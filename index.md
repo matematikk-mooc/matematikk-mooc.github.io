@@ -86,10 +86,22 @@ Gives you the URL you need to use to access the MOOC from a browser.
 
 #### Setting up the development environment
 
-```sh
+```bash
 for X in matematikk-mooc.github.io mmooc-docker-postgresql mmooc-docker-redis mmooc-docker-canvas mmooc-docker canvas-lms; do
   git clone git@github.com:matematikk-mooc/$X.git
 done
+
+cd canvas-lms
+git remote add upstream git@github.com:instructure/canvas-lms.git
+```
+
+#### Syncing upstream
+
+```
+cd canvas-lms
+git fetch upstream
+git checkout master
+git merge upstream/stable
 ```
 
 #### Making releases
