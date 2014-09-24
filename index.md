@@ -31,11 +31,15 @@ hosting them on the [Docker Hub][docker-hub-org].
 
 First thing you need to do is to install Docker on your machine.
 
-##### On Mac OS X or Windows
+##### On Mac OS X (or Windows)
 
 Install and launch [boot2docker][boot2docker]. This will give you a
 terminal window that allows you to type the required commands
 documented below.
+
+With regards to Windows: The system should run fine under boot2docker
+on Windows, but the commands described below will not work in a
+Windows terminal.
 
 ##### On Linux
 
@@ -69,13 +73,7 @@ in a terminal window:
 ./bin/start all
 ```
 
-Running
-
-```
-./bin/url
-```
-
-Gives you the URL you need to use to access the MOOC from a browser.
+Running `./bin/url` gives you the URL you need to use to access the MOOC from a browser.
 
 
 ### Give feedback
@@ -86,14 +84,12 @@ Gives you the URL you need to use to access the MOOC from a browser.
 
 #### Setting up the development environment
 
-```
-for X in matematikk-mooc.github.io mmooc-docker-postgresql mmooc-docker-redis mmooc-docker-canvas mmooc-docker canvas-lms; do
-  git clone git@github.com:matematikk-mooc/$X.git
-done
+    for X in matematikk-mooc.github.io mmooc-docker-postgresql mmooc-docker-redis mmooc-docker-canvas mmooc-docker canvas-lms; do
+      git clone git@github.com:matematikk-mooc/$X.git
+    done
 
-cd canvas-lms
-git remote add upstream git@github.com:instructure/canvas-lms.git
-```
+    cd canvas-lms
+    git remote add upstream git@github.com:instructure/canvas-lms.git
 
 #### Syncing upstream
 
