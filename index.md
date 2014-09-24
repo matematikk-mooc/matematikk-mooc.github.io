@@ -86,7 +86,7 @@ Gives you the URL you need to use to access the MOOC from a browser.
 
 #### Setting up the development environment
 
-```bash
+```
 for X in matematikk-mooc.github.io mmooc-docker-postgresql mmooc-docker-redis mmooc-docker-canvas mmooc-docker canvas-lms; do
   git clone git@github.com:matematikk-mooc/$X.git
 done
