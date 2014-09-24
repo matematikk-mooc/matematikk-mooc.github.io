@@ -50,11 +50,9 @@ your distribution. Once installed, open up a terminal window.
 
 In a terminal window:
 
-```
-wget https://github.com/matematikk-mooc/mmooc-docker/archive/master.zip
-unzip master.zip
-cd mmooc-docker-master
-```
+    wget https://github.com/matematikk-mooc/mmooc-docker/archive/master.zip
+    unzip master.zip
+    cd mmooc-docker-master
 
 #### First time setup
 
@@ -62,16 +60,14 @@ Edit env-example. Save it as env
 
 in a terminal window:
 
-```
-./bin/start db
-./bin/setup
-```
+
+    ./bin/start db
+    ./bin/setup
+
 
 #### Starting the MOOC
 
-```
-./bin/start all
-```
+    ./bin/start all
 
 Running `./bin/url` gives you the URL you need to use to access the MOOC from a browser.
 
@@ -93,12 +89,11 @@ Running `./bin/url` gives you the URL you need to use to access the MOOC from a 
 
 #### Syncing upstream
 
-```
-cd canvas-lms
-git fetch upstream
-git checkout master
-git merge upstream/stable
-```
+    cd canvas-lms
+    git fetch upstream
+    git checkout master
+    git merge upstream/stable
+
 
 #### Making releases
 
