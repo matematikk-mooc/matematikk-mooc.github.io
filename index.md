@@ -86,6 +86,30 @@ Running `./bin/url` gives you the URL you need to use to access the MOOC from a 
 
     cd canvas-lms
     git remote add upstream git@github.com:instructure/canvas-lms.git
+    cd ..
+
+Install rsync on boot2docker VM
+
+    boot2docker ssh
+    tce-load -wi rsync
+    mkdir /opt/shares/canvas
+
+Continously sync changes. Run the following in a new terminal window.
+
+    fswatch -o canvas-lms | \
+      xargs -t -n1 -I % \
+      rsync -av -e "ssh -i $(boot2docker config 2> /dev/null | grep SSHKey | cut -d '"' -f2)" --exclude=.git canvas-lms/ --port=$(boot2docker config 2> /dev/null | grep SSHPort | cut -d' ' -f3) canvas-lms/ docker@$(boot2docker ip 2> /dev/null):/opt/shares/canvas/
+
+Copy dependencies and configuration from the pre-installed canvas.
+
+    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas/vendor
+    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas/
+    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas /bin/bash -c 'cp /opt/canvas-lms/config/*.yml /canvas/config'
+
+Start a development server
+
+    docker run --rm -t -i -P -v /opt/shares/canvas:/canvas --link db:db -w /canvas mmooc/canvas bundle exec rails server
+
 
 #### Syncing upstream
 
