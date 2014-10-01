@@ -88,6 +88,8 @@ Running `./bin/url` gives you the URL you need to use to access the MOOC from a 
     git remote add upstream git@github.com:instructure/canvas-lms.git
     cd ..
 
+If you are using boot2docker:
+
 Install rsync on boot2docker VM
 
     boot2docker ssh
@@ -99,6 +101,8 @@ Continously sync changes. Run the following in a new terminal window.
     fswatch -o canvas-lms | \
       xargs -t -n1 -I % \
       rsync -av -e "ssh -i $(boot2docker config 2> /dev/null | grep SSHKey | cut -d '"' -f2)" --exclude=.git canvas-lms/ --port=$(boot2docker config 2> /dev/null | grep SSHPort | cut -d' ' -f3) canvas-lms/ docker@$(boot2docker ip 2> /dev/null):/opt/shares/canvas/
+
+(End boot2docker section)
 
 Copy dependencies and configuration from the pre-installed canvas.
 
