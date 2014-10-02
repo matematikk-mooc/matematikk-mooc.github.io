@@ -96,19 +96,20 @@ To keep local Canvas changes in sync with boot2docker VM guest:
 
 Copy dependencies and configuration from the pre-installed canvas.
 
-    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas/vendor
-    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas/
-    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas /bin/bash -c 'cp /opt/canvas-lms/config/*.yml /canvas/config'
+    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas-lms/vendor
+    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/.bundle /canvas-lms/
+    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas-lms/
+    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas /bin/bash -c "cp /opt/canvas-lms/config/*.yml /canvas-lms/config"
 
 Compile assets
 
-    docker run --rm -t -i -P -v /opt/shares/canvas:/canvas --link db:db -w /canvas mmooc/canvas npm install
-    docker run --rm -t -i -P -v /opt/shares/canvas:/canvas --link db:db -w /canvas mmooc/canvas bundle exec rake canvas:compile_assets
+    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas mmooc/canvas npm install
+    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas mmooc/canvas bundle exec rake canvas:compile_assets
 
 
-Start a development server
+Start athedevelopment server
 
-    docker run --rm -t -i -P -e RAILS_ENV=development -v /opt/shares/canvas:/canvas --link db:db -w /canvas mmooc/canvas bundle exec rails server
+    ./mm rails server
 
 
 #### Syncing upstream
