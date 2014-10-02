@@ -220,6 +220,9 @@ form {
 
 }
 
+em {
+  font-style: italic;
+}
 
 /* GENERAL ELEMENT TYPE STYLES */
 
