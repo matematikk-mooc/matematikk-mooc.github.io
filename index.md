@@ -92,13 +92,13 @@ To keep local Canvas changes in sync with boot2docker VM guest:
 
     ./b2d watch
 
-_End boot2docker section_
+*End boot2docker section*
 
 Copy dependencies and configuration from the pre-installed canvas.
 
-    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas/vendor
-    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas/
-    docker run --rm -v /opt/shares/canvas:/canvas mmooc/canvas /bin/bash -c 'cp /opt/canvas-lms/config/*.yml /canvas/config'
+    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas/vendor
+    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas/
+    docker run --rm -v $(pwd):/canvas-lms mmooc/canvas /bin/bash -c 'cp /opt/canvas-lms/config/*.yml /canvas/config'
 
 Compile assets
 
