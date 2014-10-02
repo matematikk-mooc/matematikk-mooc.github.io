@@ -80,29 +80,19 @@ Running `./bin/url` gives you the URL you need to use to access the MOOC from a 
 
 #### Setting up the development environment
 
-    for X in matematikk-mooc.github.io mmooc-docker-postgresql mmooc-docker-redis mmooc-docker-canvas mmooc-docker canvas-lms; do
-      git clone git@github.com:matematikk-mooc/$X.git
-    done
-
-    cd canvas-lms
-    git remote add upstream git@github.com:instructure/canvas-lms.git
-    cd ..
+    git clone git@github.com:matematikk-mooc/mmooc
+    cd mmooc
+    ./mgit clone
 
 If you are using boot2docker:
 
-Install rsync on boot2docker VM
+    ./b2d init
 
-    boot2docker ssh
-    tce-load -wi rsync
-    mkdir /opt/shares/canvas
+To keep local Canvas changes in sync with boot2docker VM guest:
 
-Continously sync changes. Run the following in a new terminal window.
+    ./b2d watch
 
-    fswatch -o canvas-lms | \
-      xargs -t -n1 -I % \
-      rsync -av -e "ssh -i $(boot2docker config 2> /dev/null | grep SSHKey | cut -d '"' -f2)" --exclude=.git canvas-lms/ --port=$(boot2docker config 2> /dev/null | grep SSHPort | cut -d' ' -f3) canvas-lms/ docker@$(boot2docker ip 2> /dev/null):/opt/shares/canvas/
-
-(End boot2docker section)
+_End boot2docker section_
 
 Copy dependencies and configuration from the pre-installed canvas.
 
