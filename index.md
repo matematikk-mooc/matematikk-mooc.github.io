@@ -19,8 +19,6 @@ This is very early in the project. At this stage things are likely to
 change without any regards to backwards compatibility. Furthermore
 this documentation is also likely to be out of date from time to time.
 
-Do not use in production.
-
 ### Trying it out
 
 The system is built to be as easy as possible to install and run. This
@@ -119,6 +117,11 @@ Start athedevelopment server
     git checkout master
     git merge upstream/stable
 
+#### Generating a self signed SSL certificate for use with HAProxy
+
+    SUBJECT='/C=US/ST=California/L=San Francisco/CN=test@example.com'
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt -subj "$SUBJECT"
+    cat example.crt example.key > example.pem
 
 #### Making releases
 
