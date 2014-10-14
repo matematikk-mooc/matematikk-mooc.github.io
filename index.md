@@ -48,31 +48,34 @@ your distribution. Once installed, open up a terminal window.
 
 In a terminal window:
 
-    wget https://github.com/matematikk-mooc/mmooc-docker/archive/master.zip
+    wget https://github.com/matematikk-mooc/mmooc/archive/master.zip
     unzip master.zip
-    cd mmooc-docker-master
+    cd mmooc-master
 
-#### First time setup
+#### Configure it
 
 Edit env-example. Save it as env
 
-in a terminal window:
+#### Boot it
 
+In a terminal window:
 
-    ./bin/start db
-    ./bin/setup
+    ./mm boot
 
-
-#### Starting the MOOC
-
-    ./bin/start all
-
-Running `./bin/url` gives you the URL you need to use to access the MOOC from a browser.
+Running `./b2d url` gives you the URL you need to use to access the MOOC from a browser.
 
 
 ### Give feedback
 
+Please use [this form][new-issue] (on github) if you either have any
+questions or want to report a bug.
+
 ### Running it in a production like environment
+
+To be documented ...
+
+Take a look at the boot command in the `mm` script in the `mmooc`
+repository.
 
 ### For developers
 
@@ -105,7 +108,7 @@ Compile assets
     docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas mmooc/canvas bundle exec rake canvas:compile_assets
 
 
-Start athedevelopment server
+Start the development server
 
     ./mm rails server
 
@@ -131,3 +134,4 @@ Start athedevelopment server
 [docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
+[new-issue]: https://github.com/matematikk-mooc/matematikk-mooc.github.io/issues/new
