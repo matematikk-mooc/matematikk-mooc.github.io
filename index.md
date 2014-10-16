@@ -104,13 +104,13 @@ Copy dependencies and configuration from the pre-installed canvas.
 
 Compile assets
 
-    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas mmooc/canvas npm install
-    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas mmooc/canvas bundle exec rake canvas:compile_assets
+    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas-lms mmooc/canvas npm install
+    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas-lms mmooc/canvas bundle exec rake canvas:compile_assets
 
 
 Start the development server
 
-    ./mm rails server
+    ./mm rails-dev server
 
 
 #### Syncing upstream
