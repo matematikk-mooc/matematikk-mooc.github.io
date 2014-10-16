@@ -13,7 +13,7 @@ Norwegian).
 
 This page is for the documentation of the technical stuff.
 
-# Disclaimer
+## Disclaimer
 
 This is very early in the project. At this stage things are likely to
 change without any regards to backwards compatibility. Furthermore
@@ -70,7 +70,7 @@ Running `./b2d url` gives you the URL you need to use to access the MOOC from a 
 Please use [this form][new-issue] (on github) if you either have any
 questions or want to report a bug.
 
-# Running it in a production like environment
+# Running it in production
 
 To be documented ...
 
