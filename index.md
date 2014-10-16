@@ -3,7 +3,7 @@ title: Matematikk-MOOC
 layout: default
 ---
 
-## About
+# About
 
 Matematikk-MOOC is a project run by the Norwegian
 [Center for ICT in Education][ictcenter]. The project aims to create a
@@ -13,23 +13,23 @@ Norwegian).
 
 This page is for the documentation of the technical stuff.
 
-## Disclaimer
+# Disclaimer
 
 This is very early in the project. At this stage things are likely to
 change without any regards to backwards compatibility. Furthermore
 this documentation is also likely to be out of date from time to time.
 
-## Trying it out
+# Trying it out
 
 The system is built to be as easy as possible to install and run. This
 is done by packaging the application in [Docker][docker] images and
 hosting them on the [Docker Hub][docker-hub-org].
 
-### Install Docker
+## Install Docker
 
 First thing you need to do is to install Docker on your machine.
 
-#### On Mac OS X (or Windows)
+### On Mac OS X (or Windows)
 
 Install and launch [boot2docker][boot2docker]. This will give you a
 terminal window that allows you to type the required commands
@@ -39,12 +39,12 @@ With regards to Windows: The system should run fine under boot2docker
 on Windows, but the commands described below will not work in a
 Windows terminal.
 
-#### On Linux
+### On Linux
 
 See [this document][docker-install] for installation instructions for
 your distribution. Once installed, open up a terminal window.
 
-### Install the utility package
+## Install the utility package
 
 In a terminal window:
 
@@ -52,11 +52,11 @@ In a terminal window:
     unzip master.zip
     cd mmooc-master
 
-### Configure it
+## Configure it
 
 Edit env-example. Save it as env
 
-### Boot it
+## Boot it
 
 In a terminal window:
 
@@ -65,21 +65,21 @@ In a terminal window:
 Running `./b2d url` gives you the URL you need to use to access the MOOC from a browser.
 
 
-## Give feedback
+# Give feedback
 
 Please use [this form][new-issue] (on github) if you either have any
 questions or want to report a bug.
 
-## Running it in a production like environment
+# Running it in a production like environment
 
 To be documented ...
 
 Take a look at the boot command in the `mm` script in the `mmooc`
 repository.
 
-## For developers
+# For developers
 
-### Setting up the development environment
+## Setting up the development environment
 
     git clone git@github.com:matematikk-mooc/mmooc
     cd mmooc
@@ -113,20 +113,20 @@ Start the development server
     ./mm rails-dev server
 
 
-### Syncing upstream
+## Syncing upstream
 
     cd canvas-lms
     git fetch upstream
     git checkout master
     git merge upstream/stable
 
-### Generating a self signed SSL certificate for use with HAProxy
+## Generating a self signed SSL certificate for use with HAProxy
 
     SUBJECT='/C=US/ST=California/L=San Francisco/CN=test@example.com'
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt -subj "$SUBJECT"
     cat example.crt example.key > example.pem
 
-### Making releases
+## Making releases
 
 [ictcenter]: https://iktsenteret.no/english
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
