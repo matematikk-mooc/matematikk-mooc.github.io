@@ -29,15 +29,11 @@ hosting them on the [Docker Hub][docker-hub-org].
 
 First thing you need to do is to install Docker on your machine.
 
-### On Mac OS X (or Windows)
+### On Mac OS X or Windows
 
 Install and launch [boot2docker][boot2docker]. This will give you a
 terminal window that allows you to type the required commands
 documented below.
-
-With regards to Windows: The system should run fine under boot2docker
-on Windows, but the commands described below will not work in a
-Windows terminal.
 
 ### On Linux
 
@@ -48,7 +44,7 @@ your distribution. Once installed, open up a terminal window.
 
 In a terminal window:
 
-    wget https://github.com/matematikk-mooc/mmooc/archive/master.zip
+    curl -L -O https://github.com/matematikk-mooc/mmooc/archive/master.zip
     unzip master.zip
     cd mmooc-master
 
@@ -56,13 +52,20 @@ In a terminal window:
 
 Edit env-example. Save it as env
 
+For Windows users: To edit the file type the following:
+
+    tce-load -wi nano
+    nano env-example
+
 ## Boot it
 
 In a terminal window:
 
     ./mm boot
 
-Running `./b2d url` gives you the URL you need to use to access the MOOC from a browser.
+Running `./b2d url` gives you the URL you need to use to access the
+MOOC from a browser. Note that it can take a long time to load the
+system in the browser the first time you try.
 
 
 # Give feedback
