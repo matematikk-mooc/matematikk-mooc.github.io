@@ -75,9 +75,6 @@ questions or want to report a bug.
 Developers, system administrators and adventurous people can find more
 information at the [project wiki][wiki].
 
-Take a look at the boot command in the `mm` script in the `mmooc`
-repository.
-
 [ictcenter]: https://iktsenteret.no/english
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
 [docker]: http://docker.com
