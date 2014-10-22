@@ -52,7 +52,7 @@ In a terminal window:
 
 Edit env-example. Save it as env
 
-For Windows users: To edit the file type the following:
+For Windows users: To edit the file, type the following:
 
     tce-load -wi nano
     nano env-example
