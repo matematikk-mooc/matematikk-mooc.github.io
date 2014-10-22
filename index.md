@@ -70,63 +70,13 @@ Running `./b2d url` gives you the URL you need to use to access the MOOC from a 
 Please use [this form][new-issue] (on github) if you either have any
 questions or want to report a bug.
 
-# Running it in production
+# More information
 
-To be documented ...
+Developers, system administrators and adventurous people can find more
+information at the [project wiki][wiki].
 
 Take a look at the boot command in the `mm` script in the `mmooc`
 repository.
-
-# For developers
-
-## Setting up the development environment
-
-    git clone git@github.com:matematikk-mooc/mmooc
-    cd mmooc
-    ./mgit clone
-
-If you are using boot2docker:
-
-    ./b2d init
-
-To keep local Canvas changes in sync with boot2docker VM guest:
-
-    ./b2d watch
-
-*End boot2docker section*
-
-Copy dependencies and configuration from the pre-installed canvas.
-
-    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/vendor/bundle /canvas-lms/vendor
-    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp -a /opt/canvas-lms/.bundle /canvas-lms/
-    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas cp /opt/canvas-lms/Gemfile.lock /canvas-lms/
-    docker run --rm -v $(pwd)/canvas-lms:/canvas-lms mmooc/canvas /bin/bash -c "cp /opt/canvas-lms/config/*.yml /canvas-lms/config"
-
-Compile assets
-
-    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas-lms mmooc/canvas npm install
-    docker run --rm -t -i -P -v $(pwd)/canvas-lms:/canvas-lms --link db:db -w /canvas-lms mmooc/canvas bundle exec rake canvas:compile_assets
-
-
-Start the development server
-
-    ./mm rails-dev server
-
-
-## Syncing upstream
-
-    cd canvas-lms
-    git fetch upstream
-    git checkout master
-    git merge upstream/stable
-
-## Generating a self signed SSL certificate for use with HAProxy
-
-    SUBJECT='/C=US/ST=California/L=San Francisco/CN=test@example.com'
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt -subj "$SUBJECT"
-    cat example.crt example.key > example.pem
-
-## Making releases
 
 [ictcenter]: https://iktsenteret.no/english
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
@@ -135,3 +85,4 @@ Start the development server
 [boot2docker]: http://boot2docker.io
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
 [new-issue]: https://github.com/matematikk-mooc/matematikk-mooc.github.io/issues/new
+[wiki]: https://github.com/matematikk-mooc/mmooc/wiki
