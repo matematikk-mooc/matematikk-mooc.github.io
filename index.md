@@ -11,6 +11,8 @@ course for continuing education of teachers of mathematics. Click
 [here][mmooc-project-page] for more information about the project (in
 Norwegian).
 
+Matematikk-MOOC is built using the open source LMS [Canvas][canvas].
+
 This page is for the documentation of the technical stuff.
 
 ## Disclaimer
@@ -79,6 +81,7 @@ Developers, system administrators and adventurous people can find more
 information at the [project wiki][wiki].
 
 [ictcenter]: https://iktsenteret.no/english
+[canvas]: https://instruture.com
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
 [docker]: http://docker.com
 [docker-install]: https://docs.docker.com/installation/#installation
