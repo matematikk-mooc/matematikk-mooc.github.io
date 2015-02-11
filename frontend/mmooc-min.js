@@ -1,0 +1,2058 @@
+this["mmooc"] = this["mmooc"] || {};
+this["mmooc"]["templates"] = this["mmooc"]["templates"] || {};
+
+this["mmooc"]["templates"]["activitystream"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n    <li class=\"";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.read_state), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\"><a href=\"";
+  if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "<br><span class=\"mmooc-notification-type\">"
+    + escapeExpression((helper = helpers.localize || (depth0 && depth0.localize),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "localize", (depth0 && depth0.type), options)))
+    + "</span></a></li>\n";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  
+  return "unread";
+  }
+
+  buffer += "<ul id=\"mmooc-notifications\">\n";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.activities), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n</ul>\n\n<a href=\"#\" id=\"mmooc-notifications-showall\">Vis alle</a>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["backbutton"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"mmooc-back-button\">\n    <a href=\"";
+  if (helper = helpers.url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["courselist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n            <div class=\"mmooc-size-1of3\">\n                <div class=\"mmooc-course-list-item\">\n                    <div class=\"mmooc-course-list-heading\">\n                        <h2><a href=\""
+    + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.id), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.id), options)))
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></h2>\n                    </div>\n\n                    <div class=\"mmooc-course-list-description\">\n						";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.syllabus_body), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                    </div>\n\n                    <div class=\"mmooc-course-list-button\">\n                        <a href=\""
+    + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.id), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.id), options)))
+    + "\" class=\"btn rounded ";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.course_progress), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">Gå til kursside</a>\n                    </div>\n\n                    <div class=\"mmooc-course-list-progress\">\n						";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.course_progress), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                    </div>\n                </div>\n            </div>\n\n		";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n\n							";
+  if (helper = helpers.syllabus_body) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.syllabus_body); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n						";
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += " ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.requirement_count), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " ";
+  return buffer;
+  }
+function program5(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += " ";
+  stack1 = (helper = helpers.ifEquals || (depth0 && depth0.ifEquals),options={hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options) : helperMissing.call(depth0, "ifEquals", (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " ";
+  return buffer;
+  }
+function program6(depth0,data) {
+  
+  
+  return " btn-done ";
+  }
+
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n							";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.requirement_count), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n						";
+  return buffer;
+  }
+function program9(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n                                <div class=\"mmooc-progress-bar";
+  stack1 = (helper = helpers.ifEquals || (depth0 && depth0.ifEquals),options={hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options) : helperMissing.call(depth0, "ifEquals", (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\n                                    <div class=\"mmooc-progress-bar-inner\" style=\"width:"
+    + escapeExpression((helper = helpers.percentage || (depth0 && depth0.percentage),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options) : helperMissing.call(depth0, "percentage", (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options)))
+    + "%\">\n                                    </div>\n                                </div>\n							";
+  return buffer;
+  }
+function program10(depth0,data) {
+  
+  
+  return " mmooc-progress-bar-done";
+  }
+
+  buffer += "<div class=\"mmooc-course-list\">\n    <h1 class=\"xl\">Mine kurs</h1>\n    <div class=\"mmooc-row\">\n		";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </div>\n</div>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["coursemenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "<span class=\"h1-sub-heading\">";
+  if (helper = helpers.subtitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.subtitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</span>";
+  return buffer;
+  }
+
+function program3(depth0,data,depth1) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n                <li class=\"mmooc-course-tab ";
+  stack1 = (helper = helpers.ifEquals || (depth0 && depth0.ifEquals),options={hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.title), (depth1 && depth1.selectedMenuItem), options) : helperMissing.call(depth0, "ifEquals", (depth0 && depth0.title), (depth1 && depth1.selectedMenuItem), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\"><a href=\"";
+  if (helper = helpers.url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></li>\n            ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  
+  return "selected";
+  }
+
+  buffer += "<div id=\"mmooc-course-tabs-container\">\n    <div id=\"mmooc-course-tabs-container-inner\">\n\n        <h1>";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n        ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.subtitle), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n        <ul class=\"mmooc-course-tabs\">\n            ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.menuItems), {hash:{},inverse:self.noop,fn:self.programWithDepth(3, program3, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </ul>\n    </div>\n</div>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["courseprogress"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  
+  return " mmooc-progress-bar-done";
+  }
+
+  buffer += "<div class=\"mmooc-course-progress\">\n    <div>\n        <div class=\"mmooc-course-progress-label\">Din kursprogresjon:</div>\n        <div class=\"mmooc-course-progress-bar\">\n            <div class=\"mmooc-progress-bar";
+  stack1 = (helper = helpers.ifAllModulesCompleted || (depth0 && depth0.ifAllModulesCompleted),options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.modules), options) : helperMissing.call(depth0, "ifAllModulesCompleted", (depth0 && depth0.modules), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\n                <div class=\"mmooc-progress-bar-inner\" style=\"width:"
+    + escapeExpression((helper = helpers.percentageForModules || (depth0 && depth0.percentageForModules),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.modules), options) : helperMissing.call(depth0, "percentageForModules", (depth0 && depth0.modules), options)))
+    + "%\">\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["groupheader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n                <div class=\"mmooc-group-member\">\n                    <div class=\"mmooc-group-member-avatar\" style=\"background-image: url('";
+  if (helper = helpers.avatar_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.avatar_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "')\"></div>\n                    <div class=\"mmooc-group-member-link\">\n                        <a href=\"/about/";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n                    </div>\n                </div>\n            ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-back-button\">\n    <a href=\""
+    + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.courseId), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.courseId), options)))
+    + "/groups\">Tilbake til kursgrupper</a>\n</div>\n<div id=\"mmooc-group-header\">\n    <div id=\"mmooc-group-members\">\n        <p><b>Gruppemedlemmer</b></p>\n\n        <div class=\"mmooc-group-members-list\">\n            ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.members), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n        <p>\n            <b>Videorom for gruppa:</b> <a target=\"_new\" href=\"https://connect.uninett.no/gruppe";
+  if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">https://connect.uninett.no/gruppe";
+  if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n        </p>\n    </div>\n\n</div>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["moduleitems"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n        <div class=\"header\">\n            ";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n        </div>\n\n        ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n            <ul class=\"mmooc-module-items\">\n                ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            </ul>\n        ";
+  return buffer;
+  }
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n                    <li class=\"mmooc-module-item\"><a class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isCurrent), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\" href=\"";
+  if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1);
+  stack1 = (helper = helpers.ifItemIsCompleted || (depth0 && depth0.ifItemIsCompleted),options={hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.completion_requirement), options) : helperMissing.call(depth0, "ifItemIsCompleted", (depth0 && depth0.completion_requirement), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</a></li>\n                ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  
+  return "active";
+  }
+
+function program6(depth0,data) {
+  
+  
+  return "<i class=\"icon-check\"></i>";
+  }
+
+  buffer += "<nav aria-label=\"content\" role=\"navigation\">\n\n    <div class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\n        <a href=\""
+    + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.courseId), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.courseId), options)))
+    + "\">Tilbake til kursforsiden</a>\n    </div>\n\n    ";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.module), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</nav>";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["modules"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n        <div class=\"mmooc-module\">\n            <h2 class=\"light\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h2>\n            <a href=\""
+    + escapeExpression((helper = helpers.urlForFirstNoneCompleteItem || (depth0 && depth0.urlForFirstNoneCompleteItem),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.items), options) : helperMissing.call(depth0, "urlForFirstNoneCompleteItem", (depth0 && depth0.items), options)))
+    + "\" class=\"btn rounded ";
+  stack1 = (helper = helpers.ifAllItemsCompleted || (depth0 && depth0.ifAllItemsCompleted),options={hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.items), options) : helperMissing.call(depth0, "ifAllItemsCompleted", (depth0 && depth0.items), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">Gå til modul</a>\n            ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </div>\n    ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  
+  return " btn-done ";
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                <ul class=\"mmooc-module-items-icons\">\n                    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                </ul>\n            ";
+  return buffer;
+  }
+function program5(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\n                        <li class=\"mmooc-module-item-icon\"><a class=\"mmooc-module-items-icons-";
+  if (helper = helpers.type) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.type); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  stack1 = (helper = helpers.ifItemIsCompleted || (depth0 && depth0.ifItemIsCompleted),options={hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.completion_requirement), options) : helperMissing.call(depth0, "ifItemIsCompleted", (depth0 && depth0.completion_requirement), options));
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\" href=\"";
+  if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" title=\""
+    + escapeExpression((helper = helpers.localize || (depth0 && depth0.localize),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "localize", (depth0 && depth0.type), options)))
+    + ": ";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"><i class=\"icon-"
+    + escapeExpression((helper = helpers.lowercase || (depth0 && depth0.lowercase),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "lowercase", (depth0 && depth0.type), options)))
+    + "\"></i></a></li>\n                    ";
+  return buffer;
+  }
+function program6(depth0,data) {
+  
+  
+  return "done";
+  }
+
+  buffer += "<div class=\"mmooc-modules\">\n    <h2 class=\"h3\">Kursmoduler</h2>\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.modules), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["usermenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<ul id=\"user-menu\">\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">Varsler <i class=\"icon-mini-arrow-down\"></i><span id=\"mmooc-notification-count\"></span></a>\n        <div class=\"mmooc-menu-item-drop\" id=\"mmooc-activity-stream\">\n        </div>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"/conversations\" class=\"mmooc-menu-item-title\">Innboks</a>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.display_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " <i class=\"icon-mini-arrow-down\"></i></a>\n        <div class=\"mmooc-menu-item-drop\">\n            <ul>\n                <li><a href=\"/profile/settings\">Innstillinger</a></li>\n                <li><a href=\"/logout\">Logg ut</a></li>\n            </ul>\n        </div>\n    </li>\n</ul>";
+  return buffer;
+  });
+this.mmooc=this.mmooc||{};
+
+this.mmooc.api = function() {
+    var _urlToTypeMapping = [];
+
+    _urlToTypeMapping['quizzes'] = 'Quiz';
+    _urlToTypeMapping['assignments'] = 'Assignment';
+    _urlToTypeMapping['discussion_topics'] = 'Discussion';
+
+
+    return {
+        _ajax: typeof $   !== "undefined" ? $   : {},
+
+        _env:  typeof ENV !== "undefined" ? ENV : {},
+
+        _location: typeof document !== "undefined" ? document.location : {search:"", href:""},
+
+        _uriPrefix: "/api/v1",
+
+        _defaultError: function (event, jqxhr, settings, thrownError) {
+            console.log(event, jqxhr, settings, thrownError);
+        },
+
+        _get: function(options) {
+            var error    = options.error || this._defaultError;
+            var uri      = this._uriPrefix + options.uri;
+            var params   = options.params || {};
+            var callback = options.callback;
+            this._ajax.get(uri, params, callback).fail(error);
+        },
+
+        getCurrentModuleItemId : function() {
+            var paramName = "module_item_id";
+            var q = "" + this._location.search;
+            if (typeof q === "undefined" || q.indexOf(paramName) == -1) {
+                return null;
+            }
+
+            var moduleId = q.substring(q.indexOf(paramName) + paramName.length + 1, q.length);
+            if (moduleId.indexOf("&") != -1) {
+                moduleId = moduleId.substring(0, moduleId.indexOf("&"));
+            }
+
+            return parseInt(moduleId, 10);
+        },
+
+        getCurrentContentId : function() {
+            var q = "" + this._location.pathname;
+
+            var moduleId = q.substring(q.indexOf(paramName) + paramName.length + 1, q.length);
+            if (moduleId.indexOf("&") != -1) {
+                moduleId = moduleId.substring(0, moduleId.indexOf("&"));
+            }
+
+            return parseInt(moduleId, 10);
+        },
+
+        getCurrentTypeAndContentId: function() {
+            var regexp = /\/courses\/\d\/\w+\/\d/;
+
+            if (regexp.test("" + this._location.pathname)) {
+                var tmp = this._location.pathname.split("/");
+                if (tmp.length >= 5) {
+                    var type = _urlToTypeMapping[tmp[3]];
+                    var contentId = parseInt(tmp[4], 10);
+                    return { contentId: contentId, type: type};
+                }
+            }
+            return null;
+        },
+
+
+        getEnrolledCourses: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses",
+                "params":   { "include": ["syllabus_body" , "course_progress"] }
+            });
+        },
+
+        /* FIXME Regarding include items: This parameter suggests that
+         * Canvas return module items directly in the Module object
+         * JSON, to avoid having to make separate API requests for
+         * each module when enumerating modules and items. Canvas is
+         * free to omit 'items' for any particular module if it deems
+         * them too numerous to return inline. Callers must be
+         * prepared to use the List Module Items API if items are not
+         * returned.
+         */
+        getModulesForCurrentCourse: function(callback, error) {
+            var courseId = this.getCurrentCourseId();
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/modules",
+                "params":   { "include": ["items"] }
+            });
+        },
+
+        getCurrentCourseId: function() {
+            var currentUrl = "" + this._location.pathname;
+            var matches = currentUrl.match(/\/courses\/(\d+)/);
+            if (matches != null) {
+                return parseInt(matches[1], 10);
+            } else if (this._env.group) {
+                // Group pages does not contain course id in URL, but is available via JavaScript variable
+                return this._env.group.context_id;
+            } else if ($("#section-tabs-header-subtitle").size() > 0) {
+                // Group subpages contains course id only in a link
+                var tmp = $("#section-tabs-header-subtitle").attr("href").split("/");
+                if (tmp.length == 3) {
+                    return parseInt(tmp[2], 10);
+                }
+            }
+
+            return null;
+        },
+
+        getCourse: function(courseId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId,
+                "params":   {  }
+            });
+        },
+
+        getCurrentGroupId: function() {
+            var currentUrl = "" + this._location.pathname;
+            var matches = currentUrl.match(/\/groups\/(\d+)/);
+            if (matches != null) {
+                return parseInt(matches[1], 10);
+            }
+            return null;
+        },
+
+        getGroup: function(groupId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/groups/" + groupId,
+                "params":   {}
+            });
+        },
+
+        getGroupMembers: function(groupId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/groups/" + groupId + "/users",
+                "params":   {"include": ["avatar_url"] }
+            });
+        },
+
+        getCurrentModule: function(callback, error) {
+            var currentModuleItemId = this.getCurrentModuleItemId();
+            var currentTypeAndContentId = null;
+            if (currentModuleItemId == null) {
+                currentTypeAndContentId = this.getCurrentTypeAndContentId();
+                if (currentTypeAndContentId == null) {
+                    return;
+                }
+            }
+
+            this.getModulesForCurrentCourse(function(modules) {
+                for (var i = 0; i < modules.length; i++) {
+                    var module = modules[i];
+                    var items = module.items;
+                    for (var j = 0; j < items.length; j++) {
+                        var item = items[j];
+                        if (item.id == currentModuleItemId || (currentTypeAndContentId != null && currentTypeAndContentId.contentId == item.content_id && currentTypeAndContentId.type == item.type)) {
+                            item.isCurrent = true;
+                            callback(module);
+                            return;
+                        }
+                    }
+                }
+
+            }, error);
+        },
+
+        getRoles : function() {
+            return this._env.current_user_roles;
+        },
+
+        getUser : function() {
+            return this._env.current_user;
+        },
+
+        getActivityStreamForUser: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/users/self/activity_stream",
+                "params":   { }
+            });
+        },
+
+        currentPageIsAnnouncement: function() {
+            return ($("#section-tabs").find("a.announcements.active").size() == 1);
+        },
+
+        currentPageIsModuleItem: function() {
+            if (this.getCurrentModuleItemId() != null || this.getCurrentTypeAndContentId() != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+}();
+
+if (typeof module !== "undefined" && module !== null) {
+    module.exports = this.mmooc.api;
+}
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.courseList = function() {
+    return {
+        listCourses: function(parentId) {
+            mmooc.api.getEnrolledCourses(function(courses) {
+                var html = mmooc.util.renderTemplateWithData("courselist", {courses: courses});
+                document.getElementById(parentId).innerHTML = html;
+            });
+        },
+        showAddCourseButton : function() {
+            var button = $('#start_new_course');
+            if (button.size() > 0) {
+                $('#content').append(button);
+            }
+        }
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.coursePage = function() {
+    function _renderCourseMenu(courseId, selectedMenuItem) {
+        var menuItems = [];
+
+        menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
+        menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
+        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
+        menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
+
+        var title = document.title.replace(":", " for ");
+        var html = mmooc.util.renderTemplateWithData("coursemenu", {menuItems: menuItems, selectedMenuItem: selectedMenuItem, title: title });
+        document.getElementById('header').insertAdjacentHTML('afterend', html);
+    }
+
+    return {
+
+        listModulesAndShowProgressBar: function() {
+            mmooc.api.getModulesForCurrentCourse(function(modules) {
+                var modulesHTML = mmooc.util.renderTemplateWithData("modules", {modules: modules});
+                document.getElementById('content').insertAdjacentHTML('afterbegin', modulesHTML);
+
+                var progressHTML = mmooc.util.renderTemplateWithData("courseprogress", {modules: modules});
+                document.getElementById('content').insertAdjacentHTML('afterbegin', progressHTML);
+            });
+        }
+
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.enroll = function() {
+
+    return {
+        changeButtonText: function() {
+            var enrollForm = $("#enroll_form");
+            enrollForm.find(".btn").text("Gå til Mine kurs");
+            enrollForm.find(".btn-primary").hide();
+        }
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.groups = function() {
+    function interceptLinkToGroupPageForHref(href, event) {
+        if (/\/groups\/\d+$/.test(href)) {
+            event.preventDefault();
+            location.href = href + '/discussion_topics';
+        }
+    }
+
+    return {
+        interceptLinksToGroupPage: function() {
+            $("#content").on('click', '.student-group-title a', function(event) {
+                var href= $(this).attr("href");
+                interceptLinkToGroupPageForHref(href, event);
+            });
+
+            $("#right-side").on('click', '.group_list a', function(event) {
+                var href= $(this).attr("href");
+                interceptLinkToGroupPageForHref(href, event);
+            });
+        },
+
+        showGroupHeader: function() {
+            var courseId = mmooc.api.getCurrentCourseId();
+            var groupId = mmooc.api.getCurrentGroupId();
+            if (groupId != null) {
+                mmooc.api.getGroupMembers(groupId, function(members) {
+                    console.log(members);
+                    var headerHTML = mmooc.util.renderTemplateWithData("groupheader", {groupId: groupId, courseId: courseId, members: members});
+                    document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', headerHTML);
+                });
+            }
+        }
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.menu = function() {
+    function _renderCourseMenu(course, selectedMenuItem, title) {
+        var menuItems = [];
+
+        var courseId = course.id;
+
+        menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
+        menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
+        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
+        menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
+
+
+        var subtitle = course.name;
+        if (title == null) {
+            title = course.name;
+            subtitle = "";
+        }
+
+        var html = mmooc.util.renderTemplateWithData("coursemenu", {course: course, menuItems: menuItems, selectedMenuItem: selectedMenuItem, title: title, subtitle: subtitle });
+        document.getElementById('header').insertAdjacentHTML('afterend', html);
+    }
+
+
+    function createStyleSheet () {
+        var style = document.createElement("style");
+
+        // WebKit hack :(
+        style.appendChild(document.createTextNode(""));
+
+        document.head.appendChild(style);
+
+        return style.sheet;
+    }
+
+    var stylesheet = createStyleSheet();
+
+    return {
+        listModuleItems: function() {
+            mmooc.api.getCurrentModule(function(module) {
+                var courseId = mmooc.api.getCurrentCourseId();
+                var html = mmooc.util.renderTemplateWithData("moduleitems", {module: module, courseId: courseId});
+                document.getElementById('left-side').insertAdjacentHTML('afterbegin', html);
+            });
+        },
+        showLeftMenu: function() {
+            stylesheet.insertRule("body.with-left-side #main { margin-left: 305px !important }", stylesheet.cssRules.length);
+            stylesheet.insertRule(".with-left-side #left-side { display: block !important }", stylesheet.cssRules.length);
+        },
+
+        showTeacherAdminMenu: function() {
+            var roles = mmooc.api.getRoles();
+            if (roles != null && (roles.indexOf('teacher') != -1 || roles.indexOf('admin') != -1)) {
+                this.showLeftMenu();
+
+                $("#section-tabs-header").show();
+                $("nav[aria-label='context']").show();
+                $("#edit_discussions_settings").show();
+                $("#availability_options").show();
+                $("#editor_tabs");
+
+                // Done via CSS since content is loaded using AJAX
+                stylesheet.insertRule("body.pages .header-bar-outer-container { display: block }", stylesheet.cssRules.length);
+                stylesheet.insertRule("#discussion-managebar { display: block }", stylesheet.cssRules.length);
+            }
+
+            if (roles != null && roles.indexOf('admin') != -1) {
+                // Admin needs original canvas Course dropdown to access site admin settings
+                $("#courses_menu_item").show();
+
+                // Admin needs more profile settings
+                $(".add_access_token_link").show();
+                $("body.profile_settings").find("#content > table, #content > h2, #content > p").show();
+            } else {
+                document.getElementById('menu').insertAdjacentHTML('afterbegin', '<li class="menu-item"><a href="/" class="menu-item-no-drop">Kurs</a></li>');
+            }
+        },
+
+        hideRightMenu: function() {
+            $("#right-side").hide();
+            $("body").removeClass('with-right-side');
+        },
+
+        showUserMenu: function() {
+            var menu = document.getElementById('menu');
+            if (menu !=  null) {
+                var html = mmooc.util.renderTemplateWithData("usermenu", {user: mmooc.api.getUser()});
+                menu.insertAdjacentHTML('afterend', html);
+
+                mmooc.api.getActivityStreamForUser(function(activities) {
+                    var unreadNotifications = 0;
+                    for (var i = 0; i < activities.length; i++) {
+                        if (activities[i].read_state == false) {
+                            unreadNotifications++;
+                        }
+                    }
+
+                    var badge = $("#mmooc-notification-count");
+                    if (unreadNotifications == 0) {
+                        badge.hide();
+                    } else {
+                        badge.html(unreadNotifications);
+                        badge.show();
+                    }
+
+                    document.getElementById('mmooc-activity-stream').innerHTML = mmooc.util.renderTemplateWithData("activitystream", {activities: activities});
+
+                    var notifications = $("#mmooc-notifications").find("li");
+                    if (notifications.size() == 0) {
+                        $("#mmooc-notifications").hide();
+                    } else {
+                        $("#mmooc-notifications").show();
+                    }
+
+                    var showAllItems = $("#mmooc-notifications-showall");
+                    if (notifications.size() > 10) {
+                        notifications.slice(10).addClass("hidden");
+
+                        showAllItems.click(function() {
+                            notifications.removeClass("hidden");
+                            showAllItems.hide();
+                        });
+                    } else {
+                        showAllItems.hide();
+                    }
+
+                });
+            }
+        },
+
+        showCourseMenu: function(courseId, selectedMenuItem, title) {
+            $("body").addClass("with-course-menu");
+            mmooc.api.getCourse(courseId, function(course) {
+                _renderCourseMenu(course, selectedMenuItem, title);
+            });
+        },
+
+        showBackButton: function(url, title) {
+            var buttonHTML = mmooc.util.renderTemplateWithData("backbutton", {url: url, title: title});
+            document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', buttonHTML);
+        },
+
+        showGroupHeader: function() {
+            var groupId = mmooc.api.getCurrentGroupId();
+            var groupHeaderHTML = mmooc.util.renderTemplateWithData("backbutton", {groupId: groupId});
+            document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', groupHeaderHTML);
+        },
+
+        showDiscussionGroupMenu: function() {
+            var groupId = mmooc.api.getCurrentGroupId();
+            if (groupId != null) {
+                mmooc.api.getGroup(groupId, function(group) {
+                    // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
+                    var title = mmooc.util.getPageTitleAfterColon();
+                    mmooc.menu.showCourseMenu(group.course_id, "Grupper", title);
+                    mmooc.menu.showBackButton("/groups/" + group.id + "/discussion_topics", "Tilbake til " + group.name);
+                });
+            }
+        }
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.pages = function() {
+    function updateButtonText(container, input, label) {
+        if (input.is(":checked")) {
+            label.html('Marker som ulest');
+            container.addClass("is-done");
+        } else {
+            label.html('Marker som lest');
+            container.removeClass("is-done");
+        }
+    }
+
+    return {
+        modifyMarkAsDoneButton: function() {
+            $("body").bind("wiki-page-rendered", function() {
+                var container = $("#mark-as-done-container");
+                container.appendTo("#content .usercontent");
+
+                var input = container.find("input");
+                var label = container.find("label");
+                input.change(function() {
+                    updateButtonText(container, input, label);
+                });
+
+                updateButtonText(container, input, label);
+
+
+                container.show();
+            });
+        }
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.routes = function() {
+    function Route(paths, queryStrings, handler) {
+        if (paths != null) {
+            this.paths = paths instanceof Array ? paths : [paths];
+        } else {
+            this.paths = null;
+        }
+
+        if (queryStrings != null) {
+            this.queryStrings = queryStrings instanceof Array ? queryStrings : [queryStrings];
+        } else {
+            this.queryStrings = null;
+        }
+
+        this.handler = handler;
+        this.isAlreadyHandled = false;
+    }
+
+    var routes = [];
+
+    return {
+        addRouteForPath: function(path, handler) {
+            routes.push(new Route(path, null, handler));
+        },
+        addRouteForQueryString: function(queryString, handler) {
+            routes.push(new Route(null, queryString, handler));
+        },
+
+        addRouteForPathOrQueryString: function(path, queryString, handler) {
+            routes.push(new Route(path, queryString, handler));
+        },
+
+        performHandlerForUrl: function(location) {
+            var path = location.pathname;
+            var queryString = location.search;
+
+            for (var i = 0; i < routes.length; i++) {
+                var route = routes[i];
+                if (route.paths != null) {
+                    for (var j = 0; j < route.paths.length; j++) {
+                        if (route.paths[j].test(path) && !route.isAlreadyHandled) {
+                            route.isAlreadyHandled = true;
+                            route.handler();
+                        }
+                    }
+                }
+
+                if (route.queryStrings != null) {
+                    for (var k = 0; k < route.queryStrings.length; k++) {
+                        if (route.queryStrings[k].test(queryString) && !route.isAlreadyHandled) {
+                            route.isAlreadyHandled = true;
+                            route.handler();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    };
+}();
+
+if (typeof module !== "undefined" && module !== null) {
+    module.exports = this.mmooc.routes;
+}
+
+Handlebars.registerHelper('lowercase', function(str) {
+    return ("" + str).toLowerCase();
+});
+
+Handlebars.registerHelper('uppercase', function(str) {
+    return ("" + str).toUpperCase();
+});
+
+Handlebars.registerHelper('percentage', function(number1, number2) {
+    if (number2 == 0) {
+        return 0;
+    }
+    return Math.round(number1*100/number2);
+});
+
+Handlebars.registerHelper('ifEquals', function(var1, var2, options) {
+    if (var1 == var2) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+
+Handlebars.registerHelper('ifGreaterThan', function(value1, value2, options) {
+    if (value1 > value2) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+
+Handlebars.registerHelper('urlForCourseId', function(courseId) {
+    return "/courses/" + courseId;
+});
+
+Handlebars.registerHelper('urlForGroupId', function(groupId) {
+    return "/groups/" + groupId + "/discussion_topics";
+});
+
+
+
+Handlebars.registerHelper('ifItemIsCompleted', function(completion_requirement, options) {
+
+    if (completion_requirement && completion_requirement.completed) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper('localize', function(key, options) {
+    if (mmooc.i18n[key] != null) {
+        return mmooc.i18n[key];
+    } else {
+        return key;
+    }
+});
+
+
+Handlebars.registerHelper('ifAllItemsCompleted', function(items, options) {
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.completion_requirement && !item.completion_requirement.completed) {
+            return options.inverse(this);
+        }
+    }
+
+    return options.fn(this);
+});
+
+Handlebars.registerHelper('ifAllModulesCompleted', function(modules, options) {
+    for (var i = 0; i < modules.length; i++) {
+        var module = modules[i];
+        for (var j = 0; j < module.items.length; j++) {
+            var item = module.items[j];
+            if (item.completion_requirement && !item.completion_requirement.completed) {
+                return options.inverse(this);
+            }
+        }
+    }
+
+    return options.fn(this);
+});
+
+Handlebars.registerHelper('percentageForModules', function(modules) {
+    var total = 0;
+    var completed = 0;
+
+    for (var i = 0; i < modules.length; i++) {
+        var module = modules[i];
+        for (var j = 0; j < module.items.length; j++) {
+            var item = module.items[j];
+            if (item.completion_requirement) {
+                total++;
+                if (item.completion_requirement.completed) {
+                    completed++;
+                }
+            }
+        }
+    }
+
+    return Math.round((completed*100)/total);
+});
+
+Handlebars.registerHelper('urlForFirstNoneCompleteItem', function(items) {
+    if (items != null && items != undefined && items.length > 0) {
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (item.completion_requirement && !item.completion_requirement.completed) {
+                return item.html_url;
+            }
+        }
+
+        return items[0].html_url;
+    }
+
+    return null;
+});
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.util = function() {
+    return {
+        renderTemplateWithData: function(template, data) {
+            var html = "";
+            try {
+                html = mmooc.templates[template](data);
+            } catch (e) {
+                console.log(e);
+            }
+
+            return html;
+
+        },
+
+        getPageTitleBeforeColon: function() {
+            // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
+            var title = document.title;
+            if (title.indexOf(":")) {
+                title = title.substring(0, title.indexOf(":"));
+            }
+            return title;
+        },
+
+        getPageTitleAfterColon: function() {
+            // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
+            var title = document.title;
+            if (title.indexOf(":")) {
+                title = title.substring(title.indexOf(":") + 1, title.length);
+            }
+            return title;
+        }
+
+    };
+}();
+
+
+this.mmooc=this.mmooc||{};
+
+
+this.mmooc.i18n = {
+    'Assignment' : 'Oppgave',
+    'Discussion' : 'Diskusjon',
+    'Quiz' : 'Prøve',
+    'Page' : 'Innholdsside',
+    'ExternalUrl' : 'Ekstern lenke',
+    'ExternalTool' : 'Eksternt verktøy',
+    'File' : 'Fil',
+    'Announcement' : 'Kunngjøring',
+    'DiscussionTopic': 'Diskusjon',
+    'Conversation': 'Innboksmelding',
+    'Message': 'Oppgavevarsel',
+    'Submission': 'Innlevering',
+    'AssessmentRequest': 'Vurderingsforespørsel',
+    'Conference': 'Conference',
+    'Collaboration': 'Collaboration'
+}
+
+$(document).ready(function() {
+    mmooc.routes.addRouteForPath(/\/$/, function() {
+        mmooc.menu.hideRightMenu();
+        mmooc.courseList.listCourses('content');
+        mmooc.courseList.showAddCourseButton();
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses$/, function() {
+        mmooc.menu.hideRightMenu();
+        mmooc.courseList.listCourses('content');
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses\/\d+$/, function() {
+        mmooc.coursePage.listModulesAndShowProgressBar();
+        mmooc.groups.interceptLinksToGroupPage();
+
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Kursforside', null);
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/announcements$/, function() {
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Kunngjøringer', mmooc.util.getPageTitleBeforeColon());
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/discussion_topics$/, function() {
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Diskusjoner', mmooc.util.getPageTitleBeforeColon());
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/groups$/, function() {
+        mmooc.groups.interceptLinksToGroupPage();
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Grupper', mmooc.util.getPageTitleBeforeColon());
+    });
+
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/users$/, function() {
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, '', mmooc.util.getPageTitleBeforeColon());
+    });
+
+    mmooc.routes.addRouteForPath(/\/groups\/\d+$/, function() {
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Grupper', mmooc.util.getPageTitleBeforeColon());
+    });
+
+    mmooc.routes.addRouteForPath(/\/groups\/\d+\/discussion_topics$/, function() {
+        var courseId = mmooc.api.getCurrentCourseId();
+        mmooc.menu.showCourseMenu(courseId, 'Grupper', mmooc.util.getPageTitleAfterColon());
+        mmooc.groups.showGroupHeader();
+    });
+
+    mmooc.routes.addRouteForPath([/\/groups\/\d+\/discussion_topics\/\d+$/, /\/groups\/\d+\/discussion_topics\/new$/], function() {
+        mmooc.menu.showDiscussionGroupMenu();
+    });
+
+    mmooc.routes.addRouteForPath([/\/courses\/\d+\/discussion_topics\/\d+/, /\/courses\/\d+\/discussion_topics\/new/], function() {
+        // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
+        var title = mmooc.util.getPageTitleAfterColon();
+
+        // Announcements are some as type of discussions, must use a hack to determine if this is an announcement
+        var courseId = mmooc.api.getCurrentCourseId();
+        if (mmooc.api.currentPageIsAnnouncement()) {
+            mmooc.menu.showCourseMenu(courseId, 'Kunngjøringer', title);
+            mmooc.menu.showBackButton("/courses/" + courseId + "/announcements", "Tilbake til kunngjøringer");
+        } else if (mmooc.api.getCurrentModuleItemId() == null) {
+            // Only show course menu if this discussion is not a module item
+            // Note detection if this is a module item is based on precense of query parameter
+            mmooc.menu.showCourseMenu(courseId, 'Diskusjoner', title);
+            mmooc.menu.showBackButton("/courses/" + courseId + "/discussion_topics", "Tilbake til diskusjoner");
+        }
+    });
+
+    mmooc.routes.addRouteForPathOrQueryString([/\/courses\/\d+\/assignments\/\d+/, /\/courses\/\d+\/quizzes\/\d+/], /module_item_id=/, function() {
+        mmooc.menu.showLeftMenu();
+        mmooc.menu.listModuleItems();
+        mmooc.pages.modifyMarkAsDoneButton();
+    });
+
+
+    mmooc.routes.addRouteForQueryString(/enrolled=1/, function() {
+        mmooc.enroll.changeButtonText();
+    });
+
+    try {
+        mmooc.menu.showTeacherAdminMenu();
+        mmooc.menu.showUserMenu();
+        mmooc.routes.performHandlerForUrl(document.location);
+    } catch (e) {
+        console.log(e);
+    }
+
+
+});
+
+
+
+// ==========================================================================================
+// UOB7.JS
+//
+// Generic top-level script for University of Birmingham's Canvas implementation. This
+// script, which requires jQuery and the jQuery.UI, carries out the following tasks:
+//
+// 		Adds FindIt@Bham link to Help Corner
+// 		Hides "Report a Problem" Zendesk option from all but sub-account admins
+// 		Enables accordions
+// 		Enables tabs
+// 		Enables reveal buttons
+// 		Enables regexp reveals
+//		Enables boxes
+//		Hides forgot-password link on login page
+//		Adds Google viewer previews to compatible file links
+//		Add strap line for Canvas Gallery
+//
+// Most code is implemented within a $(document).load() to ensure that jQuery and the
+// jQuery UI are both available, especially in Internet Explorer.
+//
+// ==========================================================================================
+
+
+$(document).load(
+
+	$(function() {
+		// -----------------------------------------------------------------------------------
+		// Declare veriables that are used for multiple tasks.
+		// -----------------------------------------------------------------------------------
+		var i;
+		var strSetNum = 0;
+
+
+		// -----------------------------------------------------------------------------------
+		// Add link for FindIt@Bham to the help corner on every page.
+		// -----------------------------------------------------------------------------------
+		onElementRendered("#identity", function($identity) {
+			var $nodeA = $(document.createElement("A"))
+				.attr("id", "finditatbham")
+				.attr("href", "http://findit.bham.ac.uk")
+				.attr("target", "FindItAtBham")
+				.text("FindIt@Bham");
+
+			var $nodeLI = $(document.createElement("LI"))
+				.append($nodeA);
+
+			$identity.append($nodeLI);
+		});
+
+
+		// -----------------------------------------------------------------------------------
+		// Add UoB footer line to login and entry pages (add for the Canvas Gallery).
+		// -----------------------------------------------------------------------------------
+		onElementRendered("#footer", function($footer) {
+			if (!location.pathname.match(/\/courses\/[0-9]+/)) {
+				var $nodeA = $(document.createElement("A"))
+					.attr("id", "canvas_gallery")
+					.attr("href", "/courses/9105")
+					.attr("target", "CanvasGallery")
+					.text("Canvas Gallery");
+
+				var $nodeDIV = $(document.createElement("DIV"))
+					.attr("class", "uob-footer-line")
+					.append("For access to open and self-enrolment courses, visit the ")
+					.append($nodeA)
+					.append(".");
+
+				$footer.prepend($nodeDIV);
+			}
+		});
+
+
+		// -----------------------------------------------------------------------------------
+		// If the current user is an administrator then add the uob-admin class to the body of
+		// the document so that the CSS will display the option to show the "Report a Problem"
+		// Zendesk option in the Help menu.
+		// -----------------------------------------------------------------------------------
+		hasAnyRole("admin", function(bAdmin) {
+			if (bAdmin)
+				$("body").addClass("uob-admin");
+		});
+
+
+		// -----------------------------------------------------------------------------------
+		// Add UoB enhancements to rich content displayed in courses.
+		// -----------------------------------------------------------------------------------
+		onPage(/\/(courses|groups)\/\d+/, function() {
+			uobAddComponents();
+		});
+
+
+		// -----------------------------------------------------------------------------------
+		// Remove forgot-password link on login page.
+		// -----------------------------------------------------------------------------------
+		onPage(/\/login/, function() {
+			onElementRendered("#login_forgot_password", function($forgotPassword) {
+				$forgotPassword.remove();
+			});
+		});
+
+
+		// -----------------------------------------------------------------------------------
+		// Change prompts for email address to username. in People.
+		// -----------------------------------------------------------------------------------
+
+		// Change prompts in People.
+		onPage(/\/courses\/\d+\/users/, function() {
+			onElementRendered("a#addUsers", function($addUsers) {
+				$addUsers.on("click", function() {
+					$("#create-users-step-1 > p:first").text("Type or paste a list of usernames below:");
+					$("#create-users-step-1 #user_list_textarea").attr("placeholder","For example bloggsj, abc123, pqr456, xyz789");
+				});
+			});
+		});
+
+		// Change prompts on self-enrolment page.
+		onPage(/\/enroll\/[A-Z0-9]+$/, function() {
+			onElementRendered("#modal-box", function($modalBox) {
+				$("#modal-box p:contains('enter your email')").text("Please enter your University of Birmingham username and password:");
+				$("#modal-box label[for=student_email]").text("Username");
+			});
+		});
+
+
+		// --------------------------------------------------------------------------------
+		// Google analytics
+		// --------------------------------------------------------------------------------
+
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-45967031-1', 'bham.ac.uk');
+		ga('send', 'pageview');
+
+		// --------------------------------------------------------------------------------
+
+	})
+
+)
+
+
+// --------------------------------------------------------------------------------
+// uobAddComponents
+//
+// This function will enable the following UoB components:
+// 		accordions
+// 		tabs
+// 		reveal buttons
+// 		regexp reveals
+//		boxes (header, box, tip, info, warning, question)
+//		previews
+// --------------------------------------------------------------------------------
+
+function uobAddComponents() {
+	onElementRendered("#content .user_content.enhanced,#content .show-content.enhanced", function($content) {
+
+
+		// ================================================================================
+		// Show non-uob-component tables
+		//
+		// Show standard tables that are not UoB controls i.e. tables that do not include
+		// the string "[uob-" in the first cell.
+		// --------------------------------------------------------------------------------
+
+		var $tables = $content.find("table:hidden").not("td:first(:contains('[uob-'))");
+		$tables.show();
+
+
+		// ================================================================================
+		// Accordian (Part 1/2)
+		//
+		// Convert up to 10 uob-accordion tables to format required for accordions.
+		// --------------------------------------------------------------------------------
+
+		for (i = 0; i < 10; i++) {
+			// Locate the next uob-accordion table.
+			$table = $content.find("table").has("table > tbody > tr > td:contains([uob-accordion])").last();
+
+			// Break loop if no more accordions are to be displayed.
+			if ($table.length != 1) break;
+
+			// Convert table into HTML for an accordian.
+			$table.before("<div class='uob-accordion'></div>");
+
+			$table.find("tbody:first > tr:gt(0) > td").each(function(_idx, _item) {
+				if ((_idx + 1) % 2) {
+					// Add heading 4 for accordion bar.
+					$table.prev().append("<h4></h4>");
+					$table.prev().children().last().append($(_item).text().trim());
+				}
+
+				if (_idx % 2) {
+					// Add div for accordion content.
+					$table.prev().append("<div></div>");
+					$table.prev().children().last().append($(_item).contents());
+				}
+			});
+
+			// Remove original table from the DOM
+			$table.remove();
+		}
+
+
+		// ================================================================================
+		// Tabs (Part 1/2)
+		//
+		// Convert up to 10 uob-tabs tables to format required for tabs.
+		// --------------------------------------------------------------------------------
+
+		strSetNum = 0;
+
+		for (i = 0; i < 10; i++) {
+			// Locate the next uob-tabs table.
+			$table = $content.find("table").has("table > tbody > tr > td:contains([uob-tabs])").last();
+
+			// Break loop if no more tabs are to be displayed.
+			if ($table.length != 1) break;
+
+			// Convert table into a set of tabs.
+			$table.before("<div class='uob-tabs'><ul></ul></div>");
+			strSetNum++;
+
+			$table.find("tbody:first > tr:gt(0) > td").each(function(_idx, _item) {
+				var strAnchor = "set" + strSetNum + "tab" + ((_idx - (_idx % 2)) / 2);
+
+				if ((_idx + 1) % 2) {
+					// Add list item for the tab label.
+					var strHTML = "<li><a href=\"#" + strAnchor + "\">" + $(_item).text().trim() + "</a></li>";
+					$table.prev().find("ul").first().append(strHTML);
+				}
+
+				if (_idx % 2) {
+					// Add div for the tab content.
+					$table.prev().append("<div id=\"" + strAnchor + "\"></div>");
+					$("#" + strAnchor).append($(_item).contents());
+				}
+			});
+
+			// Remove original table from the DOM
+			$table.remove();
+		}
+
+
+		// ================================================================================
+		// Reveal (Part 1/2)
+		//
+		// Convert up to 10 uob-reveal tables to format required for reveals.
+		// ................................................................................
+
+		strSetNum = 0;
+
+		for (i = 0; i < 10; i++) {
+			// Locate the next uob-reveal table
+			var $table = $content.find("table").has("table > tbody > tr > td:contains([uob-reveal])").last();
+
+			// Break loop if no more reveal tables are to be converted.
+			if ($table.length != 1) break;
+
+			// Convert table into a reveal
+			strSetNum++;
+
+			$table.find("tbody:first > tr:gt(0) > td").each(function(_idx, _item) {
+				var strAnchor = "set" + strSetNum + "reveal" + ((_idx - (_idx % 2)) / 2);
+
+				if ((_idx + 1) % 2) {
+					// Add new reveal button immediately before table
+					$table.before("<p><a href=\"#" + strAnchor + "\" class=\"uob-reveal-button\"></a></p>");
+					$table.prev().children().append($(_item).text().trim());
+				}
+
+				if (_idx % 2) {
+					// Add new reveal content immediately before table
+					$table.before("<div id=\"" + strAnchor + "\" class=\"uob-reveal-content\"></div>");
+					$table.prev().append($(_item).contents());
+				}
+			});
+
+			// Remove original table
+			$table.remove();
+		}
+
+
+		// ================================================================================
+		// RegExp (Part 1/1)
+		//
+		// Convert up to 10 uob-regexp tables to format required for regexps.
+		// --------------------------------------------------------------------------------
+
+		strSetNum = 0;
+
+		for (i = 0; i < 10; i++) {
+			// Locate the next uob-regexp table
+			var $table = $content.find("table").has("table > tbody > tr > td:contains([uob-regexp])").last();
+
+			// Break loop if no more regexp tables are to be converted.
+			if ($table.length != 1) break;
+
+			// Convert table into a regexps
+			strSetNum++;
+
+			// Generate HTML for input and button/anchor controls, and add to the DOM.
+			var strAnchor = "RE" + strSetNum;
+
+			var strHTML = "<p><input id=\"input" + strAnchor + "\" class=\"uob-regexp-input\" type=\"text\" size=\"40\" />&nbsp;<a href=\"#" + strAnchor + "\" id=\"button" + strAnchor + "\" class=\"uob-regexp-button\">Check Answer</a></p>";
+			strHTML += "<div id='content" + strAnchor + "'></div>";
+			$table.before(strHTML);
+
+			// Store regular expressions in button and create DIVs to store the contents.
+			$table.find("tbody:first > tr:gt(0) > td").each(function(_idx, _item) {
+				var strValue = $(_item).html();
+				var strIndex = ((_idx - (_idx % 2)) / 2);
+
+				if ((_idx + 1) % 2) {		// set RegExp
+					strValue = $(_item).text().trim();
+					$("#button" + strAnchor).attr("regexp" + strIndex, strValue);
+				}
+
+				if (_idx % 2) {			// set Content
+					//$("#data" + strAnchor).attr("content" + strIndex, strValue);
+					strHTML = "<div id=\"data" + strAnchor + "ID" + strIndex + "\" class=\"uob-regexp-content\"></div>";
+					$("#content" + strAnchor).append(strHTML);
+					$("#data" + strAnchor + "ID" + strIndex).append($(_item).contents());
+				}
+			});
+
+			// Store IDs of input and button to button and input respectively.
+			$("#button" + strAnchor).attr("regexpInput", "input" + strAnchor);
+			$("#input" + strAnchor).attr("regexpButton", "button" + strAnchor);
+
+			// Store default selection in button.
+			$("#button" + strAnchor).attr("regexpData", "data" + strAnchor + "ID0");
+			$("#button" + strAnchor).attr("regexpDataRoot", "data" + strAnchor + "ID");
+
+			// Remove original table
+			$table.remove();
+		}
+
+
+		// ================================================================================
+		// Accordian (Part 2/2)
+		//
+		// Accordions will be contained within elements with a uob-accordion class and
+		// headings will be restricted to h4 tags.
+		// --------------------------------------------------------------------------------
+
+		// Initialise accordions
+		var $accordion = $content.find(".uob-accordion");
+
+		if ($accordion.length) {
+			$accordion.accordion({
+				icons: null,
+				heightStyle: "content",
+				header: "> h4",
+				collapsible: true,
+				active: false,
+				beforeActivate: function( event, ui ) {
+					ui.oldPanel.find(".hide_youtube_embed_link").click();
+				}
+			});
+		}
+
+
+		// ================================================================================
+		// Tabs (Part 2/2)
+		//
+		// Tabs will be contained within elements with a uob-tabs class.
+		// --------------------------------------------------------------------------------
+
+		// Initialise tabs
+		var $tabs = $content.find(".uob-tabs");
+
+		if ($tabs.length > 0) {
+			$tabs.tabs({
+				active: 0,
+				collapsible: false,
+				heightStyle: "content",
+				beforeActivate: function( event, ui ) {
+					ui.oldPanel.find(".hide_youtube_embed_link").click();
+				}
+			});
+		}
+
+
+		// ================================================================================
+		// Reveal (Part 2/2)
+		//
+		// The uob-reveal-button and uob-reveal-content classes are required for reveals.
+		// ................................................................................
+
+		// Initialise reveal contents.
+		var $revealBody = $content.find(".uob-reveal");
+
+		if ($revealBody.length) {
+			for (i = 0; i < $revealBody.length; i++) {
+				var strSelector = $revealBody[i].href;
+				var iHashPos = strSelector.lastIndexOf("#");
+
+				if (iHashPos >= 0) {
+					$(strSelector.slice(iHashPos + 1)).css("display", "none");
+				}
+			};
+		}
+
+		// Initialise reveal buttons.
+		var $revealButton = $content.find(".uob-reveal-button");
+
+		if ($revealButton.length) {
+			$revealButton.button({ icons: { secondary: "ui-icon-triangle-1-e" } })
+				.click(function(event) {
+					var $button = $(this);
+					var body = $button.attr("href");
+					var options;
+
+					if ($(body).css("display") != "none") {
+						$(body).slideUp(400);
+						$(body).find(".hide_youtube_embed_link").click();
+						options = { icons: { secondary: "ui-icon-triangle-1-e" } };
+					} else {
+						$(body).slideDown(400);
+						options = {	icons: { secondary: "ui-icon-triangle-1-s" } };
+					}
+
+					$button.button("option", options);
+					return(false);
+				});
+		}
+
+
+		// ================================================================================
+		// RegExp (Part 2/2)
+		//
+		// The uob-regexp-input, uob-regexp-button, uob-regexp-content classes are required
+		// for regexp.
+		// --------------------------------------------------------------------------------
+
+		// Initialise regexp inputs.
+		var $regexpInput = $content.find(".uob-regexp-input");
+
+		if ($regexpInput.length) {
+			$regexpInput.focus(function(event) {
+				var $input = $(this);
+				var $button = $("#" + $input.attr("regexpButton"));
+
+				var strData = $button.attr("regexpData");
+				var strDataRoot = $button.attr("regexpDataRoot");
+
+				if (strData != "") {
+					var $data = $("#" + strData);
+					var options;
+
+					// Hide current display if visible
+					if ($data.css("display") != "none") {
+						$data.slideUp(400);
+						$data.find(".hide_youtube_embed_link").click();
+						options = { icons: { secondary: "ui-icon-triangle-1-e" } };
+						$button.button("option", options);
+						$button.attr("regexpData", "");
+					}
+				}
+			});
+		}
+
+		// Initialise regexp buttons.
+		var $regexpButton = $content.find(".uob-regexp-button");
+
+		if ($regexpButton.length) {
+			$regexpButton.button({ icons: { secondary: "ui-icon-triangle-1-e" } })
+				.click(function(event) {
+					var $button = $(this);
+					var $input = $("#" + $button.attr("regexpInput"));
+
+					var strData = $button.attr("regexpData");
+					var strDataRoot = $button.attr("regexpDataRoot");
+					if (strData == "") strData = strDataRoot + "0";
+					var $data = $("#" + strData);
+					var options;
+
+					// Hide current display if visible
+					if ($data.css("display") != "none") {
+						$data.slideUp(400);
+						options = { icons: { secondary: "ui-icon-triangle-1-e" } };
+						$button.button("option", options);
+						$button.attr("regexpData", "");
+					} else {
+						// Locate content to be displayed
+						var strInput = $input.val();
+
+						// Loop through regexp looking for a match and identify content.
+						for (i = 0; i < 100; i++) {
+							var strRegExp = $button.attr("regexp" + i);
+
+							if (strRegExp == undefined || strRegExp.length == 0)
+								break;
+
+							var re = new RegExp("^" + strRegExp.trim() + "$");
+
+							if (strRegExp == "default" || re.test(strInput)) {
+								$button.attr("regexpData", "" + strDataRoot + i);
+								$data = $("#" + strDataRoot + i);
+								break;
+							}
+						}
+
+						$data.slideDown(400);
+						options = {	icons: { secondary: "ui-icon-triangle-1-s" } };
+						$button.button("option", options);
+						return(false);
+					}
+				});
+		}
+
+
+		// ================================================================================
+		// Rating
+		//
+		// A rating will be constructed using radio buttons.
+		// See http://www.fyneworks.com/jquery/star-rating/
+		// --------------------------------------------------------------------------------
+
+		// Convert uob-rating table to format required for ratings.
+		var $ratingTable = $content.find("table").has("table > tbody > tr > td:contains([uob-rating])");
+
+		if ($ratingTable.length) {
+			// Cut table from the DOM
+			$ratingTable.remove();
+
+			// Determine is user is more than a student.
+			var isTeacher = false;
+
+			hasAnyRole("teacher", "admin", function() {
+				isTeacher = true;
+			});
+
+			// Add rating control to DOM
+			var strParams = "?page_loc=" + encodeURIComponent(location.pathname);
+			strParams += "&page_title=" + encodeURIComponent(document.title);
+			strParams += "&user_id=" + ENV.current_user_id;
+			strParams += "&user_name=" + encodeURIComponent(ENV.current_user.display_name);
+			var strRating = "<iframe src=\"https://www.vampire.bham.ac.uk/canvas/rating.aspx" + strParams + "\" width=\"100%\" height=\"32\"></iframe>";
+			strRating = "<div id='uob-rating-container-x'>" + strRating + "</div>";
+			$content.append(strRating);
+		}
+
+
+		// ================================================================================
+		// Boxes
+		//
+		// Create boxes from all tables with the codes: uob-tip, uob-info, uob-warning,
+		// uob-header and uob-question.
+		// --------------------------------------------------------------------------------
+
+		aBoxTags = ["uob-tip", "uob-info", "uob-warning", "uob-header", "uob-question", "uob-quote", "uob-box"];
+
+		for (var i = 0; i < aBoxTags.length; i++) {
+			var strTag = aBoxTags[i];
+			var $boxTable = $content.find("table").has("table > tbody > tr > td:contains([" + strTag + "])");
+
+			if ($boxTable.length) {
+				$boxTable.each(function(_idx, _item) {
+					// Add new container immediately before table
+					$table = $(_item);
+
+					if (strTag == "uob-header")
+						$table.before("<h2 class=\"" + strTag + "\"></h2>");
+					else if (strTag == "uob-quote")
+						$table.before("<div class=\"" + strTag + "\"><div class=\"uob-quote99\" /></div>");
+					else
+						$table.before("<div class=\"" + strTag + "\"></div>");
+
+					// Move content from table to container
+					$table.prev().append($table.find("tr:eq(1) > td:eq(0)").contents());
+
+					// Remove original table
+					$table.remove();
+				});
+			}
+		}
+
+
+		// ================================================================================
+		// Previews
+		//
+		// This code will append preview buttons immediately after each file link in the
+		// content of a page. File links are identified by the instructure_file_link class.
+		// When clicked the first time, the preview button will call a function to complete
+		// the DOM changes, which are not possible before the DOM manipulation carried out
+		// within Canvas is complete. The new HTML for the preview button will be similar
+		// to the following:
+		//
+		// <a href="javascript:uobShowPreviewDocument(0)" title="Preview example.pdf" id="uobPreview0">
+		//     <img src="/images/preview.png" alt="Preview example.pdf">
+		// </a>
+		// --------------------------------------------------------------------------------
+
+		$content.find(".instructure_file_link_holder.link_holder").has("a").each(function(_idx, _item) {
+			// Initialise varibles
+			var $item = $(_item);
+			var $anchor = $(_item).find('a').filter(':first');
+			var strHref = $anchor.attr('href') || "";	// if href is not found, set strHref to an empty string.
+			var iScribd = $(_item).find('.instructure_scribd_file_holder').length || 0;
+
+			if (iScribd > 0) {
+				strHref = "";
+			}
+
+			if (strHref.length > 0) {
+				// Obtain ID of the file (index is 4 or 6 respectivelly for non-draft and draft modes)
+				var file_id = strHref.split('/')[strHref.indexOf("/courses") == 0 ? 4 : 6];
+
+				// Use Canvas API to obtain information about the file being linked.
+				$.get('/api/v1/files/' + file_id, function(_d) {
+
+					// Check that the file type is compatible with the Google viewer.
+					if ($.isPreviewable(_d['content-type'], 'google') === 1) {
+
+						// Initialise variables
+						var displayName = _d['display_name'];
+
+						// Create anchor element for the link. Note, _idx is used to make each
+						// link unique. The file_id cannot be used in case when the same file
+						// link appears more than once on a page.
+						var $a = $(document.createElement('a'))
+							.attr('href', 'javascript:uobShowPreviewDocument(' + _idx + ')')
+							.attr('title', 'Preview ' + displayName)
+							.attr('id', 'uobPreview' + _idx)
+							.data('href2', strHref);
+
+						// Create preview icon for the link
+						var $img = $(document.createElement('img'))
+							.attr('src', '/images/preview.png')
+							.attr('alt', 'Preview ' + displayName);
+
+						// Combine the preview icon with the anchor and add them to the DOM.
+						$a.append($img);
+						$anchor.after($a);
+						//$(_item).append($a);
+					}
+				});
+			}
+		});
+
+
+		// ================================================================================
+		// Refresh after publish/unpublish
+		//
+		// Add dummy callback function to detect when the page is published or unpublished.
+		// The callback function will constantly check for the div and refresh the UoB
+		// components if the div is missing.
+		// --------------------------------------------------------------------------------
+
+		// Create dummy div and add it to the DOM
+		var $div = $(document.createElement('div')).attr('id', 'uob-components-loaded');
+		$content.append($div);
+
+		// Set callback to test for missing div, as occurs when pages are published/unpublished.
+		onElementMissing("#uob-components-loaded", function($identity) {
+			uobAddComponents();
+		});
+
+
+		// ================================================================================
+		// --------------------------------------------------------------------------------
+
+	});
+}
+
+
+// --------------------------------------------------------------------------------
+// uobShowPreviewDocument
+//
+// This function will amend a preview link so that when it is clicked, it will
+// display documents using the Google viewer. This function will only be called
+// once for each preview link, the first time it is clicked. When amended, the link
+// is moved into the SPAN element with a "link_holder" class which should
+// immediately precede the link. The preview link is given a new href attribute,
+// the "scribd_file_preview_link" class and the click event will be triggered.
+// --------------------------------------------------------------------------------
+
+function uobShowPreviewDocument(iFileID) {
+	// Initialise object variables to simplify the code. $target is the preview link
+	// and $holder is the preceding or parent SPAN element (if it exists).
+	var $target = $('#uobPreview' + iFileID);
+	var $holder = $target.prev('span.link_holder');
+
+	if ($holder.length == 0) {
+		$holder = $target.parent('span.link_holder');
+	}
+
+	// Check that preceding element is a SPAN with the "link_holder" class.
+	if ($holder.length) {
+
+		// Move the anchor element into the preceeding span element
+		$holder.append($target);
+
+		// Replace href value, add the "scribd_file_preview_link" class and click.
+		$target
+			.attr('href', $target.data('href2'))
+			.addClass('scribd_file_preview_link')
+			.click();
+	}
+}
+
+
+// --------------------------------------------------------------------------------
+// Instructure/rpflorence functions
+//
+// (see http://youtu.be/ag6mxnBMTnQ and https://gist.github.com/rpflorence/5817898)
+// Functions slightly amended and onElementMissing function added.
+// --------------------------------------------------------------------------------
+
+function onPage(regex, fn) {
+  if (location.pathname.match(regex)) fn();
+}
+
+
+function hasAnyRole(/* role1, role2..., cb */) {
+	var roles = [].slice.call(arguments, 0);
+	var cb = roles.pop();
+
+	if (typeof ENV != "object") return cb(false);
+	if (typeof ENV.current_user_roles != "object") return cb(false);
+	if (ENV.current_user_roles == null) return cb(false);
+
+	for (var i = 0; i < roles.length; i++) {
+		if (ENV.current_user_roles.indexOf(roles[i]) !== -1) return cb(true);
+	}
+
+	return cb(false);
+}
+
+
+function isUser(id, cb) {
+	cb(ENV.current_user_id == id);
+}
+
+
+function onElementRendered(selector, cb, _attempts) {
+	var el = $(selector);
+	_attempts = ++_attempts || 1;
+	if (el.length) return cb(el);
+	if (_attempts >= 60) return;
+
+	setTimeout(function() {
+		onElementRendered(selector, cb, _attempts);
+	}, 200);
+}
+
+
+function onElementMissing(selector, cb) {
+	var el = $(selector);
+	if (!el.length) return cb(el);
+
+	setTimeout(function() {
+		onElementMissing(selector, cb);
+	}, 700);
+}
+
+
+function getQueryVariable(variable) {
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if(pair[0] == variable){return pair[1];}
+	}
+
+	return(false);
+}
