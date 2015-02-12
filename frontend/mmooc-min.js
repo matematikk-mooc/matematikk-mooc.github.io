@@ -1201,7 +1201,7 @@ $(document).ready(function() {
     });
 
     mmooc.routes.addRouteForPath(/\/login$/, function() {
-        $('#register-link').html("<i>Trenger du en konto?</i><b>Klikk her.</b>");
+        $('#register_link').html("<i>Trenger du en konto?</i><b>Klikk her.</b>");
     });
 
     mmooc.routes.addRouteForPath(/\/courses$/, function() {
