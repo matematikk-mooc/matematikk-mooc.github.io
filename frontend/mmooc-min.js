@@ -963,6 +963,10 @@ this.mmooc.pages = function() {
 
                 container.show();
             });
+        },
+
+        changeTranslations : function() {
+            $("a.submit_assignment_link").text('Lever besvarelse');
         }
     };
 }();
@@ -1299,6 +1303,7 @@ $(document).ready(function() {
         mmooc.menu.showLeftMenu();
         mmooc.menu.listModuleItems();
         mmooc.pages.modifyMarkAsDoneButton();
+        mmooc.pages.changeTranslations();
     });
 
 
