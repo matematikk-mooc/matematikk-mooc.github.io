@@ -15,12 +15,6 @@ Matematikk-MOOC is built using the open source LMS [Canvas][canvas].
 
 This page is for the documentation of the technical stuff.
 
-## Disclaimer
-
-This is very early in the project. At this stage things are likely to
-change without any regards to backwards compatibility. Furthermore
-this documentation is also likely to be out of date from time to time.
-
 # Trying it out
 
 The system is built to be as easy as possible to install and run. This
@@ -70,16 +64,6 @@ MOOC from a browser. Note that it can take a long time to load the
 system in the browser the first time you try.
 
 
-# Give feedback
-
-Please use [this form][new-issue] (on github) if you either have any
-questions or want to report a bug.
-
-# More information
-
-Developers, system administrators and adventurous people can find more
-information at the [project wiki][wiki].
-
 [ictcenter]: https://iktsenteret.no/english
 [canvas]: https://instruture.com
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
@@ -87,5 +71,3 @@ information at the [project wiki][wiki].
 [docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
-[new-issue]: https://github.com/matematikk-mooc/matematikk-mooc.github.io/issues/new
-[wiki]: https://github.com/matematikk-mooc/mmooc/wiki
