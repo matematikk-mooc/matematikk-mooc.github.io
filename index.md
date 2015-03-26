@@ -63,6 +63,15 @@ Running `./b2d url` gives you the URL you need to use to access the
 MOOC from a browser. Note that it can take a long time to load the
 system in the browser the first time you try.
 
+## (Optional) Try out the Matematikk-MOOC custom user interface
+
+See [this document][branding-guide] for an explanation on how to
+enable custom javascript and CSS.
+
+The files you need to include are
+
+- http://matematikk-mooc.github.io/frontend/mmooc-min.css
+- http://matematikk-mooc.github.io/frontend/mmooc-min.js
 
 [ictcenter]: https://iktsenteret.no/english
 [canvas]: https://instruture.com
@@ -71,3 +80,4 @@ system in the browser the first time you try.
 [docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
+[branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
