@@ -13,8 +13,6 @@ Norwegian).
 
 Matematikk-MOOC is built using the open source LMS [Canvas][canvas].
 
-This page is for the documentation of the technical stuff.
-
 # Trying it out
 
 The system is built to be as easy as possible to install and run. This
