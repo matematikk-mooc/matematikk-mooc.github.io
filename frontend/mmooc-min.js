@@ -4,18 +4,16 @@ this["mmooc"]["templates"] = this["mmooc"]["templates"] || {};
 this["mmooc"]["templates"]["activitystream"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, functionType="function", self=this, blockHelperMissing=helpers.blockHelperMissing, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper, options;
   buffer += "\n    <li class=\"";
-  stack1 = helpers.unless.call(depth0, (depth0 && depth0.read_state), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.mmooc)),stack1 == null || stack1 === false ? stack1 : stack1.menu)),stack1 == null || stack1 === false ? stack1 : stack1.checkReadStateFor)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1)),blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data}));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\"><a href=\"";
-  if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
+  buffer += "\"><a href=\""
+    + escapeExpression((helper = helpers.findRightUrlFor || (depth0 && depth0.findRightUrlFor),options={hash:{},data:data},helper ? helper.call(depth0, depth0, options) : helperMissing.call(depth0, "findRightUrlFor", depth0, options)))
     + "\">";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
@@ -318,20 +316,30 @@ function program2(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\n                    <li class=\"mmooc-module-item\"><a class=\"";
+  buffer += "\n                    <li class=\"mmooc-module-item mmooc-module-item-icon\">\n                        <a class=\"";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isCurrent), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\" href=\"";
   if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">";
+    + "\">\n                            <span class=\"mmooc-module-item-title\">";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</span>\n                            <span class=\"mmooc-module-items-icons-";
+  if (helper = helpers.type) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.type); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1);
   stack1 = (helper = helpers.ifItemIsCompleted || (depth0 && depth0.ifItemIsCompleted),options={hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.completion_requirement), options) : helperMissing.call(depth0, "ifItemIsCompleted", (depth0 && depth0.completion_requirement), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</a></li>\n                ";
+  buffer += "\"\n                               href=\"";
+  if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">\n                                <i class=\"icon-"
+    + escapeExpression((helper = helpers.lowercase || (depth0 && depth0.lowercase),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "lowercase", (depth0 && depth0.type), options)))
+    + "\"></i>\n                            </span>\n                        </a>\n                    </li>\n                ";
   return buffer;
   }
 function program4(depth0,data) {
@@ -343,7 +351,7 @@ function program4(depth0,data) {
 function program6(depth0,data) {
   
   
-  return "<i class=\"icon-check\"></i>";
+  return " done";
   }
 
   buffer += "<nav aria-label=\"content\" role=\"navigation\">\n\n    <div class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\n        <a href=\""
@@ -428,6 +436,20 @@ function program6(depth0,data) {
   stack1 = helpers.each.call(depth0, (depth0 && depth0.modules), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["navigateToPreviousPage"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<nav class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\n    <span href=\"#\" onclick=\"mmooc.util.goBack()\">\n        ";
+  if (helper = helpers.linkText) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.linkText); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n    </span>\n</nav>";
   return buffer;
   });
 
@@ -666,7 +688,8 @@ this.mmooc.courseList = function() {
     return {
         listCourses: function(parentId) {
             mmooc.api.getEnrolledCourses(function(courses) {
-                var html = mmooc.util.renderTemplateWithData("courselist", {courses: courses});
+                var sortedCourses = mmooc.util.arraySorted(courses, "course_code"),
+                    html = mmooc.util.renderTemplateWithData("courselist", {courses: sortedCourses});
                 document.getElementById(parentId).innerHTML = html;
             });
         },
@@ -703,11 +726,11 @@ this.mmooc.coursePage = function() {
 
         listModulesAndShowProgressBar: function() {
             mmooc.api.getModulesForCurrentCourse(function(modules) {
-                var modulesHTML = mmooc.util.renderTemplateWithData("modules", {modules: modules});
-                document.getElementById('content').insertAdjacentHTML('afterbegin', modulesHTML);
-
                 var progressHTML = mmooc.util.renderTemplateWithData("courseprogress", {modules: modules});
-                document.getElementById('content').insertAdjacentHTML('afterbegin', progressHTML);
+                document.getElementById('course_home_content').insertAdjacentHTML('beforebegin', progressHTML);
+
+                var modulesHTML = mmooc.util.renderTemplateWithData("modules", {modules: modules});
+                document.getElementById('course_home_content').insertAdjacentHTML('beforebegin', modulesHTML);
             });
         }
 
@@ -769,6 +792,12 @@ this.mmooc=this.mmooc||{};
 
 
 this.mmooc.menu = function() {
+
+    function extractBadgesLinkFromPage() {
+        var href = $('li.section:contains("BadgeSafe")').find('a').attr('href');
+        return {"title": mmooc.i18n.Badgesafe , url: href};
+    }
+
     function _renderCourseMenu(course, selectedMenuItem, title) {
         var menuItems = [];
 
@@ -778,7 +807,7 @@ this.mmooc.menu = function() {
         menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
         menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
         menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
-
+        menuItems[menuItems.length] = extractBadgesLinkFromPage();
 
         var subtitle = course.name;
         if (title == null) {
@@ -860,7 +889,7 @@ this.mmooc.menu = function() {
                 mmooc.api.getActivityStreamForUser(function(activities) {
                     var unreadNotifications = 0;
                     for (var i = 0; i < activities.length; i++) {
-                        if (activities[i].read_state == false) {
+                        if (mmooc.menu.checkReadStateFor(activities[i])) {
                             unreadNotifications++;
                         }
                     }
@@ -928,6 +957,10 @@ this.mmooc.menu = function() {
                     document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', headerHTML);
                 });
             }
+        },
+
+        checkReadStateFor: function (activity) {
+            return activity.read_state === false;
         }
     };
 }();
@@ -967,6 +1000,13 @@ this.mmooc.pages = function() {
 
         changeTranslations : function() {
             $("a.submit_assignment_link").text('Lever besvarelse');
+        },
+
+        showBackLinkIfNecessary: function() {
+            if ($('#left-side').is(':hidden')) {
+                var linkBack = mmooc.util.renderTemplateWithData("navigateToPreviousPage", {linkText: mmooc.i18n.LinkBack});
+                $(linkBack).prependTo($('#content'));
+            }
         }
     };
 }();
@@ -1159,12 +1199,16 @@ Handlebars.registerHelper('urlForFirstNoneCompleteItem', function(items) {
 
     return null;
 });
-this.mmooc=this.mmooc||{};
+
+Handlebars.registerHelper('findRightUrlFor', function(activity) {
+    return activity.type === 'Submission' ? '/courses/' + activity.course_id + '/grades' : activity.html_url;
+});
+this.mmooc = this.mmooc || {};
 
 
-this.mmooc.util = function() {
+this.mmooc.util = function () {
     return {
-        renderTemplateWithData: function(template, data) {
+        renderTemplateWithData: function (template, data) {
             var html = "";
             try {
                 html = mmooc.templates[template](data);
@@ -1176,7 +1220,7 @@ this.mmooc.util = function() {
 
         },
 
-        getPageTitleBeforeColon: function() {
+        getPageTitleBeforeColon: function () {
             // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
             var title = document.title;
             if (title.indexOf(":")) {
@@ -1185,13 +1229,66 @@ this.mmooc.util = function() {
             return title;
         },
 
-        getPageTitleAfterColon: function() {
+        getPageTitleAfterColon: function () {
             // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
             var title = document.title;
             if (title.indexOf(":")) {
                 title = title.substring(title.indexOf(":") + 1, title.length);
             }
             return title;
+        },
+
+        arraySorted: function (array, elementToSort) {
+            if (Object.prototype.toString.call(array) === '[object Array]' && elementToSort) {
+                return array.sort(function (a, b) {
+                    if (a.hasOwnProperty(elementToSort) && b.hasOwnProperty(elementToSort)) {
+                        var field1 = a[elementToSort].toLocaleLowerCase();
+                        var field2 = b[elementToSort].toLocaleLowerCase();
+                        return field1.localeCompare(field2);
+                    }
+                    return 0;
+                });
+            }
+            return array;
+        },
+
+        goBack: function (e) {//http://stackoverflow.com/questions/9756159/using-javascript-how-to-create-a-go-back-link-that-takes-the-user-to-a-link-i
+            var defaultLocation = "https://server";
+            var oldHash = window.location.hash;
+
+            history.back(); // Try to go back
+
+            var newHash = window.location.hash;
+
+            /* If the previous page hasn't been loaded in a given time (in this case
+             * 1000ms) the user is redirected to the default location given above.
+             * This enables you to redirect the user to another page.
+             *
+             * However, you should check whether there was a referrer to the current
+             * site. This is a good indicator for a previous entry in the history
+             * session.
+             *
+             * Also you should check whether the old location differs only in the hash,
+             * e.g. /index.html#top --> /index.html# shouldn't redirect to the default
+             * location.
+             */
+
+            if (
+                newHash === oldHash &&
+                (typeof(document.referrer) !== "string" || document.referrer === "")
+            ) {
+                window.setTimeout(function () {
+                    // redirect to default location
+                    window.location.href = defaultLocation;
+                }, 1000); // set timeout in ms
+            }
+            if (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                if (e.preventPropagation)
+                    e.preventPropagation();
+            }
+            return false; // stop event propagation and browser default event
         }
 
     };
@@ -1216,8 +1313,10 @@ this.mmooc.i18n = {
     'Submission': 'Innlevering',
     'AssessmentRequest': 'Vurderingsforespørsel',
     'Conference': 'Conference',
-    'Collaboration': 'Collaboration'
-}
+    'Collaboration': 'Collaboration',
+    'LinkBack': 'Tilbake til forrige side',
+    'Badgesafe': 'Utmerkelser'
+};
 
 $(document).ready(function() {
     mmooc.routes.addRouteForPath(/\/$/, function() {
@@ -1305,6 +1404,11 @@ $(document).ready(function() {
         mmooc.pages.modifyMarkAsDoneButton();
         mmooc.pages.changeTranslations();
     });
+
+    mmooc.routes.addRouteForPath([/\/pages/], function() {
+        mmooc.pages.showBackLinkIfNecessary();
+    });
+
 
 
     mmooc.routes.addRouteForQueryString(/enrolled=1/, function() {
