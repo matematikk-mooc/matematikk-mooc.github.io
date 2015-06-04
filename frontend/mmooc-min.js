@@ -4,15 +4,14 @@ this["mmooc"]["templates"] = this["mmooc"]["templates"] || {};
 this["mmooc"]["templates"]["activitystream"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", self=this, blockHelperMissing=helpers.blockHelperMissing, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\n    <li class=\"";
-  stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.mmooc)),stack1 == null || stack1 === false ? stack1 : stack1.menu)),stack1 == null || stack1 === false ? stack1 : stack1.checkReadStateFor)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1)),blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data}));
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\"><a href=\""
+  buffer += "\n    <li class=\""
+    + escapeExpression((helper = helpers.checkReadStateFor || (depth0 && depth0.checkReadStateFor),options={hash:{},data:data},helper ? helper.call(depth0, depth0, options) : helperMissing.call(depth0, "checkReadStateFor", depth0, options)))
+    + "\"><a href=\""
     + escapeExpression((helper = helpers.findRightUrlFor || (depth0 && depth0.findRightUrlFor),options={hash:{},data:data},helper ? helper.call(depth0, depth0, options) : helperMissing.call(depth0, "findRightUrlFor", depth0, options)))
     + "\">";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -22,11 +21,6 @@ function program1(depth0,data) {
     + escapeExpression((helper = helpers.localize || (depth0 && depth0.localize),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "localize", (depth0 && depth0.type), options)))
     + "</span></a></li>\n";
   return buffer;
-  }
-function program2(depth0,data) {
-  
-  
-  return "unread";
   }
 
   buffer += "<ul id=\"mmooc-notifications\">\n";
@@ -1202,6 +1196,10 @@ Handlebars.registerHelper('urlForFirstNoneCompleteItem', function(items) {
 
 Handlebars.registerHelper('findRightUrlFor', function(activity) {
     return activity.type === 'Submission' ? '/courses/' + activity.course_id + '/grades' : activity.html_url;
+});
+
+Handlebars.registerHelper('checkReadStateFor', function(activity) {
+    return mmooc.menu.checkReadStateFor(activity) ? "unread" : "";
 });
 this.mmooc = this.mmooc || {};
 
