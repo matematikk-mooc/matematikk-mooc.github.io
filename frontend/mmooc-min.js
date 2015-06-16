@@ -453,10 +453,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<ul id=\"user-menu\">\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">Varsler <i class=\"icon-mini-arrow-down\"></i><span id=\"mmooc-notification-count\"></span></a>\n        <div class=\"mmooc-menu-item-drop\" id=\"mmooc-activity-stream\">\n        </div>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"/conversations\" class=\"mmooc-menu-item-title\">Innboks</a>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">"
+  buffer += "<ul id=\"user-menu\">\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">Varsler <i class=\"icon-mini-arrow-down\"></i><span id=\"mmooc-notification-count\"></span></a>\n        <div class=\"mmooc-menu-item-drop\" id=\"mmooc-activity-stream\">\n        </div>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"/conversations\" class=\"mmooc-menu-item-title\">Innboks <span id=\"mmooc-unread-messages-count\"></span></a>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.display_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " <i class=\"icon-mini-arrow-down\"></i></a>\n        <div class=\"mmooc-menu-item-drop\">\n            <ul>\n                <li><a href=\"/profile/settings\">Innstillinger</a></li>\n                <li><a href=\"/logout\">Logg ut</a></li>\n            </ul>\n        </div>\n    </li>\n</ul>";
+    + " <i class=\"icon-mini-arrow-down\"></i></a>\n        <div class=\"mmooc-menu-item-drop\">\n            <ul>\n                <li><a href=\"/profile/settings\">Innstillinger</a></li>\n                <li><a href=\"/logout\">Logg ut</a></li>\n            </ul>\n        </div>\n    </li>\n</ul>\n";
   return buffer;
+  });
+
+this["mmooc"]["templates"]["waitIcon"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div id=\"fountainG\">\n    <div id=\"fountainG_1\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_2\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_3\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_4\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_5\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_6\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_7\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_8\" class=\"fountainG\">\n    </div>\n</div>";
   });
 this.mmooc=this.mmooc||{};
 
@@ -516,7 +525,7 @@ this.mmooc.api = function() {
         },
 
         getCurrentTypeAndContentId: function() {
-            var regexp = /\/courses\/\d\/\w+\/\d/;
+            var regexp = /\/courses\/\d+\/\w+\/\d+/;
 
             if (regexp.test("" + this._location.pathname)) {
                 var tmp = this._location.pathname.split("/");
@@ -648,6 +657,15 @@ this.mmooc.api = function() {
             return this._env.current_user;
         },
 
+        getUserProfile : function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/users/self/profile",
+                "params":   { }
+            });
+        },
+
         getActivityStreamForUser: function(callback, error) {
             this._get({
                 "callback": callback,
@@ -667,6 +685,9 @@ this.mmooc.api = function() {
             } else {
                 return false;
             }
+        },
+        getUnreadMessageSize: function() {
+          return parseInt(document.getElementsByClassName('unread-messages-count')[0].innerHTML);
         }
     };
 }();
@@ -678,13 +699,30 @@ if (typeof module !== "undefined" && module !== null) {
 this.mmooc=this.mmooc||{};
 
 
+this.mmooc.badges = function() {
+    return {
+        initPage: function() {
+            mmooc.util.adaptHeghtToIframeContentForId('tool_content');
+        },
+
+        claimBadge: function(OpenBadges, urls, callBack) {
+            OpenBadges.issue_no_modal(urls, callBack);
+        }
+    }
+}();
+
+this.mmooc=this.mmooc||{};
+
+
 this.mmooc.courseList = function() {
     return {
         listCourses: function(parentId) {
             mmooc.api.getEnrolledCourses(function(courses) {
+              if (document.getElementsByClassName('reaccept_terms').length === 0) {
                 var sortedCourses = mmooc.util.arraySorted(courses, "course_code"),
                     html = mmooc.util.renderTemplateWithData("courselist", {courses: sortedCourses});
                 document.getElementById(parentId).innerHTML = html;
+              }
             });
         },
         showAddCourseButton : function() {
@@ -703,18 +741,6 @@ this.mmooc=this.mmooc||{};
 
 
 this.mmooc.coursePage = function() {
-    function _renderCourseMenu(courseId, selectedMenuItem) {
-        var menuItems = [];
-
-        menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
-        menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
-        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
-        menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
-
-        var title = document.title.replace(":", " for ");
-        var html = mmooc.util.renderTemplateWithData("coursemenu", {menuItems: menuItems, selectedMenuItem: selectedMenuItem, title: title });
-        document.getElementById('header').insertAdjacentHTML('afterend', html);
-    }
 
     return {
 
@@ -743,6 +769,98 @@ this.mmooc.enroll = function() {
             enrollForm.find(".btn-primary").hide();
         }
     };
+}();
+
+mmooc = mmooc || {};
+
+mmooc.greeting = function () {
+
+    function redesignPage() {
+        $('#wrapper').addClass('diploma-page');
+    }
+
+    function fixLinkToModules($content) {
+        if ($content.find(".alert li > a").size() <= 0) {
+            return;
+        }
+
+        redesignPage();
+        mmooc.api.getModulesForCurrentCourse(function (modules) {
+            var firstItemPerModule = {};
+            for (var i in modules) {
+                firstItemPerModule[modules[i].id] = modules[i].items[0];
+            }
+
+            $('.alert li > a').each(function () {
+                var oldPath = $(this).attr('href');
+                var moduleNumber = /courses\/\d+\/modules\/(\d+)/.exec(oldPath);
+                if (moduleNumber.length > 0) {
+                    $(this).attr('href', firstItemPerModule[moduleNumber[1]].html_url);
+                }
+            });
+
+        });
+    }
+
+    return {
+        enableGreetingButtonIfNecessary: function ($content) {
+            // Erlends diploma
+            var $diplomaButton = $content.find(".sikt-diploma-button");
+            var $formIdDiv = $content.find(".sikt-diploma-formId");
+            var $nameEntryIdDiv = $content.find(".sikt-diploma-nameEntryId");
+            var $emailEntryIdDiv = $content.find(".sikt-diploma-emailEntryId");
+
+            if ($diplomaButton.length && $formIdDiv.length && $nameEntryIdDiv.length && $emailEntryIdDiv.length) {
+                $diplomaButton.button().click(function () {
+                    if ($diplomaButton.hasClass('btn-done')) {
+                        return;
+                    }
+
+                    $('#info').html(mmooc.util.renderTemplateWithData("waitIcon", {}));
+
+                    var formId = $formIdDiv.text();
+                    var nameEntryId = $nameEntryIdDiv.text();
+                    var emailEntryId = $emailEntryIdDiv.text();
+                    var str1 = "https://docs.google.com/forms/d/";
+                    var str2 = "/formResponse";
+                    var googleurl = str1.concat(formId, str2);
+
+                    str1 = "entry.";
+                    var nameEntry = str1.concat(nameEntryId);
+                    var emailEntry = str1.concat(emailEntryId);
+
+                    mmooc.api.getUserProfile(function (profile) {
+                        var values = {};
+                        values[nameEntry] = profile.name;
+                        values[emailEntry] = profile.primary_email;
+
+                        $.ajax({
+                            url: googleurl,
+                            data: values,
+                            type: "POST",
+                            dataType: "xml",
+                            complete: function (jqXHR) {
+                                switch (jqXHR.status) {
+                                    case 0:
+                                        str1 = "Diplom ble sendt til denne eposten:";
+                                        var s = str1.concat(profile.primary_email);
+                                        $('#info').html(s);
+                                        $diplomaButton.addClass('btn-done');
+                                        break;
+                                    default:
+                                        $('#info').addClass('error');
+                                        $('#info').html("En feil oppstod. Ta kontakt med matematikkmooc@iktsenteret.no for &aring; f&aring; hjelp.");
+                                }
+                            }
+                        }); //End Google callback
+                    }); //End Canvas user profile callback
+                }); //End diploma button clicked
+                redesignPage();
+            } //End if valid diploma fields
+
+            fixLinkToModules($content);
+        }
+    }
 }();
 
 this.mmooc=this.mmooc||{};
@@ -778,6 +896,18 @@ this.mmooc.groups = function() {
                     document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', headerHTML);
                 });
             }
+        },
+
+        changeGroupListURLs: function(href) {
+          if (/\/groups(\/)?$/.test(href) || /(\/groups(\??([A-Za-z0-9\=\&]{0,})))$/.test(href)) {
+            var list = $('.context_list li a');
+            list.each(function(i) {
+              this.setAttribute('href', this.getAttribute('href') + '/discussion_topics');
+            });
+            return true;
+          }
+
+          return false;
         }
     };
 }();
@@ -787,11 +917,6 @@ this.mmooc=this.mmooc||{};
 
 this.mmooc.menu = function() {
 
-    function extractBadgesLinkFromPage() {
-        var href = $('li.section:contains("BadgeSafe")').find('a').attr('href');
-        return {"title": mmooc.i18n.Badgesafe , url: href};
-    }
-
     function _renderCourseMenu(course, selectedMenuItem, title) {
         var menuItems = [];
 
@@ -799,9 +924,8 @@ this.mmooc.menu = function() {
 
         menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
         menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
-        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
         menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
-        menuItems[menuItems.length] = extractBadgesLinkFromPage();
+        menuItems[menuItems.length] = mmooc.menu.extractBadgesLinkFromPage();
 
         var subtitle = course.name;
         if (title == null) {
@@ -841,8 +965,7 @@ this.mmooc.menu = function() {
         },
 
         showTeacherAdminMenu: function() {
-            var roles = mmooc.api.getRoles();
-            if (roles != null && (roles.indexOf('teacher') != -1 || roles.indexOf('admin') != -1)) {
+            if (mmooc.util.isTeacherOrAdmin()) {
                 this.showLeftMenu();
 
                 $("#section-tabs-header").show();
@@ -857,6 +980,7 @@ this.mmooc.menu = function() {
                 stylesheet.insertRule("#discussion-managebar { display: block }", stylesheet.cssRules.length);
             }
 
+            var roles = mmooc.api.getRoles();
             if (roles != null && roles.indexOf('admin') != -1) {
                 // Admin needs original canvas Course dropdown to access site admin settings
                 $("#courses_menu_item").show();
@@ -879,6 +1003,15 @@ this.mmooc.menu = function() {
             if (menu !=  null) {
                 var html = mmooc.util.renderTemplateWithData("usermenu", {user: mmooc.api.getUser()});
                 menu.insertAdjacentHTML('afterend', html);
+
+                var msgBadge = $("#mmooc-unread-messages-count");
+                if (mmooc.api.getUnreadMessageSize() === 0) {
+                  msgBadge.hide();
+                }
+                else {
+                  msgBadge.html(mmooc.api.getUnreadMessageSize());
+                  msgBadge.show();
+                }
 
                 mmooc.api.getActivityStreamForUser(function(activities) {
                     var unreadNotifications = 0;
@@ -955,6 +1088,15 @@ this.mmooc.menu = function() {
 
         checkReadStateFor: function (activity) {
             return activity.read_state === false;
+        },
+
+        extractBadgesLinkFromPage: function () {
+            var href = $('li.section:contains("BadgeSafe")').find('a').attr('href');
+            return {"title": mmooc.i18n.Badgesafe, url: href};
+        },
+
+        injectGroupsPage: function() {
+          $('#courses_menu_item').after('<li class="menu-item"><a href="/groups" class="menu-item-no-drop">Grupper</a></li>');
         }
     };
 }();
@@ -1001,6 +1143,15 @@ this.mmooc.pages = function() {
                 var linkBack = mmooc.util.renderTemplateWithData("navigateToPreviousPage", {linkText: mmooc.i18n.LinkBack});
                 $(linkBack).prependTo($('#content'));
             }
+        },
+
+        showBackToAssignmentLink: function(href) {
+          if (/\/courses\/\d+\/assignments\/\d+\/submissions\/\d+$/.test(href)) {
+            $('#add_comment_form').append('<a href="javascript:window.history.back();" style="margin-top: 20px; display: inline-block;">Tilbake til oppgaven</a>');
+            return true;
+          }
+
+          return false;
         }
     };
 }();
@@ -1242,7 +1393,7 @@ this.mmooc.util = function () {
                     if (a.hasOwnProperty(elementToSort) && b.hasOwnProperty(elementToSort)) {
                         var field1 = a[elementToSort].toLocaleLowerCase();
                         var field2 = b[elementToSort].toLocaleLowerCase();
-                        return field1.localeCompare(field2);
+                        return field1.localeCompare(field2, 'nb', {usage: 'sort'});
                     }
                     return 0;
                 });
@@ -1287,6 +1438,21 @@ this.mmooc.util = function () {
                     e.preventPropagation();
             }
             return false; // stop event propagation and browser default event
+        },
+
+        adaptHeghtToIframeContentForId: function (id) {
+            // thanks to Ahmy http://stackoverflow.com/questions/819416/adjust-width-height-of-iframe-to-fit-with-content-in-it
+
+            var scrollHeight = Number(document.getElementById(id).contentWindow.document.body.scrollHeight) + 20;
+            document.getElementById(id).height = scrollHeight + "px";
+            document.getElementById(id).width = document.getElementById(id).contentWindow.document.body.scrollWidth + "px";
+        },
+
+        isTeacherOrAdmin: function() {
+            var roles = mmooc.api.getRoles();
+            return roles != null
+                && (roles.indexOf('teacher') != -1
+                    || roles.indexOf('admin') != -1);
         }
 
     };
@@ -1403,6 +1569,23 @@ $(document).ready(function() {
         mmooc.pages.changeTranslations();
     });
 
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/external_tools\/\d+$/, function() {
+        function isBadgesafePage() {
+            function extractPluginNumber(input) {
+                 return input.substring(input.lastIndexOf('/') + 1);
+            }
+
+            var badgesafeUrl = mmooc.menu.extractBadgesLinkFromPage().url;
+
+            return extractPluginNumber(badgesafeUrl) === extractPluginNumber(window.location.pathname);
+        };
+
+        if (isBadgesafePage()) {
+            var courseId = mmooc.api.getCurrentCourseId();
+            mmooc.menu.showCourseMenu(courseId, 'Utmerkelser', 'Utmerkelser');
+        }
+    });
+
     mmooc.routes.addRouteForPath([/\/pages/], function() {
         mmooc.pages.showBackLinkIfNecessary();
     });
@@ -1426,6 +1609,16 @@ $(document).ready(function() {
         console.log(e);
     }
 
+    try {
+      mmooc.menu.injectGroupsPage();
+    }
+    catch(e) {
+      console.log(e);
+    }
+
+    mmooc.groups.changeGroupListURLs(document.location.href);
+
+    mmooc.pages.showBackToAssignmentLink(document.location.href);
 
 });
 
@@ -1738,6 +1931,8 @@ function uobAddComponents() {
 				}
 			};
 		}
+
+        mmooc.greeting.enableGreetingButtonIfNecessary($content);
 
 		// Initialise reveal buttons.
 		var $revealButton = $content.find(".uob-reveal-button");
