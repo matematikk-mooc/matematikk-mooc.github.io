@@ -144,6 +144,8 @@ this.mmooc.iframe = {
                     mmooc.iframe.badges.displayElements(redesignedBadges);
                     $('body').attr("style", "margin: 0 !important;");
                     $('head').append('<base target="_parent"/>');
+                } else {
+                    $('#badge-wrap').attr('style', 'display: block')
                 }
                 this.notifyParentAndSetSize();
             },
@@ -375,17 +377,10 @@ Handlebars.registerHelper('ifAllItemsCompleted', function(items, options) {
 });
 
 Handlebars.registerHelper('ifAllModulesCompleted', function(modules, options) {
-    for (var i = 0; i < modules.length; i++) {
-        var module = modules[i];
-        for (var j = 0; j < module.items.length; j++) {
-            var item = module.items[j];
-            if (item.completion_requirement && !item.completion_requirement.completed) {
-                return options.inverse(this);
-            }
-        }
+    if (mmooc.courseList.isCourseCompleted(modules)) {
+        return options.fn(this);
     }
-
-    return options.fn(this);
+    return options.inverse(this);
 });
 
 Handlebars.registerHelper('percentageForModules', function(modules) {
@@ -518,12 +513,10 @@ this.mmooc.util = function () {
             return false; // stop event propagation and browser default event
         },
 
-        adaptHeghtToIframeContentForId: function (id) {
-            // thanks to Ahmy http://stackoverflow.com/questions/819416/adjust-width-height-of-iframe-to-fit-with-content-in-it
+        adaptHeightToIframeContentForId: function (containerId, frameId) {
 
-            var scrollHeight = Number(document.getElementById(id).contentWindow.document.body.scrollHeight) + 20;
-            document.getElementById(id).height = scrollHeight + "px";
-            document.getElementById(id).width = document.getElementById(id).contentWindow.document.body.scrollWidth + "px";
+            var scrollHeight = Number(document.getElementById(frameId).contentWindow.document.body.scrollHeight) + 20;
+            document.getElementsByClassName(containerId)[0].style.height = scrollHeight + "px";
         },
 
         isTeacherOrAdmin: function() {

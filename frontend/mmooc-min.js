@@ -56,7 +56,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\n            <div class=\"mmooc-size-1of3\">\n                <div class=\"mmooc-course-list-item\">\n                    <div class=\"mmooc-course-list-heading\">\n                        <h2><a href=\""
+  buffer += "\n            <div id=\"course_";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"mmooc-size-1of3\">\n                <div class=\"mmooc-course-list-item\">\n                    <div class=\"mmooc-course-list-heading\">\n                        <h2><a href=\""
     + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.id), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.id), options)))
     + "\">";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -447,6 +451,188 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
+this["mmooc"]["templates"]["powerfunctions-assign"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Assign students to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <p>\n      Description of CSV format\n    </p>\n  </div>\n</div>\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions-group-category"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Create groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <ol>\n      <li class=\"step-1\">\n        <select name=\"account\" onchange=\"$('.step-2').css('display', 'list-item')\">\n          <option value=\"\">Choose the account...</option>\n          ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </select>\n      <li class=\"step-2\">\n        <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n        </select>\n      <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n      <li class=\"step-4\"><input type=\"submit\"/>\n    </ol>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas.\n    <dl>\n      <dt>name [String]\n      <dd>The name of the group\n      <dt>description [String]\n      <dd>A description of the group\n      <dt>is_public [Boolean]\n      <dd>whether the group is public (applies only to community groups)\n      <dt>join_level [String]\n      <dd>“parent_context_auto_join” | “parent_context_request” | “invitation_only”\n      <dt>storage_quota_mb [Integer]\n      <dd>The allowed file storage for the group, in megabytes. This\n        parameter is ignored if the caller does not have the\n        manage_storage_quotas permission.\n    </dl>\n  </div>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions-logins"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Add new logins to students</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"account\">Choose the account</label></dt>\n      <dd>\n        <select name=\"account\">\n          ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </select>\n      </dd>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <p>\n      Description of CSV format\n    </p>\n  </div>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n\n  <div class=\"mmooc-pf-list\">\n    <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n    <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n    <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n  </div>\n</div>\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions/assign-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n      <tr id=\"mmpf-assign-";
+  if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "-";
+  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        <td>";
+  if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td>";
+  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing assigning student to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>Group ID</th>\n        <th>Student ID</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.assigns) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.assigns); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.assigns) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/groups-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n      <tr id=\"mmpf-group-"
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\n        <td>";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td>";
+  if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing group creations</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>Name</th>\n        <th>Description</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.groups) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.groups); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.groups) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/logins-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n      <tr id=\"mmpf-logins-";
+  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        <td>";
+  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td>";
+  if (helper = helpers.login_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.login_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing new logins</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>User ID</th>\n        <th>Login ID</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.logins) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.logins); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.logins) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  return buffer;
+  });
+
 this["mmooc"]["templates"]["usermenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -490,12 +676,20 @@ this.mmooc.api = function() {
             console.log(event, jqxhr, settings, thrownError);
         },
 
-        _get: function(options) {
+        _sendRequest: function(method, options) {
             var error    = options.error || this._defaultError;
             var uri      = this._uriPrefix + options.uri;
             var params   = options.params || {};
             var callback = options.callback;
-            this._ajax.get(uri, params, callback).fail(error);
+            method(uri, params, callback).fail(error);
+        },
+
+        _get: function(options) {
+            this._sendRequest(this._ajax.get, options);
+        },
+
+        _post: function(options) {
+            this._sendRequest(this._ajax.post, options);
         },
 
         getCurrentModuleItemId : function() {
@@ -559,6 +753,10 @@ this.mmooc.api = function() {
          */
         getModulesForCurrentCourse: function(callback, error) {
             var courseId = this.getCurrentCourseId();
+            this.getModulesForCourseId(callback, error, courseId);
+        },
+
+        getModulesForCourseId: function(callback, error, courseId) {
             this._get({
                 "callback": callback,
                 "error":    error,
@@ -686,8 +884,64 @@ this.mmooc.api = function() {
                 return false;
             }
         },
+
         getUnreadMessageSize: function() {
           return parseInt(document.getElementsByClassName('unread-messages-count')[0].innerHTML);
+        },
+
+        getAccounts: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts",
+                "params":   { }
+            });
+
+        },
+
+        getGroupCategoriesForAccount: function(account, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts/" + account + "/group_categories",
+                "params":   { }
+            });
+
+        },
+
+
+        createGroup: function(params, callback, error) {
+            this._post({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/group_categories/" + params.category + "/groups",
+                "params":   {
+                    name: params.name,
+                    description: params.description,
+                    is_public: false,
+                    join_level: 'invitation_only'
+                }
+            });
+        },
+
+        createGroupMembership: function(gid, uid, callback, error) {
+            this._post({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/groups/" + gid + "/membership",
+                "params":   { user_id: uid }
+            });
+
+        },
+
+
+        createUserLogin: function(params, callback, error) {
+            this._post({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts/" + params.account_id + "/logins",
+                "params":   { user_id: params.user_id }
+            });
         }
     };
 }();
@@ -700,9 +954,20 @@ this.mmooc=this.mmooc||{};
 
 
 this.mmooc.badges = function() {
+
+    function resizeIframe() {
+        mmooc.util.adaptHeightToIframeContentForId('tool_content_wrapper', 'tool_content');
+    };
     return {
         initPage: function() {
-            mmooc.util.adaptHeghtToIframeContentForId('tool_content');
+            resizeIframe();
+
+            var resizeTimer;
+            $(window).resize(function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(resizeIframe, 42);
+            });
+
         },
 
         claimBadge: function(OpenBadges, urls, callBack) {
@@ -717,12 +982,32 @@ this.mmooc=this.mmooc||{};
 this.mmooc.courseList = function() {
     return {
         listCourses: function(parentId) {
-            mmooc.api.getEnrolledCourses(function(courses) {
-              if (document.getElementsByClassName('reaccept_terms').length === 0) {
-                var sortedCourses = mmooc.util.arraySorted(courses, "course_code"),
-                    html = mmooc.util.renderTemplateWithData("courselist", {courses: sortedCourses});
-                document.getElementById(parentId).innerHTML = html;
-              }
+            mmooc.api.getEnrolledCourses(function (courses) {
+                if (document.getElementsByClassName('reaccept_terms').length === 0) {
+
+                    var sortedCourses = mmooc.util.arraySorted(courses, "course_code"),
+                        html = mmooc.util.renderTemplateWithData("courselist", {courses: sortedCourses});
+                    document.getElementById(parentId).innerHTML = html;
+
+                    var createCallBackForId = function(id) {
+                        return function(modules) {
+                            if (mmooc.courseList.isCourseCompleted(modules)) {
+                                var $course = $("#course_" + id);
+                                $course.find('.mmooc-course-list-button .btn').addClass('btn-done');
+                                $course.find('.mmooc-progress-bar').addClass('mmooc-progress-bar-done');
+                            }
+                        };
+                    };
+
+                    var error = function(error) {
+                        console.error("error calling api, skip over this course", error);
+                    };
+
+                    $(sortedCourses).each(function() {
+                        var success =  createCallBackForId(this.id);
+                        mmooc.api.getModulesForCourseId(success, error, this.id);
+                    });
+                }
             });
         },
         showAddCourseButton : function() {
@@ -733,6 +1018,18 @@ this.mmooc.courseList = function() {
                     $('#content').append(button);
                 }
             });
+        },
+        isCourseCompleted: function(modules) {
+            for (var i = 0; i < modules.length; i++) {
+                var module = modules[i];
+                for (var j = 0; j < module.items.length; j++) {
+                    var item = module.items[j];
+                    if (item.completion_requirement && !item.completion_requirement.completed) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     };
 }();
@@ -1158,6 +1455,155 @@ this.mmooc.pages = function() {
 
 this.mmooc=this.mmooc||{};
 
+this.mmooc.powerFunctions = function() {
+    var rootId = undefined;
+
+    function _render(template, data) {
+        var html = mmooc.util.renderTemplateWithData(template, data);
+        document.getElementById(rootId).innerHTML = html;
+    }
+
+    function _readFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(event){
+            callback(event.target.result);
+        };
+        reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+        reader.readAsText(file);
+    }
+
+    function _accountID() {
+        return $('select[name="account"] option:selected').val();
+    }
+
+    function _renderGroupCategoryOptions() {
+        mmooc.api.getGroupCategoriesForAccount(_accountID(), function(categories) {
+            var html = "";
+            if (categories.length === 0) {
+                html = "<option value=\"\">No group sets defined for account</option>";
+            }
+            else {
+                html = html + "<option value=''>Choose a group set</option>";
+                for (var i = 0; i < categories.length; i++) {
+                    html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
+                }
+            }
+            $("select[name='category']").html(html);
+        });
+    }
+
+    function _renderGroupView() {
+        mmooc.api.getAccounts(function(accounts) {
+            _render("powerfunctions-group-category",
+                    {accounts: accounts});
+            $('select[name="account"]').change(function() {
+                _renderGroupCategoryOptions();
+            });
+            _setUpSubmitHandler(_processGroupFile);
+        });
+    }
+
+    function _success(row) {
+        return function () {
+            $("td.status", row).removeClass("waiting").addClass("ok").text("OK");
+        };
+    }
+
+    function _error(row) {
+        return function (jqXHR, textStatus, errorThrown ) {
+            $("td.status", row).removeClass("waiting").addClass("failed").
+                text("Failed: " + errorThrown + ": " + JSON.parse(jqXHR.responseText).errors[0].message);
+        };
+    }
+
+    function _setUpSubmitHandler(callback) {
+        $('input[type="submit"]').click(function() {
+            var file = $('input:file')[0].files.item(0);
+            _readFile(file, function(content) {
+                callback(content);
+            });
+            return false;
+        });
+    }
+
+    function _processGroupFile(content) {
+        var groups = $.csv.toObjects(content);
+        var params = {
+            account: document.getElementsByName("account")[0].value,
+            category: document.getElementsByName("category")[0].value
+        };
+        _render("powerfunctions/groups-process", {groups: groups});
+        for (var i = 0; i < groups.length; i++) {
+            var row = $("#mmpf-group-"+i);
+            params.name = groups[i].name;
+            params.description = groups[i].description;
+            mmooc.api.createGroup(params, _success(row), _error(row));
+        }
+    }
+
+    function _processAssignFile(content) {
+        var assigns = $.csv.toObjects(content);
+        _render("powerfunctions/assign-process", {assigns: assigns});
+        for (var i = 0; i < assigns.length; i++) {
+            var gid = assigns[i]["group_id"];
+            var uid = assigns[i]["user_id"];
+            var row = $("#mmpf-assign-"+gid+"-"+uid);
+            mmooc.api.createGroupMembership(gid, uid, _success(row), _error(row));
+        }
+    }
+
+    function _processLoginsFile(content) {
+        var logins = $.csv.toObjects(content);
+        _render("powerfunctions/logins-process", {logins: logins});
+        for (var i = 0; i < logins.length; i++) {
+            var uid = logins[i]["user_id"];
+            var lid = logins[i]["login_id"];
+            var row = $("#mmpf-logins-"+uid);
+            var params = {
+                user_id: uid,
+                login_id: lid,
+                account_id: _accountID()
+            };
+            mmooc.api.createUserLogin(params, _success(row), _error(row));
+        }
+    }
+
+    function _renderAssignView() {
+        _render("powerfunctions-assign", {});
+        _setUpSubmitHandler(_processAssignFile);
+    }
+
+    function _renderLoginsView() {
+        mmooc.api.getAccounts(function(accounts) {
+            _render("powerfunctions-logins", {accounts: accounts});
+            _setUpSubmitHandler(_processLoginsFile);
+        });
+    }
+
+    function _setUpClickHandlers() {
+        $("#mmooc-pf-group-btn").click(function() {
+            _renderGroupView(rootId);
+        });
+        $("#mmooc-pf-assign-btn").click(function() {
+            _renderAssignView(rootId);
+        });
+        $("#mmooc-pf-logins-btn").click(function() {
+            _renderLoginsView(rootId);
+        });
+    }
+
+    return {
+        show: function(parentId) {
+            rootId = parentId;
+            _render("powerfunctions", {});
+            _setUpClickHandlers();
+        }
+
+    };
+}();
+
+this.mmooc=this.mmooc||{};
+
 
 this.mmooc.routes = function() {
     function Route(paths, queryStrings, handler) {
@@ -1297,17 +1743,10 @@ Handlebars.registerHelper('ifAllItemsCompleted', function(items, options) {
 });
 
 Handlebars.registerHelper('ifAllModulesCompleted', function(modules, options) {
-    for (var i = 0; i < modules.length; i++) {
-        var module = modules[i];
-        for (var j = 0; j < module.items.length; j++) {
-            var item = module.items[j];
-            if (item.completion_requirement && !item.completion_requirement.completed) {
-                return options.inverse(this);
-            }
-        }
+    if (mmooc.courseList.isCourseCompleted(modules)) {
+        return options.fn(this);
     }
-
-    return options.fn(this);
+    return options.inverse(this);
 });
 
 Handlebars.registerHelper('percentageForModules', function(modules) {
@@ -1440,12 +1879,10 @@ this.mmooc.util = function () {
             return false; // stop event propagation and browser default event
         },
 
-        adaptHeghtToIframeContentForId: function (id) {
-            // thanks to Ahmy http://stackoverflow.com/questions/819416/adjust-width-height-of-iframe-to-fit-with-content-in-it
+        adaptHeightToIframeContentForId: function (containerId, frameId) {
 
-            var scrollHeight = Number(document.getElementById(id).contentWindow.document.body.scrollHeight) + 20;
-            document.getElementById(id).height = scrollHeight + "px";
-            document.getElementById(id).width = document.getElementById(id).contentWindow.document.body.scrollWidth + "px";
+            var scrollHeight = Number(document.getElementById(frameId).contentWindow.document.body.scrollHeight) + 20;
+            document.getElementsByClassName(containerId)[0].style.height = scrollHeight + "px";
         },
 
         isTeacherOrAdmin: function() {
@@ -1485,8 +1922,13 @@ this.mmooc.i18n = {
 $(document).ready(function() {
     mmooc.routes.addRouteForPath(/\/$/, function() {
         mmooc.menu.hideRightMenu();
-        mmooc.courseList.listCourses('content');
-        mmooc.courseList.showAddCourseButton();
+        var parentId = 'content'
+        if (document.location.search === "?mmpf") {
+            mmooc.powerFunctions.show(parentId);
+        } else {
+            mmooc.courseList.listCourses(parentId);
+            mmooc.courseList.showAddCourseButton();
+        }
     });
 
     mmooc.routes.addRouteForQueryString(/invitation=/, function() {
@@ -1548,6 +1990,10 @@ $(document).ready(function() {
     mmooc.routes.addRouteForPath([/\/courses\/\d+\/discussion_topics\/\d+/, /\/courses\/\d+\/discussion_topics\/new/], function() {
         // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
         var title = mmooc.util.getPageTitleAfterColon();
+
+        if (!mmooc.util.isTeacherOrAdmin()) {
+            mmooc.menu.hideRightMenu();
+        }
 
         // Announcements are some as type of discussions, must use a hack to determine if this is an announcement
         var courseId = mmooc.api.getCurrentCourseId();
@@ -1622,6 +2068,79 @@ $(document).ready(function() {
 
 });
 
+
+RegExp.escape=function(s){return s.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');};(function($){'use strict'
+$.csv={defaults:{separator:',',delimiter:'"',headers:true},hooks:{castToScalar:function(value,state){var hasDot=/\./;if(isNaN(value)){return value;}else{if(hasDot.test(value)){return parseFloat(value);}else{var integer=parseInt(value);if(isNaN(integer)){return null;}else{return integer;}}}}},parsers:{parse:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+if(!options.state.colNum){options.state.colNum=1;}
+var data=[];var entry=[];var state=0;var value=''
+var exit=false;function endOfEntry(){state=0;value='';if(options.start&&options.state.rowNum<options.start){entry=[];options.state.rowNum++;options.state.colNum=1;return;}
+if(options.onParseEntry===undefined){data.push(entry);}else{var hookVal=options.onParseEntry(entry,options.state);if(hookVal!==false){data.push(hookVal);}}
+entry=[];if(options.end&&options.state.rowNum>=options.end){exit=true;}
+options.state.rowNum++;options.state.colNum=1;}
+function endOfValue(){if(options.onParseValue===undefined){entry.push(value);}else{var hook=options.onParseValue(value,options.state);if(hook!==false){entry.push(hook);}}
+value='';state=0;options.state.colNum++;}
+var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);match=RegExp(matchSrc,'gm');csv.replace(match,function(m0){if(exit){return;}
+switch(state){case 0:if(m0===separator){value+='';endOfValue();break;}
+if(m0===delimiter){state=1;break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+value+=m0;state=3;break;case 1:if(m0===delimiter){state=2;break;}
+value+=m0;state=1;break;case 2:if(m0===delimiter){value+=m0;state=1;break;}
+if(m0===separator){endOfValue();break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+throw new Error('CSVDataError: Illegal State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');case 3:if(m0===separator){endOfValue();break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal Quote [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}
+throw new Error('CSVDataError: Illegal Data [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');default:throw new Error('CSVDataError: Unknown State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}});if(entry.length!==0){endOfValue();endOfEntry();}
+return data;},splitLines:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+var entries=[];var state=0;var entry='';var exit=false;function endOfLine(){state=0;if(options.start&&options.state.rowNum<options.start){entry='';options.state.rowNum++;return;}
+if(options.onParseEntry===undefined){entries.push(entry);}else{var hookVal=options.onParseEntry(entry,options.state);if(hookVal!==false){entries.push(hookVal);}}
+entry='';if(options.end&&options.state.rowNum>=options.end){exit=true;}
+options.state.rowNum++;}
+var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);match=RegExp(matchSrc,'gm');csv.replace(match,function(m0){if(exit){return;}
+switch(state){case 0:if(m0===separator){entry+=m0;state=0;break;}
+if(m0===delimiter){entry+=m0;state=1;break;}
+if(m0==='\n'){endOfLine();break;}
+if(/^\r$/.test(m0)){break;}
+entry+=m0;state=3;break;case 1:if(m0===delimiter){entry+=m0;state=2;break;}
+entry+=m0;state=1;break;case 2:var prevChar=entry.substr(entry.length-1);if(m0===delimiter&&prevChar===delimiter){entry+=m0;state=1;break;}
+if(m0===separator){entry+=m0;state=0;break;}
+if(m0==='\n'){endOfLine();break;}
+if(m0==='\r'){break;}
+throw new Error('CSVDataError: Illegal state [Row:'+options.state.rowNum+']');case 3:if(m0===separator){entry+=m0;state=0;break;}
+if(m0==='\n'){endOfLine();break;}
+if(m0==='\r'){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal quote [Row:'+options.state.rowNum+']');}
+throw new Error('CSVDataError: Illegal state [Row:'+options.state.rowNum+']');default:throw new Error('CSVDataError: Unknown state [Row:'+options.state.rowNum+']');}});if(entry!==''){endOfLine();}
+return entries;},parseEntry:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+if(!options.state.colNum){options.state.colNum=1;}
+var entry=[];var state=0;var value='';function endOfValue(){if(options.onParseValue===undefined){entry.push(value);}else{var hook=options.onParseValue(value,options.state);if(hook!==false){entry.push(hook);}}
+value='';state=0;options.state.colNum++;}
+if(!options.match){var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);options.match=RegExp(matchSrc,'gm');}
+csv.replace(options.match,function(m0){switch(state){case 0:if(m0===separator){value+='';endOfValue();break;}
+if(m0===delimiter){state=1;break;}
+if(m0==='\n'||m0==='\r'){break;}
+value+=m0;state=3;break;case 1:if(m0===delimiter){state=2;break;}
+value+=m0;state=1;break;case 2:if(m0===delimiter){value+=m0;state=1;break;}
+if(m0===separator){endOfValue();break;}
+if(m0==='\n'||m0==='\r'){break;}
+throw new Error('CSVDataError: Illegal State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');case 3:if(m0===separator){endOfValue();break;}
+if(m0==='\n'||m0==='\r'){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal Quote [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}
+throw new Error('CSVDataError: Illegal Data [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');default:throw new Error('CSVDataError: Unknown State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}});endOfValue();return entry;}},toArray:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;var state=(options.state!==undefined?options.state:{});var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,state:state}
+var entry=$.csv.parsers.parseEntry(csv,options);if(!config.callback){return entry;}else{config.callback('',entry);}},toArrays:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;var data=[];var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,start:options.start,end:options.end,state:{rowNum:1,colNum:1}};data=$.csv.parsers.parse(csv,options);if(!config.callback){return data;}else{config.callback('',data);}},toObjects:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.headers='headers'in options?options.headers:$.csv.defaults.headers;options.start='start'in options?options.start:1;if(config.headers){options.start++;}
+if(options.end&&config.headers){options.end++;}
+var lines=[];var data=[];var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,start:options.start,end:options.end,state:{rowNum:1,colNum:1},match:false};var headerOptions={delimiter:config.delimiter,separator:config.separator,start:1,end:1,state:{rowNum:1,colNum:1}}
+var headerLine=$.csv.parsers.splitLines(csv,headerOptions);var headers=$.csv.toArray(headerLine[0],options);var lines=$.csv.parsers.splitLines(csv,options);options.state.colNum=1;if(headers){options.state.rowNum=2;}else{options.state.rowNum=1;}
+for(var i=0,len=lines.length;i<len;i++){var entry=$.csv.toArray(lines[i],options);var object={};for(var j in headers){object[headers[j]]=entry[j];}
+data.push(object);options.state.rowNum++;}
+if(!config.callback){return data;}else{config.callback('',data);}},fromArrays:function(arrays,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.escaper='escaper'in options?options.escaper:$.csv.defaults.escaper;config.experimental='experimental'in options?options.experimental:false;if(!config.experimental){throw new Error('not implemented');}
+var output=[];for(i in arrays){output.push(arrays[i]);}
+if(!config.callback){return output;}else{config.callback('',output);}},fromObjects2CSV:function(objects,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.experimental='experimental'in options?options.experimental:false;if(!config.experimental){throw new Error('not implemented');}
+var output=[];for(i in objects){output.push(arrays[i]);}
+if(!config.callback){return output;}else{config.callback('',output);}}};$.csvEntry2Array=$.csv.toArray;$.csv2Array=$.csv.toArrays;$.csv2Dictionary=$.csv.toObjects;})(jQuery);
 // ==========================================================================================
 // This code was copied and adapted on January 27th 2015 from:
 // https://s3.amazonaws.com/SSL_Assets/bham/uob/uob7.js 
