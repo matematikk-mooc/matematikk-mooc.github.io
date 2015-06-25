@@ -451,84 +451,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["mmooc"]["templates"]["powerfunctions-assign"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Assign students to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <p>\n      Description of CSV format\n    </p>\n  </div>\n</div>\n";
-  });
-
-this["mmooc"]["templates"]["powerfunctions-group-category"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
-
-function program1(depth0,data) {
-  
-  var buffer = "", stack1, helper;
-  buffer += "\n            <option value=\"";
-  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</option>\n          ";
-  return buffer;
-  }
-
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Create groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <ol>\n      <li class=\"step-1\">\n        <select name=\"account\" onchange=\"$('.step-2').css('display', 'list-item')\">\n          <option value=\"\">Choose the account...</option>\n          ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </select>\n      <li class=\"step-2\">\n        <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n        </select>\n      <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n      <li class=\"step-4\"><input type=\"submit\"/>\n    </ol>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas.\n    <dl>\n      <dt>name [String]\n      <dd>The name of the group\n      <dt>description [String]\n      <dd>A description of the group\n      <dt>is_public [Boolean]\n      <dd>whether the group is public (applies only to community groups)\n      <dt>join_level [String]\n      <dd>“parent_context_auto_join” | “parent_context_request” | “invitation_only”\n      <dt>storage_quota_mb [Integer]\n      <dd>The allowed file storage for the group, in megabytes. This\n        parameter is ignored if the caller does not have the\n        manage_storage_quotas permission.\n    </dl>\n  </div>\n</div>\n";
-  return buffer;
-  });
-
-this["mmooc"]["templates"]["powerfunctions-logins"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
-
-function program1(depth0,data) {
-  
-  var buffer = "", stack1, helper;
-  buffer += "\n            <option value=\"";
-  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</option>\n          ";
-  return buffer;
-  }
-
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Add new logins to students</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"account\">Choose the account</label></dt>\n      <dd>\n        <select name=\"account\">\n          ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </select>\n      </dd>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <p>\n      Description of CSV format\n    </p>\n  </div>\n</div>\n";
-  return buffer;
-  });
-
-this["mmooc"]["templates"]["powerfunctions"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n\n  <div class=\"mmooc-pf-list\">\n    <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n    <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n    <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n  </div>\n</div>\n";
-  });
-
 this["mmooc"]["templates"]["powerfunctions/assign-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -564,6 +486,45 @@ function program1(depth0,data) {
   if (!helpers.assigns) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/assign"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Assign students to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>group_id [Integer]\n      <dd>The group ID\n      <dt>user_id [Integer]\n      <dd>The user ID\n    </dl>\n  </div>\n</div>\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions/group-category"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Create groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <ol>\n      <li class=\"step-1\">\n        <select name=\"account\" onchange=\"$('.step-2').css('display', 'list-item')\">\n          <option value=\"\">Choose the account...</option>\n          ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </select>\n      <li class=\"step-2\">\n        <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n        </select>\n      <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n      <li class=\"step-4\"><input type=\"submit\"/>\n    </ol>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>name [String]\n      <dd>The name of the group\n      <dt>description [String]\n      <dd>A description of the group\n    </dl>\n  </div>\n</div>\n";
   return buffer;
   });
 
@@ -631,6 +592,45 @@ function program1(depth0,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </tbody>\n  <table>\n</div>\n";
   return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/logins"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Add new logins to students</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"account\">Choose the account</label></dt>\n      <dd>\n        <select name=\"account\">\n          ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </select>\n      </dd>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>user_id [Integer]\n      <dd>The user ID\n      <dt>login_id [Integer]\n      <dd>The new login ID\n    </dl>\n  </div>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n\n  <div class=\"mmooc-pf-list\">\n    <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n    <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n    <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n  </div>\n</div>\n";
   });
 
 this["mmooc"]["templates"]["usermenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1494,7 +1494,7 @@ this.mmooc.powerFunctions = function() {
 
     function _renderGroupView() {
         mmooc.api.getAccounts(function(accounts) {
-            _render("powerfunctions-group-category",
+            _render("powerfunctions/group-category",
                     {accounts: accounts});
             $('select[name="account"]').change(function() {
                 _renderGroupCategoryOptions();
@@ -1569,13 +1569,13 @@ this.mmooc.powerFunctions = function() {
     }
 
     function _renderAssignView() {
-        _render("powerfunctions-assign", {});
+        _render("powerfunctions/assign", {});
         _setUpSubmitHandler(_processAssignFile);
     }
 
     function _renderLoginsView() {
         mmooc.api.getAccounts(function(accounts) {
-            _render("powerfunctions-logins", {accounts: accounts});
+            _render("powerfunctions/logins", {accounts: accounts});
             _setUpSubmitHandler(_processLoginsFile);
         });
     }
@@ -1595,7 +1595,7 @@ this.mmooc.powerFunctions = function() {
     return {
         show: function(parentId) {
             rootId = parentId;
-            _render("powerfunctions", {});
+            _render("powerfunctions/main", {});
             _setUpClickHandlers();
         }
 
