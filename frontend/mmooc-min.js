@@ -451,7 +451,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["mmooc"]["templates"]["powerfunctions/assign-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["mmooc"]["templates"]["powerfunctions/account-picker"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
@@ -459,33 +459,54 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n      <tr id=\"mmpf-assign-";
-  if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += "\n      <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "-";
-  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\n        <td>";
-  if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n        <td>";
-  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+    + "</option>\n      ";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing assigning student to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>Group ID</th>\n        <th>Student ID</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
+  buffer += "<div>\n  <form>\n    <select name=\"account\">\n      <option value=\"\">Choose the account...</option>\n      ";
   options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.assigns) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.assigns); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.assigns) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  buffer += "\n    </select>\n  </form>\n</div>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/assign-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n    <tr id=\"mmpf-assign-"
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\n      <td>";
+  if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n      <td>";
+  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
+  return buffer;
+  }
+
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>Group ID</th>\n      <th>Student ID</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.assigns), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </tbody>\n<table>\n\n";
   return buffer;
   });
 
@@ -495,15 +516,30 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Assign students to groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>group_id [Integer]\n      <dd>The group ID\n      <dt>user_id [Integer]\n      <dd>The user ID\n    </dl>\n  </div>\n</div>\n";
+  return "<form>\n  <dl>\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\n    <dd><input type=\"file\" name=\"csv\"></dd>\n  </dl>\n  <input type=\"submit\"/>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>group_id [Integer]\n    <dd>The group ID\n    <dt>user_id [Integer]\n    <dd>The user ID\n  </dl>\n</div>\n\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/group-category"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
+  
+  
+  return "\n          <option value=\"\">No group sets defined for account</option>\n        ";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n          <option value=\"\">Choose a group set</option>\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.categories), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  return buffer;
+  }
+function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n            <option value=\"";
@@ -518,13 +554,10 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Create groups</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <ol>\n      <li class=\"step-1\">\n        <select name=\"account\" onchange=\"$('.step-2').css('display', 'list-item')\">\n          <option value=\"\">Choose the account...</option>\n          ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select name=\"category\"  onchange=\"$('.step-2').css('display', 'list-item')\">\n        ";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.categories), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </select>\n      <li class=\"step-2\">\n        <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n        </select>\n      <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n      <li class=\"step-4\"><input type=\"submit\"/>\n    </ol>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>name [String]\n      <dd>The name of the group\n      <dt>description [String]\n      <dd>A description of the group\n    </dl>\n  </div>\n</div>\n";
+  buffer += "\n      </select>\n    <li class=\"step-2\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n    <li class=\"step-3\"><input type=\"submit\"/>\n  </ol>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>name [String]\n    <dd>The name of the group\n    <dt>description [String]\n    <dd>A description of the group\n  </dl>\n</div>\n";
   return buffer;
   });
 
@@ -536,9 +569,72 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n      <tr id=\"mmpf-group-"
+  buffer += "\n    <tr id=\"mmpf-group-"
     + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">\n        <td>";
+    + "\">\n      <td>";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n      <td>";
+  if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
+  return buffer;
+  }
+
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>Name</th>\n      <th>Description</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
+  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
+  if (helper = helpers.groups) { stack1 = helper.call(depth0, options); }
+  else { helper = (depth0 && depth0.groups); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
+  if (!helpers.groups) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </tbody>\n<table>\n\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/head"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>";
+  if (helper = helpers.heading) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.heading); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/list-groups"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n  <p>No groups found for account</p>\n";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <table>\n    <tr><th>ID</th><th>Name</th><th>Description</th></tr>\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.groups), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </table>\n";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n      <tr>\n        <td>";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        <td>";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -546,82 +642,52 @@ function program1(depth0,data) {
   if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+    + "</td>\n      </tr>\n    ";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing group creations</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>Name</th>\n        <th>Description</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.groups) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.groups); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.groups) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.groups), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  buffer += "\n";
   return buffer;
   });
 
 this["mmooc"]["templates"]["powerfunctions/logins-process"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n      <tr id=\"mmpf-logins-";
+  buffer += "\n    <tr id=\"mmpf-logins-"
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\n      <td>";
   if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\n        <td>";
-  if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n        <td>";
+    + "</td>\n      <td>";
   if (helper = helpers.login_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.login_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\n        <td class=\"status waiting\">Waiting</td>\n      ";
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Processing new logins</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <table>\n    <thead>\n      <tr>\n        <th>User ID</th>\n        <th>Login ID</th>\n        <th>Status</th>\n      </tr>\n    </thead>\n    <tbody>\n      ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.logins) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.logins); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.logins) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>User ID</th>\n      <th>Login ID</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.logins), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </tbody>\n  <table>\n</div>\n";
+  buffer += "\n  </tbody>\n<table>\n";
   return buffer;
   });
 
 this["mmooc"]["templates"]["powerfunctions/logins"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
-
-function program1(depth0,data) {
   
-  var buffer = "", stack1, helper;
-  buffer += "\n            <option value=\"";
-  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</option>\n          ";
-  return buffer;
-  }
 
-  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>Add new logins to students</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n  <form>\n    <dl>\n      <dt><label for=\"account\">Choose the account</label></dt>\n      <dd>\n        <select name=\"account\">\n          ";
-  options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
-  if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
-  else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
-  if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </select>\n      </dd>\n      <dt><label for=\"csv\">Upload CSV file</label></dt>\n      <dd><input type=\"file\" name=\"csv\"></dd>\n    </dl>\n    <input type=\"submit\"/>\n  </form>\n\n  <div class=\"side-information\">\n    <h3>Decription of CSV format</h3>\n    <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n    <dl>\n      <dt>user_id [Integer]\n      <dd>The user ID\n      <dt>login_id [Integer]\n      <dd>The new login ID\n    </dl>\n  </div>\n</div>\n";
-  return buffer;
+
+  return "<form>\n  <dl>\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\n    <dd><input type=\"file\" name=\"csv\"></dd>\n  </dl>\n  <input type=\"submit\"/>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>user_id [Integer]\n    <dd>The user ID\n    <dt>login_id [Integer]\n    <dd>The new login ID\n  </dl>\n</div>\n\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -630,7 +696,16 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n\n  <div class=\"mmooc-pf-list\">\n    <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n    <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n    <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n  </div>\n</div>\n";
+  return "<div class=\"mmooc-pf-list\">\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n</div>\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions/tail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "</div>\n";
   });
 
 this["mmooc"]["templates"]["usermenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -899,6 +974,15 @@ this.mmooc.api = function() {
 
         },
 
+        getUsersForAccount: function(account, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts/" + account + "/users",
+                "params":   { }
+            });
+        },
+
         getGroupCategoriesForAccount: function(account, callback, error) {
             this._get({
                 "callback": callback,
@@ -907,6 +991,16 @@ this.mmooc.api = function() {
                 "params":   { }
             });
 
+        },
+
+
+        getGroupsForAccount: function(account, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts/" + account + "/groups",
+                "params":   { }
+            });
         },
 
 
@@ -928,7 +1022,7 @@ this.mmooc.api = function() {
             this._post({
                 "callback": callback,
                 "error":    error,
-                "uri":      "/groups/" + gid + "/membership",
+                "uri":      "/groups/" + gid + "/memberships",
                 "params":   { user_id: uid }
             });
 
@@ -1456,150 +1550,210 @@ this.mmooc.pages = function() {
 this.mmooc=this.mmooc||{};
 
 this.mmooc.powerFunctions = function() {
-    var rootId = undefined;
+  var rootId = undefined;
+  var accountID = undefined;
 
-    function _render(template, data) {
-        var html = mmooc.util.renderTemplateWithData(template, data);
-        document.getElementById(rootId).innerHTML = html;
+  function _render(template, heading, data) {
+    var html =
+          mmooc.util.renderTemplateWithData('powerfunctions/head', {heading: heading}) +
+          mmooc.util.renderTemplateWithData(template, data) +
+          mmooc.util.renderTemplateWithData('powerfunctions/tail', {});
+      document.getElementById(rootId).innerHTML = html;
     }
 
-    function _readFile(file, callback) {
-        var reader = new FileReader();
-        reader.onload = function(event){
-            callback(event.target.result);
-        };
-        reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
-        reader.readAsText(file);
+  function _readFile(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function(event){
+      callback(event.target.result);
+    };
+    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+    reader.readAsText(file);
+  }
+
+  function _renderGroupView() {
+    mmooc.api.getGroupCategoriesForAccount(accountID, function(categories) {
+      _render("powerfunctions/group-category",
+              "Create groups",
+              {categories: categories});
+      _setUpSubmitHandler(_processGroupFile);
+    });
+  }
+
+
+  function _success(row) {
+    return function () {
+      $("td.status", row).removeClass("waiting").addClass("ok").text("OK");
+    };
+  }
+
+  function _error(row) {
+    return function (jqXHR, textStatus, errorThrown ) {
+      $("td.status", row).removeClass("waiting").addClass("failed").
+        text("Failed: " + errorThrown + ": " + JSON.parse(jqXHR.responseText).errors[0].message);
+    };
+  }
+
+  function _setUpSubmitHandler(callback) {
+    $('input[type="submit"]').click(function() {
+      var file = $('input:file')[0].files.item(0);
+      _readFile(file, function(content) {
+        callback(content);
+      });
+      return false;
+    });
+  }
+
+  function _processGroupFile(content) {
+    var groups = $.csv.toObjects(content);
+    var params = {
+      account: accountID,
+      category: document.getElementsByName("category")[0].value
+    };
+    _render("powerfunctions/groups-process",
+            "Processing group creations",
+            {groups: groups});
+    for (var i = 0; i < groups.length; i++) {
+      var row = $("#mmpf-group-"+i);
+      params.name = groups[i].name;
+      params.description = groups[i].description;
+      mmooc.api.createGroup(params, _success(row), _error(row));
+    }
+  }
+
+  function _renderListGroupsView() {
+    mmooc.api.getGroupsForAccount(accountID, function(groups) {
+      _render("powerfunctions/list-groups",
+              "List groups",
+              {groups: groups});
+    });
+  }
+
+
+  function CreateNewLoginsTask() {
+
+    function _renderView() {
+        _render("powerfunctions/logins",
+                "Add new logins to students",
+                {});
     }
 
-    function _accountID() {
-        return $('select[name="account"] option:selected').val();
+    function _processFile(content) {
+      var logins = $.csv.toObjects(content);
+      _render("powerfunctions/logins-process",
+              "Processing new logins",
+              {logins: logins});
+      for (var i = 0; i < logins.length; i++) {
+        _processItem(i, logins[i]);
+      }
     }
 
-    function _renderGroupCategoryOptions() {
-        mmooc.api.getGroupCategoriesForAccount(_accountID(), function(categories) {
-            var html = "";
-            if (categories.length === 0) {
-                html = "<option value=\"\">No group sets defined for account</option>";
-            }
-            else {
-                html = html + "<option value=''>Choose a group set</option>";
-                for (var i = 0; i < categories.length; i++) {
-                    html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
-                }
-            }
-            $("select[name='category']").html(html);
-        });
-    }
-
-    function _renderGroupView() {
-        mmooc.api.getAccounts(function(accounts) {
-            _render("powerfunctions/group-category",
-                    {accounts: accounts});
-            $('select[name="account"]').change(function() {
-                _renderGroupCategoryOptions();
-            });
-            _setUpSubmitHandler(_processGroupFile);
-        });
-    }
-
-    function _success(row) {
-        return function () {
-            $("td.status", row).removeClass("waiting").addClass("ok").text("OK");
-        };
-    }
-
-    function _error(row) {
-        return function (jqXHR, textStatus, errorThrown ) {
-            $("td.status", row).removeClass("waiting").addClass("failed").
-                text("Failed: " + errorThrown + ": " + JSON.parse(jqXHR.responseText).errors[0].message);
-        };
-    }
-
-    function _setUpSubmitHandler(callback) {
-        $('input[type="submit"]').click(function() {
-            var file = $('input:file')[0].files.item(0);
-            _readFile(file, function(content) {
-                callback(content);
-            });
-            return false;
-        });
-    }
-
-    function _processGroupFile(content) {
-        var groups = $.csv.toObjects(content);
-        var params = {
-            account: document.getElementsByName("account")[0].value,
-            category: document.getElementsByName("category")[0].value
-        };
-        _render("powerfunctions/groups-process", {groups: groups});
-        for (var i = 0; i < groups.length; i++) {
-            var row = $("#mmpf-group-"+i);
-            params.name = groups[i].name;
-            params.description = groups[i].description;
-            mmooc.api.createGroup(params, _success(row), _error(row));
-        }
-    }
-
-    function _processAssignFile(content) {
-        var assigns = $.csv.toObjects(content);
-        _render("powerfunctions/assign-process", {assigns: assigns});
-        for (var i = 0; i < assigns.length; i++) {
-            var gid = assigns[i]["group_id"];
-            var uid = assigns[i]["user_id"];
-            var row = $("#mmpf-assign-"+gid+"-"+uid);
-            mmooc.api.createGroupMembership(gid, uid, _success(row), _error(row));
-        }
-    }
-
-    function _processLoginsFile(content) {
-        var logins = $.csv.toObjects(content);
-        _render("powerfunctions/logins-process", {logins: logins});
-        for (var i = 0; i < logins.length; i++) {
-            var uid = logins[i]["user_id"];
-            var lid = logins[i]["login_id"];
-            var row = $("#mmpf-logins-"+uid);
-            var params = {
-                user_id: uid,
-                login_id: lid,
-                account_id: _accountID()
-            };
-            mmooc.api.createUserLogin(params, _success(row), _error(row));
-        }
-    }
-
-    function _renderAssignView() {
-        _render("powerfunctions/assign", {});
-        _setUpSubmitHandler(_processAssignFile);
-    }
-
-    function _renderLoginsView() {
-        mmooc.api.getAccounts(function(accounts) {
-            _render("powerfunctions/logins", {accounts: accounts});
-            _setUpSubmitHandler(_processLoginsFile);
-        });
-    }
-
-    function _setUpClickHandlers() {
-        $("#mmooc-pf-group-btn").click(function() {
-            _renderGroupView(rootId);
-        });
-        $("#mmooc-pf-assign-btn").click(function() {
-            _renderAssignView(rootId);
-        });
-        $("#mmooc-pf-logins-btn").click(function() {
-            _renderLoginsView(rootId);
-        });
+    function _processItem(i, login) {
+      var uid = "sis_user_id:" + encodeURIComponent(login.user_id);
+      var lid = login.login_id;
+      var row = $("#mmpf-logins-"+i);
+      var params = {
+        user_id: uid,
+        login_id: lid,
+        account_id: accountID
+      };
+      mmooc.api.createUserLogin(params, _success(row), _error(row));
     }
 
     return {
-        show: function(parentId) {
-            rootId = parentId;
-            _render("powerfunctions/main", {});
-            _setUpClickHandlers();
-        }
-
+      run: function() {
+        _renderView();
+        _setUpSubmitHandler(_processFile);
+      }
     };
+  }
+
+
+  function AssignStudentsToGroupsTask() {
+
+    function _renderView() {
+      _render("powerfunctions/assign",
+              "Assign students to groups",
+              {});
+    }
+
+    function _processFile(content) {
+      var assigns = $.csv.toObjects(content);
+      _render("powerfunctions/assign-process",
+              "Processing assigning student to groups",
+              {assigns: assigns});
+      for (var i = 0; i < assigns.length; i++) {
+        _processItem(i, assigns[i]);
+      }
+    }
+
+    function _processItem(i, assignment) {
+      var gid = assignment.group_id;
+      var uid = "sis_user_id:" + encodeURIComponent(assignment.user_id);
+      var row = $("#mmpf-assign-"+i);
+      mmooc.api.createGroupMembership(gid, uid, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+        _setUpSubmitHandler(_processFile);
+      }
+    };
+  }
+
+  function AccountPicker() {
+    function _setAccountID() {
+      accountID = $('select[name="account"] option:selected').val();
+    }
+
+    return {
+      run: function(params) {
+        mmooc.api.getAccounts(function(accounts) {
+          _render("powerfunctions/account-picker",
+                  "Choose account",
+                  {accounts: accounts});
+          $('select[name="account"]').change(function() {
+            _setAccountID();
+            params.nextStep();
+          });
+        });
+
+      }
+    };
+  }
+
+  function Menu() {
+    function _setUpClickHandlers() {
+      $("#mmooc-pf-list-group-btn").click(function() {
+        _renderListGroupsView(rootId);
+      });
+      $("#mmooc-pf-group-btn").click(function() {
+        _renderGroupView(rootId);
+      });
+      $("#mmooc-pf-assign-btn").click(function() {
+        new AssignStudentsToGroupsTask().run();
+      });
+      $("#mmooc-pf-logins-btn").click(function() {
+        new CreateNewLoginsTask().run();
+      });
+    }
+
+    return {
+      run: function() {
+        _render("powerfunctions/main", {});
+        _setUpClickHandlers();
+      }
+    };
+  }
+
+  return {
+    show: function(parentId) {
+      rootId = parentId;
+      new AccountPicker().run({nextStep: function () {
+        new Menu().run();
+      }});
+    }
+  };
 }();
 
 this.mmooc=this.mmooc||{};
