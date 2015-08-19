@@ -630,7 +630,7 @@ function program3(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n      <tr>\n        <td>";
+  buffer += "\n      <tr>\n        <td class=\"right\">";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -993,13 +993,37 @@ this.mmooc.api = function() {
 
         },
 
+      // Recursively fetch all groups by following the next links
+      // found in the Links response header:
+      // https://canvas.instructure.com/doc/api/file.pagination.html
+      _getGroupsForAccountHelper: function(accumulatedGroups, callback, error) {
+        var that = this;
+        return function(groups, status, xhr) {
+          Array.prototype.push.apply(accumulatedGroups, groups);
+          var next = xhr.getResponseHeader('Link').split(',').find(function (e) {
+            return e.match("rel=\"next\"");
+          });
+          if (next === undefined) {
+            callback(accumulatedGroups);
+          }
+          else {
+            var fullURI = next.match("<([^>]+)>")[1];
+            that._get({
+              "callback": that._getGroupsForAccountHelper(accumulatedGroups, callback, error),
+              "error":    error,
+              "uri":      fullURI.split("api/v1")[1],
+              "params":   { }
+            });
+          }
+        };
+      },
 
         getGroupsForAccount: function(account, callback, error) {
             this._get({
-                "callback": callback,
-                "error":    error,
-                "uri":      "/accounts/" + account + "/groups",
-                "params":   { }
+              "callback": this._getGroupsForAccountHelper([], callback, error),
+              "error":    error,
+              "uri":      "/accounts/" + account + "/groups",
+              "params":   { per_page: 999 }
             });
         },
 
@@ -1029,14 +1053,16 @@ this.mmooc.api = function() {
         },
 
 
-        createUserLogin: function(params, callback, error) {
-            this._post({
-                "callback": callback,
-                "error":    error,
-                "uri":      "/accounts/" + params.account_id + "/logins",
-                "params":   { user_id: params.user_id }
-            });
-        }
+      createUserLogin: function(params, callback, error) {
+        var account_id = params.account_id;
+        delete params.account_id;
+        this._post({
+          "callback": callback,
+          "error":  error,
+          "uri": "/accounts/" + account_id + "/logins",
+          "params": params
+        });
+      }
     };
 }();
 
@@ -1619,12 +1645,21 @@ this.mmooc.powerFunctions = function() {
     }
   }
 
-  function _renderListGroupsView() {
-    mmooc.api.getGroupsForAccount(accountID, function(groups) {
-      _render("powerfunctions/list-groups",
-              "List groups",
-              {groups: groups});
-    });
+
+  function ListGroupsTask() {
+    function _renderView() {
+      mmooc.api.getGroupsForAccount(accountID, function(groups) {
+        _render("powerfunctions/list-groups",
+                "List groups",
+                {groups: groups});
+      });
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
   }
 
 
@@ -1647,12 +1682,13 @@ this.mmooc.powerFunctions = function() {
     }
 
     function _processItem(i, login) {
-      var uid = "sis_user_id:" + encodeURIComponent(login.current_id);
-      var lid = login.new_id;
+      var uid = "sis_user_id:" + login.current_id;
+      var nid = login.new_id;
       var row = $("#mmpf-logins-"+i);
       var params = {
-        user_id: uid,
-        login_id: lid,
+        'user[id]': uid,
+        'login[unique_id]': nid,
+        'login[sis_user_id]': nid,
         account_id: accountID
       };
       mmooc.api.createUserLogin(params, _success(row), _error(row));
@@ -1719,7 +1755,6 @@ this.mmooc.powerFunctions = function() {
             params.nextStep();
           });
         });
-
       }
     };
   }
@@ -1727,7 +1762,7 @@ this.mmooc.powerFunctions = function() {
   function Menu() {
     function _setUpClickHandlers() {
       $("#mmooc-pf-list-group-btn").click(function() {
-        _renderListGroupsView(rootId);
+        new ListGroupsTask().run();
       });
       $("#mmooc-pf-group-btn").click(function() {
         _renderGroupView(rootId);
