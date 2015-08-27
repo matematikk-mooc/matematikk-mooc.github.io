@@ -1000,9 +1000,9 @@ this.mmooc.api = function() {
         var that = this;
         return function(groups, status, xhr) {
           Array.prototype.push.apply(accumulatedGroups, groups);
-          var next = xhr.getResponseHeader('Link').split(',').find(function (e) {
+          var next = xhr.getResponseHeader('Link').split(',').filter(function (e) {
             return e.match("rel=\"next\"");
-          });
+          })[0];
           if (next === undefined) {
             callback(accumulatedGroups);
           }
@@ -1341,6 +1341,7 @@ this.mmooc.menu = function() {
 
         menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
         menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
+        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
         menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
         menuItems[menuItems.length] = mmooc.menu.extractBadgesLinkFromPage();
 
@@ -1514,6 +1515,16 @@ this.mmooc.menu = function() {
 
         injectGroupsPage: function() {
           $('#courses_menu_item').after('<li class="menu-item"><a href="/groups" class="menu-item-no-drop">Grupper</a></li>');
+        },
+
+        alterHomeLink: function() {
+          $('#header-logo').attr('href', '/courses');
+        },
+
+        alterCourseLink: function() {
+          if ($('#menu > li:first-child a').hasClass('menu-item-no-drop')) {
+            $('#menu > li:first-child a').attr('href', '/courses');
+          }
         }
     };
 }();
@@ -2207,6 +2218,9 @@ $(document).ready(function() {
     mmooc.routes.addRouteForPath(/\/groups\/\d+\/discussion_topics$/, function() {
         var courseId = mmooc.api.getCurrentCourseId();
         mmooc.menu.showCourseMenu(courseId, 'Grupper', mmooc.util.getPageTitleAfterColon());
+
+        //TODO: Check whether or not courseId is undefined or not valid, only insert the group header
+        //when it is.
         mmooc.groups.showGroupHeader();
     });
 
@@ -2294,6 +2308,8 @@ $(document).ready(function() {
     mmooc.pages.showBackToAssignmentLink(document.location.href);
     mmooc.pages.updateSidebarWhenMarkedAsDone();
 
+    mmooc.menu.alterHomeLink();
+    mmooc.menu.alterCourseLink();
 
 });
 
