@@ -1059,9 +1059,9 @@ this.mmooc.api = function() {
         var that = this;
         return function(groups, status, xhr) {
           Array.prototype.push.apply(accumulatedGroups, groups);
-          var next = xhr.getResponseHeader('Link').split(',').find(function (e) {
+          var next = xhr.getResponseHeader('Link').split(',').filter(function (e) {
             return e.match("rel=\"next\"");
-          });
+          })[0];
           if (next === undefined) {
             callback(accumulatedGroups);
           }
