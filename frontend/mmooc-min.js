@@ -519,6 +519,48 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<form>\n  <dl>\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\n    <dd><input type=\"file\" name=\"csv\"></dd>\n  </dl>\n  <input type=\"submit\"/>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>group_id [Integer]\n    <dd>The group ID\n    <dt>user_id [String]\n    <dd>The FEIDE user ID\n  </dl>\n</div>\n\n";
   });
 
+this["mmooc"]["templates"]["powerfunctions/course-groups"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n          <option value=\"\">No courses defined for account</option>\n        ";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n          <option value=\"\">Choose a course</option>\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select id=\"mmpf-course-select\">\n        ";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      </select>\n    <li class=\"step-2\">\n      <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n          <option value=\"\">No group sets defined for course</option>\n      </select>\n    <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n    <li class=\"step-4\"><input type=\"submit\"/>\n  </ol>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>name [String]\n    <dd>The name of the group\n    <dt>description [String]\n    <dd>A description of the group\n  </dl>\n</div>\n";
+  return buffer;
+  });
+
 this["mmooc"]["templates"]["powerfunctions/group-category"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -696,7 +738,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-pf-list\">\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create groups</div>\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n</div>\n";
+  return "<div class=\"mmooc-pf-list\">\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create account groups</div>\n  <div id=\"mmooc-pf-course-group-btn\" class=\"item\">Create course groups</div>\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n</div>\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/tail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -983,6 +1025,15 @@ this.mmooc.api = function() {
             });
         },
 
+        getCoursesForAccount: function(account, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/accounts/" + account + "/courses",
+                "params":   { }
+            });
+        },
+
         getGroupCategoriesForAccount: function(account, callback, error) {
             this._get({
                 "callback": callback,
@@ -990,8 +1041,16 @@ this.mmooc.api = function() {
                 "uri":      "/accounts/" + account + "/group_categories",
                 "params":   { }
             });
-
         },
+
+      getGroupCategoriesForCourse: function(course, callback, error) {
+        this._get({
+          "callback": callback,
+          "error":    error,
+          "uri":      "/courses/" + course + "/group_categories",
+          "params":   { }
+        });
+      },
 
       // Recursively fetch all groups by following the next links
       // found in the Links response header:
@@ -1341,6 +1400,7 @@ this.mmooc.menu = function() {
 
         menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
         menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
+        menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
         menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
         menuItems[menuItems.length] = mmooc.menu.extractBadgesLinkFromPage();
 
@@ -1514,6 +1574,16 @@ this.mmooc.menu = function() {
 
         injectGroupsPage: function() {
           $('#courses_menu_item').after('<li class="menu-item"><a href="/groups" class="menu-item-no-drop">Grupper</a></li>');
+        },
+
+        alterHomeLink: function() {
+          $('#header-logo').attr('href', '/courses');
+        },
+
+        alterCourseLink: function() {
+          if ($('#menu > li:first-child a').hasClass('menu-item-no-drop')) {
+            $('#menu > li:first-child a').attr('href', '/courses');
+          }
         }
     };
 }();
@@ -1647,7 +1717,7 @@ this.mmooc.powerFunctions = function() {
     function _renderView() {
       mmooc.api.getGroupCategoriesForAccount(accountID, function(categories) {
         _render("powerfunctions/group-category",
-                "Create groups",
+                "Create account groups",
                 {categories: categories});
         _setUpSubmitHandler(_processFile);
       });
@@ -1658,6 +1728,57 @@ this.mmooc.powerFunctions = function() {
       var params = {
         account: accountID,
         category: document.getElementsByName("category")[0].value
+      };
+      _render("powerfunctions/groups-process",
+              "Processing group creations",
+              {groups: groups});
+      for (var i = 0; i < groups.length; i++) {
+        _processItem(params, i, groups[i]);
+      }
+    }
+
+    function _processItem(params, i, group) {
+      var row = $("#mmpf-group-"+i);
+      params.name = group.name;
+      params.description = group.description;
+      mmooc.api.createGroup(params, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
+
+
+  function CreateCourseGroupsTask() {
+
+    function _renderView() {
+      console.log("Here");
+      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+        _render("powerfunctions/course-groups",
+                "Create course groups",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
+            $('.step-2').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a group set</option>";
+            for (var i = 0; i < categories.length; i++) {
+              html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
+            }
+            $("select[name='category']").html(html);
+            _setUpSubmitHandler(_processFile);
+          });
+        });
+      });
+    }
+
+    function _processFile(content) {
+      var groups = _parseCSV(content);
+      var params = {
+        category: $("select[name='category'] option:selected").val()
       };
       _render("powerfunctions/groups-process",
               "Processing group creations",
@@ -1800,6 +1921,9 @@ this.mmooc.powerFunctions = function() {
       $("#mmooc-pf-list-group-btn").click(function() {
         new ListGroupsTask().run();
       });
+      $("#mmooc-pf-course-group-btn").click(function() {
+        new CreateCourseGroupsTask().run();
+      });
       $("#mmooc-pf-group-btn").click(function() {
         new CreateGroupsTask().run();
       });
@@ -1813,8 +1937,14 @@ this.mmooc.powerFunctions = function() {
 
     return {
       run: function() {
-        _render("powerfunctions/main", {});
-        _setUpClickHandlers();
+        try {
+          _render("powerfunctions/main", {});
+          _setUpClickHandlers();
+        }
+        catch (e) {
+          alert (e.message);
+          console.log(e);
+        }
       }
     };
   }
@@ -2207,6 +2337,9 @@ $(document).ready(function() {
     mmooc.routes.addRouteForPath(/\/groups\/\d+\/discussion_topics$/, function() {
         var courseId = mmooc.api.getCurrentCourseId();
         mmooc.menu.showCourseMenu(courseId, 'Grupper', mmooc.util.getPageTitleAfterColon());
+
+        //TODO: Check whether or not courseId is undefined or not valid, only insert the group header
+        //when it is.
         mmooc.groups.showGroupHeader();
     });
 
@@ -2294,6 +2427,8 @@ $(document).ready(function() {
     mmooc.pages.showBackToAssignmentLink(document.location.href);
     mmooc.pages.updateSidebarWhenMarkedAsDone();
 
+    mmooc.menu.alterHomeLink();
+    mmooc.menu.alterCourseLink();
 
 });
 
