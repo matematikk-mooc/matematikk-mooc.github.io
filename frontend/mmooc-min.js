@@ -224,22 +224,14 @@ function program1(depth0,data) {
 this["mmooc"]["templates"]["groupdiscussionheader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
   buffer += "<div id=\"mmooc-group-header\">\n    <div id=\"mmooc-group-members\">\n        <div class=\"mmooc-back-button\">\n            <a href=\"/groups/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.group)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "/discussion_topics\">Tilbake til "
+    + "/discussion_topics\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.group)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a>\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n        <p>\n            <b>Videorom for gruppa:</b> <a target=\"_new\" href=\"https://connect.uninett.no/gruppe";
-  if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">https://connect.uninett.no/gruppe";
-  if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</a>\n        </p>\n    </div>\n\n</div>";
+    + "</a>\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n    </div>\n\n</div>\n";
   return buffer;
   });
 
@@ -272,15 +264,11 @@ function program1(depth0,data) {
     + "/groups\">Tilbake til kursgrupper</a>\n</div>\n<div id=\"mmooc-group-header\">\n    <div id=\"mmooc-group-members\">\n        <p><b>Gruppemedlemmer</b></p>\n\n        <div class=\"mmooc-group-members-list\">\n            ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.members), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n        <p>\n            <b>Videorom for gruppa:</b> <a target=\"_new\" href=\"https://connect.uninett.no/gruppe";
+  buffer += "\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n        <p>\n            <a target=\"_new\" href=\"https://connect.uninett.no/uit-videorom-matematikkmooc-";
   if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">https://connect.uninett.no/gruppe";
-  if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</a>\n        </p>\n    </div>\n\n</div>";
+    + "\" class=\"external\"><b>Videorom for gruppa</b> <span class=\"ui-icon ui-icon-extlink ui-icon-inline\" title=\"Lenker til en ekstern side.\"></span></a>\n        </p>\n    </div>\n\n</div>\n";
   return buffer;
   });
 
@@ -809,6 +797,39 @@ this.mmooc.api = function() {
             this._sendRequest(this._ajax.post, options);
         },
 
+        /*  FIXME for listModulesForCourse()
+         *  This function loads data in a blocking manner no matter how many items and modules are present.
+         *  This could potentially pose problems in the future, as page load time increases rapidly when
+         *  the number of requests are numerous. This function should be updated to use non-blocking loading
+         *  if Canvas is not updated to allow for better data loading through their API.
+         */
+        listModulesForCourse: function(callback, error, cid)
+        {
+        	var href= "/api/v1/courses/" + cid + "/modules";
+        	$.getJSON(href, function(modules) {
+        		var noOfModules = modules.length;
+        		var asyncsDone = 0;
+        		for (var i = 0; i < noOfModules; i++) {
+        			var m = modules[i];
+        			var href= "/api/v1/courses/" + cid + "/modules/" + m.id + "/items";
+        			$.getJSON(
+        				href,
+        				(function(j) {
+        			    return function(items) {
+        						modules[j].items = items;
+        						asyncsDone++;
+
+        						if(asyncsDone === noOfModules) {
+        							callback(modules);
+        						}
+        					};
+            		}(i)) // calling the function with the current value
+        	    );
+        		};
+        	}
+        	);
+        },
+
         getCurrentModuleItemId : function() {
             var paramName = "module_item_id";
             var q = "" + this._location.search;
@@ -870,7 +891,7 @@ this.mmooc.api = function() {
          */
         getModulesForCurrentCourse: function(callback, error) {
             var courseId = this.getCurrentCourseId();
-            this.getModulesForCourseId(callback, error, courseId);
+            this.listModulesForCourse(callback, error, courseId);
         },
 
         getModulesForCourseId: function(callback, error, courseId) {
@@ -878,8 +899,17 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/courses/" + courseId + "/modules",
-                "params":   { "include": ["items"] }
+                "params":   { }
             });
+        },
+
+        getItemsForModuleId: function(callback, error, courseId, moduleId) {
+          this._get({
+            "callback": callback,
+            "error": error,
+            "uri": "/courses/" + courseId + "/modules/" + moduleId + "/items",
+            "params": { }
+          });
         },
 
         getCurrentCourseId: function() {
@@ -1384,6 +1414,13 @@ this.mmooc.groups = function() {
           }
 
           return false;
+        },
+
+        moveSequenceLinks: function() {
+          var sequenceContainer = $("#module_sequence_footer");
+          var discussionContainer = $("#discussion_container");
+          sequenceContainer.addClass('module-sequence-top');
+          sequenceContainer.insertBefore(discussionContainer);
         }
     };
 }();
@@ -2345,6 +2382,10 @@ $(document).ready(function() {
 
     mmooc.routes.addRouteForPath([/\/groups\/\d+\/discussion_topics\/\d+$/, /\/groups\/\d+\/discussion_topics\/new$/], function() {
         mmooc.menu.showDiscussionGroupMenu();
+    });
+
+    mmooc.routes.addRouteForPath([/\/groups\/\d+\/discussion_topics\/\d+$/], function() {
+      mmooc.groups.moveSequenceLinks();
     });
 
     mmooc.routes.addRouteForPath([/\/courses\/\d+\/discussion_topics\/\d+/, /\/courses\/\d+\/discussion_topics\/new/], function() {
