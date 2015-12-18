@@ -1,6 +1,24 @@
 this["mmooc"] = this["mmooc"] || {};
 this["mmooc"]["templates"] = this["mmooc"]["templates"] || {};
 
+this["mmooc"]["templates"]["actionbutton"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"mmooc-action-button\">\n    <a href=\"#\" id=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"btn btn-done\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n</div>\n";
+  return buffer;
+  });
+
 this["mmooc"]["templates"]["activitystream"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -797,6 +815,24 @@ this.mmooc.api = function() {
             this._sendRequest(this._ajax.post, options);
         },
 
+        _put: function(options) {
+            var uri      = this._uriPrefix + options.uri;
+            var params   = options.params || {};
+            var callback = options.callback;
+
+            $.ajax({
+                url: uri,
+                type: 'PUT',
+                data: params,
+                success: function(response) {
+                    callback(response);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Error during PUT");
+                }
+            });
+        },
+
         /*  FIXME for listModulesForCourse()
          *  This function loads data in a blocking manner no matter how many items and modules are present.
          *  This could potentially pose problems in the future, as page load time increases rapidly when
@@ -805,29 +841,29 @@ this.mmooc.api = function() {
          */
         listModulesForCourse: function(callback, error, cid)
         {
-        	var href= "/api/v1/courses/" + cid + "/modules";
-        	$.getJSON(href, function(modules) {
-        		var noOfModules = modules.length;
-        		var asyncsDone = 0;
-        		for (var i = 0; i < noOfModules; i++) {
-        			var m = modules[i];
-        			var href= "/api/v1/courses/" + cid + "/modules/" + m.id + "/items?per_page=100";
-        			$.getJSON(
-        				href,
-        				(function(j) {
-        			    return function(items) {
-        						modules[j].items = items;
-        						asyncsDone++;
+            var href= "/api/v1/courses/" + cid + "/modules";
+            $.getJSON(href, function(modules) {
+                    var noOfModules = modules.length;
+                    var asyncsDone = 0;
+                    for (var i = 0; i < noOfModules; i++) {
+                        var m = modules[i];
+                        var href= "/api/v1/courses/" + cid + "/modules/" + m.id + "/items?per_page=100";
+                        $.getJSON(
+                            href,
+                            (function(j) {
+                                return function(items) {
+                                    modules[j].items = items;
+                                    asyncsDone++;
 
-        						if(asyncsDone === noOfModules) {
-        							callback(modules);
-        						}
-        					};
-            		}(i)) // calling the function with the current value
-        	    );
-        		};
-        	}
-        	);
+                                    if(asyncsDone === noOfModules) {
+                                        callback(modules);
+                                    }
+                                };
+                            }(i)) // calling the function with the current value
+                        );
+                    };
+                }
+            );
         },
 
         getCurrentModuleItemId : function() {
@@ -836,17 +872,6 @@ this.mmooc.api = function() {
             if (typeof q === "undefined" || q.indexOf(paramName) == -1) {
                 return null;
             }
-
-            var moduleId = q.substring(q.indexOf(paramName) + paramName.length + 1, q.length);
-            if (moduleId.indexOf("&") != -1) {
-                moduleId = moduleId.substring(0, moduleId.indexOf("&"));
-            }
-
-            return parseInt(moduleId, 10);
-        },
-
-        getCurrentContentId : function() {
-            var q = "" + this._location.pathname;
 
             var moduleId = q.substring(q.indexOf(paramName) + paramName.length + 1, q.length);
             if (moduleId.indexOf("&") != -1) {
@@ -904,12 +929,12 @@ this.mmooc.api = function() {
         },
 
         getItemsForModuleId: function(callback, error, courseId, moduleId) {
-          this._get({
-            "callback": callback,
-            "error": error,
-            "uri": "/courses/" + courseId + "/modules/" + moduleId + "/items",
-            "params": { }
-          });
+            this._get({
+                "callback": callback,
+                "error": error,
+                "uri": "/courses/" + courseId + "/modules/" + moduleId + "/items",
+                "params": { }
+            });
         },
 
         getCurrentCourseId: function() {
@@ -1033,7 +1058,7 @@ this.mmooc.api = function() {
         },
 
         getUnreadMessageSize: function() {
-          return parseInt(document.getElementsByClassName('unread-messages-count')[0].innerHTML);
+            return parseInt(document.getElementsByClassName('unread-messages-count')[0].innerHTML);
         },
 
         getAccounts: function(callback, error) {
@@ -1060,7 +1085,7 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/accounts/" + account + "/courses",
-                "params":   { }
+                "params":   { per_page: 999 }
             });
         },
 
@@ -1073,46 +1098,46 @@ this.mmooc.api = function() {
             });
         },
 
-      getGroupCategoriesForCourse: function(course, callback, error) {
-        this._get({
-          "callback": callback,
-          "error":    error,
-          "uri":      "/courses/" + course + "/group_categories",
-          "params":   { }
-        });
-      },
-
-      // Recursively fetch all groups by following the next links
-      // found in the Links response header:
-      // https://canvas.instructure.com/doc/api/file.pagination.html
-      _getGroupsForAccountHelper: function(accumulatedGroups, callback, error) {
-        var that = this;
-        return function(groups, status, xhr) {
-          Array.prototype.push.apply(accumulatedGroups, groups);
-          var next = xhr.getResponseHeader('Link').split(',').find(function (e) {
-            return e.match("rel=\"next\"");
-          });
-          if (next === undefined) {
-            callback(accumulatedGroups);
-          }
-          else {
-            var fullURI = next.match("<([^>]+)>")[1];
-            that._get({
-              "callback": that._getGroupsForAccountHelper(accumulatedGroups, callback, error),
-              "error":    error,
-              "uri":      fullURI.split("api/v1")[1],
-              "params":   { }
+        getGroupCategoriesForCourse: function(course, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + course + "/group_categories",
+                "params":   { }
             });
-          }
-        };
-      },
+        },
+
+        // Recursively fetch all groups by following the next links
+        // found in the Links response header:
+        // https://canvas.instructure.com/doc/api/file.pagination.html
+        _getGroupsForAccountHelper: function(accumulatedGroups, callback, error) {
+            var that = this;
+            return function(groups, status, xhr) {
+                Array.prototype.push.apply(accumulatedGroups, groups);
+                var next = xhr.getResponseHeader('Link').split(',').find(function (e) {
+                    return e.match("rel=\"next\"");
+                });
+                if (next === undefined) {
+                    callback(accumulatedGroups);
+                }
+                else {
+                    var fullURI = next.match("<([^>]+)>")[1];
+                    that._get({
+                        "callback": that._getGroupsForAccountHelper(accumulatedGroups, callback, error),
+                        "error":    error,
+                        "uri":      fullURI.split("api/v1")[1],
+                        "params":   { }
+                    });
+                }
+            };
+        },
 
         getGroupsForAccount: function(account, callback, error) {
             this._get({
-              "callback": this._getGroupsForAccountHelper([], callback, error),
-              "error":    error,
-              "uri":      "/accounts/" + account + "/groups",
-              "params":   { per_page: 999 }
+                "callback": this._getGroupsForAccountHelper([], callback, error),
+                "error":    error,
+                "uri":      "/accounts/" + account + "/groups",
+                "params":   { per_page: 999 }
             });
         },
 
@@ -1142,22 +1167,162 @@ this.mmooc.api = function() {
         },
 
 
-      createUserLogin: function(params, callback, error) {
-        var account_id = params.account_id;
-        delete params.account_id;
-        this._post({
-          "callback": callback,
-          "error":  error,
-          "uri": "/accounts/" + account_id + "/logins",
-          "params": params
-        });
-      }
+        createUserLogin: function(params, callback, error) {
+            var account_id = params.account_id;
+            delete params.account_id;
+            this._post({
+                "callback": callback,
+                "error": error,
+                "uri": "/accounts/" + account_id + "/logins",
+                "params": params
+            });
+        },
+
+        getDiscussionTopic: function(courseId, contentId, callback) {
+            this._get({
+                "callback": callback,
+                "uri":      "/courses/" + courseId + "/discussion_topics/" + contentId,
+                "params":   { per_page: 999 }
+            });
+        },
+
+        markDiscussionTopicAsRead: function(courseId, contentId, callback) {
+            this._put({
+                "callback": callback,
+                "uri":      "/courses/" + courseId + "/discussion_topics/" + contentId + "/read_all",
+                "params":   { forced_read_state: 'false' }
+            });
+        }
     };
 }();
 
 if (typeof module !== "undefined" && module !== null) {
     module.exports = this.mmooc.api;
 }
+
+this.mmooc = this.mmooc || {};
+
+
+this.mmooc.announcements = function () {
+    function hideMarkAsReadButton() {
+        $('#markAllAsReadButton').hide();
+        mmooc.menu.updateNotificationsForUser();
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+    // Function that fix announcement bug in Canvas
+    // https://community.canvaslms.com/message/22237?et=watches.email.thread#22237
+    /////////////////////////////////////////////////////////////////////////////
+    function clearAnnouncementsForCourseArrays(courses) {
+        var ayncsDone = 0;
+        var totalAsyncs = 0;
+
+        for(var j = 0; j < courses.length; j++) {
+            var course = courses[j];
+            totalAsyncs += course.discussionIds.length;
+        }
+
+        for(var j = 0; j < courses.length; j++) {
+            var course = courses[j];
+            var courseId = course.courseId;
+            for (var i = 0; i < course.discussionIds.length; i++) {
+                var discussionId = course.discussionIds[i];
+                var s = '<br><div id="cdt' + courseId + discussionId + '">Markerer kunngj&oslash;ring som lest...</div>';
+                $("#clearannouncements").append(s);
+
+                var href= "/api/v1/courses/" + courseId + "/discussion_topics/" + discussionId + "/read_all.json";
+                $.ajax({
+                    url: href,
+                    type: 'PUT',
+                    data: 'forced_read_state=true',
+                    courseid: courseId,
+                    discussiontopicid: discussionId,
+                    success: function(response) {
+                        var s = "#cdt" + this.courseid + this.discussiontopicid;
+                        $(s).append("OK");
+                        ayncsDone++;
+                        if (totalno == ayncsDone) {
+                            try {
+                                mmooc.menu.updateNotificationsForUser();
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Error marking things as done:" + textStatus);
+                    }
+                });
+            }
+        }
+    }
+
+    /*
+     Disse kunngjøringene blir nullstilt:
+
+     Kurs 0:
+     https://matematikk.mooc.no/courses/18/discussion_topics/519
+     https://matematikk.mooc.no/courses/18/discussion_topics/551
+     https://matematikk.mooc.no/courses/18/discussion_topics/569
+     https://matematikk.mooc.no/courses/18/discussion_topics/824
+
+     Kurs 1:
+     https://matematikk.mooc.no/courses/11/discussion_topics/884
+     https://matematikk.mooc.no/courses/11/discussion_topics/942
+     https://matematikk.mooc.no/courses/11/discussion_topics/948
+     https://matematikk.mooc.no/courses/11/discussion_topics/949
+     https://matematikk.mooc.no/courses/11/discussion_topics/962
+     https://matematikk.mooc.no/courses/11/discussion_topics/966
+     https://matematikk.mooc.no/courses/11/discussion_topics/969
+     https://matematikk.mooc.no/courses/11/discussion_topics/973
+     https://matematikk.mooc.no/courses/11/discussion_topics/974
+     https://matematikk.mooc.no/courses/11/discussion_topics/1245
+     https://matematikk.mooc.no/courses/11/discussion_topics/1246
+     https://matematikk.mooc.no/courses/11/discussion_topics/1259
+
+     Kurs 2:
+     https://matematikk.mooc.no/courses/12/discussion_topics/1263
+     */
+
+    return {
+        clearAnnouncements: function() {
+            var courses = [ {
+                    courseId: 18,
+                    discussionIds: [519,551,569,824]
+                },
+                {
+                    courseId: 11,
+                    discussionIds: [884,942,948,949,962,966,969,973,974,1245,1246,1259]
+                },
+                {
+                    courseId: 12,
+                    discussionIds: [1263]
+                }
+
+            ];
+            clearAnnouncementsForCourseArrays(courses);
+        },
+
+        addMarkAsReadButton: function() {
+            var contentId = mmooc.api.getCurrentTypeAndContentId().contentId;
+            var courseId = mmooc.api.getCurrentCourseId();
+
+            mmooc.api.getDiscussionTopic(courseId, contentId, function(discussionTopic) {
+                if (discussionTopic.read_state !== "read") {
+                    var buttonHTML = mmooc.util.renderTemplateWithData("actionbutton", {id: "markAllAsReadButton", title: "Marker som lest"});
+                    document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', buttonHTML);
+
+                    $('#markAllAsReadButton').click(function() {
+                        mmooc.api.markDiscussionTopicAsRead(courseId, contentId, hideMarkAsReadButton);
+                    });
+                }
+            });
+
+        }
+
+    };
+}();
+
 
 this.mmooc=this.mmooc||{};
 
@@ -1503,7 +1668,10 @@ this.mmooc.menu = function() {
                 $(".add_access_token_link").show();
                 $("body.profile_settings").find("#content > table, #content > h2, #content > p").show();
             } else {
-                document.getElementById('menu').insertAdjacentHTML('afterbegin', '<li class="menu-item"><a href="/" class="menu-item-no-drop">Kurs</a></li>');
+                var menu = document.getElementById('menu');
+                if (menu) {
+                    menu.insertAdjacentHTML('afterbegin', '<li class="menu-item"><a href="/" class="menu-item-no-drop">Kurs</a></li>');
+                }
             }
         },
 
@@ -1521,51 +1689,54 @@ this.mmooc.menu = function() {
                 var msgBadge = $("#mmooc-unread-messages-count");
                 if (mmooc.api.getUnreadMessageSize() === 0) {
                   msgBadge.hide();
-                }
-                else {
+                } else {
                   msgBadge.html(mmooc.api.getUnreadMessageSize());
                   msgBadge.show();
                 }
 
-                mmooc.api.getActivityStreamForUser(function(activities) {
-                    var unreadNotifications = 0;
-                    for (var i = 0; i < activities.length; i++) {
-                        if (mmooc.menu.checkReadStateFor(activities[i])) {
-                            unreadNotifications++;
-                        }
-                    }
-
-                    var badge = $("#mmooc-notification-count");
-                    if (unreadNotifications == 0) {
-                        badge.hide();
-                    } else {
-                        badge.html(unreadNotifications);
-                        badge.show();
-                    }
-
-                    document.getElementById('mmooc-activity-stream').innerHTML = mmooc.util.renderTemplateWithData("activitystream", {activities: activities});
-
-                    var notifications = $("#mmooc-notifications").find("li");
-                    if (notifications.size() == 0) {
-                        $("#mmooc-notifications").hide();
-                    } else {
-                        $("#mmooc-notifications").show();
-                    }
-
-                    var showAllItems = $("#mmooc-notifications-showall");
-                    if (notifications.size() > 10) {
-                        notifications.slice(10).addClass("hidden");
-
-                        showAllItems.click(function() {
-                            notifications.removeClass("hidden");
-                            showAllItems.hide();
-                        });
-                    } else {
-                        showAllItems.hide();
-                    }
-
-                });
+                this.updateNotificationsForUser();
             }
+        },
+
+        updateNotificationsForUser: function() {
+            mmooc.api.getActivityStreamForUser(function(activities) {
+                var unreadNotifications = 0;
+                for (var i = 0; i < activities.length; i++) {
+                    if (mmooc.menu.checkReadStateFor(activities[i])) {
+                        unreadNotifications++;
+                    }
+                }
+
+                var badge = $("#mmooc-notification-count");
+                if (unreadNotifications == 0) {
+                    badge.hide();
+                } else {
+                    badge.html(unreadNotifications);
+                    badge.show();
+                }
+
+                document.getElementById('mmooc-activity-stream').innerHTML = mmooc.util.renderTemplateWithData("activitystream", {activities: activities});
+
+                var notifications = $("#mmooc-notifications").find("li");
+                if (notifications.size() == 0) {
+                    $("#mmooc-notifications").hide();
+                } else {
+                    $("#mmooc-notifications").show();
+                }
+
+                var showAllItems = $("#mmooc-notifications-showall");
+                if (notifications.size() > 10) {
+                    notifications.slice(10).addClass("hidden");
+
+                    showAllItems.click(function() {
+                        notifications.removeClass("hidden");
+                        showAllItems.hide();
+                    });
+                } else {
+                    showAllItems.hide();
+                }
+
+            });
         },
 
         showCourseMenu: function(courseId, selectedMenuItem, title) {
@@ -2314,6 +2485,7 @@ this.mmooc.i18n = {
 };
 
 $(document).ready(function() {
+
     mmooc.routes.addRouteForPath(/\/$/, function() {
         mmooc.menu.hideRightMenu();
         var parentId = 'content'
@@ -2401,6 +2573,7 @@ $(document).ready(function() {
         if (mmooc.api.currentPageIsAnnouncement()) {
             mmooc.menu.showCourseMenu(courseId, 'Kunngjøringer', title);
             mmooc.menu.showBackButton("/courses/" + courseId + "/announcements", "Tilbake til kunngjøringer");
+            mmooc.announcements.addMarkAsReadButton();
         } else if (mmooc.api.getCurrentModuleItemId() == null) {
             // Only show course menu if this discussion is not a module item
             // Note detection if this is a module item is based on precense of query parameter
@@ -2438,7 +2611,6 @@ $(document).ready(function() {
     });
 
 
-
     mmooc.routes.addRouteForQueryString(/enrolled=1/, function() {
         mmooc.enroll.changeButtonText();
     });
@@ -2457,19 +2629,22 @@ $(document).ready(function() {
     }
 
     try {
-      mmooc.menu.injectGroupsPage();
-    }
-    catch(e) {
+        mmooc.menu.injectGroupsPage();
+        mmooc.groups.changeGroupListURLs(document.location.href);
+
+        mmooc.pages.showBackToAssignmentLink(document.location.href);
+        mmooc.pages.updateSidebarWhenMarkedAsDone();
+
+        mmooc.menu.alterHomeLink();
+        mmooc.menu.alterCourseLink();
+
+        $('#announcementbug').click(function() {
+            mmooc.announcements.clearAnnouncements();
+        });
+
+    } catch(e) {
       console.log(e);
     }
-
-    mmooc.groups.changeGroupListURLs(document.location.href);
-
-    mmooc.pages.showBackToAssignmentLink(document.location.href);
-    mmooc.pages.updateSidebarWhenMarkedAsDone();
-
-    mmooc.menu.alterHomeLink();
-    mmooc.menu.alterCourseLink();
 
 });
 
