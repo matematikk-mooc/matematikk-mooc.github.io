@@ -61,9 +61,14 @@ To get the URL you need to access the MOOC from a browser, run
 one of the following 
 
 ```bash
-docker inspect web | jq '.[0].NetworkSettings.IPAddress' # requires jq
+# Option 1. Requires jq, should give only one result.
+docker inspect web | jq '.[0].NetworkSettings.IPAddress'
+
+# Option 2. Should give multiple identical results.
 docker inspect web | grep '"IPAddress":'
-docker inspect web # look for the "IPAddress" field manually, or using whatever
+
+# Option 3. Manual resolution.
+docker inspect web # look for the "IPAddress" field manually, or use whatever
                    # JSON tool you prefer
 ```
 The first line uses [jq][jq] to parse the JSON `docker inspect web` outputs.
