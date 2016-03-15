@@ -57,9 +57,19 @@ In a terminal window:
 
     ./mm boot
 
-Running `./b2d url` gives you the URL you need to use to access the
-MOOC from a browser. Note that it can take a long time to load the
-system in the browser the first time you try.
+To get the URL you need to access the MOOC from a browser, run
+one of the following 
+
+```bash
+docker inspect web | jq '.[0].NetworkSettings.IPAddress' # requires jq
+docker inspect web | grep '"IPAddress":'
+docker inspect web # look for the "IPAddress" field manually, or using whatever
+                   # JSON tool you prefer
+```
+The first line uses [jq][jq] to parse the JSON `docker inspect web` outputs.
+
+Note that it can take a long time to load the system in the browser the first
+time you try.
 
 ## (Optional) Try out the Matematikk-MOOC custom user interface
 
@@ -79,5 +89,6 @@ The files you need to include are
 [docker-toolbox]: https://www.docker.com/products/docker-toolbox
 [docker]: http://docker.com
 [ictcenter]: https://iktsenteret.no/english
+[jq]: https://stedolan.github.io/jq/
 [kitematic]: https://kitematic.com/
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
