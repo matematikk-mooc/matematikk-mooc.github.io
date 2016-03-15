@@ -25,9 +25,9 @@ First thing you need to do is to install Docker on your machine.
 
 ### On Mac OS X or Windows
 
-Install and launch [boot2docker][boot2docker]. This will give you a
+Install and launch [Docker Toolbox][docker-toolbox]. This will give you a
 terminal window that allows you to type the required commands
-documented below.
+documented below. It will also install the [Kitematic][kitematic] GUI.
 
 ### On Linux
 
@@ -77,5 +77,7 @@ The files you need to include are
 [docker]: http://docker.com
 [docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
+[docker-toolbox]: https://www.docker.com/products/docker-toolbox
+[kitematic]: https://kitematic.com/
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
 [branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
