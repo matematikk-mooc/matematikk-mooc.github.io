@@ -71,13 +71,13 @@ The files you need to include are
 - http://matematikk-mooc.github.io/frontend/mmooc-min.css
 - http://matematikk-mooc.github.io/frontend/mmooc-min.js
 
-[ictcenter]: https://iktsenteret.no/english
-[canvas]: https://instruture.com
-[mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
-[docker]: http://docker.com
-[docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
-[docker-toolbox]: https://www.docker.com/products/docker-toolbox
-[kitematic]: https://kitematic.com/
-[docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
 [branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
+[canvas]: https://instruture.com
+[docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
+[docker-install]: https://docs.docker.com/installation/#installation
+[docker-toolbox]: https://www.docker.com/products/docker-toolbox
+[docker]: http://docker.com
+[ictcenter]: https://iktsenteret.no/english
+[kitematic]: https://kitematic.com/
+[mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
