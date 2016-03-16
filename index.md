@@ -25,9 +25,9 @@ First thing you need to do is to install Docker on your machine.
 
 ### On Mac OS X or Windows
 
-Install and launch [boot2docker][boot2docker]. This will give you a
+Install and launch [Docker Toolbox][docker-toolbox]. This will give you a
 terminal window that allows you to type the required commands
-documented below.
+documented below. It will also install the [Kitematic][kitematic] GUI.
 
 ### On Linux
 
@@ -57,9 +57,24 @@ In a terminal window:
 
     ./mm boot
 
-Running `./b2d url` gives you the URL you need to use to access the
-MOOC from a browser. Note that it can take a long time to load the
-system in the browser the first time you try.
+To get the URL you need to access the MOOC from a browser, run
+one of the following 
+
+```bash
+# Option 1. Requires jq, should give only one result.
+docker inspect web | jq '.[0].NetworkSettings.IPAddress'
+
+# Option 2. Should give multiple identical results.
+docker inspect web | grep '"IPAddress":'
+
+# Option 3. Manual resolution.
+docker inspect web # look for the "IPAddress" field manually, or use whatever
+                   # JSON tool you prefer
+```
+The first line uses [jq][jq] to parse the JSON `docker inspect web` outputs.
+
+Note that it can take a long time to load the system in the browser the first
+time you try.
 
 ## (Optional) Try out the Matematikk-MOOC custom user interface
 
@@ -71,11 +86,14 @@ The files you need to include are
 - http://matematikk-mooc.github.io/frontend/mmooc-min.css
 - http://matematikk-mooc.github.io/frontend/mmooc-min.js
 
-[ictcenter]: https://iktsenteret.no/english
-[canvas]: https://instruture.com
-[mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
-[docker]: http://docker.com
-[docker-install]: https://docs.docker.com/installation/#installation
 [boot2docker]: http://boot2docker.io
-[docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
 [branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
+[canvas]: https://instruture.com
+[docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
+[docker-install]: https://docs.docker.com/installation/#installation
+[docker-toolbox]: https://www.docker.com/products/docker-toolbox
+[docker]: http://docker.com
+[ictcenter]: https://iktsenteret.no/english
+[jq]: https://stedolan.github.io/jq/
+[kitematic]: https://kitematic.com/
+[mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
