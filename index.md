@@ -58,20 +58,13 @@ In a terminal window:
     ./mm boot
 
 To get the URL you need to access the MOOC from a browser, run
-one of the following 
 
 ```bash
-# Option 1. Requires jq, should give only one result.
-docker inspect web | jq '.[0].NetworkSettings.IPAddress'
-
-# Option 2. Should give multiple identical results.
-docker inspect web | grep '"IPAddress":'
-
-# Option 3. Manual resolution.
-docker inspect web # look for the "IPAddress" field manually, or use whatever
-                   # JSON tool you prefer
+./url
 ```
-The first line uses [jq][jq] to parse the JSON `docker inspect web` outputs.
+
+It should detect if Docker is running in a VM, and output the correct `ip:port`
+combination.
 
 Note that it can take a long time to load the system in the browser the first
 time you try.
@@ -86,7 +79,6 @@ The files you need to include are
 - http://matematikk-mooc.github.io/frontend/mmooc-min.css
 - http://matematikk-mooc.github.io/frontend/mmooc-min.js
 
-[boot2docker]: http://boot2docker.io
 [branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
 [canvas]: https://instruture.com
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
@@ -94,6 +86,5 @@ The files you need to include are
 [docker-toolbox]: https://www.docker.com/products/docker-toolbox
 [docker]: http://docker.com
 [ictcenter]: https://iktsenteret.no/english
-[jq]: https://stedolan.github.io/jq/
 [kitematic]: https://kitematic.com/
 [mmooc-project-page]: https://iktsenteret.no/prosjekter/matematikk-mooc
