@@ -13,7 +13,23 @@ Norwegian).
 
 Matematikk-MOOC is built using the open source LMS [Canvas][canvas].
 
-# Trying it out
+## Try out the Matematikk-MOOC custom user interface
+
+See [this document][branding-guide] for an explanation on how to
+enable custom javascript and CSS in Canvas.
+
+The files you need to include are
+
+- http://matematikk-mooc.github.io/frontend/mmooc-min.css
+- http://matematikk-mooc.github.io/frontend/mmooc-min.js
+ 
+If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to. The image files for the logo are in the directory frontend/bitmaps.
+
+For information on how to customize the design further, see 
+[https://github.com/matematikk-mooc/frontend](https://github.com/matematikk-mooc/frontend).
+
+
+# Easily install a Canvas server on your own machine
 
 The system is built to be as easy as possible to install and run. This
 is done by packaging the application in [Docker][docker] images and
@@ -69,15 +85,7 @@ combination.
 Note that it can take a long time to load the system in the browser the first
 time you try.
 
-## (Optional) Try out the Matematikk-MOOC custom user interface
 
-See [this document][branding-guide] for an explanation on how to
-enable custom javascript and CSS.
-
-The files you need to include are
-
-- http://matematikk-mooc.github.io/frontend/mmooc-min.css
-- http://matematikk-mooc.github.io/frontend/mmooc-min.js
 
 [branding-guide]: http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance
 [canvas]: https://instruture.com
