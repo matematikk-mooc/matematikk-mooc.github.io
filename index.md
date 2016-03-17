@@ -13,7 +13,7 @@ Norwegian).
 
 Matematikk-MOOC is built using the open source LMS [Canvas][canvas].
 
-## Try out the Matematikk-MOOC custom user interface
+# Try out the Matematikk-MOOC custom user interface
 
 See [this document][branding-guide] for an explanation on how to
 enable custom javascript and CSS in Canvas.
