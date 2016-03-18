@@ -60,7 +60,7 @@ In a terminal window:
 To get the URL you need to access the MOOC from a browser, run
 
 ```bash
-./url
+./mm url
 ```
 
 It should detect if Docker is running in a VM, and output the correct `ip:port`
@@ -68,6 +68,19 @@ combination.
 
 Note that it can take a long time to load the system in the browser the first
 time you try.
+
+## Restarting / resetting
+
+If you need to restart the running services after `./mm boot`,
+
+    ./mm reboot
+
+will stop, remove, re-pull and start the web, cache and database services. If
+you need to get rid of the data as well, they're contained in two containers
+named db-data and web-data. The follwing command will do the same as `reboot`,
+but wipe the data containers as well:
+
+    ./mm reset
 
 ## (Optional) Try out the Matematikk-MOOC custom user interface
 
