@@ -20,8 +20,8 @@ enable custom javascript and CSS in Canvas.
 
 The files you need to include are
 
-- http://matematikk-mooc.github.io/frontend/mmooc-min.css
-- http://matematikk-mooc.github.io/frontend/mmooc-min.js
+- https://matematikk-mooc.github.io/frontend/mmooc-min.css
+- https://matematikk-mooc.github.io/frontend/mmooc-min.js
  
 If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to. The image files for the logo are in the directory frontend/bitmaps.
 
