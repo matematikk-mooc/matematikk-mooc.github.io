@@ -21,18 +21,18 @@ enable custom javascript and CSS in Canvas.
 ## New Canvas user interface
 July 10th 2016 it will no longer be possible to use the old Canvas user interface. After that date, or if you have already enabled the new design, you need to download the javascript and css files found here:
 
-- https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/new_ui
+- [https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/new_ui](https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/new_ui)
 
-CSS file       : https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.css
-Javascript file: https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js
+- CSS file       : [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.css](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.css)
+- Javascript file: [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js)
 
 You must then upload these files in the Canvas theme editor.
 
 ## Old Canvas user interface
 If you are using the old version of the Canvas user interface, the files you need to include are
 
-- https://matematikk-mooc.github.io/frontend/mmooc-min.css
-- https://matematikk-mooc.github.io/frontend/mmooc-min.js
+- [https://matematikk-mooc.github.io/frontend/mmooc-min.css](https://matematikk-mooc.github.io/frontend/mmooc-min.css)
+- [https://matematikk-mooc.github.io/frontend/mmooc-min.js](https://matematikk-mooc.github.io/frontend/mmooc-min.js)
 
 ## Own logo
 If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to. The image files for the logo are in the directory frontend/bitmaps.
