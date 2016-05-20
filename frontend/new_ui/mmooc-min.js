@@ -1815,6 +1815,17 @@ this.mmooc=this.mmooc||{};
 this.mmooc.menu = function() {
 
     function _renderCourseMenu(course, selectedMenuItem, title, hideTabs) {
+        
+        function _insertCourseMenuHtml(course, selectedMenuItem, title, menuItems) {
+            var subtitle = course.name;
+            if (title == null) {
+                title = course.name;
+                subtitle = "";
+            }
+            var html = mmooc.util.renderTemplateWithData("coursemenu", {course: course, menuItems: menuItems, selectedMenuItem: selectedMenuItem, title: title, subtitle: subtitle });
+            document.getElementById('header').insertAdjacentHTML('afterend', html);
+        }
+        
         var menuItems = [];
 
         var courseId = course.id;
@@ -1823,17 +1834,22 @@ this.mmooc.menu = function() {
             menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
             menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
             menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
-            menuItems[menuItems.length] = mmooc.menu.extractBadgesLinkFromPage();
+            
+            var badgeSafe = mmooc.menu.extractBadgesLinkFromPage();
+            if (badgeSafe.url) { //If the url of Badges is found then display this as an additional tab
+                menuItems[menuItems.length] = badgeSafe;
+                _insertCourseMenuHtml(course, selectedMenuItem, title, menuItems);
+            } else {
+                if (mmooc.settings.useCanvaBadge) {
+                    mmooc.menu.setCanvaBadgesLink(course, function(canvaBadgeObject) { //Second parameter is a callback function
+                        if (canvaBadgeObject.url) {
+                            menuItems[menuItems.length] = canvaBadgeObject; //check if canva badges is used for the current domain and if it is and the user has any badges then display this additional tab 
+                        }
+                        _insertCourseMenuHtml(course, selectedMenuItem, title, menuItems);
+                    });
+                }
+            }
         }
-        
-        var subtitle = course.name;
-        if (title == null) {
-            title = course.name;
-            subtitle = "";
-        }
-
-        var html = mmooc.util.renderTemplateWithData("coursemenu", {course: course, menuItems: menuItems, selectedMenuItem: selectedMenuItem, title: title, subtitle: subtitle });
-        document.getElementById('header').insertAdjacentHTML('afterend', html);
     }
 
 
@@ -2026,6 +2042,45 @@ this.mmooc.menu = function() {
         extractBadgesLinkFromPage: function () {
             var href = $('li.section:contains("BadgeSafe")').find('a').attr('href');
             return {"title": mmooc.i18n.Badgesafe, url: href};
+        },
+        setCanvaBadgesLink: function (course, callback) {
+            var user_id = mmooc.api.getUser().id;
+            
+            //This should be refactored to be in an api resource file
+            var domain = location.host;
+            var urlToCanvaBadgesApi = mmooc.settings.CanvaBadgeProtocolAndHost + "/api/v1/badges/public/" + user_id + "/" + encodeURIComponent(domain) + ".json";
+            $.ajax({
+                type: 'GET',
+                dataType: 'jsonp',
+                url: urlToCanvaBadgesApi,
+                timeout: 5000,
+                success: function(data) {
+                    if(data.objects && data.objects.length > 0) {
+                        if ($.isFunction(callback)) {
+                            callback({
+                                "title": mmooc.i18n.Badgesafe,
+                                url: "/courses/" + course.id + "?allcanvabadges"
+                            });
+                        }
+                        
+                    } else {
+                        if ($.isFunction(callback)) {
+                            callback({
+                                "title": mmooc.i18n.Badgesafe, 
+                                url: undefined
+                            });
+                        }
+                    }
+                },
+                error: function(err) {
+                    if ($.isFunction(callback)) {
+                        callback({
+                            "title": mmooc.i18n.Badgesafe, 
+                            url: undefined
+                        });
+                    }
+                }
+            });
         },
 
         injectGroupsPage: function() {
@@ -2724,7 +2779,8 @@ this.mmooc=this.mmooc||{};
 
 
 this.mmooc.settings = {
-    'CanvaBadgeProtocolAndHost' : 'https://canvabadges-beta-iktsenteret.bibsys.no'
+    'CanvaBadgeProtocolAndHost' : 'https://canvabadges-beta-iktsenteret.bibsys.no',
+    'useCanvaBadge' : true
 };
 
 this.mmooc=this.mmooc||{};
@@ -2775,14 +2831,23 @@ jQuery(function($) {
         mmooc.menu.hideRightMenu();
         mmooc.courseList.listCourses('content', mmooc.courseList.showAddCourseButton);
     });
-
+    
     mmooc.routes.addRouteForPath(/\/courses\/\d+$/, function() {
-        mmooc.coursePage.listModulesAndShowProgressBar();
         mmooc.groups.interceptLinksToGroupPage();
-
-        var courseId = mmooc.api.getCurrentCourseId();
-        mmooc.menu.showCourseMenu(courseId, 'Kursforside', null);
         mmooc.coursePage.hideCourseInvitationsForAllUsers();
+        
+        var courseId = mmooc.api.getCurrentCourseId();
+        var queryString = document.location.search; 
+        if (queryString === "?allcanvabadges") { //query string = ?allcanvabadges 
+            var courseId = mmooc.api.getCurrentCourseId();
+            mmooc.menu.showCourseMenu(courseId, 'Utmerkelser', 'Utmerkelser'); 
+            //Should be refactored to use json api instead 
+            var canvabadgesForCurrentCourse = '<iframe allowfullscreen="true" height="680" id="tool_content" mozallowfullscreen="true" name="tool_content" src="' + mmooc.settings.CanvaBadgeProtocolAndHost + '/badges/course/' + courseId + '" tabindex="0" webkitallowfullscreen="true" width="100%"></iframe>';
+            $("#content").append(canvabadgesForCurrentCourse);
+        } else {
+            mmooc.coursePage.listModulesAndShowProgressBar();
+            mmooc.menu.showCourseMenu(courseId, 'Kursforside', null);
+        }
     });
 
     mmooc.routes.addRouteForPath(/\/courses\/\d+\/announcements$/, function() {
@@ -3674,83 +3739,85 @@ function getQueryVariable(variable) {
 
 	return(false);
 }
-$(function() {
-  // console.log("CANVABADGES: Loaded!");
-  // NOTE: if pasting this code into another script, you'll need to manually change the
-  // next line. Instead of assigning the value null, you need to assign the value of
-  // the Canvabadges domain, i.e. "https://www.canvabadges.org". If you have a custom
-  // domain configured then it'll be something like "https://www.canvabadges.org/_my_site"
-  // instead.
-  // var protocol_and_host = null; Overridden because of the comment above
-  //Some small changes has been made to this script so it is displayed also on the about/<user id> page and /profile/settings page.
-  //The original is here: https://www.canvabadges.org/canvas_profile_badges.js
-  var protocol_and_host = mmooc.settings.CanvaBadgeProtocolAndHost; //'https://canvabadges-beta-iktsenteret.bibsys.no' - this is where the Canva Badge certificate is stored.;
-  var isProfilePage = false;
-  var user_id;
-  if(!protocol_and_host) {
-    var $scripts = $("script");
-    $("script").each(function() {
-      var src = $(this).attr('src');
-      if(src && src.match(/canvas_profile_badges/)) {
-        var splits = src.split(/\//);
-        protocol_and_host = splits[0] + "//" + splits[2];
-      }
-      var prefix = src && src.match(/\?path_prefix=\/(\w+)/);
-      if(prefix && prefix[1]) {
-        protocol_and_host = protocol_and_host + "/" + prefix[1];
-      }
-    });
-  }
-  if(!protocol_and_host) {
-    console.log("CANVABADGES: Couldn't find a valid protocol and host. Canvabadges will not appear on profile pages until this is fixed.");
-  }
-  var match = location.href.match(/\/(users|about)\/(\d+)$/);
-  if (!match) {
-    match = location.href.match(/\/profile\/settings$/);
-    isProfilePage = true;
-  }
-  if(match && protocol_and_host) {
-    console.log("CANVABADGES: This page shows badges! Loading...");
-    if (isProfilePage) {
-      user_id = mmooc.api.getUser().id;
-    } else {
-      user_id = match[2];
-    }
-    
-    var domain = location.host;
-    var url = protocol_and_host + "/api/v1/badges/public/" + user_id + "/" + encodeURIComponent(domain) + ".json";
-    $.ajax({
-      type: 'GET',
-      dataType: 'jsonp',
-      url: url,
-      success: function(data) {
-        console.log("CANVABADGES: Data retrieved!");
-        if(data.objects && data.objects.length > 0) {
-          console.log("CANVABADGES: Badges found! Adding to the page...");
-          var $box = $("<div/>", {style: 'margin-bottom: 20px;'});
-          $box.append("<h2 class='border border-b'>Badges</h2>");
-          for(idx in data.objects) {
-            var badge = data.objects[idx];
-            var $badge = $("<div/>", {style: 'float: left;'});
-            var link = protocol_and_host + "/badges/criteria/" + badge.config_id + "/" + badge.config_nonce + "?user=" + badge.nonce;
-            var $a = $("<a/>", {href: link});
-            $a.append($("<img/>", {src: badge.image_url, style: 'width: 72px; height: 72px; padding-right: 10px;'}));
-            $badge.append($a);
-            $box.append($badge);
-          }
-          $box.append($("<div/>", {style: 'clear: left'}));
-          $("#edit_profile_form,fieldset#courses,.more_user_information + div, #update_profile_form").after($box);
-        } else {
-          console.log("CANVABADGES: No badges found for the user: " + user_id + " at " + domain);
+$(function () {
+    // console.log("CANVABADGES: Loaded!");
+    // NOTE: if pasting this code into another script, you'll need to manually change the
+    // next line. Instead of assigning the value null, you need to assign the value of
+    // the Canvabadges domain, i.e. "https://www.canvabadges.org". If you have a custom
+    // domain configured then it'll be something like "https://www.canvabadges.org/_my_site"
+    // instead.
+    // var protocol_and_host = null; Overridden because of the comment above
+    //Some small changes has been made to this script so it is displayed also on the about/<user id> page and /profile/settings page.
+    //The original is here: https://www.canvabadges.org/canvas_profile_badges.js
+    if (mmooc.settings.useCanvaBadge) { //Only run this code if it is set to be used in the settings
+        var protocol_and_host = mmooc.settings.CanvaBadgeProtocolAndHost; //'https://canvabadges-beta-iktsenteret.bibsys.no' - this is where the Canva Badge certificate is stored.;
+        var isProfilePage = false;
+        var user_id;
+        if (!protocol_and_host) {
+            var $scripts = $("script");
+            $("script").each(function () {
+                var src = $(this).attr('src');
+                if (src && src.match(/canvas_profile_badges/)) {
+                    var splits = src.split(/\//);
+                    protocol_and_host = splits[0] + "//" + splits[2];
+                }
+                var prefix = src && src.match(/\?path_prefix=\/(\w+)/);
+                if (prefix && prefix[1]) {
+                    protocol_and_host = protocol_and_host + "/" + prefix[1];
+                }
+            });
         }
-      },
-      error: function(err) {
-        console.log("CANVABADGES: Badges failed to load, API error response");
-        console.log(err);
-      },
-      timeout: 5000
-    });
-  } else {
-    console.log("CANVABADGES: This page doesn't show badges");
-  }
+        if (!protocol_and_host) {
+            console.log("CANVABADGES: Couldn't find a valid protocol and host. Canvabadges will not appear on profile pages until this is fixed.");
+        }
+        var match = location.href.match(/\/(users|about)\/(\d+)$/);
+        if (!match) {
+            match = location.href.match(/\/profile\/settings$/);
+            isProfilePage = true;
+        }
+        if (match && protocol_and_host) {
+            // console.log("CANVABADGES: This page shows badges! Loading...");
+            if (isProfilePage) {
+                user_id = mmooc.api.getUser().id;
+            } else {
+                user_id = match[2];
+            }
+
+            var domain = location.host;
+            var url = protocol_and_host + "/api/v1/badges/public/" + user_id + "/" + encodeURIComponent(domain) + ".json";
+            $.ajax({
+                type: 'GET',
+                dataType: 'jsonp',
+                url: url,
+                success: function (data) {
+                    //console.log("CANVABADGES: Data retrieved!");
+                    if (data.objects && data.objects.length > 0) {
+                        //console.log("CANVABADGES: Badges found! Adding to the page...");
+                        var $box = $("<div/>", { style: 'margin-bottom: 20px;' });
+                        $box.append("<h2 class='border border-b'>Badges</h2>");
+                        for (idx in data.objects) {
+                            var badge = data.objects[idx];
+                            var $badge = $("<div/>", { style: 'float: left;' });
+                            var link = protocol_and_host + "/badges/criteria/" + badge.config_id + "/" + badge.config_nonce + "?user=" + badge.nonce;
+                            var $a = $("<a/>", { href: link });
+                            $a.append($("<img/>", { src: badge.image_url, style: 'width: 72px; height: 72px; padding-right: 10px;' }));
+                            $badge.append($a);
+                            $box.append($badge);
+                        }
+                        $box.append($("<div/>", { style: 'clear: left' }));
+                        $("#edit_profile_form,fieldset#courses,.more_user_information + div, #update_profile_form").after($box);
+                    } else {
+                        //console.log("CANVABADGES: No badges found for the user: " + user_id + " at " + domain);
+                    }
+                },
+                error: function (err) {
+                    console.log("CANVABADGES: Badges failed to load, API error response");
+                    console.log(err);
+                },
+                timeout: 5000
+            });
+        } else {
+            //console.log("CANVABADGES: This page doesn't show badges");
+        }
+    }
 });
