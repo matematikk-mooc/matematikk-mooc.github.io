@@ -48,6 +48,300 @@ function program1(depth0,data) {
   return buffer;
   });
 
+this["mmooc"]["templates"]["assignmentPageWithPeerReviewRightSide"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  return " late";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return " (for sen)";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n				<ul class=\"mmooc-assignment-files\">\r\n					";
+  stack1 = helpers.each.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.attachments), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n				</ul>\r\n            ";
+  return buffer;
+  }
+function program6(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\r\n                        <li>\r\n							<a href=\"";
+  if (helper = helpers.url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"file-big\">";
+  if (helper = helpers.display_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.display_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\r\n						</li>\r\n                    ";
+  return buffer;
+  }
+
+function program8(depth0,data) {
+  
+  
+  return "\r\n				<li>Ingen innleveringer tildelt</li>\r\n			";
+  }
+
+function program10(depth0,data) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\r\n				<li>\r\n					<a class=\""
+    + escapeExpression((helper = helpers.getPeerReviewWorkflowIconClass || (depth0 && depth0.getPeerReviewWorkflowIconClass),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.workflow_state), options) : helperMissing.call(depth0, "getPeerReviewWorkflowIconClass", (depth0 && depth0.workflow_state), options)))
+    + "\" href=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assessor)),stack1 == null || stack1 === false ? stack1 : stack1.mmooc_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assessor)),stack1 == null || stack1 === false ? stack1 : stack1.display_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\r\n				</li>	\r\n			";
+  return buffer;
+  }
+
+  buffer += "<div class=\"mmooc-assignment-rightside\">\r\n	<div class=\"mmooc-assignment-responses\">\r\n		<h3>Besvarelser</h3>\r\n		<div class=\"mmooc-assignment-responses-contents\">\r\n			<p class=\"mmooc-assignment-delivery-date";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">Levert "
+    + escapeExpression((helper = helpers.norwegianDateAndTime || (depth0 && depth0.norwegianDateAndTime),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options) : helperMissing.call(depth0, "norwegianDateAndTime", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options)));
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</p>\r\n			";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.attachments), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n		</div>\r\n		<div class=\"mmooc-assignment-details\">\r\n			<a href=\""
+    + escapeExpression((helper = helpers.getPathFromUrl || (depth0 && depth0.getPathFromUrl),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.preview_url), options) : helperMissing.call(depth0, "getPathFromUrl", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.preview_url), options)))
+    + "\">Vis detaljer om innlevering &raquo;</a>\r\n		</div>\r\n	</div>\r\n	<div class=\"mmooc-peer-reviews\">\r\n		<h3>Hverandrevurdering tildelt deg</h3>\r\n		<ul class=\"unstyled_list\">\r\n			";
+  stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.peerReview)),stack1 == null || stack1 === false ? stack1 : stack1.length), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n			";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.peerReview), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n		</ul>\r\n	</div>\r\n</div>\r\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["assignmentPageWithPeerReviewWarning"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-peer-review-warning\">\r\n	<p class=\"mmooc-warning\">\r\n		Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet til hver tildelte hverandrevurdering\r\n	</p>\r\n</div>";
+  });
+
+this["mmooc"]["templates"]["assignmentSubmission"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  return " late";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return " (for sen)";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n							<span class=\"mmooc-assignment-delivered-by\"> av "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.user)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</span>\r\n						";
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n							";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n						";
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n								<span class=\"mmooc-new-delivery\"><a class=\"add\" href=\"/courses/"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.course)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/assignments/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.assignment_id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "#submit\">Lever oppgave på nytt</a></span>\r\n							";
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n			";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n		";
+  return buffer;
+  }
+function program11(depth0,data) {
+  
+  
+  return "\r\n				<div class=\"mmooc-peer-review-success\">\r\n					<p class=\"mmooc-success singleLine\">\r\n						Du har fullført hverandrevurderingen.\r\n					</p>\r\n				</div>\r\n			";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\r\n				<div class=\"mmooc-peer-review-warning\">\r\n					<p class=\"mmooc-warning singleLine\">\r\n						Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet.\r\n					</p>\r\n				</div>\r\n			";
+  }
+
+function program15(depth0,data) {
+  
+  
+  return "\r\n					<h3>Din vurdering</h3>\r\n				";
+  }
+
+function program17(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n					";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.program(20, program20, data),fn:self.program(18, program18, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n					\r\n				";
+  return buffer;
+  }
+function program18(depth0,data) {
+  
+  
+  return "\r\n						<h3>Vurdering av besvarelse</h3>\r\n					";
+  }
+
+function program20(depth0,data) {
+  
+  
+  return "\r\n						<h3>Vurdering av din besvarelse</h3>	\r\n					";
+  }
+
+function program22(depth0,data) {
+  
+  var stack1;
+  return escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  }
+
+function program24(depth0,data) {
+  
+  
+  return "-";
+  }
+
+function program26(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n					";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.noop,fn:self.program(27, program27, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vurderingsskjema</a>\r\n				";
+  return buffer;
+  }
+function program27(depth0,data) {
+  
+  
+  return "\r\n						<p class=\"assessment-warning\">Du har ikke vurdert denne oppgaven enda.</p>\r\n					";
+  }
+
+function program29(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n					";
+  stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(30, program30, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vis vurdering</a>\r\n				";
+  return buffer;
+  }
+function program30(depth0,data) {
+  
+  
+  return "\r\n						<p class=\"assessment-warning\">Oppgaven er ikke vurdert enda.</p>\r\n					";
+  }
+
+function program32(depth0,data) {
+  
+  
+  return " isPeerReviewPage";
+  }
+
+function program34(depth0,data) {
+  
+  
+  return " isSubmissionDetaisPage";
+  }
+
+function program36(depth0,data) {
+  
+  
+  return " withNoAssessmentText";
+  }
+
+  buffer += "<div class=\"mmooc-assignment-submission\">\r\n	<div class=\"mmooc-assignment-submission-leftside\">\r\n		<div class=\"mmooc-assignment-submission-metadata\">\r\n			<h2 class=\"mmooc-assignment-submission-header\">";
+  if (helper = helpers.submissionTitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.submissionTitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h2>\r\n			<ul class=\"mmooc-assignment-submission-metadata-list\">\r\n				<li>\r\n					<span class=\"title\">Oppgave:</span>\r\n					<span class=\"value\"><a href=\"/courses/"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.course)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/assignments/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.assignment_id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a></span>\r\n				</li>\r\n				<li>\r\n					<span class=\"title\">Innlevert:</span>\r\n					<span class=\"value\">\r\n						<span class=\"mmooc-assignment-delivery-date";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">"
+    + escapeExpression((helper = helpers.norwegianDateAndTime || (depth0 && depth0.norwegianDateAndTime),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options) : helperMissing.call(depth0, "norwegianDateAndTime", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options)));
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</span>\r\n						";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n						";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n						";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n					</span>\r\n				</li>\r\n			</ul>\r\n		</div>\r\n		";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n	</div>\r\n	<div class=\"mmooc-assignment-submission-rightside\">\r\n		<div class=\"mmooc-assignment-submission-assessment\">\r\n			<div class=\"mmooc-assignment-submission-assessment-header\">\r\n				";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(17, program17, data),fn:self.program(15, program15, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n			</div>\r\n			<div class=\"mmooc-assignment-submission-assessment-contents\">\r\n				<p class=\"assessment\">Karakter: ";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.program(24, program24, data),fn:self.program(22, program22, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.points_possible)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</p>\r\n				";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(29, program29, data),fn:self.program(26, program26, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n			</div>\r\n		</div>\r\n	</div>\r\n</div>\r\n<div class=\"mmooc-assignment-submission-answers";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(34, program34, data),fn:self.program(32, program32, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(36, program36, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\r\n	<h3>Besvarelser</h3>\r\n</div>";
+  return buffer;
+  });
+
 this["mmooc"]["templates"]["backbutton"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -802,7 +1096,49 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-pf-list\">\r\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\r\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create account groups</div>\r\n  <div id=\"mmooc-pf-course-group-btn\" class=\"item\">Create course groups</div>\r\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\r\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\r\n</div>\r\n";
+  return "<div class=\"mmooc-pf-list\">\r\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\r\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create account groups</div>\r\n  <div id=\"mmooc-pf-course-group-btn\" class=\"item\">Create course groups</div>\r\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\r\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\r\n  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\r\n</div>\r\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions/peer-review"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\r\n          <option value=\"\">No courses defined for account</option>\r\n        ";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n          <option value=\"\">Choose a course</option>\r\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n        ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\r\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\r\n          ";
+  return buffer;
+  }
+
+  buffer += "<form>\r\n  <ol>\r\n    <li class=\"step-1\">\r\n      <select id=\"mmpf-course-select\">\r\n        ";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n      </select>\r\n    <li class=\"step-2\">\r\n      <select id=\"mmpf-category-select\" name=\"category\" onchange=\"$('.step-3').css('display', 'list-item')\">\r\n          <option value=\"\">No group sets defined for course</option>\r\n      </select>\r\n    <li class=\"step-3\">\r\n      <select id=\"mmpf-group-select\" name=\"group\" onchange=\"$('.step-4').css('display', 'list-item')\">\r\n          <option value=\"\">No groups defined for course</option>\r\n      </select>\r\n    <li class=\"step-4\">\r\n      <select id=\"mmpf-assignment-select\" name=\"assignment\">\r\n          <option value=\"\">No assignments defined for course</option>\r\n      </select>\r\n  </ol>\r\n  <div class=\"peer-review-list\"></div>\r\n  <div class=\"peer-review-create\"></div>\r\n</form>\r\n";
+  return buffer;
   });
 
 this["mmooc"]["templates"]["powerfunctions/tail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -901,7 +1237,7 @@ this.mmooc.api = function() {
          */
         listModulesForCourse: function(callback, error, cid)
         {
-            var href= "/api/v1/courses/" + cid + "/modules";
+            var href= "/api/v1/courses/" + cid + "/modules?per_page=100";
             $.getJSON(href, function(modules) {
                     var noOfModules = modules.length;
                     var asyncsDone = 0;
@@ -1231,8 +1567,80 @@ this.mmooc.api = function() {
                 "params":   { per_page: 999 }
             });
         },
-
-
+        
+        // /api/v1/group_categories/:group_category_id/groups
+        getGroupsInCategory: function(categoryID, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/group_categories/" + categoryID + "/groups",
+                "params":   { }
+            });
+        },
+                
+        // /api/v1/courses/54/assignments/369
+        getSingleAssignment : function(courseId, assignmentId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId,
+                "params":   {"include": ["submission", "assignment_visibility", "overrides", "observed_users"]}
+            });
+        },
+        
+        // /api/v1/courses/:course_id/assignments
+        getAssignmentsForCourse : function(courseId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/assignments",
+                "params":   { }
+            });
+        },       
+        
+        // /api/v1/courses/54/assignments/369/submissions/1725
+        getSingleSubmissionForUser : function(courseId, assignmentId, user_id, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId + "/submissions/" + user_id,
+                "params":   {"include": ["submission_history", "submission_comments", "rubric_assessment", "visibility", "course", "user"]}
+                // "params":   {"include": ["rubric_assessment", "visibility"]}
+            });
+        },
+        
+        // /api/v1/courses/7/assignments/11/submissions/4/peer_reviews
+        // Important! This API displays info about who has the peer review of your own submission! This is often not what you are interested in.
+        getPeerReviewsForUser : function(courseId, assignmentId, user_id, callback, error) {
+            // Returns only the student's peer reviews if you are a student. Returns all peer reviews if you are a teacher or admin
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId + "/submissions/" + user_id + "/peer_reviews",
+                // "params":   {"include": ["submission_comments", "user"]}
+                "params":   {"include": ["user"]}
+            });
+        },
+        
+        // /api/v1/courses/:course_id/assignments/:assignment_id/peer_reviews
+        getPeerReviewsForAssignment : function(courseId, assignmentId, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId + "/peer_reviews",
+                "params":   {"include": ["user"]}
+            });
+        },
+ 
+        createPeerReview: function(courseID, assignmentID, submissionID, userID, callback, error) {
+            this._post({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseID + "/assignments/" + assignmentID + "/submissions/" + submissionID + "/peer_reviews",
+                "params":   { user_id: userID }
+            });
+        },
+        
         createGroup: function(params, callback, error) {
             this._post({
                 "callback": callback,
@@ -1276,6 +1684,15 @@ this.mmooc.api = function() {
                 "params":   { per_page: 999 }
             });
         },
+        
+        //To be used later when displaying info about unread discussion comments.
+        // getDiscussionTopics: function(courseId, callback) {
+        //     this._get({
+        //         "callback": callback,
+        //         "uri":      "/courses/" + courseId + "/discussion_topics",
+        //         "params":   { per_page: 999 }
+        //     });
+        // },
 
         markDiscussionTopicAsRead: function(courseId, contentId, callback) {
             this._put({
@@ -1890,13 +2307,15 @@ this.mmooc.menu = function() {
             mmooc.api.getCurrentModule(function(module) {
                 var courseId = mmooc.api.getCurrentCourseId();
                 var html = mmooc.util.renderTemplateWithData("moduleitems", {module: module, courseId: courseId});
-                document.getElementById('left-side').insertAdjacentHTML('afterbegin', html);
+                if (document.getElementById("left-side")) {
+                    document.getElementById('left-side').insertAdjacentHTML('afterbegin', html);
+                }
             });
         },
         showLeftMenu: function() {
             stylesheet.insertRule("body.with-left-side #main { margin-left: 305px !important }", stylesheet.cssRules.length);
             stylesheet.insertRule(".with-left-side #left-side { display: block !important }", stylesheet.cssRules.length);
-            $("body").addClass("isTeacherOrAdmin"); //Used to solve problems in making the design 100% width in the new UI for students. This is the simplest way to implement this.
+            $("body").addClass("useFullWidth"); //Used to solve problems in making the design 100% width in the new UI. This is the simplest way to implement this.
         },
 
         renderLeftHeaderMenu: function() {
@@ -2055,22 +2474,16 @@ this.mmooc.menu = function() {
                 url: urlToCanvaBadgesApi,
                 timeout: 5000,
                 success: function(data) {
-                    if(data.objects && data.objects.length > 0) {
-                        if ($.isFunction(callback)) {
-                            callback({
-                                "title": mmooc.i18n.Badgesafe,
-                                url: "/courses/" + course.id + "?allcanvabadges"
-                            });
-                        }
-                        
-                    } else {
-                        if ($.isFunction(callback)) {
-                            callback({
-                                "title": mmooc.i18n.Badgesafe, 
-                                url: undefined
-                            });
-                        }
+                    if ($.isFunction(callback)) {
+                        callback({
+                            "title": mmooc.i18n.Badgesafe,
+                            url: "/courses/" + course.id + "?allcanvabadges"
+                        });
                     }
+                    
+                    // if(data.objects && data.objects.length > 0) {
+                    
+                    // }
                 },
                 error: function(err) {
                     if ($.isFunction(callback)) {
@@ -2145,9 +2558,9 @@ this.mmooc.pages = function() {
           })
         },
 
-        changeTranslations : function() {
-            $("a.submit_assignment_link").text('Lever besvarelse');
-        },
+        // changeTranslations : function() {
+        //     $("a.submit_assignment_link").text('Lever besvarelse');
+        // },
 
         showBackLinkIfNecessary: function() {
             if ($('#left-side').is(':hidden')) {
@@ -2156,13 +2569,197 @@ this.mmooc.pages = function() {
             }
         },
 
-        showBackToAssignmentLink: function(href) {
-          if (/\/courses\/\d+\/assignments\/\d+\/submissions\/\d+$/.test(href)) {
-            $('#add_comment_form').append('<a href="javascript:window.history.back();" style="margin-top: 20px; display: inline-block;">Tilbake til oppgaven</a>');
-            return true;
-          }
+        redesignAssignmentPage: function() {
+            //Still under development
+            
+            function _isAssignmentWithPeerReview() {
+                var returnValue = false;
+                var peerReviewer = mmooc.i18n.PeerReviewer;
+                if ($("#right-side .details .content > h4:contains('" + peerReviewer.toLowerCase() + "')").length) {
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+            
+            function _getPeerReviewArray() {
+                
+                function _getWorkFlowState(peerReviewLinkClass) {
+                    var _workflow_state = ""; // workflow_state either 'assigned' or 'completed'
+                    if (peerReviewLinkClass == "warning") {
+                        _workflow_state = 'assigned';
+                    } else if (peerReviewLinkClass == "pass") {
+                        _workflow_state = 'completed';
+                    }
+                    return _workflow_state;
+                }
+                
+                var $peerReviewLinks = $("#right-side .details .content > h4 + ul.unstyled_list a");
+                var _peerReview = []; //Peer review api is unfortunately not displaying the info we want (only info about the persons beeing peer reviewers for my submission), so we have to do this by using jquery
+                var workflow_state;
+                var peerReviewLinkClass;
+                
+                $peerReviewLinks.each(function(i){
+                    peerReviewLinkClass = $(this).attr('class');
+                    workflow_state = _getWorkFlowState(peerReviewLinkClass);
+                    _peerReview[_peerReview.length] = {"workflow_state" : workflow_state, "assessor" : { "display_name" : $(this).text(), "mmooc_url": $(this).attr('href')}};
+                });
+                
+                console.log('Custom peerReview array:');
+                console.log(_peerReview);
+                
+                return _peerReview;
+            }
+            
+            function _appendPeerReviewHtmlOnRightSide(submission, peerReview) {
+                var peerReviewHtml = mmooc.util.renderTemplateWithData("assignmentPageWithPeerReviewRightSide", { submission : submission, peerReview:peerReview });
+                // $("body.assignments #application.ic-app #right-side .details" ).append(peerReviewHtml);
+                $(peerReviewHtml).insertBefore("body.assignments #application.ic-app #right-side .details");
+            }
+            
+            function _appendPeerReviewWarningInContentsColumn(submission, peerReview) {
+                var $peerReviewLinksWarnings = $("#right-side .details .content > h4 + ul.unstyled_list a.warning");
+                if ($peerReviewLinksWarnings.length) { //If any warnings display peer review warning in the contents column after the assignment meta data
+                    var peerReviewWarningHtml = mmooc.util.renderTemplateWithData("assignmentPageWithPeerReviewWarning", { submission : submission, peerReview:peerReview });
+                    $("body.assignments #application.ic-app ul.student-assignment-overview" ).after(peerReviewWarningHtml); 
+                }
+            }
+            
+            function _displayRightColumnContents() {
+                $("#right-side .details").show();
+            }
+            
+            var courseId = mmooc.api.getCurrentCourseId();
+            var assignmentId = mmooc.api.getCurrentTypeAndContentId().contentId;
+            var user_id = mmooc.api.getUser().id;
 
-          return false;
+            if (_isAssignmentWithPeerReview()) {
+                // console.log('user_id:' + user_id);
+                mmooc.api.getSingleSubmissionForUser(courseId, assignmentId, user_id, function(submission) {
+                    console.log('submission');
+                    console.log(submission);
+                    var peerReview = _getPeerReviewArray();
+                    _appendPeerReviewHtmlOnRightSide(submission, peerReview);
+                    _appendPeerReviewWarningInContentsColumn(submission, peerReview);
+                });
+            } else {
+                _displayRightColumnContents();
+            }
+        },
+        
+        redesignPeerReviewAndOwnSubmissionDetailsPage: function() {
+            
+            //Still under development
+            function _isCodeRunningInIframe() {
+                var returnValue = true;
+                if (ENV.SUBMISSION && ENV.SUBMISSION.user_id) {
+                    returnValue = false;
+                }
+                return returnValue;
+            }
+            
+            function _getSubmissionTitle() {
+                var returnValue;
+                var current_user_id = mmooc.api.getUser().id;
+                if (isPeerReview) {
+                    returnValue = mmooc.i18n.PeerReview; 
+                } else {
+                    returnValue = mmooc.i18n.DetailsAboutYourDelivery;
+                    if (current_user_id != submission_user_id) { //Submission opened by admin or teacher. We don't make any changes in the existing design when this is the case.
+                        returnValue = mmooc.i18n.DetailsAboutDelivery;
+                    }
+                }
+                return returnValue;
+            }
+            
+            function _isTeacherViewingStudentsSubmission() {
+                var returnValue = false;
+                var current_user_id = mmooc.api.getUser().id;
+                if (!isPeerReview && current_user_id != submission_user_id) { //Submission opened by admin or teacher. We don't make any changes in the existing design when this is the case.
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+            
+            function _isPeerReviewFinished() {
+                var returnValue = false;
+                if($('.assessment_request_incomplete_message').css('display') == 'none') {
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+            
+            function _addClickEventOnOpenAssessmentButton() {
+                $(document).on("click", ".open-assessment-dialog-button", function(event) {
+                    event.preventDefault(); 
+                    $('#rubric_holder').show(); 
+                    // $('.assess_submission_link.rubric').click(); //click on the previous hidden button.
+                });
+            }
+            
+            function _isPeerReview() {
+                var returnValue = false;
+                var peerReviewText = mmooc.i18n.PeerReview;
+                var originalSubmissionHeader = "body.assignments #application.ic-app #content .submission_details h2.submission_header";
+                if ($(originalSubmissionHeader + ":contains('" + peerReviewText + "')").length) {
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+            
+            function _isOwnSubmission() {
+                var returnValue = false;
+                var deliveryText = mmooc.i18n.Delivery;
+                deliveryText = deliveryText.toLowerCase();
+                var originalSubmissionHeader = "body.assignments #application.ic-app #content .submission_details h2.submission_header";
+                if ($(originalSubmissionHeader + ":contains('" + deliveryText + "')").length) {
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+            
+            function _logDataToConsole(assignment, submission) {
+                console.log('submission_user_id:' + submission_user_id);
+                console.log('Assignment:');
+                console.log(assignment);
+                console.log('Submission:');
+                console.log(submission);
+            }
+            
+            function _appendSubmissionHtml(assignment, submission) {
+                var submissionTitle = _getSubmissionTitle();
+                var isTeacherViewingStudentsSubmission = _isTeacherViewingStudentsSubmission();
+                var isPeerReviewFinished = _isPeerReviewFinished();
+                var submissionObject = { 
+                        assignment : assignment, 
+                        submission : submission, 
+                        submissionTitle : submissionTitle, 
+                        isPeerReview : isPeerReview, 
+                        isPeerReviewFinished : isPeerReviewFinished, 
+                        isTeacherViewingStudentsSubmission : isTeacherViewingStudentsSubmission 
+                    };
+                
+                var submissionHtml = mmooc.util.renderTemplateWithData("assignmentSubmission", submissionObject);
+                $("body.assignments #application.ic-app #content .submission_details" ).after(submissionHtml);  
+            }
+            
+            if (_isCodeRunningInIframe()) {
+                return false; //The code is running in an iframe. Code should not be running.
+            }
+            var courseId = mmooc.api.getCurrentCourseId();
+            var assignmentId = mmooc.api.getCurrentTypeAndContentId().contentId;
+            var isPeerReview = _isPeerReview();
+            var isOwnSubmission = _isOwnSubmission();
+            var submission_user_id = ENV.SUBMISSION.user_id;
+            
+            if (isPeerReview || isOwnSubmission) {
+                mmooc.api.getSingleAssignment(courseId, assignmentId, function(assignment) {
+                    mmooc.api.getSingleSubmissionForUser(courseId, assignmentId, submission_user_id, function(submission) {
+                        _logDataToConsole(assignment, submission);
+                        _appendSubmissionHtml(assignment, submission);
+                        _addClickEventOnOpenAssessmentButton();
+                    });
+                });
+            }
         }
     };
 }();
@@ -2407,6 +3004,145 @@ this.mmooc.powerFunctions = function() {
       }
     };
   }
+  
+  function AssignPeerReviewsForGroup() {
+
+    function _renderView() {
+      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+        _render("powerfunctions/peer-review",
+                "Assign peer reviews by group",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
+            $('.step-2').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a group set</option>";
+            for (var i = 0; i < categories.length; i++) {
+              html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
+            }
+            $("#mmpf-category-select").html(html);
+          });
+        });
+        $('#mmpf-category-select').change(function () {
+          var categoryID = $('#mmpf-category-select option:selected').val();
+          mmooc.api.getGroupsInCategory(categoryID, function(groups) {
+            $('.step-3').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a group</option>";
+            for (var i = 0; i < groups.length; i++) {
+              html = html + "<option value=" + groups[i].id + ">" + groups[i].name + "</option>";
+            }
+            $("#mmpf-group-select").html(html);
+          });
+        });
+        $('#mmpf-group-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getAssignmentsForCourse(courseID, function(assignments) {
+            $('.step-4').css('display', 'list-item');
+            var html = html + "<option value=''>Choose an assignment</option>";
+            for (var i = 0; i < assignments.length; i++) {
+              html = html + "<option value=" + assignments[i].id + ">" + assignments[i].name + "</option>";
+            }
+            $("#mmpf-assignment-select").html(html);
+          });
+        });
+		$('#mmpf-assignment-select').change(function () {
+			_listPeerReviewsForGroup();
+			_showButton();
+		});
+
+      });
+    }
+
+    function _listPeerReviewsForGroup() {
+	    var courseID = $('#mmpf-course-select option:selected').val();
+	    var groupID = $('#mmpf-group-select option:selected').val();
+	    var assignmentID = $('#mmpf-assignment-select option:selected').val();
+	    var html = "<ul>";
+	    var peerReivewsInGroup = [];
+	    var count = 0;
+	    var inArray = false;
+	    mmooc.api.getGroupMembers(groupID, function(members) {
+		    mmooc.api.getPeerReviewsForAssignment(courseID, assignmentID, function(peerReviews) {	  	
+		    	for (var i = 0; i < peerReviews.length; i++) {
+			    	for (var j = 0; j < members.length; j++) {			    	
+				    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
+					    	if(peerReivewsInGroup[k] === peerReviews[i]) {
+						    	inArray = true;
+					    	}
+					    }			    	
+			    		if (peerReviews.assessor_id == members.id && !inArray) {
+				    		peerReivewsInGroup[count] = peerReviews[i];
+				    		count++;
+			    		}
+			    		inArray = false;
+			    	}
+			    }			    			    			    
+		    	for (var i = 0; i < members.length; i++) {
+			    	count = 0;
+			    	html = html + "<li>" + members[i].name + "</li><ul>";			    	
+			    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
+				    	if(members[i].id == peerReivewsInGroup[k].assessor_id) {
+					    	html = html + "<li>" + peerReivewsInGroup[k].user.display_name  + "</li>";
+					    	count++;
+				    	}
+			    	}
+			    	html = html + "</ul>";
+			    	if(count == 0) {
+				    	html = html + "<div>Ingen tildelt</div>";
+			    	}	    			    	
+			    }
+			    $(".peer-review-list").html(html + "</ul>");
+				$('.btn-create-pr').click(function () {
+					_findSubmittedInGroup(members, courseID, assignmentID);	
+				});			        			    
+		    });       
+		});	
+    }
+    
+    function _showButton() {
+	    $(".peer-review-create").html("<input type='button' value='Tildel hverandrevurderinger' class='button btn-create-pr'>");
+    }
+
+    function _findSubmittedInGroup(members, courseID, assignmentID) {
+	    var submitted = [];
+	    var asyncsDone = 0;
+		for (var i = 0; i < members.length; i++) {
+			mmooc.api.getSingleSubmissionForUser(courseID, assignmentID, members[i].id, function(submission) {
+				if (submission.workflow_state == "submitted") {
+					submitted.push(submission);
+				}
+				asyncsDone++;
+				if (asyncsDone == members.length) {
+					_createPeerReviewsForGroup();
+				}
+			});
+		}
+		
+		function _createPeerReviewsForGroup() {
+			asyncsDone = 0;
+			for (var i = 0; i < submitted.length; i++) {
+				if (i == submitted.length - 1) {
+					var userID = submitted[0].user_id; 
+				}else {
+					nextMember = i + 1;
+					var userID = submitted[nextMember].user_id;
+				}						
+				mmooc.api.createPeerReview(courseID, assignmentID, submitted[i].id, userID, function(result) {					
+					asyncsDone++;
+					if (asyncsDone == submitted.length) {
+						_listPeerReviewsForGroup();	
+					}
+				});		
+			}			
+		}
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
 
   function AccountPicker() {
     function _setAccountID() {
@@ -2444,6 +3180,9 @@ this.mmooc.powerFunctions = function() {
       });
       $("#mmooc-pf-logins-btn").click(function() {
         new CreateNewLoginsTask().run();
+      });
+      $("#mmooc-pf-peer-review-btn").click(function() {
+        new AssignPeerReviewsForGroup().run();
       });
     }
 
@@ -2573,13 +3312,41 @@ Handlebars.registerHelper('ifGreaterThan', function(value1, value2, options) {
 
 Handlebars.registerHelper('overrideIconClassByTitle', function(title) {
     title = title.toLowerCase();
-    if (title.indexOf('utmerkelse') !=-1) {
+    if (title.indexOf('utmerkelse:') !=-1) {
         return ' mmooc-icon-badge';
-    } else if (title.indexOf('video') !=-1) {
+    } else if (title.indexOf('video:') !=-1) {
         return ' mmooc-icon-video';
+    } else if (title.indexOf('aktivitet:') !=-1) {
+        return ' mmooc-icon-interactive';
     } else {
         return '';
     }
+});
+
+Handlebars.registerHelper('getPeerReviewWorkflowIconClass', function(workflow_state) {
+    
+    if (workflow_state == "assigned") {
+        return ' warning';
+    } else if (workflow_state == "completed") {
+        return ' pass';
+    } else {
+        return '';
+    }
+});
+
+Handlebars.registerHelper("norwegianDateAndTime", function(timestamp) {
+    var year = new Date(timestamp).toString(' yyyy');
+    var day = new Date(timestamp).toString('dd. ');
+    var time = new Date(timestamp).toString(' HH:mm');
+    var monthNumber = parseInt(new Date(timestamp).toString('M'), 10);
+    var months = mmooc.i18n.Months;
+    var month = months[monthNumber - 1];
+    
+    return day + month + year + time; //return new Date(timestamp).toString('dd. MMMM yyyy HH:mm'); // yyyy-MM-dd
+});
+
+Handlebars.registerHelper("getPathFromUrl", function(url) {
+  return url.split("?")[0]; //returns an array even if there is no '?' so no need for extra checks
 });
 
 Handlebars.registerHelper('urlForCourseId', function(courseId) {
@@ -2589,8 +3356,6 @@ Handlebars.registerHelper('urlForCourseId', function(courseId) {
 Handlebars.registerHelper('urlForGroupId', function(groupId) {
     return "/groups/" + groupId + "/discussion_topics";
 });
-
-
 
 Handlebars.registerHelper('ifItemIsCompleted', function(completion_requirement, options) {
 
@@ -2803,7 +3568,13 @@ this.mmooc.i18n = {
     'Conference': 'Conference',
     'Collaboration': 'Collaboration',
     'LinkBack': 'Tilbake til forrige side',
-    'Badgesafe': 'Utmerkelser'
+    'Badgesafe': 'Utmerkelser',
+    'PeerReview' : 'Hverandrevurdering',
+    'PeerReviewer' : 'Hverandrevurderer',
+    'Delivery' : 'Innlevering',
+    'DetailsAboutYourDelivery' : 'Detaljer om din innlevering',
+    'DetailsAboutDelivery' : 'Detaljer om innlevering',
+    'Months' : ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "Oktober", "november", "december"]
 };
 
 jQuery(function($) {
@@ -2919,9 +3690,19 @@ jQuery(function($) {
         mmooc.menu.showLeftMenu();
         mmooc.menu.listModuleItems();
         mmooc.pages.modifyMarkAsDoneButton();
-        mmooc.pages.changeTranslations();
+        // mmooc.pages.changeTranslations();
+    });
+    
+    // example route: /courses/54/assignments/369 - assignment which may be a peer review (hverandrevurdering)
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/assignments\/\d+/, function() {
+        mmooc.pages.redesignAssignmentPage();
     });
 
+    // Assignment submission which might be your own or someone else's: Peer review (hverandrevurdering)
+    mmooc.routes.addRouteForPath(/\/courses\/\d+\/assignments\/\d+\/submissions\/\d+/, function() {
+        mmooc.pages.redesignPeerReviewAndOwnSubmissionDetailsPage();
+    });
+    
     mmooc.routes.addRouteForPath(/\/courses\/\d+\/external_tools\/\d+$/, function() {
         function isBadgesafePage() {
             function extractPluginNumber(input) {
@@ -2943,7 +3724,7 @@ jQuery(function($) {
         mmooc.menu.showLeftMenu();
         mmooc.menu.listModuleItems();
     });
-
+    
     mmooc.routes.addRouteForPath([/\/pages/], function() {
         mmooc.pages.showBackLinkIfNecessary();
     });
@@ -2970,7 +3751,6 @@ jQuery(function($) {
         mmooc.menu.injectGroupsPage();
         mmooc.groups.changeGroupListURLs(document.location.href);
 
-        mmooc.pages.showBackToAssignmentLink(document.location.href);
         mmooc.pages.updateSidebarWhenMarkedAsDone();
 
         mmooc.menu.alterHomeLink();
@@ -3776,7 +4556,7 @@ $(function () {
             isProfilePage = true;
         }
         if (match && protocol_and_host) {
-            // console.log("CANVABADGES: This page shows badges! Loading...");
+            console.log("CANVABADGES: This page shows badges! Loading...");
             if (isProfilePage) {
                 user_id = mmooc.api.getUser().id;
             } else {
@@ -3790,9 +4570,9 @@ $(function () {
                 dataType: 'jsonp',
                 url: url,
                 success: function (data) {
-                    //console.log("CANVABADGES: Data retrieved!");
+                    console.log("CANVABADGES: Data retrieved!");
                     if (data.objects && data.objects.length > 0) {
-                        //console.log("CANVABADGES: Badges found! Adding to the page...");
+                        console.log("CANVABADGES: Badges found! Adding to the page...");
                         var $box = $("<div/>", { style: 'margin-bottom: 20px;' });
                         $box.append("<h2 class='border border-b'>Badges</h2>");
                         for (idx in data.objects) {
@@ -3807,7 +4587,7 @@ $(function () {
                         $box.append($("<div/>", { style: 'clear: left' }));
                         $("#edit_profile_form,fieldset#courses,.more_user_information + div, #update_profile_form").after($box);
                     } else {
-                        //console.log("CANVABADGES: No badges found for the user: " + user_id + " at " + domain);
+                        console.log("CANVABADGES: No badges found for the user: " + user_id + " at " + domain);
                     }
                 },
                 error: function (err) {
@@ -3817,7 +4597,7 @@ $(function () {
                 timeout: 5000
             });
         } else {
-            //console.log("CANVABADGES: This page doesn't show badges");
+            console.log("CANVABADGES: This page doesn't show badges");
         }
     }
 });
