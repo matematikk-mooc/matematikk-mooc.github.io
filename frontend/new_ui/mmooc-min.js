@@ -130,6 +130,15 @@ function program10(depth0,data) {
   return buffer;
   });
 
+this["mmooc"]["templates"]["assignmentPageWithPeerReviewSaveRubricButton"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<button type=\"button\" id=\"mmooc_save_rubric_button\" class=\"save_rubric_button btn btn-small\">Lagre kommentar</button>";
+  });
+
 this["mmooc"]["templates"]["assignmentPageWithPeerReviewWarning"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -168,129 +177,108 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n							";
-  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n						";
-  return buffer;
-  }
-function program8(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\r\n								<span class=\"mmooc-new-delivery\"><a class=\"add\" href=\"/courses/"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.course)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "/assignments/"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.assignment_id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "#submit\">Lever oppgave på nytt</a></span>\r\n							";
-  return buffer;
-  }
-
-function program10(depth0,data) {
-  
-  var buffer = "", stack1;
   buffer += "\r\n			";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n		";
   return buffer;
   }
-function program11(depth0,data) {
+function program8(depth0,data) {
   
   
   return "\r\n				<div class=\"mmooc-peer-review-success\">\r\n					<p class=\"mmooc-success singleLine\">\r\n						Du har fullført hverandrevurderingen.\r\n					</p>\r\n				</div>\r\n			";
   }
 
-function program13(depth0,data) {
+function program10(depth0,data) {
   
   
   return "\r\n				<div class=\"mmooc-peer-review-warning\">\r\n					<p class=\"mmooc-warning singleLine\">\r\n						Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet.\r\n					</p>\r\n				</div>\r\n			";
   }
 
-function program15(depth0,data) {
+function program12(depth0,data) {
   
   
   return "\r\n					<h3>Din vurdering</h3>\r\n				";
   }
 
-function program17(depth0,data) {
+function program14(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n					";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.program(20, program20, data),fn:self.program(18, program18, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.program(17, program17, data),fn:self.program(15, program15, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n					\r\n				";
   return buffer;
   }
-function program18(depth0,data) {
+function program15(depth0,data) {
   
   
   return "\r\n						<h3>Vurdering av besvarelse</h3>\r\n					";
   }
 
-function program20(depth0,data) {
+function program17(depth0,data) {
   
   
   return "\r\n						<h3>Vurdering av din besvarelse</h3>	\r\n					";
   }
 
-function program22(depth0,data) {
+function program19(depth0,data) {
   
-  var stack1;
-  return escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  var buffer = "", stack1;
+  buffer += "\r\n				<p class=\"assessment\">Karakter: "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.points_possible)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</p>\r\n				";
+  return buffer;
   }
 
-function program24(depth0,data) {
-  
-  
-  return "-";
-  }
-
-function program26(depth0,data) {
+function program21(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n					";
-  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.noop,fn:self.program(27, program27, data),data:data});
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vurderingsskjema</a>\r\n				";
   return buffer;
   }
-function program27(depth0,data) {
+function program22(depth0,data) {
   
   
-  return "\r\n						<p class=\"assessment-warning\">Du har ikke vurdert denne oppgaven enda.</p>\r\n					";
+  return "\r\n						<p class=\"assessment-warning\">Du har ikke vurdert denne oppgaven.</p>\r\n					";
   }
 
-function program29(depth0,data) {
+function program24(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "\r\n					";
-  stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(30, program30, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vis vurdering</a>\r\n				";
+  var buffer = "", helper, options;
+  buffer += "\r\n					<p class=\"assessment-text\">"
+    + escapeExpression((helper = helpers.getSubmissionAssessmentText || (depth0 && depth0.getSubmissionAssessmentText),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.peerReview), options) : helperMissing.call(depth0, "getSubmissionAssessmentText", (depth0 && depth0.peerReview), options)))
+    + "</p>\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vis vurdering</a>\r\n				";
   return buffer;
   }
-function program30(depth0,data) {
-  
-  
-  return "\r\n						<p class=\"assessment-warning\">Oppgaven er ikke vurdert enda.</p>\r\n					";
-  }
 
-function program32(depth0,data) {
+function program26(depth0,data) {
   
   
   return " isPeerReviewPage";
   }
 
-function program34(depth0,data) {
+function program28(depth0,data) {
   
   
   return " isSubmissionDetaisPage";
   }
 
-function program36(depth0,data) {
+function program30(depth0,data) {
   
   
-  return " withNoAssessmentText";
+  return " withGradesText";
+  }
+
+function program32(depth0,data) {
+  
+  
+  return " withNoGradesText";
   }
 
   buffer += "<div class=\"mmooc-assignment-submission\">\r\n	<div class=\"mmooc-assignment-submission-leftside\">\r\n		<div class=\"mmooc-assignment-submission-metadata\">\r\n			<h2 class=\"mmooc-assignment-submission-header\">";
@@ -316,27 +304,22 @@ function program36(depth0,data) {
   buffer += "\r\n						";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n						";
-  stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n					</span>\r\n				</li>\r\n			</ul>\r\n		</div>\r\n		";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	</div>\r\n	<div class=\"mmooc-assignment-submission-rightside\">\r\n		<div class=\"mmooc-assignment-submission-assessment\">\r\n			<div class=\"mmooc-assignment-submission-assessment-header\">\r\n				";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(17, program17, data),fn:self.program(15, program15, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n			</div>\r\n			<div class=\"mmooc-assignment-submission-assessment-contents\">\r\n				<p class=\"assessment\">Karakter: ";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.program(24, program24, data),fn:self.program(22, program22, data),data:data});
+  buffer += "\r\n			</div>\r\n			<div class=\"mmooc-assignment-submission-assessment-contents\">\r\n				";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(19, program19, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "/"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.points_possible)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</p>\r\n				";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(29, program29, data),fn:self.program(26, program26, data),data:data});
+  buffer += "\r\n				";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(24, program24, data),fn:self.program(21, program21, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n			</div>\r\n		</div>\r\n	</div>\r\n</div>\r\n<div class=\"mmooc-assignment-submission-answers";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(34, program34, data),fn:self.program(32, program32, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(28, program28, data),fn:self.program(26, program26, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(36, program36, data),data:data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.program(32, program32, data),fn:self.program(30, program30, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">\r\n	<h3>Besvarelser</h3>\r\n</div>";
   return buffer;
@@ -589,6 +572,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
   return "<footer role=\"contentinfo\" id=\"mmooc-footer\" class=\"ic-app-footer\">\r\n    <div class=\"mmooc-license\">\r\n        <p class=\"public-license-text\">Lisensnivå: Illustrasjoner og filmer utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-nd/4.0/\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-ND 4.0</span></a><br>\r\n        Annet innhold utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-SA 4.0</span></a>\r\n        </p>\r\n    </div>\r\n</footer>";
+  });
+
+this["mmooc"]["templates"]["groupdiscussionGetHelpFromTeacher"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"getTeachersHelpContainer\">\r\n    <button type=\"button\" id=\"mmooc-get-teachers-help\" class=\"btn btn-primary getTeachersHelp\">Tilkall veileder</button>\r\n</div>";
   });
 
 this["mmooc"]["templates"]["groupdiscussionheader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1137,7 +1129,7 @@ function program4(depth0,data) {
   buffer += "<form>\r\n  <ol>\r\n    <li class=\"step-1\">\r\n      <select id=\"mmpf-course-select\">\r\n        ";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n      </select>\r\n    <li class=\"step-2\">\r\n      <select id=\"mmpf-category-select\" name=\"category\" onchange=\"$('.step-3').css('display', 'list-item')\">\r\n          <option value=\"\">No group sets defined for course</option>\r\n      </select>\r\n    <li class=\"step-3\">\r\n      <select id=\"mmpf-group-select\" name=\"group\" onchange=\"$('.step-4').css('display', 'list-item')\">\r\n          <option value=\"\">No groups defined for course</option>\r\n      </select>\r\n    <li class=\"step-4\">\r\n      <select id=\"mmpf-assignment-select\" name=\"assignment\">\r\n          <option value=\"\">No assignments defined for course</option>\r\n      </select>\r\n  </ol>\r\n  <div class=\"peer-review-list\"></div>\r\n  <div class=\"peer-review-create\"></div>\r\n</form>\r\n";
+  buffer += "\r\n      </select>\r\n    <li class=\"step-2\">\r\n      <select id=\"mmpf-category-select\" name=\"category\">\r\n          <option value=\"\">No group sets defined for course</option>\r\n      </select>\r\n    <li class=\"step-3\">\r\n      <select id=\"mmpf-group-select\" name=\"group\">\r\n          <option value=\"\">No groups defined for course</option>\r\n      </select>\r\n    <li class=\"step-4\">\r\n      <select id=\"mmpf-assignment-select\" name=\"assignment\">\r\n          <option value=\"\">No assignments defined for course</option>\r\n      </select>\r\n  </ol>\r\n  <div class=\"peer-review-list\"></div>\r\n  <div id=\"progress\">\r\n  	<div id=\"bar\"></div>\r\n  </div>\r\n  <div class=\"peer-review-create\"></div>\r\n</form>\r\n";
   return buffer;
   });
 
@@ -1530,7 +1522,7 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/courses/" + course + "/group_categories",
-                "params":   { }
+                "params":   { per_page: 999 }
             });
         },
 
@@ -1574,7 +1566,7 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/group_categories/" + categoryID + "/groups",
-                "params":   { }
+                "params":   { per_page: 999 }
             });
         },
                 
@@ -1584,7 +1576,8 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/courses/" + courseId + "/assignments/" + assignmentId,
-                "params":   {"include": ["submission", "assignment_visibility", "overrides", "observed_users"]}
+                // "params":   {"include": ["submission", "assignment_visibility", "overrides", "observed_users"]}
+                "params":   {}
             });
         },
         
@@ -1594,7 +1587,7 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/courses/" + courseId + "/assignments",
-                "params":   { }
+                "params":   { per_page: 999 }
             });
         },       
         
@@ -1610,13 +1603,13 @@ this.mmooc.api = function() {
         },
         
         // /api/v1/courses/7/assignments/11/submissions/4/peer_reviews
-        // Important! This API displays info about who has the peer review of your own submission! This is often not what you are interested in.
-        getPeerReviewsForUser : function(courseId, assignmentId, user_id, callback, error) {
+        // This API displays info about who has the peer review for a specific submissionID which is the id property on the submission object (different from user id)
+        getPeerReviewsForSubmissionId : function(courseId, assignmentId, submission_id, callback, error) {
             // Returns only the student's peer reviews if you are a student. Returns all peer reviews if you are a teacher or admin
             this._get({
                 "callback": callback,
                 "error":    error,
-                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId + "/submissions/" + user_id + "/peer_reviews",
+                "uri":      "/courses/" + courseId + "/assignments/" + assignmentId + "/submissions/" + submission_id + "/peer_reviews",
                 // "params":   {"include": ["submission_comments", "user"]}
                 "params":   {"include": ["user"]}
             });
@@ -2438,18 +2431,71 @@ this.mmooc.menu = function() {
         },
 
         showDiscussionGroupMenu: function() {
+
+            function _addBodyClassForGroupDiscussionForStyling() {
+                var $body = $('body');
+                var bodyClassForGroupDiscussion = 'mmooc-group-discussion';
+                
+                if (!$body.hasClass(bodyClassForGroupDiscussion)) {
+                    $body.addClass(bodyClassForGroupDiscussion);
+                }
+            }
+
+            function strLeft(sourceStr, keyStr){
+                return (sourceStr.indexOf(keyStr) == -1 | keyStr=='') ? '' : sourceStr.split(keyStr)[0];
+            }
+
+            function _addGetHelpFromteacherButton(group) {
+                
+                function _selectCourseAndPrefillMessageInDialogBox() {
+                
+                    var $teacherFeedbackBody = $("#teacher-feedback-body");
+                    var courseId = mmooc.api.getCurrentCourseId();
+
+                    mmooc.api.getCourse(courseId, function(course) {
+                        var courseName = course.name;
+                        var discussionUrl = window.location.href;
+                        var discussionAndGroupTitle = $(".discussion-title").text();
+                        var discussionTitle = strLeft(discussionAndGroupTitle, " - ");
+                        var newLine = "\n";
+                        $('#teacher-feedback-recipients option:contains("' + courseName + '")').prop('selected', true);
+                        var teacherFeedbackBodyHtml = mmooc.i18n.ThisIsGroup + ' "' + group.name + '".' + newLine + newLine + mmooc.i18n.WeHaveAQuestionToTeacherInTheDiscussion + ' "' + discussionTitle + '":' + newLine + discussionUrl;
+                        $teacherFeedbackBody.val(teacherFeedbackBodyHtml);
+                    });
+                }
+
+                function _openTeacherFeedbackLink() {
+                    var $teacherFeedbackLink = $("#help-dialog a[href='#teacher_feedback']");
+                    if (!$teacherFeedbackLink.length) {
+                        console.log(mmooc.i18n.NoTeacherFeedbackLink);
+                        return false;
+                    }
+                    $teacherFeedbackLink.click();
+                    _selectCourseAndPrefillMessageInDialogBox();
+                }
+
+                function _addClickEventOnGetHelpFromTeacherButton() {
+                    $(document).on("click", "#mmooc-get-teachers-help", function(event) {
+                        $('.help_dialog_trigger').click();
+                        setTimeout(_openTeacherFeedbackLink, 600); //Need to wait for the dialog contents to be loaded
+                    });
+                }
+                
+                // Get help from teacher by clicking a button
+                var getHelpButtonFromteacherButtonHTML = mmooc.util.renderTemplateWithData("groupdiscussionGetHelpFromTeacher", {});
+                document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', getHelpButtonFromteacherButtonHTML);
+                _addClickEventOnGetHelpFromTeacherButton();
+            }
+
             var groupId = mmooc.api.getCurrentGroupId();
             if (groupId != null) {
                 mmooc.api.getGroup(groupId, function(group) {
                     // For discussion pages we only want the title to be "<discussion>" instead of "Discussion: <discussion>"
                     var title = mmooc.util.getPageTitleAfterColon();
                     mmooc.menu.showCourseMenu(group.course_id, "Grupper", title, true); //Group menu in tabs including title - Use optional fourth parameter for hiding tabs
-         
+                    _addBodyClassForGroupDiscussionForStyling(); 
+                    _addGetHelpFromteacherButton(group);
                     mmooc.menu.showBackButton("/courses/" + group.course_id, "Tilbake til kursforsiden");
-                    
-                    // if (!mmooc.util.isTeacherOrAdmin()) {
-                    //     $('body').removeClass('with-left-side'); //This is already hidden so we remove this class for a better display (remove left padding)
-                    // }
                 });
             }
         },
@@ -2570,8 +2616,7 @@ this.mmooc.pages = function() {
         },
 
         redesignAssignmentPage: function() {
-            //Still under development
-            
+
             function _isAssignmentWithPeerReview() {
                 var returnValue = false;
                 var peerReviewer = mmooc.i18n.PeerReviewer;
@@ -2580,9 +2625,9 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
+
             function _getPeerReviewArray() {
-                
+
                 function _getWorkFlowState(peerReviewLinkClass) {
                     var _workflow_state = ""; // workflow_state either 'assigned' or 'completed'
                     if (peerReviewLinkClass == "warning") {
@@ -2590,44 +2635,44 @@ this.mmooc.pages = function() {
                     } else if (peerReviewLinkClass == "pass") {
                         _workflow_state = 'completed';
                     }
-                    return _workflow_state;
+                    return _workflow_state; 
                 }
-                
+
                 var $peerReviewLinks = $("#right-side .details .content > h4 + ul.unstyled_list a");
                 var _peerReview = []; //Peer review api is unfortunately not displaying the info we want (only info about the persons beeing peer reviewers for my submission), so we have to do this by using jquery
                 var workflow_state;
                 var peerReviewLinkClass;
-                
+
                 $peerReviewLinks.each(function(i){
                     peerReviewLinkClass = $(this).attr('class');
                     workflow_state = _getWorkFlowState(peerReviewLinkClass);
                     _peerReview[_peerReview.length] = {"workflow_state" : workflow_state, "assessor" : { "display_name" : $(this).text(), "mmooc_url": $(this).attr('href')}};
                 });
-                
+
                 console.log('Custom peerReview array:');
                 console.log(_peerReview);
-                
+
                 return _peerReview;
             }
-            
+
             function _appendPeerReviewHtmlOnRightSide(submission, peerReview) {
                 var peerReviewHtml = mmooc.util.renderTemplateWithData("assignmentPageWithPeerReviewRightSide", { submission : submission, peerReview:peerReview });
                 // $("body.assignments #application.ic-app #right-side .details" ).append(peerReviewHtml);
                 $(peerReviewHtml).insertBefore("body.assignments #application.ic-app #right-side .details");
             }
-            
+
             function _appendPeerReviewWarningInContentsColumn(submission, peerReview) {
                 var $peerReviewLinksWarnings = $("#right-side .details .content > h4 + ul.unstyled_list a.warning");
                 if ($peerReviewLinksWarnings.length) { //If any warnings display peer review warning in the contents column after the assignment meta data
                     var peerReviewWarningHtml = mmooc.util.renderTemplateWithData("assignmentPageWithPeerReviewWarning", { submission : submission, peerReview:peerReview });
-                    $("body.assignments #application.ic-app ul.student-assignment-overview" ).after(peerReviewWarningHtml); 
+                    $("body.assignments #application.ic-app ul.student-assignment-overview" ).after(peerReviewWarningHtml);
                 }
             }
-            
+
             function _displayRightColumnContents() {
                 $("#right-side .details").show();
             }
-            
+
             var courseId = mmooc.api.getCurrentCourseId();
             var assignmentId = mmooc.api.getCurrentTypeAndContentId().contentId;
             var user_id = mmooc.api.getUser().id;
@@ -2645,10 +2690,9 @@ this.mmooc.pages = function() {
                 _displayRightColumnContents();
             }
         },
-        
+
         redesignPeerReviewAndOwnSubmissionDetailsPage: function() {
-            
-            //Still under development
+
             function _isCodeRunningInIframe() {
                 var returnValue = true;
                 if (ENV.SUBMISSION && ENV.SUBMISSION.user_id) {
@@ -2656,12 +2700,12 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
+
             function _getSubmissionTitle() {
                 var returnValue;
                 var current_user_id = mmooc.api.getUser().id;
                 if (isPeerReview) {
-                    returnValue = mmooc.i18n.PeerReview; 
+                    returnValue = mmooc.i18n.PeerReview;
                 } else {
                     returnValue = mmooc.i18n.DetailsAboutYourDelivery;
                     if (current_user_id != submission_user_id) { //Submission opened by admin or teacher. We don't make any changes in the existing design when this is the case.
@@ -2670,7 +2714,7 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
+
             function _isTeacherViewingStudentsSubmission() {
                 var returnValue = false;
                 var current_user_id = mmooc.api.getUser().id;
@@ -2679,23 +2723,80 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
+
             function _isPeerReviewFinished() {
                 var returnValue = false;
-                if($('.assessment_request_incomplete_message').css('display') == 'none') {
+                if ($('.assessment_request_incomplete_message').css('display') == 'none') {
                     returnValue = true;
                 }
                 return returnValue;
             }
-            
+
             function _addClickEventOnOpenAssessmentButton() {
                 $(document).on("click", ".open-assessment-dialog-button", function(event) {
-                    event.preventDefault(); 
-                    $('#rubric_holder').show(); 
+                    event.preventDefault();
+                    $('#rubric_holder').show();
                     // $('.assess_submission_link.rubric').click(); //click on the previous hidden button.
                 });
             }
-            
+
+            function _updateDomAfterSaveRubricButtonClick(event) {
+                console.log('_updateDomAfterSaveRubricButtonClick is running');
+                function _arePointsGivenInRubric() {
+                    
+                    var criterion_descriptionsCompleted = $('#rubric_holder table.rubric_table tr.criterion:not(.blank) td.criterion_description.completed').length;
+                    var criterion_descriptions = $('#rubric_holder table.rubric_table tr.criterion:not(.blank) td.criterion_description').length;
+                    var totalPoints = $('#rubric_holder table.rubric_table tr.summary .rubric_total').text();
+                    
+                    var pointsAreGiven = false;
+                    if (totalPoints != "") {
+                        if (criterion_descriptionsCompleted == criterion_descriptions) { //If all criteria are filled in 
+                            pointsAreGiven = true;
+                        }
+                    }
+                    
+                    return pointsAreGiven; 
+                }
+
+                function _appendCompletedPeerReviewHtml(assignment, submission, peerReview) {
+                    var submissionTitle = _getSubmissionTitle();
+                    var isTeacherViewingStudentsSubmission = _isTeacherViewingStudentsSubmission();
+                    var isPeerReviewFinished = true;
+                    var submissionObject = {
+                            assignment : assignment,
+                            submission : submission,
+                            peerReview : peerReview,
+                            submissionTitle : submissionTitle,
+                            isPeerReview : isPeerReview,
+                            isPeerReviewFinished : isPeerReviewFinished,
+                            isTeacherViewingStudentsSubmission : isTeacherViewingStudentsSubmission
+                        };
+
+                    var submissionHtml = mmooc.util.renderTemplateWithData("assignmentSubmission", submissionObject);
+
+                    $(".mmooc-assignment-submission, .mmooc-assignment-submission-answers").remove(); //Remove old Html that was created before
+                    $("body.assignments #application.ic-app #content .submission_details" ).after(submissionHtml);
+                }
+                
+                //Functionality for this is as follows:
+                // We want the peer review to display that it is finished without a refresh of the page.
+                // Unfortunately we don't have any info about the peer review from the API because as a user you don't have access to that data it seems.
+                // In order to solve this we check that the user has submitted data by checking the DOM. Then the SubmissionObject used in the template (assignmentSubmission) is changed so the peer review looks completed (which it also is).  
+
+                if (_arePointsGivenInRubric()) {
+                    mmooc.api.getSingleAssignment(courseId, assignmentId, function(assignment) {
+                        mmooc.api.getSingleSubmissionForUser(courseId, assignmentId, submission_user_id, function(submission) {
+                            var submission_id = submission.id;
+
+                            mmooc.api.getPeerReviewsForSubmissionId(courseId, assignmentId, submission_id, function(peerReview) {
+                                _logDataToConsole(assignment, submission, peerReview);
+                                _appendCompletedPeerReviewHtml(assignment, submission, peerReview);
+                            });
+                        });
+                    });
+                }
+            }
+
             function _isPeerReview() {
                 var returnValue = false;
                 var peerReviewText = mmooc.i18n.PeerReview;
@@ -2705,7 +2806,7 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
+
             function _isOwnSubmission() {
                 var returnValue = false;
                 var deliveryText = mmooc.i18n.Delivery;
@@ -2716,32 +2817,125 @@ this.mmooc.pages = function() {
                 }
                 return returnValue;
             }
-            
-            function _logDataToConsole(assignment, submission) {
+
+            function _logDataToConsole(assignment, submission, peerReview) {
                 console.log('submission_user_id:' + submission_user_id);
                 console.log('Assignment:');
                 console.log(assignment);
                 console.log('Submission:');
                 console.log(submission);
+                console.log('peerReview for submission id');
+                console.log(peerReview);
             }
-            
-            function _appendSubmissionHtml(assignment, submission) {
+
+            function _appendSubmissionHtml(assignment, submission, peerReview) {
                 var submissionTitle = _getSubmissionTitle();
                 var isTeacherViewingStudentsSubmission = _isTeacherViewingStudentsSubmission();
                 var isPeerReviewFinished = _isPeerReviewFinished();
-                var submissionObject = { 
-                        assignment : assignment, 
-                        submission : submission, 
-                        submissionTitle : submissionTitle, 
-                        isPeerReview : isPeerReview, 
-                        isPeerReviewFinished : isPeerReviewFinished, 
-                        isTeacherViewingStudentsSubmission : isTeacherViewingStudentsSubmission 
+                var submissionObject = {
+                        assignment : assignment,
+                        submission : submission,
+                        peerReview : peerReview,
+                        submissionTitle : submissionTitle,
+                        isPeerReview : isPeerReview,
+                        isPeerReviewFinished : isPeerReviewFinished,
+                        isTeacherViewingStudentsSubmission : isTeacherViewingStudentsSubmission
                     };
-                
+
                 var submissionHtml = mmooc.util.renderTemplateWithData("assignmentSubmission", submissionObject);
-                $("body.assignments #application.ic-app #content .submission_details" ).after(submissionHtml);  
+                $("body.assignments #application.ic-app #content .submission_details" ).after(submissionHtml);
             }
-            
+
+            function _addSaveRubricButtonIfItDoesNotExist() {
+
+                function _new_save_rubric_button(event) {
+                    console.log('dynamically button (#mmooc_save_rubric_button.save_rubric_button )is clicked');
+
+                    //Start original rubric button on click code in Canvas LMS
+                    var showGrade = function(submission) {
+                        $(".grading_box").val(submission.grade != undefined && submission.grade !== null ? submission.grade : "");
+                        $(".score").text(submission.score != undefined && submission.score !== null ? round(submission.score, round.DEFAULT) : "");
+                        $(".published_score").text(submission.published_score != undefined && submission.published_score !== null ? round(submission.published_score, round.DEFAULT) : "");
+                    };
+
+                    var toggleRubric = function($rubric) {
+                        ariaSetting = $rubric.is(":visible");
+                        $("#application").find("[data-hide_from_rubric]").attr("aria-hidden", ariaSetting)
+                    };
+
+                    var closeRubric = function() {
+                        $("#rubric_holder").fadeOut(function() {
+                        toggleRubric($(this));
+                        $(".assess_submission_link").focus();
+                        });
+                    };
+
+                    var $rubric = $(this).parents("#rubric_holder").find(".rubric");
+                    var data = rubricAssessment.assessmentData($rubric);
+                    var url = $(".update_rubric_assessment_url").attr('href');
+                    var method = "POST";
+                    $rubric.loadingImage();
+                    
+                    $.ajaxJSON(url, method, data, function(data) {
+                        $rubric.loadingImage('remove');
+                        var assessment = data;
+                        var found = false;
+                        if(assessment.rubric_association) {
+                            rubricAssessment.updateRubricAssociation($rubric, data.rubric_association);
+                            delete assessment.rubric_association;
+                        }
+                        for(var idx in rubricAssessments) {
+                            var a = rubricAssessments[idx].rubric_assessment;
+                            if(a && assessment && assessment.id == a.id) {
+                                rubricAssessments[idx].rubric_assessment = assessment;
+                                found = true;
+                            }
+                        }
+                        if(!found) {
+                            if (!data.rubric_assessment) {
+                                data = { rubric_assessment: data };
+                            }
+                            rubricAssessments.push(data);
+                            var $option = $(document.createElement('option'));
+                            $option.val(assessment.id).text(assessment.assessor_name).attr('id', 'rubric_assessment_option_' + assessment.id);
+                            $("#rubric_assessments_select").prepend($option).val(assessment.id);
+                        }
+                        $("#rubric_assessment_option_" + assessment.id).text(assessment.assessor_name);
+                        $("#new_rubric_assessment_option").remove();
+                        $("#rubric_assessments_list").show();
+                        rubricAssessment.populateRubric($rubric, assessment);
+                        submission = assessment.artifact;
+                        if (submission) {
+                            showGrade(submission);
+                        }
+                        closeRubric();
+                        //End original rubric button on click code in Canvas LMS
+                        console.log('Finished running #mmooc_save_rubric_button.save_rubric_button code');
+                        _updateDomAfterSaveRubricButtonClick();
+                    });
+                }
+
+                if (isPeerReview) {
+                    var isAssessingRubric = false;
+                    if ($('#rubric_holder .rubric_container.rubric.assessing').length) {
+                        isAssessingRubric = true;
+                    }
+
+                    if (isAssessingRubric) { //We know that we are in assessing mode
+                        //The button should be there
+                        var $saveRubricButton = $("#rubric_holder #rubric_criterion_comments_dialog + .button-container > button.save_rubric_button");
+                        if ($saveRubricButton.length == 0) {
+                            console.log('Adding custom save rubric button');
+                            var saveRubricButtonHtml = mmooc.util.renderTemplateWithData("assignmentPageWithPeerReviewSaveRubricButton", {});
+                            
+                            // $("#rubric_holder #rubric_criterion_comments_dialog + .button-container button.save_rubric_button").remove(); 
+                            $("#rubric_holder #rubric_criterion_comments_dialog + .button-container").append(saveRubricButtonHtml);
+                            $(document).on("click", "#mmooc_save_rubric_button", _new_save_rubric_button);
+                        }
+                    }
+                }
+            }
+
             if (_isCodeRunningInIframe()) {
                 return false; //The code is running in an iframe. Code should not be running.
             }
@@ -2750,13 +2944,19 @@ this.mmooc.pages = function() {
             var isPeerReview = _isPeerReview();
             var isOwnSubmission = _isOwnSubmission();
             var submission_user_id = ENV.SUBMISSION.user_id;
-            
-            if (isPeerReview || isOwnSubmission) {
+
+            if (isPeerReview || isOwnSubmission) { 
                 mmooc.api.getSingleAssignment(courseId, assignmentId, function(assignment) {
                     mmooc.api.getSingleSubmissionForUser(courseId, assignmentId, submission_user_id, function(submission) {
-                        _logDataToConsole(assignment, submission);
-                        _appendSubmissionHtml(assignment, submission);
-                        _addClickEventOnOpenAssessmentButton();
+                        var submission_id = submission.id;    
+
+                        mmooc.api.getPeerReviewsForSubmissionId(courseId, assignmentId, submission_id, function(peerReview) {
+                            _logDataToConsole(assignment, submission, peerReview);
+                            _appendSubmissionHtml(assignment, submission, peerReview);
+                            _addClickEventOnOpenAssessmentButton();
+                            // _addSaveRubricButtonIfItDoesNotExist(); //Enable this if the button 'Lagre kommentar' in the peer review dialog is not displaying
+                            $(document).on("click", "button.save_rubric_button", _updateDomAfterSaveRubricButtonClick);
+                        }); 
                     });
                 });
             }
@@ -3016,22 +3216,27 @@ this.mmooc.powerFunctions = function() {
           var courseID = $('#mmpf-course-select option:selected').val();
           mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
             $('.step-2').css('display', 'list-item');
+            $('.step-3').css('display', 'none');
+            $('.step-4').css('display', 'none');
             var html = html + "<option value=''>Choose a group set</option>";
             for (var i = 0; i < categories.length; i++) {
               html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
             }
             $("#mmpf-category-select").html(html);
+            $(".peer-review-list").html("");
           });
         });
         $('#mmpf-category-select').change(function () {
           var categoryID = $('#mmpf-category-select option:selected').val();
           mmooc.api.getGroupsInCategory(categoryID, function(groups) {
             $('.step-3').css('display', 'list-item');
+            $('.step-4').css('display', 'none');
             var html = html + "<option value=''>Choose a group</option>";
             for (var i = 0; i < groups.length; i++) {
               html = html + "<option value=" + groups[i].id + ">" + groups[i].name + "</option>";
             }
             $("#mmpf-group-select").html(html);
+            $(".peer-review-list").html("");
           });
         });
         $('#mmpf-group-select').change(function () {
@@ -3043,98 +3248,145 @@ this.mmooc.powerFunctions = function() {
               html = html + "<option value=" + assignments[i].id + ">" + assignments[i].name + "</option>";
             }
             $("#mmpf-assignment-select").html(html);
+            $(".peer-review-list").html("");
           });
         });
 		$('#mmpf-assignment-select').change(function () {
 			_listPeerReviewsForGroup();
-			_showButton();
+			_showInput();
 		});
 
       });
     }
 
     function _listPeerReviewsForGroup() {
+	    $(".peer-review-list").html("<p>Laster hverandrevurderinger...</p>");
+	    $("#progress").show();
+	    $("#bar").width('0%');
 	    var courseID = $('#mmpf-course-select option:selected').val();
 	    var groupID = $('#mmpf-group-select option:selected').val();
 	    var assignmentID = $('#mmpf-assignment-select option:selected').val();
 	    var html = "<ul>";
 	    var peerReivewsInGroup = [];
+	    var submitted = [];
 	    var count = 0;
+	    var asyncsDone = 0;
 	    var inArray = false;
 	    mmooc.api.getGroupMembers(groupID, function(members) {
-		    mmooc.api.getPeerReviewsForAssignment(courseID, assignmentID, function(peerReviews) {	  	
-		    	for (var i = 0; i < peerReviews.length; i++) {
-			    	for (var j = 0; j < members.length; j++) {			    	
-				    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
-					    	if(peerReivewsInGroup[k] === peerReviews[i]) {
-						    	inArray = true;
-					    	}
-					    }			    	
-			    		if (peerReviews.assessor_id == members.id && !inArray) {
-				    		peerReivewsInGroup[count] = peerReviews[i];
-				    		count++;
-			    		}
-			    		inArray = false;
-			    	}
-			    }			    			    			    
-		    	for (var i = 0; i < members.length; i++) {
-			    	count = 0;
-			    	html = html + "<li>" + members[i].name + "</li><ul>";			    	
-			    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
-				    	if(members[i].id == peerReivewsInGroup[k].assessor_id) {
-					    	html = html + "<li>" + peerReivewsInGroup[k].user.display_name  + "</li>";
-					    	count++;
+		    $("#bar").width('50%');
+		    mmooc.api.getPeerReviewsForAssignment(courseID, assignmentID, function(peerReviews) {
+			    $("#bar").width('100%');
+			    $(".peer-review-list").html("Laster besvarelser...");
+			    $("#progress").show();
+			    $("#bar").width('0%');
+				for (var i = 0; i < members.length; i++) {
+					mmooc.api.getSingleSubmissionForUser(courseID, assignmentID, members[i].id, function(submission) {
+						if (submission.workflow_state == "submitted") {
+							submitted.push(submission);
+						}
+						asyncsDone++;
+						var width = (100 / members.length) * asyncsDone + "%";
+						$("#bar").width(width);
+						if (asyncsDone == members.length) {
+							_renderList();
+						}
+					});
+				}
+				function _renderList() {	  	
+			    	for (var i = 0; i < peerReviews.length; i++) {
+				    	for (var j = 0; j < members.length; j++) {			    	
+					    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
+						    	if(peerReivewsInGroup[k] === peerReviews[i]) {
+							    	inArray = true;
+						    	}
+						    }			    	
+				    		if (peerReviews.assessor_id == members.id && !inArray) {
+					    		peerReivewsInGroup[count] = peerReviews[i];
+					    		count++;
+				    		}
+				    		inArray = false;
 				    	}
-			    	}
-			    	html = html + "</ul>";
-			    	if(count == 0) {
-				    	html = html + "<div>Ingen tildelt</div>";
-			    	}	    			    	
-			    }
-			    $(".peer-review-list").html(html + "</ul>");
-				$('.btn-create-pr').click(function () {
-					_findSubmittedInGroup(members, courseID, assignmentID);	
-				});			        			    
+				    }
+				    inArray = false;			    			    			    
+			    	for (var i = 0; i < members.length; i++) {
+				    	count = 0;
+				    	if(submitted) {
+					    	for (j = 0; j < submitted.length; j++) {
+						    	if (submitted[j].user_id == members[i].id) {
+							    	html = html + "<li>" + members[i].name + "</li><ul>";
+							    	inArray = true;
+							    	break;
+						    	}
+					    	}
+							if (!inArray) {
+							  	html = html + "<li>" + members[i].name + " <span class='no-submission'>Ikke levert besvarelse</span></li><ul>";
+							}
+				    	}else {
+					    	html = html + "<li>" + members[i].name + "</li><ul>";
+				    	}		    	
+				    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
+					    	if(members[i].id == peerReivewsInGroup[k].assessor_id) {
+						    	html = html + "<li>" + peerReivewsInGroup[k].user.display_name  + "</li>";
+						    	count++;
+					    	}
+				    	}
+				    	html = html + "</ul>";
+				    	if(count == 0) {
+					    	html = html + "<div>Ingen tildelt</div>";
+				    	}
+				    	inArray = false;	    			    	
+				    }
+				    $("#progress").hide();
+				    $(".peer-review-list").html(html + "</ul>");
+				    $('.input-wrapper').show();
+					$('.btn-create-pr').click(function () {
+						var numOfReviews = $('.number-of-reviews').val();
+						if (!_isNormalInteger(numOfReviews) || numOfReviews < 1) {
+							alert("Antall gjennomganger må være et positivt heltall");
+						}else if (numOfReviews > (submitted.length - 1)) {
+							alert("For mange gjennomganger i forhold til antall besvarelser");
+						}else {
+							$('.input-wrapper').hide();
+							_createPeerReviewsForGroup(courseID, assignmentID, numOfReviews, submitted);
+						}	
+					});	
+				}			        			    
 		    });       
 		});	
     }
     
-    function _showButton() {
-	    $(".peer-review-create").html("<input type='button' value='Tildel hverandrevurderinger' class='button btn-create-pr'>");
-    }
-
-    function _findSubmittedInGroup(members, courseID, assignmentID) {
-	    var submitted = [];
-	    var asyncsDone = 0;
-		for (var i = 0; i < members.length; i++) {
-			mmooc.api.getSingleSubmissionForUser(courseID, assignmentID, members[i].id, function(submission) {
-				if (submission.workflow_state == "submitted") {
-					submitted.push(submission);
+	function _createPeerReviewsForGroup(courseID, assignmentID, numOfReviews, submitted) {
+		$(".peer-review-list").html("<p>Tildeler hverandrevurderinger...</p>");
+		$("#progress").show();
+		$("#bar").width('0%');
+		asyncsDone = 0;
+		var assigned = [];
+		var assesorIndex;
+		for (var j = 0; j < numOfReviews; j++) {
+			for (var i = 0; i < submitted.length; i++) {				
+				assesorIndex = (i + 1) + j;
+				if (assesorIndex >= submitted.length) {
+					assesorIndex = assesorIndex - submitted.length;	
 				}
-				asyncsDone++;
-				if (asyncsDone == members.length) {
-					_createPeerReviewsForGroup();
-				}
-			});
-		}
-		
-		function _createPeerReviewsForGroup() {
-			asyncsDone = 0;
-			for (var i = 0; i < submitted.length; i++) {
-				if (i == submitted.length - 1) {
-					var userID = submitted[0].user_id; 
-				}else {
-					nextMember = i + 1;
-					var userID = submitted[nextMember].user_id;
-				}						
+				userID = submitted[assesorIndex].user_id;					
 				mmooc.api.createPeerReview(courseID, assignmentID, submitted[i].id, userID, function(result) {					
 					asyncsDone++;
-					if (asyncsDone == submitted.length) {
-						_listPeerReviewsForGroup();	
+					var width = (100 / (numOfReviews * submitted.length)) * asyncsDone + "%";
+					$("#bar").width(width);
+					if (asyncsDone == (submitted.length * numOfReviews)) {
+						_listPeerReviewsForGroup();
 					}
 				});		
-			}			
-		}
+			}
+		}			
+	}
+    
+    function _isNormalInteger(str) {
+    	return /^\+?(0|[1-9]\d*)$/.test(str);
+	}
+    
+    function _showInput() {
+	    $(".peer-review-create").html("<div class='input-wrapper'><input type='text' value='1' style='width:25px;' class='number-of-reviews'> gjennomganger per bruker<br><input type='button' value='Tildel hverandrevurderinger' class='button btn-create-pr'></div>");
     }
 
     return {
@@ -3343,6 +3595,35 @@ Handlebars.registerHelper("norwegianDateAndTime", function(timestamp) {
     var month = months[monthNumber - 1];
     
     return day + month + year + time; //return new Date(timestamp).toString('dd. MMMM yyyy HH:mm'); // yyyy-MM-dd
+});
+
+Handlebars.registerHelper('getSubmissionAssessmentText', function(peerReview) {
+    
+    var submissionText = '';
+    var numberOfReviews = peerReview.length;
+    var numberOfReviewsCompleted = 0;
+    var submissionAssessmentText = '';
+
+    $.each(peerReview, function( index, singlePeerReview ) {
+        if (singlePeerReview.workflow_state == 'completed') {
+            numberOfReviewsCompleted = numberOfReviewsCompleted + 1;
+        }
+    });
+    
+    if (numberOfReviews === 0) {
+        submissionAssessmentText = mmooc.i18n.SubmissionIsNotAssessed;
+    } else if (numberOfReviews === numberOfReviewsCompleted) {
+        if (numberOfReviewsCompleted == 1) {
+            submissionAssessmentText = mmooc.i18n.SubmissionIsAssessedByOne;
+        } else {
+            submissionAssessmentText = mmooc.i18n.SubmissionIsAssessedByAll;
+        }
+         
+    } else {
+        submissionAssessmentText = numberOfReviewsCompleted.toString() + " " + mmooc.i18n.OutOf + " " + numberOfReviews.toString() + " " + mmooc.i18n.SubmissionAssessmentsAreReady; 
+    }
+
+    return submissionAssessmentText; 
 });
 
 Handlebars.registerHelper("getPathFromUrl", function(url) {
@@ -3574,6 +3855,14 @@ this.mmooc.i18n = {
     'Delivery' : 'Innlevering',
     'DetailsAboutYourDelivery' : 'Detaljer om din innlevering',
     'DetailsAboutDelivery' : 'Detaljer om innlevering',
+    'SubmissionIsNotAssessed' : 'Oppgaven er ikke vurdert',
+    'SubmissionIsAssessedByOne' : 'Vurderingen er klar',
+    'SubmissionIsAssessedByAll' : 'Alle vurderinger er klare',
+    'SubmissionAssessmentsAreReady' : 'vurderinger er klare',
+    'ThisIsGroup' : 'Dette er gruppe',
+    'WeHaveAQuestionToTeacherInTheDiscussion' : 'Vi har et spørsmål til veileder i diskusjonen',
+    'NoTeacherFeedbackLink' : 'No teacher_feedback link. Does the help menu have a link to send feedback to the teacher?',
+    'OutOf' : 'av',
     'Months' : ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "Oktober", "november", "december"]
 };
 
@@ -4301,7 +4590,7 @@ function uobAddComponents() {
 		// uob-header and uob-question.
 		// --------------------------------------------------------------------------------
 
-		aBoxTags = ["uob-tip", "uob-info", "uob-warning", "uob-header", "uob-question", "uob-quote", "uob-box"];
+		aBoxTags = ["uob-tip", "uob-read", "uob-info", "uob-warning", "uob-header", "uob-question", "uob-quote", "uob-box"];
 
 		for (var i = 0; i < aBoxTags.length; i++) {
 			var strTag = aBoxTags[i];
@@ -4327,7 +4616,6 @@ function uobAddComponents() {
 				});
 			}
 		}
-
 
 		// ================================================================================
 		// Previews
@@ -4519,6 +4807,7 @@ function getQueryVariable(variable) {
 
 	return(false);
 }
+
 $(function () {
     // console.log("CANVABADGES: Loaded!");
     // NOTE: if pasting this code into another script, you'll need to manually change the
