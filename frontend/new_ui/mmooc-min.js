@@ -7,7 +7,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"mmooc-action-button\">\r\n    <a href=\"#\" id=\"";
+  buffer += "<div class=\"mmooc-action-button\">\n    <a href=\"#\" id=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -15,7 +15,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a>\r\n</div>\r\n";
+    + "</a>\n</div>\n";
   return buffer;
   });
 
@@ -27,7 +27,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n    <li class=\""
+  buffer += "\n    <li class=\""
     + escapeExpression((helper = helpers.checkReadStateFor || (depth0 && depth0.checkReadStateFor),options={hash:{},data:data},helper ? helper.call(depth0, depth0, options) : helperMissing.call(depth0, "checkReadStateFor", depth0, options)))
     + "\"><a href=\""
     + escapeExpression((helper = helpers.findRightUrlFor || (depth0 && depth0.findRightUrlFor),options={hash:{},data:data},helper ? helper.call(depth0, depth0, options) : helperMissing.call(depth0, "findRightUrlFor", depth0, options)))
@@ -37,14 +37,14 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1)
     + "<br><span class=\"mmooc-notification-type\">"
     + escapeExpression((helper = helpers.localize || (depth0 && depth0.localize),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "localize", (depth0 && depth0.type), options)))
-    + "</span></a></li>\r\n";
+    + "</span></a></li>\n";
   return buffer;
   }
 
-  buffer += "<ul id=\"mmooc-notifications\">\r\n";
+  buffer += "<ul id=\"mmooc-notifications\">\n";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.activities), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n\r\n</ul>\r\n\r\n<a href=\"#\" id=\"mmooc-notifications-showall\">Vis alle</a>";
+  buffer += "\n\n</ul>\n\n<a href=\"#\" id=\"mmooc-notifications-showall\">Vis alle</a>";
   return buffer;
   });
 
@@ -68,16 +68,16 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n				<ul class=\"mmooc-assignment-files\">\r\n					";
+  buffer += "\n				<ul class=\"mmooc-assignment-files\">\n					";
   stack1 = helpers.each.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.attachments), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n				</ul>\r\n            ";
+  buffer += "\n				</ul>\n            ";
   return buffer;
   }
 function program6(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n                        <li>\r\n							<a href=\"";
+  buffer += "\n                        <li>\n							<a href=\"";
   if (helper = helpers.url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -85,48 +85,48 @@ function program6(depth0,data) {
   if (helper = helpers.display_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.display_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a>\r\n						</li>\r\n                    ";
+    + "</a>\n						</li>\n                    ";
   return buffer;
   }
 
 function program8(depth0,data) {
   
   
-  return "\r\n				<li>Ingen innleveringer tildelt</li>\r\n			";
+  return "\n				<li>Ingen innleveringer tildelt</li>\n			";
   }
 
 function program10(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n				<li>\r\n					<a class=\""
+  buffer += "\n				<li>\n					<a class=\""
     + escapeExpression((helper = helpers.getPeerReviewWorkflowIconClass || (depth0 && depth0.getPeerReviewWorkflowIconClass),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.workflow_state), options) : helperMissing.call(depth0, "getPeerReviewWorkflowIconClass", (depth0 && depth0.workflow_state), options)))
     + "\" href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assessor)),stack1 == null || stack1 === false ? stack1 : stack1.mmooc_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assessor)),stack1 == null || stack1 === false ? stack1 : stack1.display_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a>\r\n				</li>	\r\n			";
+    + "</a>\n				</li>	\n			";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-assignment-rightside\">\r\n	<div class=\"mmooc-assignment-responses\">\r\n		<h3>Besvarelser</h3>\r\n		<div class=\"mmooc-assignment-responses-contents\">\r\n			<p class=\"mmooc-assignment-delivery-date";
+  buffer += "<div class=\"mmooc-assignment-rightside\">\n	<div class=\"mmooc-assignment-responses\">\n		<h3>Besvarelser</h3>\n		<div class=\"mmooc-assignment-responses-contents\">\n			<p class=\"mmooc-assignment-delivery-date";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">Levert "
     + escapeExpression((helper = helpers.norwegianDateAndTime || (depth0 && depth0.norwegianDateAndTime),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options) : helperMissing.call(depth0, "norwegianDateAndTime", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options)));
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</p>\r\n			";
+  buffer += "</p>\n			";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.attachments), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n		</div>\r\n		<div class=\"mmooc-assignment-details\">\r\n			<a href=\""
+  buffer += "\n		</div>\n		<div class=\"mmooc-assignment-details\">\n			<a href=\""
     + escapeExpression((helper = helpers.getPathFromUrl || (depth0 && depth0.getPathFromUrl),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.preview_url), options) : helperMissing.call(depth0, "getPathFromUrl", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.preview_url), options)))
-    + "\">Vis detaljer om innlevering &raquo;</a>\r\n		</div>\r\n	</div>\r\n	<div class=\"mmooc-peer-reviews\">\r\n		<h3>Hverandrevurdering tildelt deg</h3>\r\n		<ul class=\"unstyled_list\">\r\n			";
+    + "\">Vis detaljer om innlevering &raquo;</a>\n		</div>\n	</div>\n	<div class=\"mmooc-peer-reviews\">\n		<h3>Hverandrevurdering tildelt deg</h3>\n		<ul class=\"unstyled_list\">\n			";
   stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.peerReview)),stack1 == null || stack1 === false ? stack1 : stack1.length), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n			";
+  buffer += "\n			";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.peerReview), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n		</ul>\r\n	</div>\r\n</div>\r\n";
+  buffer += "\n		</ul>\n	</div>\n</div>\n";
   return buffer;
   });
 
@@ -145,7 +145,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-peer-review-warning\">\r\n	<p class=\"mmooc-warning\">\r\n		Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet til hver tildelte hverandrevurdering\r\n	</p>\r\n</div>";
+  return "<div class=\"mmooc-peer-review-warning\">\n	<p class=\"mmooc-warning\">\n		Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet til hver tildelte hverandrevurdering\n	</p>\n</div>";
   });
 
 this["mmooc"]["templates"]["assignmentSubmission"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -168,92 +168,92 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n							<span class=\"mmooc-assignment-delivered-by\"> av "
+  buffer += "\n							<span class=\"mmooc-assignment-delivered-by\"> av "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.user)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</span>\r\n						";
+    + "</span>\n						";
   return buffer;
   }
 
 function program7(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n			";
+  buffer += "\n			";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n		";
+  buffer += "\n		";
   return buffer;
   }
 function program8(depth0,data) {
   
   
-  return "\r\n				<div class=\"mmooc-peer-review-success\">\r\n					<p class=\"mmooc-success singleLine\">\r\n						Du har fullført hverandrevurderingen.\r\n					</p>\r\n				</div>\r\n			";
+  return "\n				<div class=\"mmooc-peer-review-success\">\n					<p class=\"mmooc-success singleLine\">\n						Du har fullført hverandrevurderingen.\n					</p>\n				</div>\n			";
   }
 
 function program10(depth0,data) {
   
   
-  return "\r\n				<div class=\"mmooc-peer-review-warning\">\r\n					<p class=\"mmooc-warning singleLine\">\r\n						Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet.\r\n					</p>\r\n				</div>\r\n			";
+  return "\n				<div class=\"mmooc-peer-review-warning\">\n					<p class=\"mmooc-warning singleLine\">\n						Denne oppgaven er ikke ferdig før du har fylt ut vurderingsskjemaet.\n					</p>\n				</div>\n			";
   }
 
 function program12(depth0,data) {
   
   
-  return "\r\n					<h3>Din vurdering</h3>\r\n				";
+  return "\n					<h3>Din vurdering</h3>\n				";
   }
 
 function program14(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n					";
+  buffer += "\n					";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.program(17, program17, data),fn:self.program(15, program15, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n					\r\n				";
+  buffer += "\n					\n				";
   return buffer;
   }
 function program15(depth0,data) {
   
   
-  return "\r\n						<h3>Vurdering av besvarelse</h3>\r\n					";
+  return "\n						<h3>Vurdering av besvarelse</h3>\n					";
   }
 
 function program17(depth0,data) {
   
   
-  return "\r\n						<h3>Vurdering av din besvarelse</h3>	\r\n					";
+  return "\n						<h3>Vurdering av din besvarelse</h3>	\n					";
   }
 
 function program19(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n				<p class=\"assessment\">Karakter: "
+  buffer += "\n				<p class=\"assessment\">Karakter: "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.points_possible)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</p>\r\n				";
+    + "</p>\n				";
   return buffer;
   }
 
 function program21(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n					";
+  buffer += "\n					";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.isPeerReviewFinished), {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vurderingsskjema</a>\r\n				";
+  buffer += "\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vurderingsskjema</a>\n				";
   return buffer;
   }
 function program22(depth0,data) {
   
   
-  return "\r\n						<p class=\"assessment-warning\">Du har ikke vurdert denne oppgaven.</p>\r\n					";
+  return "\n						<p class=\"assessment-warning\">Du har ikke vurdert denne oppgaven.</p>\n					";
   }
 
 function program24(depth0,data) {
   
   var buffer = "", helper, options;
-  buffer += "\r\n					<p class=\"assessment-text\">"
+  buffer += "\n					<p class=\"assessment-text\">"
     + escapeExpression((helper = helpers.getSubmissionAssessmentText || (depth0 && depth0.getSubmissionAssessmentText),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.peerReview), options) : helperMissing.call(depth0, "getSubmissionAssessmentText", (depth0 && depth0.peerReview), options)))
-    + "</p>\r\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vis vurdering</a>\r\n				";
+    + "</p>\n					<a href=\"#\" class=\"open-assessment-dialog-button\">Vis vurdering</a>\n				";
   return buffer;
   }
 
@@ -281,47 +281,47 @@ function program32(depth0,data) {
   return " withNoGradesText";
   }
 
-  buffer += "<div class=\"mmooc-assignment-submission\">\r\n	<div class=\"mmooc-assignment-submission-leftside\">\r\n		<div class=\"mmooc-assignment-submission-metadata\">\r\n			<h2 class=\"mmooc-assignment-submission-header\">";
+  buffer += "<div class=\"mmooc-assignment-submission\">\n	<div class=\"mmooc-assignment-submission-leftside\">\n		<div class=\"mmooc-assignment-submission-metadata\">\n			<h2 class=\"mmooc-assignment-submission-header\">";
   if (helper = helpers.submissionTitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.submissionTitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h2>\r\n			<ul class=\"mmooc-assignment-submission-metadata-list\">\r\n				<li>\r\n					<span class=\"title\">Oppgave:</span>\r\n					<span class=\"value\"><a href=\"/courses/"
+    + "</h2>\n			<ul class=\"mmooc-assignment-submission-metadata-list\">\n				<li>\n					<span class=\"title\">Oppgave:</span>\n					<span class=\"value\"><a href=\"/courses/"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.course)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/assignments/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.assignment_id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assignment)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a></span>\r\n				</li>\r\n				<li>\r\n					<span class=\"title\">Innlevert:</span>\r\n					<span class=\"value\">\r\n						<span class=\"mmooc-assignment-delivery-date";
+    + "</a></span>\n				</li>\n				<li>\n					<span class=\"title\">Innlevert:</span>\n					<span class=\"value\">\n						<span class=\"mmooc-assignment-delivery-date";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">"
     + escapeExpression((helper = helpers.norwegianDateAndTime || (depth0 && depth0.norwegianDateAndTime),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options) : helperMissing.call(depth0, "norwegianDateAndTime", ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.submitted_at), options)));
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.late), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span>\r\n						";
+  buffer += "</span>\n						";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n						";
+  buffer += "\n						";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isTeacherViewingStudentsSubmission), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n					</span>\r\n				</li>\r\n			</ul>\r\n		</div>\r\n		";
+  buffer += "\n					</span>\n				</li>\n			</ul>\n		</div>\n		";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n	</div>\r\n	<div class=\"mmooc-assignment-submission-rightside\">\r\n		<div class=\"mmooc-assignment-submission-assessment\">\r\n			<div class=\"mmooc-assignment-submission-assessment-header\">\r\n				";
+  buffer += "\n	</div>\n	<div class=\"mmooc-assignment-submission-rightside\">\n		<div class=\"mmooc-assignment-submission-assessment\">\n			<div class=\"mmooc-assignment-submission-assessment-header\">\n				";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n			</div>\r\n			<div class=\"mmooc-assignment-submission-assessment-contents\">\r\n				";
+  buffer += "\n			</div>\n			<div class=\"mmooc-assignment-submission-assessment-contents\">\n				";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.noop,fn:self.program(19, program19, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n				";
+  buffer += "\n				";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(24, program24, data),fn:self.program(21, program21, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n			</div>\r\n		</div>\r\n	</div>\r\n</div>\r\n<div class=\"mmooc-assignment-submission-answers";
+  buffer += "\n			</div>\n		</div>\n	</div>\n</div>\n<div class=\"mmooc-assignment-submission-answers";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isPeerReview), {hash:{},inverse:self.program(28, program28, data),fn:self.program(26, program26, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.submission)),stack1 == null || stack1 === false ? stack1 : stack1.grade), {hash:{},inverse:self.program(32, program32, data),fn:self.program(30, program30, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\r\n	<h3>Besvarelser</h3>\r\n</div>";
+  buffer += "\">\n	<h3>Besvarelser</h3>\n</div>";
   return buffer;
   });
 
@@ -331,7 +331,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"mmooc-back-button\">\r\n    <a href=\"";
+  buffer += "<div class=\"mmooc-back-button\">\n    <a href=\"";
   if (helper = helpers.url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -339,7 +339,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a>\r\n</div>\r\n";
+    + "</a>\n</div>\n";
   return buffer;
   });
 
@@ -351,54 +351,56 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n            <div id=\"course_";
+  buffer += "\n            <div id=\"course_";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"mmooc-size-1of3\">\r\n                <div class=\"mmooc-course-list-item\">\r\n                    <div class=\"mmooc-course-list-heading\">\r\n                        <h2><a href=\""
+    + "\" class=\"mmooc-size-1of3\">\n                <div class=\"mmooc-course-list-item\">\n                    <div class=\"mmooc-course-list-heading\">\n                        <h2><a href=\""
     + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.id), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.id), options)))
     + "\">";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a></h2>\r\n                    </div>\r\n\r\n                    <div class=\"mmooc-course-list-description\">\r\n						";
+    + "</a></h2>\n                    </div>\n\n                    <div class=\"mmooc-course-list-description\">\n						";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.syllabus_body), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n		";
+  buffer += "\n                    </div>\n                </div>\n            </div>\n\n		";
   return buffer;
   }
 function program2(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n\r\n							";
+  buffer += "\n\n							";
   if (helper = helpers.syllabus_body) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.syllabus_body); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n\r\n						";
+  buffer += "\n\n						";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-course-list\">\r\n    <h1>Mine studier</h1>\r\n    <div class=\"mmooc-row\">\r\n		";
+  buffer += "<div class=\"mmooc-course-list\">\n    <h1>Mine studier</h1>\n    <div class=\"mmooc-row\">\n		";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </div>\r\n</div>";
+  buffer += "\n    </div>\n</div>";
   return buffer;
   });
 
 this["mmooc"]["templates"]["courselistprogress"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n    	<a href=\""
+  buffer += "\n    	<a href=\""
     + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.id), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.id), options)))
     + "\" class=\"btn rounded ";
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.course_progress), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">Gå til kursside</a>\r\n    ";
+  buffer += "\">"
+    + escapeExpression(((stack1 = (depth1 && depth1.navname)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n    ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -428,30 +430,30 @@ function program4(depth0,data) {
 function program6(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n		";
+  buffer += "\n		";
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.course_progress), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n	";
+  buffer += "\n	";
   return buffer;
   }
 function program7(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n			";
+  buffer += "\n			";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.requirement_count), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n		";
+  buffer += "\n		";
   return buffer;
   }
 function program8(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n	            <div class=\"mmooc-progress-bar";
+  buffer += "\n	            <div class=\"mmooc-progress-bar";
   stack1 = (helper = helpers.ifEquals || (depth0 && depth0.ifEquals),options={hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options) : helperMissing.call(depth0, "ifEquals", (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\r\n	                <div class=\"mmooc-progress-bar-inner\" style=\"width:"
+  buffer += "\">\n	                <div class=\"mmooc-progress-bar-inner\" style=\"width:"
     + escapeExpression((helper = helpers.percentage || (depth0 && depth0.percentage),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options) : helperMissing.call(depth0, "percentage", (depth0 && depth0.requirement_completed_count), (depth0 && depth0.requirement_count), options)))
-    + "%\">\r\n	                </div>\r\n	            </div>\r\n			";
+    + "%\">\n	                </div>\n	            </div>\n			";
   return buffer;
   }
 function program9(depth0,data) {
@@ -460,13 +462,13 @@ function program9(depth0,data) {
   return " mmooc-progress-bar-done";
   }
 
-  buffer += "<div class=\"mmooc-course-list-button\">\r\n	";
-  stack1 = helpers['with'].call(depth0, (depth0 && depth0.course), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "<div class=\"mmooc-course-list-button\">\n	";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.course), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</div>\r\n\r\n<div class=\"mmooc-course-list-progress\">\r\n	";
+  buffer += "\n</div>\n\n<div class=\"mmooc-course-list-progress\">\n	";
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.course), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</div>\r\n";
+  buffer += "\n</div>\n";
   return buffer;
   });
 
@@ -499,16 +501,16 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n        <ul class=\"mmooc-course-tabs\">\r\n            ";
+  buffer += "\n        <ul class=\"mmooc-course-tabs\">\n            ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.menuItems), {hash:{},inverse:self.noop,fn:self.programWithDepth(6, program6, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        </ul>\r\n        ";
+  buffer += "\n        </ul>\n        ";
   return buffer;
   }
 function program6(depth0,data,depth1) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n                <li class=\"mmooc-course-tab ";
+  buffer += "\n                <li class=\"mmooc-course-tab ";
   stack1 = (helper = helpers.ifEquals || (depth0 && depth0.ifEquals),options={hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.title), (depth1 && depth1.selectedMenuItem), options) : helperMissing.call(depth0, "ifEquals", (depth0 && depth0.title), (depth1 && depth1.selectedMenuItem), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\"><a href=\"";
@@ -519,7 +521,7 @@ function program6(depth0,data,depth1) {
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a></li>\r\n            ";
+    + "</a></li>\n            ";
   return buffer;
   }
 function program7(depth0,data) {
@@ -531,24 +533,24 @@ function program7(depth0,data) {
   buffer += "<div id=\"mmooc-course-tabs-container\"";
   stack1 = helpers.unless.call(depth0, ((stack1 = (depth0 && depth0.menuItems)),stack1 == null || stack1 === false ? stack1 : stack1.length), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += ">\r\n    <div id=\"mmooc-course-tabs-container-inner\">\r\n\r\n        <h1>";
+  buffer += ">\n    <div id=\"mmooc-course-tabs-container-inner\">\n\n        <h1>";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h1>\r\n        ";
+    + "</h1>\n        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.subtitle), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        \r\n        ";
+  buffer += "\n        \n        ";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.menuItems)),stack1 == null || stack1 === false ? stack1 : stack1.length), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </div>\r\n</div>";
+  buffer += "\n    </div>\n</div>";
   return buffer;
   });
 
 this["mmooc"]["templates"]["courseprogress"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -556,12 +558,16 @@ function program1(depth0,data) {
   return " mmooc-progress-bar-done";
   }
 
-  buffer += "<div class=\"mmooc-course-progress\">\r\n    <div>\r\n        <div class=\"mmooc-course-progress-label\">Din kursprogresjon:</div>\r\n        <div class=\"mmooc-course-progress-bar\">\r\n            <div class=\"mmooc-progress-bar";
+  buffer += "<div class=\"mmooc-course-progress\">\n    <div>\n        <div class=\"mmooc-course-progress-label\">";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</div>\n        <div class=\"mmooc-course-progress-bar\">\n            <div class=\"mmooc-progress-bar";
   stack1 = (helper = helpers.ifAllModulesCompleted || (depth0 && depth0.ifAllModulesCompleted),options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.modules), options) : helperMissing.call(depth0, "ifAllModulesCompleted", (depth0 && depth0.modules), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\r\n                <div class=\"mmooc-progress-bar-inner\" style=\"width:"
+  buffer += "\">\n                <div class=\"mmooc-progress-bar-inner\" style=\"width:"
     + escapeExpression((helper = helpers.percentageForModules || (depth0 && depth0.percentageForModules),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.modules), options) : helperMissing.call(depth0, "percentageForModules", (depth0 && depth0.modules), options)))
-    + "%\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>";
+    + "%\">\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>";
   return buffer;
   });
 
@@ -571,7 +577,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<footer role=\"contentinfo\" id=\"mmooc-footer\" class=\"ic-app-footer\">\r\n    <div class=\"mmooc-license\">\r\n        <p class=\"public-license-text\">Lisensnivå: Illustrasjoner og filmer utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-nd/4.0/\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-ND 4.0</span></a><br>\r\n        Annet innhold utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-SA 4.0</span></a>\r\n        </p>\r\n    </div>\r\n</footer>";
+  return "<footer role=\"contentinfo\" id=\"mmooc-footer\" class=\"ic-app-footer\">\n    <div class=\"mmooc-license\">\n        <p class=\"public-license-text\">Lisensnivå: Illustrasjoner og filmer utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-nd/4.0/\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-ND 4.0</span></a><br>\n        Annet innhold utviklet i regi av prosjektet: <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0\" class=\"external\" target=\"_blank\" rel=\"license\"><span>CC BY-NC-SA 4.0</span></a>\n        </p>\n    </div>\n</footer>";
   });
 
 this["mmooc"]["templates"]["groupdiscussionGetHelpFromTeacher"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -580,7 +586,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"getTeachersHelpContainer\">\r\n    <button type=\"button\" id=\"mmooc-get-teachers-help\" class=\"btn btn-primary getTeachersHelp\">Tilkall veileder</button>\r\n</div>";
+  return "<div class=\"getTeachersHelpContainer\">\n    <button type=\"button\" id=\"mmooc-get-teachers-help\" class=\"btn btn-primary getTeachersHelp\">Tilkall veileder</button>\n</div>";
   });
 
 this["mmooc"]["templates"]["groupdiscussionheader"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -589,11 +595,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div id=\"mmooc-group-header\">\r\n    <div id=\"mmooc-group-members\">\r\n        <div class=\"mmooc-back-button\">\r\n            <a href=\"/groups/"
+  buffer += "<div id=\"mmooc-group-header\">\n    <div id=\"mmooc-group-members\">\n        <div class=\"mmooc-back-button\">\n            <a href=\"/groups/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.group)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/discussion_topics\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.group)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a>\r\n        </div>\r\n    </div>\r\n    <div id=\"mmooc-group-links\">\r\n    </div>\r\n\r\n</div>\r\n";
+    + "</a>\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n    </div>\n\n</div>\n";
   return buffer;
   });
 
@@ -605,11 +611,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n                <div class=\"mmooc-group-member\">\r\n                    <div class=\"mmooc-group-member-avatar\" style=\"background-image: url('";
+  buffer += "\n                <div class=\"mmooc-group-member\">\n                    <div class=\"mmooc-group-member-avatar\" style=\"background-image: url('";
   if (helper = helpers.avatar_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.avatar_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "')\"></div>\r\n                    <div class=\"mmooc-group-member-link\">\r\n                        <a href=\"/about/";
+    + "')\"></div>\n                    <div class=\"mmooc-group-member-link\">\n                        <a href=\"/about/";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -617,20 +623,20 @@ function program1(depth0,data) {
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</a>\r\n                    </div>\r\n                </div>\r\n            ";
+    + "</a>\n                    </div>\n                </div>\n            ";
   return buffer;
   }
 
-  buffer += "<div class=\"mmooc-back-button\">\r\n    <a href=\""
+  buffer += "<div class=\"mmooc-back-button\">\n    <a href=\""
     + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.courseId), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.courseId), options)))
-    + "/groups\">Tilbake til kursgrupper</a>\r\n</div>\r\n<div id=\"mmooc-group-header\">\r\n    <div id=\"mmooc-group-members\">\r\n        <p><b>Gruppemedlemmer</b></p>\r\n\r\n        <div class=\"mmooc-group-members-list\">\r\n            ";
+    + "/groups\">Tilbake til kursgrupper</a>\n</div>\n<div id=\"mmooc-group-header\">\n    <div id=\"mmooc-group-members\">\n        <p><b>Gruppemedlemmer</b></p>\n\n        <div class=\"mmooc-group-members-list\">\n            ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.members), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        </div>\r\n    </div>\r\n    <div id=\"mmooc-group-links\">\r\n        <p>\r\n            <a target=\"_new\" href=\"https://connect.uninett.no/uit-videorom-matematikkmooc-";
+  buffer += "\n        </div>\n    </div>\n    <div id=\"mmooc-group-links\">\n        <p>\n            <a target=\"_new\" href=\"https://connect.uninett.no/uit-videorom-matematikkmooc-";
   if (helper = helpers.groupId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.groupId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"external\"><b>Videorom for gruppa</b> <span class=\"ui-icon ui-icon-extlink ui-icon-inline\" title=\"Lenker til en ekstern side.\"></span></a>\r\n        </p>\r\n    </div>\r\n\r\n</div>\r\n";
+    + "\" class=\"external\"><b>Videorom for gruppa</b> <span class=\"ui-icon ui-icon-extlink ui-icon-inline\" title=\"Lenker til en ekstern side.\"></span></a>\n        </p>\n    </div>\n\n</div>\n";
   return buffer;
   });
 
@@ -642,53 +648,53 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n        <div class=\"header\">\r\n            ";
+  buffer += "\n        <div class=\"header\">\n            ";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\r\n        </div>\r\n\r\n        ";
+    + "\n        </div>\n\n        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    ";
+  buffer += "\n    ";
   return buffer;
   }
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n            <ul class=\"mmooc-module-items\">\r\n                ";
+  buffer += "\n            <ul class=\"mmooc-module-items\">\n                ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n            </ul>\r\n        ";
+  buffer += "\n            </ul>\n        ";
   return buffer;
   }
 function program3(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n                    <li class=\"mmooc-module-item mmooc-module-item-icon\">\r\n                        <a class=\"";
+  buffer += "\n                    <li class=\"mmooc-module-item mmooc-module-item-icon\">\n                        <a class=\"";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.isCurrent), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\" href=\"";
   if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\r\n                            <span class=\"mmooc-module-item-title\">";
+    + "\">\n                            <span class=\"mmooc-module-item-title\">";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</span>\r\n                            <span class=\"mmooc-module-items-icons-";
+    + "</span>\n                            <span class=\"mmooc-module-items-icons-";
   if (helper = helpers.type) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.type); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1);
   stack1 = (helper = helpers.ifItemIsCompleted || (depth0 && depth0.ifItemIsCompleted),options={hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.completion_requirement), options) : helperMissing.call(depth0, "ifItemIsCompleted", (depth0 && depth0.completion_requirement), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\"\r\n                               href=\"";
+  buffer += "\"\n                               href=\"";
   if (helper = helpers.html_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.html_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\r\n                                <i class=\"icon-"
+    + "\">\n                                <i class=\"icon-"
     + escapeExpression((helper = helpers.lowercase || (depth0 && depth0.lowercase),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "lowercase", (depth0 && depth0.type), options)))
     + escapeExpression((helper = helpers.overrideIconClassByTitle || (depth0 && depth0.overrideIconClassByTitle),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.title), options) : helperMissing.call(depth0, "overrideIconClassByTitle", (depth0 && depth0.title), options)))
-    + "\"></i>\r\n                            </span>\r\n                        </a>\r\n                    </li>\r\n                ";
+    + "\"></i>\n                            </span>\n                        </a>\n                    </li>\n                ";
   return buffer;
   }
 function program4(depth0,data) {
@@ -703,36 +709,42 @@ function program6(depth0,data) {
   return " done";
   }
 
-  buffer += "<nav aria-label=\"content\" role=\"navigation\">\r\n\r\n    <div class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\r\n        <a href=\""
+  buffer += "<nav aria-label=\"content\" role=\"navigation\">\n\n    <div class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\n        <a href=\""
     + escapeExpression((helper = helpers.urlForCourseId || (depth0 && depth0.urlForCourseId),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.courseId), options) : helperMissing.call(depth0, "urlForCourseId", (depth0 && depth0.courseId), options)))
-    + "\">Tilbake til kursforsiden</a>\r\n    </div>\r\n\r\n    ";
+    + "\">";
+  if (helper = helpers.backToCoursePage) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.backToCoursePage); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n    </div>\n\n    ";
   stack1 = helpers['with'].call(depth0, (depth0 && depth0.module), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</nav>";
+  buffer += "\n</nav>";
   return buffer;
   });
 
 this["mmooc"]["templates"]["modules"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n        <div class=\"mmooc-module\">\r\n            <h2 class=\"light\">";
+  buffer += "\n        <div class=\"mmooc-module\">\n            <h2 class=\"light\">";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h2>\r\n            <a href=\""
+    + "</h2>\n            <a href=\""
     + escapeExpression((helper = helpers.urlForFirstNoneCompleteItem || (depth0 && depth0.urlForFirstNoneCompleteItem),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.items), options) : helperMissing.call(depth0, "urlForFirstNoneCompleteItem", (depth0 && depth0.items), options)))
     + "\" class=\"btn rounded ";
   stack1 = (helper = helpers.ifAllItemsCompleted || (depth0 && depth0.ifAllItemsCompleted),options={hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data},helper ? helper.call(depth0, (depth0 && depth0.items), options) : helperMissing.call(depth0, "ifAllItemsCompleted", (depth0 && depth0.items), options));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">Gå til modul</a>\r\n            ";
+  buffer += "\">"
+    + escapeExpression(((stack1 = (depth1 && depth1.navname)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n            ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        </div>\r\n    ";
+  buffer += "\n        </div>\n    ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -744,16 +756,16 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n                <ul class=\"mmooc-module-items-icons\">\r\n                    ";
+  buffer += "\n                <ul class=\"mmooc-module-items-icons\">\n                    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.items), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n                </ul>\r\n            ";
+  buffer += "\n                </ul>\n            ";
   return buffer;
   }
 function program5(depth0,data) {
   
   var buffer = "", stack1, helper, options;
-  buffer += "\r\n                        <li class=\"mmooc-module-item-icon\"><a class=\"mmooc-module-items-icons-";
+  buffer += "\n                        <li class=\"mmooc-module-item-icon\"><a class=\"mmooc-module-items-icons-";
   if (helper = helpers.type) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.type); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -771,7 +783,7 @@ function program5(depth0,data) {
     + "\"><i class=\"icon-"
     + escapeExpression((helper = helpers.lowercase || (depth0 && depth0.lowercase),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.type), options) : helperMissing.call(depth0, "lowercase", (depth0 && depth0.type), options)))
     + escapeExpression((helper = helpers.overrideIconClassByTitle || (depth0 && depth0.overrideIconClassByTitle),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.title), options) : helperMissing.call(depth0, "overrideIconClassByTitle", (depth0 && depth0.title), options)))
-    + "\"></i></a></li>\r\n                    ";
+    + "\"></i></a></li>\n                    ";
   return buffer;
   }
 function program6(depth0,data) {
@@ -780,10 +792,14 @@ function program6(depth0,data) {
   return "done";
   }
 
-  buffer += "<div class=\"mmooc-modules\">\r\n    <h2 class=\"h3\">Kursmoduler</h2>\r\n    ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.modules), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "<div class=\"mmooc-modules\">\n    <h2 class=\"h3\">";
+  if (helper = helpers.coursemodules) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.coursemodules); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h2>\n    ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.modules), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</div> \r\n";
+  buffer += "\n</div> \n";
   return buffer;
   });
 
@@ -793,11 +809,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<nav class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\r\n    <span href=\"#\" onclick=\"mmooc.util.goBack()\">\r\n        ";
+  buffer += "<nav class=\"mmooc-module-items-back-to-course-button mmooc-back-button\">\n    <span href=\"#\" onclick=\"mmooc.util.goBack()\">\n        ";
   if (helper = helpers.linkText) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.linkText); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\r\n    </span>\r\n</nav>";
+    + "\n    </span>\n</nav>";
   return buffer;
   });
 
@@ -809,7 +825,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n      <option value=\"";
+  buffer += "\n      <option value=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -817,17 +833,17 @@ function program1(depth0,data) {
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</option>\r\n      ";
+    + "</option>\n      ";
   return buffer;
   }
 
-  buffer += "<div>\r\n  <form>\r\n    <select name=\"account\">\r\n      <option value=\"\">Choose the account...</option>\r\n      ";
+  buffer += "<div>\n  <form>\n    <select name=\"account\">\n      <option value=\"\">Choose the account...</option>\n      ";
   options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
   if (helper = helpers.accounts) { stack1 = helper.call(depth0, options); }
   else { helper = (depth0 && depth0.accounts); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
   if (!helpers.accounts) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    </select>\r\n  </form>\r\n</div>\r\n";
+  buffer += "\n    </select>\n  </form>\n</div>\n";
   return buffer;
   });
 
@@ -839,24 +855,24 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n    <tr id=\"mmpf-assign-"
+  buffer += "\n    <tr id=\"mmpf-assign-"
     + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">\r\n      <td>";
+    + "\">\n      <td>";
   if (helper = helpers.group_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.group_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td>";
+    + "</td>\n      <td>";
   if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td class=\"status waiting\">Waiting</td>\r\n    ";
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
   return buffer;
   }
 
-  buffer += "<table>\r\n  <thead>\r\n    <tr>\r\n      <th>Group ID</th>\r\n      <th>Student ID</th>\r\n      <th>Status</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    ";
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>Group ID</th>\n      <th>Student ID</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.assigns), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n  </tbody>\r\n<table>\r\n\r\n";
+  buffer += "\n  </tbody>\n<table>\n\n";
   return buffer;
   });
 
@@ -866,7 +882,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<form>\r\n  <dl>\r\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\r\n    <dd><input type=\"file\" name=\"csv\"></dd>\r\n  </dl>\r\n  <input type=\"submit\"/>\r\n</form>\r\n\r\n<div class=\"side-information\">\r\n  <h3>Decription of CSV format</h3>\r\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\r\n  <dl>\r\n    <dt>group_id [Integer]\r\n    <dd>The group ID\r\n    <dt>user_id [String]\r\n    <dd>The FEIDE user ID\r\n  </dl>\r\n</div>\r\n\r\n";
+  return "<form>\n  <dl>\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\n    <dd><input type=\"file\" name=\"csv\"></dd>\n  </dl>\n  <input type=\"submit\"/>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>group_id [Integer]\n    <dd>The group ID\n    <dt>user_id [String]\n    <dd>The FEIDE user ID\n  </dl>\n</div>\n\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/course-groups"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -877,22 +893,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\r\n          <option value=\"\">No courses defined for account</option>\r\n        ";
+  return "\n          <option value=\"\">No courses defined for account</option>\n        ";
   }
 
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n          <option value=\"\">Choose a course</option>\r\n          ";
+  buffer += "\n          <option value=\"\">Choose a course</option>\n          ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        ";
+  buffer += "\n        ";
   return buffer;
   }
 function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n            <option value=\"";
+  buffer += "\n            <option value=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -900,14 +916,14 @@ function program4(depth0,data) {
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</option>\r\n          ";
+    + "</option>\n          ";
   return buffer;
   }
 
-  buffer += "<form>\r\n  <ol>\r\n    <li class=\"step-1\">\r\n      <select id=\"mmpf-course-select\">\r\n        ";
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select id=\"mmpf-course-select\">\n        ";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n      </select>\r\n    <li class=\"step-2\">\r\n      <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\r\n          <option value=\"\">No group sets defined for course</option>\r\n      </select>\r\n    <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\r\n    <li class=\"step-4\"><input type=\"submit\"/>\r\n  </ol>\r\n</form>\r\n\r\n<div class=\"side-information\">\r\n  <h3>Decription of CSV format</h3>\r\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\r\n  <dl>\r\n    <dt>name [String]\r\n    <dd>The name of the group\r\n    <dt>description [String]\r\n    <dd>A description of the group\r\n  </dl>\r\n</div>\r\n";
+  buffer += "\n      </select>\n    <li class=\"step-2\">\n      <select name=\"category\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n          <option value=\"\">No group sets defined for course</option>\n      </select>\n    <li class=\"step-3\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-4').css('display', 'list-item')\">\n    <li class=\"step-4\"><input type=\"submit\"/>\n  </ol>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>name [String]\n    <dd>The name of the group\n    <dt>description [String]\n    <dd>A description of the group\n  </dl>\n</div>\n";
   return buffer;
   });
 
@@ -919,22 +935,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\r\n          <option value=\"\">No group sets defined for account</option>\r\n        ";
+  return "\n          <option value=\"\">No group sets defined for account</option>\n        ";
   }
 
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n          <option value=\"\">Choose a group set</option>\r\n          ";
+  buffer += "\n          <option value=\"\">Choose a group set</option>\n          ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.categories), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        ";
+  buffer += "\n        ";
   return buffer;
   }
 function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n            <option value=\"";
+  buffer += "\n            <option value=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -942,14 +958,14 @@ function program4(depth0,data) {
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</option>\r\n          ";
+    + "</option>\n          ";
   return buffer;
   }
 
-  buffer += "<form>\r\n  <ol>\r\n    <li class=\"step-1\">\r\n      <select name=\"category\"  onchange=\"$('.step-2').css('display', 'list-item')\">\r\n        ";
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select name=\"category\"  onchange=\"$('.step-2').css('display', 'list-item')\">\n        ";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.categories), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n      </select>\r\n    <li class=\"step-2\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-3').css('display', 'list-item')\">\r\n    <li class=\"step-3\"><input type=\"submit\"/>\r\n  </ol>\r\n</form>\r\n\r\n<div class=\"side-information\">\r\n  <h3>Decription of CSV format</h3>\r\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\r\n  <dl>\r\n    <dt>name [String]\r\n    <dd>The name of the group\r\n    <dt>description [String]\r\n    <dd>A description of the group\r\n  </dl>\r\n</div>\r\n";
+  buffer += "\n      </select>\n    <li class=\"step-2\"><input type=\"file\" name=\"csv\"  onchange=\"$('.step-3').css('display', 'list-item')\">\n    <li class=\"step-3\"><input type=\"submit\"/>\n  </ol>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>name [String]\n    <dd>The name of the group\n    <dt>description [String]\n    <dd>A description of the group\n  </dl>\n</div>\n";
   return buffer;
   });
 
@@ -961,27 +977,27 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n    <tr id=\"mmpf-group-"
+  buffer += "\n    <tr id=\"mmpf-group-"
     + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">\r\n      <td>";
+    + "\">\n      <td>";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td>";
+    + "</td>\n      <td>";
   if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td class=\"status waiting\">Waiting</td>\r\n    ";
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
   return buffer;
   }
 
-  buffer += "<table>\r\n  <thead>\r\n    <tr>\r\n      <th>Name</th>\r\n      <th>Description</th>\r\n      <th>Status</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    ";
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>Name</th>\n      <th>Description</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
   options={hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}
   if (helper = helpers.groups) { stack1 = helper.call(depth0, options); }
   else { helper = (depth0 && depth0.groups); stack1 = typeof helper === functionType ? helper.call(depth0, options) : helper; }
   if (!helpers.groups) { stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n  </tbody>\r\n<table>\r\n\r\n";
+  buffer += "\n  </tbody>\n<table>\n\n";
   return buffer;
   });
 
@@ -991,11 +1007,25 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
+  buffer += "<div class=\"mmooc-power-functions\">\n  <h1 class=\"xl\">Power Functions</h1>\n  <h2>";
+  if (helper = helpers.heading) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.heading); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h2>\n  <p><a href=\"/?mmpf\">Back</a></p>\n\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/headteacher"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
   buffer += "<div class=\"mmooc-power-functions\">\r\n  <h1 class=\"xl\">Power Functions</h1>\r\n  <h2>";
   if (helper = helpers.heading) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.heading); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h2>\r\n  <p><a href=\"/?mmpf\">Back</a></p>\r\n\r\n";
+    + "</h2>\r\n\r\n";
   return buffer;
   });
 
@@ -1007,40 +1037,40 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\r\n  <p>No groups found for account</p>\r\n";
+  return "\n  <p>No groups found for account</p>\n";
   }
 
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n  <table>\r\n    <tr><th>ID</th><th>Name</th><th>Description</th></tr>\r\n    ";
+  buffer += "\n  <table>\n    <tr><th>ID</th><th>Name</th><th>Description</th></tr>\n    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.groups), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n  </table>\r\n";
+  buffer += "\n  </table>\n";
   return buffer;
   }
 function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n      <tr>\r\n        <td class=\"right\">";
+  buffer += "\n      <tr>\n        <td class=\"right\">";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n        <td>";
+    + "</td>\n        <td>";
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n        <td>";
+    + "</td>\n        <td>";
   if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      </tr>\r\n    ";
+    + "</td>\n      </tr>\n    ";
   return buffer;
   }
 
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.groups), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n";
+  buffer += "\n";
   return buffer;
   });
 
@@ -1052,24 +1082,24 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n    <tr id=\"mmpf-logins-"
+  buffer += "\n    <tr id=\"mmpf-logins-"
     + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">\r\n      <td>";
+    + "\">\n      <td>";
   if (helper = helpers.user_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.user_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td>";
+    + "</td>\n      <td>";
   if (helper = helpers.login_id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.login_id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n      <td class=\"status waiting\">Waiting</td>\r\n    ";
+    + "</td>\n      <td class=\"status waiting\">Waiting</td>\n    ";
   return buffer;
   }
 
-  buffer += "<table>\r\n  <thead>\r\n    <tr>\r\n      <th>User ID</th>\r\n      <th>Login ID</th>\r\n      <th>Status</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    ";
+  buffer += "<table>\n  <thead>\n    <tr>\n      <th>User ID</th>\n      <th>Login ID</th>\n      <th>Status</th>\n    </tr>\n  </thead>\n  <tbody>\n    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.logins), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n  </tbody>\r\n<table>\r\n";
+  buffer += "\n  </tbody>\n<table>\n";
   return buffer;
   });
 
@@ -1079,7 +1109,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<form>\r\n  <dl>\r\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\r\n    <dd><input type=\"file\" name=\"csv\"></dd>\r\n  </dl>\r\n  <input type=\"submit\"/>\r\n</form>\r\n\r\n<div class=\"side-information\">\r\n  <h3>Decription of CSV format</h3>\r\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\r\n  <dl>\r\n    <dt>current_id [String]\r\n    <dd>The current FEIDE user ID \r\n    <dt>new_id [String]\r\n    <dd>The new  FEIDE user ID\r\n  </dl>\r\n</div>\r\n\r\n";
+  return "<form>\n  <dl>\n    <dt><label for=\"csv\">Upload CSV file</label></dt>\n    <dd><input type=\"file\" name=\"csv\"></dd>\n  </dl>\n  <input type=\"submit\"/>\n</form>\n\n<div class=\"side-information\">\n  <h3>Decription of CSV format</h3>\n  <p>First line of the file must be the name of the columns. Column separators are commas. Fields optionally encloused by double quotes (\").\n  <dl>\n    <dt>current_id [String]\n    <dd>The current FEIDE user ID \n    <dt>new_id [String]\n    <dd>The new  FEIDE user ID\n  </dl>\n</div>\n\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1088,7 +1118,16 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-pf-list\">\r\n  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\r\n  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create account groups</div>\r\n  <div id=\"mmooc-pf-course-group-btn\" class=\"item\">Create course groups</div>\r\n  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\r\n  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\r\n  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\r\n</div>\r\n";
+  return "<div class=\"mmooc-pf-main\">\n	<h3>Teacher functions</h3>\n	<div class=\"mmooc-pf-list\">\n	  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\n	  <div id=\"mmooc-pf-student-progress-btn\" class=\"item\">Student progress</div>\n	</div>\n	<h3>Administrator functions</h3>\n	<div class=\"mmooc-pf-list\">\n	  <div id=\"mmooc-pf-list-group-btn\" class=\"item\">List groups</div>\n	  <div id=\"mmooc-pf-group-btn\" class=\"item\">Create account groups</div>\n	  <div id=\"mmooc-pf-course-group-btn\" class=\"item\">Create course groups</div>\n	  <div id=\"mmooc-pf-assign-btn\" class=\"item\">Assign students to groups</div>\n	  <div id=\"mmooc-pf-logins-btn\" class=\"item\">Add new logins</div>\n	</div>\n</div>\n";
+  });
+
+this["mmooc"]["templates"]["powerfunctions/mainteacher"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"mmooc-pf-main\">\r\n	<h3>Teacher functions</h3>\r\n	<div class=\"mmooc-pf-list\">\r\n	  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\r\n	  <div id=\"mmooc-pf-student-progress-btn\" class=\"item\">Student progress</div>\r\n	</div>\r\n</div>\r\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/peer-review"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1099,22 +1138,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  return "\r\n          <option value=\"\">No courses defined for account</option>\r\n        ";
+  return "\n          <option value=\"\">No courses defined for account</option>\n        ";
   }
 
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n          <option value=\"\">Choose a course</option>\r\n          ";
+  buffer += "\n          <option value=\"\">Choose a course</option>\n          ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        ";
+  buffer += "\n        ";
   return buffer;
   }
 function program4(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n            <option value=\"";
+  buffer += "\n            <option value=\"";
   if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -1122,14 +1161,56 @@ function program4(depth0,data) {
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</option>\r\n          ";
+    + "</option>\n          ";
   return buffer;
   }
 
-  buffer += "<form>\r\n  <ol>\r\n    <li class=\"step-1\">\r\n      <select id=\"mmpf-course-select\">\r\n        ";
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select id=\"mmpf-course-select\">\n        ";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n      </select>\r\n    <li class=\"step-2\">\r\n      <select id=\"mmpf-category-select\" name=\"category\">\r\n          <option value=\"\">No group sets defined for course</option>\r\n      </select>\r\n    <li class=\"step-3\">\r\n      <select id=\"mmpf-group-select\" name=\"group\">\r\n          <option value=\"\">No groups defined for course</option>\r\n      </select>\r\n    <li class=\"step-4\">\r\n      <select id=\"mmpf-assignment-select\" name=\"assignment\">\r\n          <option value=\"\">No assignments defined for course</option>\r\n      </select>\r\n  </ol>\r\n  <div class=\"peer-review-list\"></div>\r\n  <div id=\"progress\">\r\n  	<div id=\"bar\"></div>\r\n  </div>\r\n  <div class=\"peer-review-create\"></div>\r\n</form>\r\n";
+  buffer += "\n      </select>\n    <li class=\"step-2\">\n      <select id=\"mmpf-category-select\" name=\"category\">\n          <option value=\"\">No group sets defined for course</option>\n      </select>\n    <li class=\"step-3\">\n      <select id=\"mmpf-group-select\" name=\"group\">\n          <option value=\"\">No groups defined for course</option>\n      </select>\n    <li class=\"step-4\">\n      <select id=\"mmpf-assignment-select\" name=\"assignment\">\n          <option value=\"\">No assignments defined for course</option>\n      </select>\n  </ol>\n  <div class=\"peer-review-list\"></div>\n  <div id=\"progress\">\n  	<div id=\"bar\"></div>\n  </div>\n  <div class=\"peer-review-create\"></div>\n</form>\n";
+  return buffer;
+  });
+
+this["mmooc"]["templates"]["powerfunctions/student-progress"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n          <option value=\"\">No courses defined for account</option>\n        ";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n          <option value=\"\">Choose a course</option>\n          ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <option value=\"";
+  if (helper = helpers.id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</option>\n          ";
+  return buffer;
+  }
+
+  buffer += "<form>\n  <ol>\n    <li class=\"step-1\">\n      <select id=\"mmpf-course-select\">\n        ";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0.courses), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      </select>\n    <li class=\"step-2\">\n      <select id=\"mmpf-section-select\" name=\"section\">\n          <option value=\"\">No sections defined for course</option>\n      </select>\n    <li class=\"step-3\">\n      <select id=\"mmpf-module-select\" name=\"module\">\n          <option value=\"\">No modules defined for course</option>\n      </select>\n  </ol>\n  <div id=\"progress\">\n  	<div id=\"bar\"></div>\n  </div>\n  <div class=\"student-progress-table\"></div>\n</form>\n";
   return buffer;
   });
 
@@ -1139,7 +1220,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "</div>\r\n";
+  return "</div>\n";
   });
 
 this["mmooc"]["templates"]["usermenu"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1148,11 +1229,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<ul id=\"user-menu\">\r\n    <li class=\"mmooc-menu-item\">\r\n        <a href=\"#\" class=\"mmooc-menu-item-title\">Varsler <i class=\"icon-mini-arrow-down\"></i><span id=\"mmooc-notification-count\"></span></a>\r\n        <div class=\"mmooc-menu-item-drop\" id=\"mmooc-activity-stream\">\r\n        </div>\r\n    </li>\r\n    <li class=\"mmooc-menu-item\">\r\n        <a href=\"/conversations\" class=\"mmooc-menu-item-title\">Innboks <span id=\"mmooc-unread-messages-count\"></span></a>\r\n    </li>\r\n    <li class=\"mmooc-menu-item profile-settings\">\r\n        <a href=\"#\" class=\"mmooc-menu-item-title\">\r\n            <div class=\"ic-avatar\" aria-hidden=\"true\">\r\n                <img src=\""
+  buffer += "<ul id=\"user-menu\">\n    <li class=\"mmooc-menu-item\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">Varsler <i class=\"icon-mini-arrow-down\"></i><span id=\"mmooc-notification-count\"></span></a>\n        <div class=\"mmooc-menu-item-drop\" id=\"mmooc-activity-stream\">\n        </div>\n    </li>\n    <li class=\"mmooc-menu-item\">\n        <a href=\"/conversations\" class=\"mmooc-menu-item-title\">Innboks <span id=\"mmooc-unread-messages-count\"></span></a>\n    </li>\n    <li class=\"mmooc-menu-item profile-settings\">\n        <a href=\"#\" class=\"mmooc-menu-item-title\">\n            <div class=\"ic-avatar\" aria-hidden=\"true\">\n                <img src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.avatar_image_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" alt=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.display_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\r\n            </div>\r\n            <i class=\"icon-mini-arrow-down\"></i>\r\n        </a>\r\n        <div class=\"mmooc-menu-item-drop\">\r\n            <ul>\r\n                <li><a href=\"/profile/settings\">Innstillinger</a></li>\r\n                <li class=\"helpMenu\"><a href=\"#\">Hjelp</a></li>\r\n                <li><a href=\"/logout\">Logg ut</a></li>\r\n            </ul>\r\n        </div>\r\n    </li>\r\n</ul>\r\n";
+    + "\" />\n            </div>\n            <i class=\"icon-mini-arrow-down\"></i>\n        </a>\n        <div class=\"mmooc-menu-item-drop\">\n            <ul>\n                <li><a href=\"/profile/settings\">Innstillinger</a></li>\n                <li class=\"helpMenu\"><a href=\"#\">Hjelp</a></li>\n                <li><a href=\"/logout\">Logg ut</a></li>\n            </ul>\n        </div>\n    </li>\n</ul>\n";
   return buffer;
   });
 
@@ -1162,7 +1243,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div id=\"fountainG\">\r\n    <div id=\"fountainG_1\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_2\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_3\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_4\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_5\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_6\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_7\" class=\"fountainG\">\r\n    </div>\r\n    <div id=\"fountainG_8\" class=\"fountainG\">\r\n    </div>\r\n</div>";
+  return "<div id=\"fountainG\">\n    <div id=\"fountainG_1\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_2\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_3\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_4\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_5\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_6\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_7\" class=\"fountainG\">\n    </div>\n    <div id=\"fountainG_8\" class=\"fountainG\">\n    </div>\n</div>";
   });
 this.mmooc=this.mmooc||{};
 
@@ -1330,16 +1411,16 @@ this.mmooc.api = function() {
                 "callback": callback,
                 "error":    error,
                 "uri":      "/courses/" + courseId + "/modules",
-                "params":   { }
+                "params":   { per_page: 999 }
             });
         },
 
-        getItemsForModuleId: function(callback, error, courseId, moduleId) {
+        getItemsForModuleId: function(callback, error, courseId, moduleId, params) {
             this._get({
                 "callback": callback,
                 "error": error,
                 "uri": "/courses/" + courseId + "/modules/" + moduleId + "/items",
-                "params": { }
+                "params": params
             });
         },
 
@@ -1508,6 +1589,15 @@ this.mmooc.api = function() {
             });
         },
 
+        getCoursesForUser: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses",
+                "params":   { per_page: 999 }
+            });
+        },
+
         getGroupCategoriesForAccount: function(account, callback, error) {
             this._get({
                 "callback": callback,
@@ -1569,6 +1659,16 @@ this.mmooc.api = function() {
                 "params":   { per_page: 999 }
             });
         },
+        
+        // /api/v1/courses/:course_id/sections
+        getSectionsForCourse: function(courseID, params, callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/courses/" + courseID + "/sections",
+                "params":   params
+            });
+        },      
                 
         // /api/v1/courses/54/assignments/369
         getSingleAssignment : function(courseId, assignmentId, callback, error) {
@@ -1700,6 +1800,621 @@ this.mmooc.api = function() {
 if (typeof module !== "undefined" && module !== null) {
     module.exports = this.mmooc.api;
 }
+
+this.mmooc.powerAdminFunctions = function() {
+  var rootId = undefined;
+  var accountID = undefined;
+
+  function _render(template, heading, data) {
+    var html =
+          mmooc.util.renderTemplateWithData('powerfunctions/head', {heading: heading}) +
+          mmooc.util.renderTemplateWithData(template, data) +
+          mmooc.util.renderTemplateWithData('powerfunctions/tail', {});
+      document.getElementById(rootId).innerHTML = html;
+    }
+
+  function _readFile(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function(event){
+      callback(event.target.result);
+    };
+    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+    reader.readAsText(file);
+  }
+
+  function _success(row) {
+    return function () {
+      $("td.status", row).removeClass("waiting").addClass("ok").text("OK");
+    };
+  }
+
+  function _error(row) {
+    return function (jqXHR, textStatus, errorThrown ) {
+      $("td.status", row).removeClass("waiting").addClass("failed").
+        text("Failed: " + errorThrown + ": " + JSON.parse(jqXHR.responseText).errors[0].message);
+    };
+  }
+
+  function _setUpSubmitHandler(callback) {
+    $('input[type="submit"]').click(function() {
+      var file = $('input:file')[0].files.item(0);
+      _readFile(file, function(content) {
+        callback(content);
+      });
+      return false;
+    });
+  }
+
+  function _parseCSV(content) {
+    try {
+      return $.csv.toObjects(content);
+    }
+    catch (e) {
+      alert(e.message);
+      console.log(e);
+      throw e;
+    }
+  }
+
+  function CreateGroupsTask() {
+
+    function _renderView() {
+      mmooc.api.getGroupCategoriesForAccount(accountID, function(categories) {
+        _render("powerfunctions/group-category",
+                "Create account groups",
+                {categories: categories});
+        _setUpSubmitHandler(_processFile);
+      });
+    }
+
+    function _processFile(content) {
+      var groups = _parseCSV(content);
+      var params = {
+        account: accountID,
+        category: document.getElementsByName("category")[0].value
+      };
+      _render("powerfunctions/groups-process",
+              "Processing group creations",
+              {groups: groups});
+      for (var i = 0; i < groups.length; i++) {
+        _processItem(params, i, groups[i]);
+      }
+    }
+
+    function _processItem(params, i, group) {
+      var row = $("#mmpf-group-"+i);
+      params.name = group.name;
+      params.description = group.description;
+      mmooc.api.createGroup(params, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
+
+
+  function CreateCourseGroupsTask() {
+
+    function _renderView() {
+      console.log("Here");
+      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+        _render("powerfunctions/course-groups",
+                "Create course groups",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
+            $('.step-2').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a group set</option>";
+            for (var i = 0; i < categories.length; i++) {
+              html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
+            }
+            $("select[name='category']").html(html);
+            _setUpSubmitHandler(_processFile);
+          });
+        });
+      });
+    }
+
+    function _processFile(content) {
+      var groups = _parseCSV(content);
+      var params = {
+        category: $("select[name='category'] option:selected").val()
+      };
+      _render("powerfunctions/groups-process",
+              "Processing group creations",
+              {groups: groups});
+      for (var i = 0; i < groups.length; i++) {
+        _processItem(params, i, groups[i]);
+      }
+    }
+
+    function _processItem(params, i, group) {
+      var row = $("#mmpf-group-"+i);
+      params.name = group.name;
+      params.description = group.description;
+      mmooc.api.createGroup(params, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
+
+
+  function ListGroupsTask() {
+    function _renderView() {
+      mmooc.api.getGroupsForAccount(accountID, function(groups) {
+        _render("powerfunctions/list-groups",
+                "List groups",
+                {groups: groups});
+      });
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
+
+
+  function CreateNewLoginsTask() {
+
+    function _renderView() {
+        _render("powerfunctions/logins",
+                "Add new logins to students",
+                {});
+    }
+
+    function _processFile(content) {
+      var logins = _parseCSV(content);
+      _render("powerfunctions/logins-process",
+              "Processing new logins",
+              {logins: logins});
+      for (var i = 0; i < logins.length; i++) {
+        _processItem(i, logins[i]);
+      }
+    }
+
+    function _processItem(i, login) {
+      var uid = "sis_user_id:" + login.current_id;
+      var nid = login.new_id;
+      var row = $("#mmpf-logins-"+i);
+      var params = {
+        'user[id]': uid,
+        'login[unique_id]': nid,
+        'login[sis_user_id]': nid,
+        account_id: accountID
+      };
+      mmooc.api.createUserLogin(params, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+        _setUpSubmitHandler(_processFile);
+      }
+    };
+  }
+
+
+  function AssignStudentsToGroupsTask() {
+
+    function _renderView() {
+      _render("powerfunctions/assign",
+              "Assign students to groups",
+              {});
+    }
+
+    function _processFile(content) {
+      var assigns = _parseCSV(content);
+      _render("powerfunctions/assign-process",
+              "Processing assigning student to groups",
+              {assigns: assigns});
+      for (var i = 0; i < assigns.length; i++) {
+        _processItem(i, assigns[i]);
+      }
+    }
+
+    function _processItem(i, assignment) {
+      var gid = assignment.group_id;
+      // According to the API documentation the SIS params should be
+      // encoded, but this fails. Was:
+      // encodeURIComponent(assignment.user_id);
+      var uid = "sis_user_id:" + assignment.user_id;
+      var row = $("#mmpf-assign-"+i);
+      mmooc.api.createGroupMembership(gid, uid, _success(row), _error(row));
+    }
+
+    return {
+      run: function() {
+        _renderView();
+        _setUpSubmitHandler(_processFile);
+      }
+    };
+  }
+  
+  function AssignPeerReviewsForGroup() {
+
+    function _renderView() {
+      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+        _render("powerfunctions/peer-review",
+                "Assign peer reviews by group",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
+            $('.step-2').css('display', 'list-item');
+            $('.step-3').css('display', 'none');
+            $('.step-4').css('display', 'none');
+            var html = html + "<option value=''>Choose a group set</option>";
+            for (var i = 0; i < categories.length; i++) {
+              html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
+            }
+            $("#mmpf-category-select").html(html);
+            $(".peer-review-list").html("");
+          });
+        });
+        $('#mmpf-category-select').change(function () {
+          var categoryID = $('#mmpf-category-select option:selected').val();
+          mmooc.api.getGroupsInCategory(categoryID, function(groups) {
+            $('.step-3').css('display', 'list-item');
+            $('.step-4').css('display', 'none');
+            var html = html + "<option value=''>Choose a group</option>";
+            for (var i = 0; i < groups.length; i++) {
+              html = html + "<option value=" + groups[i].id + ">" + groups[i].name + "</option>";
+            }
+            $("#mmpf-group-select").html(html);
+            $(".peer-review-list").html("");
+          });
+        });
+        $('#mmpf-group-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getAssignmentsForCourse(courseID, function(assignments) {
+            $('.step-4').css('display', 'list-item');
+            var html = html + "<option value=''>Choose an assignment</option>";
+            for (var i = 0; i < assignments.length; i++) {
+              html = html + "<option value=" + assignments[i].id + ">" + assignments[i].name + "</option>";
+            }
+            $("#mmpf-assignment-select").html(html);
+            $(".peer-review-list").html("");
+          });
+        });
+		$('#mmpf-assignment-select').change(function () {
+			_listPeerReviewsForGroup();
+			_showInput();
+		});
+
+      });
+    }
+
+    function _listPeerReviewsForGroup() {
+	    $(".peer-review-list").html("<p>Laster hverandrevurderinger...</p>");
+	    $("#progress").show();
+	    $("#bar").width('0%');
+	    var courseID = $('#mmpf-course-select option:selected').val();
+	    var groupID = $('#mmpf-group-select option:selected').val();
+	    var assignmentID = $('#mmpf-assignment-select option:selected').val();
+	    var html = "<ul>";
+	    var peerReveiwsInGroup = [];
+	    var submitted = [];
+	    var count = 0;
+	    var asyncsDone = 0;
+	    var inArray = false;
+	    mmooc.api.getGroupMembers(groupID, function(members) {
+		    $("#bar").width('50%');
+		    mmooc.api.getPeerReviewsForAssignment(courseID, assignmentID, function(peerReviews) {
+			    $("#bar").width('100%');
+			    $(".peer-review-list").html("Laster besvarelser...");
+			    $("#progress").show();
+			    $("#bar").width('0%');
+			    // Get submissions for users in group and push to array if workflow_state is submitted or graded
+				for (var i = 0; i < members.length; i++) {
+					mmooc.api.getSingleSubmissionForUser(courseID, assignmentID, members[i].id, function(submission) {
+						if (submission.workflow_state == "submitted" || submission.workflow_state == "graded") {
+							submitted.push(submission);
+						}
+						asyncsDone++;
+						var width = (100 / members.length) * asyncsDone + "%";
+						$("#bar").width(width);
+						if (asyncsDone == members.length) {
+							_renderList();
+						}
+					});
+				}
+				function _renderList() {
+					// Traverse all peer reviews and group members	  	
+			    	for (var i = 0; i < peerReviews.length; i++) {
+				    	for (var j = 0; j < members.length; j++) {
+					    	// Check if object is already in array			    	
+					    	for (var k = 0; k < peerReveiwsInGroup.length; k++) {
+						    	if(peerReveiwsInGroup[k] === peerReviews[i]) {
+							    	inArray = true;
+						    	}
+						    }
+						    // Push object to array if assesor is member of group and object not already in array	    	
+				    		if (peerReviews.assessor_id == members.id && !inArray) {
+					    		peerReveiwsInGroup[count] = peerReviews[i];
+					    		count++;
+				    		}
+				    		inArray = false;
+				    	}
+				    }
+				    inArray = false;			    			    			    
+			    	for (var i = 0; i < members.length; i++) {
+				    	count = 0;
+				    	// List users and tag users without submissions
+				    	if(submitted) {
+					    	for (j = 0; j < submitted.length; j++) {
+						    	// Check if user has submission
+						    	if (submitted[j].user_id == members[i].id) {
+							    	html = html + "<li>" + members[i].name + "</li><ul>";
+							    	inArray = true;
+							    	break;
+						    	}
+					    	}
+							if (!inArray) {
+							  	html = html + "<li>" + members[i].name + " <span class='no-submission'>Ikke levert besvarelse</span></li><ul>";
+							}
+				    	}else {
+					    	html = html + "<li>" + members[i].name + "</li><ul>";
+				    	}		    	
+				    	for (var k = 0; k < peerReveiwsInGroup.length; k++) {
+					    	if(members[i].id == peerReveiwsInGroup[k].assessor_id) {
+						    	// List user name and tag peer review as completed/not completed
+						    	if(peerReveiwsInGroup[k].workflow_state == "completed") {
+						    		html = html + "<li>" + peerReveiwsInGroup[k].user.display_name  + " <span style='color:green;'>Fullført</span></li>";
+						    	}else {
+							    	html = html + "<li>" + peerReveiwsInGroup[k].user.display_name  + " <span style='color:red;'>Ikke fullført</span></li>";
+						    	}
+						    	count++;
+					    	}
+				    	}
+				    	html = html + "</ul>";
+				    	if(count == 0) {
+					    	html = html + "<div>Ingen tildelt</div>";
+				    	}
+				    	inArray = false;	    			    	
+				    }
+				    $("#progress").hide();
+				    $(".peer-review-list").html(html + "</ul>");
+				    $('.input-wrapper').show();
+					$('.btn-create-pr').click(function () {
+						var numOfReviews = $('.number-of-reviews').val();
+						// Create peer reviews for group after valitadion
+						if (!_isNormalInteger(numOfReviews) || numOfReviews < 1) {
+							alert("Antall gjennomganger må være et positivt heltall");
+						}else if (numOfReviews > (submitted.length - 1)) {
+							alert("For mange gjennomganger i forhold til antall besvarelser");
+						}else {
+							$('.input-wrapper').hide();
+							_createPeerReviewsForGroup(courseID, assignmentID, numOfReviews, submitted);
+						}	
+					});	
+				}			        			    
+		    });       
+		});	
+    }
+    
+	function _createPeerReviewsForGroup(courseID, assignmentID, numOfReviews, submitted) {
+		$(".peer-review-list").html("<p>Tildeler hverandrevurderinger...</p>");
+		$("#progress").show();
+		$("#bar").width('0%');
+		asyncsDone = 0;
+		var assigned = [];
+		var assesorIndex;
+		for (var j = 0; j < numOfReviews; j++) {
+			for (var i = 0; i < submitted.length; i++) {				
+				assesorIndex = (i + 1) + j;
+				// Check if index exceeds array length
+				if (assesorIndex >= submitted.length) {
+					assesorIndex = assesorIndex - submitted.length;	
+				}
+				userID = submitted[assesorIndex].user_id;					
+				mmooc.api.createPeerReview(courseID, assignmentID, submitted[i].id, userID, function(result) {					
+					asyncsDone++;
+					var width = (100 / (numOfReviews * submitted.length)) * asyncsDone + "%";
+					$("#bar").width(width);
+					if (asyncsDone == (submitted.length * numOfReviews)) {
+						_listPeerReviewsForGroup();
+					}
+				});		
+			}
+		}			
+	}
+    
+    function _isNormalInteger(str) {
+    	return /^\+?(0|[1-9]\d*)$/.test(str);
+	}
+    
+    function _showInput() {
+	    $(".peer-review-create").html("<div class='input-wrapper'><input type='text' value='1' style='width:25px;' class='number-of-reviews'> gjennomganger per bruker<br><input type='button' value='Tildel hverandrevurderinger' class='button btn-create-pr'></div>");
+    }
+
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }
+  
+  function ListStudentProgress() {
+    var error = function(error) {
+        console.error("error calling api", error);
+    };
+    	
+    function _renderView() {    
+      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+        _render("powerfunctions/student-progress",
+                "List student progress by section",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          var params = { per_page: 999 };
+          mmooc.api.getSectionsForCourse(courseID, params, function(sections) {
+            $('.step-2').css('display', 'list-item');
+            $('.step-3').css('display', 'none');
+            var html = html + "<option value=''>Choose a section</option>";
+            for (var i = 0; i < sections.length; i++) {
+              html = html + "<option value=" + i + ">" + sections[i].name + "</option>";
+            }
+            $("#mmpf-section-select").html(html);
+            $(".student-progress-table").html("");
+          });
+        });
+        $('#mmpf-section-select').change(function () {
+	      var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getModulesForCourseId(function(modules) {
+            $('.step-3').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a module</option>";
+            for (var i = 0; i < modules.length; i++) {
+              html = html + "<option value=" + modules[i].id + ">" + modules[i].name + "</option>";
+            }
+            $("#mmpf-module-select").html(html);
+            $(".student-progress-table").html("");
+          }, error, courseID);
+        });
+		$('#mmpf-module-select').change(function () {
+			_printStudentProgressForSection();
+			$(".student-progress-table").html("");
+		});
+
+      });
+    }
+    
+    function _printStudentProgressForSection() {
+	    $("#progress").hide();
+	    var courseID = $('#mmpf-course-select option:selected').val();
+	    var moduleID = $('#mmpf-module-select option:selected').val();
+	    var sectionIndex = $('#mmpf-section-select option:selected').val();
+	    var sectionParams = { per_page: 999, "include": ["students"] };
+	    var moduleParams = { per_page: 999 };
+	    var html = "<table><tr><th>Navn</th>";
+	    var asyncsDone = 0;
+	    mmooc.api.getItemsForModuleId(function(items) {
+		    for (var i = 0; i < items.length; i++) {
+			    html = html + "<th>" + items[i].title + "</th>";
+		    }
+		    html = html + "</tr>";
+		    mmooc.api.getSectionsForCourse(courseID, sectionParams, function(sections) {		
+			    if(sections[sectionIndex].students.length < 1) {
+				    $(".student-progress-table").html("Ingen studenter funnet i klasse " + sections[sectionIndex].name);
+			    }    
+			    for (var j = 0; j < sections[sectionIndex].students.length; j++) {				    
+				    moduleParams = { student_id: sections[sectionIndex].students[j].id, per_page: 999 };
+				    mmooc.api.getItemsForModuleId(function(itemsForStudent) {
+					    html = html + "<tr><td>" + sections[sectionIndex].students[asyncsDone].name + "</td>";
+					    if(itemsForStudent.length < 1) {
+						    html = html + "<td>Ingen krav</td>";
+					    }
+					    for (var k = 0; k < itemsForStudent.length; k++) {
+						    if("completion_requirement" in itemsForStudent[k]) {
+							    if(itemsForStudent[k].completion_requirement.completed) {
+							    	html = html + "<td class='ok' />";
+							    }else {
+								    html = html + "<td class='nok' />";
+							    }
+						    }else {
+							    html = html + "<td>Ingen krav</td>";
+						    }
+					    }
+					    asyncsDone++;
+					    var width = ((100 / sections[sectionIndex].students.length) * asyncsDone + "%");
+					    $("#bar").width(width);
+					    $("#progress").show();
+					    if(asyncsDone == sections[sectionIndex].students.length) {
+						    $("#progress").hide();
+						    $(".student-progress-table").html(html + "</table>");
+					    }
+				    }, error, courseID, moduleID, moduleParams);
+				    html = html + "</tr>";
+			    }
+			    
+		    });
+	    }, error, courseID, moduleID, moduleParams);
+    }
+  
+    return {
+      run: function() {
+        _renderView();
+      }
+    };
+  }  
+
+  function AccountPicker() {
+    function _setAccountID() {
+      accountID = $('select[name="account"] option:selected').val();
+    }
+
+    return {
+      run: function(params) {
+        mmooc.api.getAccounts(function(accounts) {
+          _render("powerfunctions/account-picker",
+                  "Choose account",
+                  {accounts: accounts});
+          $('select[name="account"]').change(function() {
+            _setAccountID();
+            params.nextStep();
+          });
+        });
+      }
+    };
+  }
+
+  function Menu() {
+    function _setUpClickHandlers() {
+      $("#mmooc-pf-list-group-btn").click(function() {
+        new ListGroupsTask().run();
+      });
+      $("#mmooc-pf-course-group-btn").click(function() {
+        new CreateCourseGroupsTask().run();
+      });
+      $("#mmooc-pf-group-btn").click(function() {
+        new CreateGroupsTask().run();
+      });
+      $("#mmooc-pf-assign-btn").click(function() {
+        new AssignStudentsToGroupsTask().run();
+      });
+      $("#mmooc-pf-logins-btn").click(function() {
+        new CreateNewLoginsTask().run();
+      });
+      $("#mmooc-pf-peer-review-btn").click(function() {
+        new AssignPeerReviewsForGroup().run();
+      });
+      $("#mmooc-pf-student-progress-btn").click(function() {
+        new ListStudentProgress().run();
+      });
+    }
+
+    return {
+      run: function() {
+        try {
+          _render("powerfunctions/main", "Choose function");
+          _setUpClickHandlers();
+        }
+        catch (e) {
+          alert (e.message);
+          console.log(e);
+        }
+      }
+    };
+  }
+
+  return {
+    show: function(parentId) {
+      rootId = parentId;
+      new AccountPicker().run({nextStep: function () {
+        new Menu().run();
+      }});
+    }
+  };
+}();
 
 this.mmooc = this.mmooc || {};
 
@@ -1863,10 +2578,11 @@ this.mmooc.courseList = function() {
 					var $oldContent = $('#' + parentId).children(); //After an update the 'Add course button' is in #content including a popupform. So we need to move this to another place in the DOM so we don't overwrite it.
 					$oldContent.appendTo("#right-side-wrapper #right-side");
 					
-					$('#' + parentId).html("<div>Laster kurs....</div>"); //overwrite the contents in parentID and display: 'Laster kurs....'
+					$('#' + parentId).html("<div>Laster " + mmooc.i18n.CoursePlural + "....</div>"); //overwrite the contents in parentID and display: 'Laster kurs....'
 					
                     var sortedCourses = mmooc.util.arraySorted(courses, "course_code");
                     html = mmooc.util.renderTemplateWithData("courselist", {courses: sortedCourses});
+                    document.title = "Studier";
                     document.getElementById(parentId).innerHTML = html; 
 					
 //Additional check if course if completed. Not in use since course_progress(check implemented in template) seems to be working as expected. (Not able to reproduce errors).
@@ -1911,7 +2627,7 @@ this.mmooc.courseList = function() {
                     
                     $(sortedCourses).each(function() {
                         var $course = $("#course_" + this.id + " .mmooc-course-list-description");
-						html = mmooc.util.renderTemplateWithData("courselistprogress", {course: this});
+						html = mmooc.util.renderTemplateWithData("courselistprogress", {navname: mmooc.i18n.GoToCourse, course: this});
                         $course.after(html);          
                     });					
 
@@ -1925,7 +2641,7 @@ this.mmooc.courseList = function() {
             var $button = $('#start_new_course');
             if ($button.length) {
                 $('#content').append($button);
-				$button.html('Legg til et kurs');
+				$button.html(mmooc.i18n.AddACourse);
             }
         },
         showFilter : function(sortedCourses) {
@@ -2001,10 +2717,10 @@ this.mmooc.coursePage = function() {
 
         listModulesAndShowProgressBar: function() {
             mmooc.api.getModulesForCurrentCourse(function(modules) {
-                var progressHTML = mmooc.util.renderTemplateWithData("courseprogress", {modules: modules});
+                var progressHTML = mmooc.util.renderTemplateWithData("courseprogress", {title: mmooc.i18n.CourseProgressionTitle, modules: modules});
                 document.getElementById('course_home_content').insertAdjacentHTML('beforebegin', progressHTML);
 
-                var modulesHTML = mmooc.util.renderTemplateWithData("modules", {modules: modules});
+                var modulesHTML = mmooc.util.renderTemplateWithData("modules", {navname: mmooc.i18n.GoToModule, coursemodules: mmooc.i18n.ModulePlural, modules: modules});
                 document.getElementById('course_home_content').insertAdjacentHTML('beforebegin', modulesHTML);
             });
         },
@@ -2033,7 +2749,7 @@ this.mmooc.enroll = function() {
     return {
         changeButtonText: function() {
             var enrollForm = $("#enroll_form");
-            enrollForm.find(".btn").text("Gå til Mine kurs");
+            enrollForm.find(".btn").text("Gå til Mine " + mmooc.i18n.CoursePlural);
             enrollForm.find(".btn-primary").hide();
         }
     };
@@ -2194,6 +2910,7 @@ this.mmooc.groups = function() {
                 mmooc.api.getGroupMembers(groupId, function(members) {
                     var headerHTML = mmooc.util.renderTemplateWithData("groupheader", {groupId: groupId, courseId: courseId, members: members});
                     document.getElementById('content-wrapper').insertAdjacentHTML('afterbegin', headerHTML);
+                    $("body").addClass("group-header");
                 });
             }
         },
@@ -2240,7 +2957,7 @@ this.mmooc.menu = function() {
 
         var courseId = course.id;
         if (!hideTabs) { 
-            menuItems[menuItems.length] = {"title": "Kursforside", url: "/courses/" + courseId};
+            menuItems[menuItems.length] = {"title": mmooc.i18n.Course + "forside", url: "/courses/" + courseId};
             menuItems[menuItems.length] = {"title": "Kunngjøringer", url: "/courses/" + courseId + "/announcements"};
             menuItems[menuItems.length] = {"title": "Grupper", url: "/courses/" + courseId + "/groups"};
             menuItems[menuItems.length] = {"title": "Diskusjoner", url: "/courses/" + courseId + "/discussion_topics"};
@@ -2299,7 +3016,7 @@ this.mmooc.menu = function() {
         listModuleItems: function() {
             mmooc.api.getCurrentModule(function(module) {
                 var courseId = mmooc.api.getCurrentCourseId();
-                var html = mmooc.util.renderTemplateWithData("moduleitems", {module: module, courseId: courseId});
+                var html = mmooc.util.renderTemplateWithData("moduleitems", {backToCoursePage: mmooc.i18n.BackToCoursePage, module: module, courseId: courseId});
                 if (document.getElementById("left-side")) {
                     document.getElementById('left-side').insertAdjacentHTML('afterbegin', html);
                 }
@@ -2317,7 +3034,7 @@ this.mmooc.menu = function() {
             insertCustomMenuElementInTopMenu("Kalender", "/calendar");
             insertCustomMenuElementInTopMenu("Karakterer", "/grades");
             insertCustomMenuElementInTopMenu("Grupper", "/groups");
-            insertCustomMenuElementInTopMenu("Kurs", "/courses"); 
+            insertCustomMenuElementInTopMenu(mmooc.i18n.Studies, "/courses"); 
             
             if (mmooc.util.isTeacherOrAdmin()) {
                 this.showLeftMenu();
@@ -2495,7 +3212,7 @@ this.mmooc.menu = function() {
                     mmooc.menu.showCourseMenu(group.course_id, "Grupper", title, true); //Group menu in tabs including title - Use optional fourth parameter for hiding tabs
                     _addBodyClassForGroupDiscussionForStyling(); 
                     _addGetHelpFromteacherButton(group);
-                    mmooc.menu.showBackButton("/courses/" + group.course_id, "Tilbake til kursforsiden");
+                    mmooc.menu.showBackButton("/courses/" + group.course_id, "Tilbake til " + mmooc.i18n.Course + "forsiden");
                 });
             }
         },
@@ -2968,7 +3685,6 @@ this.mmooc=this.mmooc||{};
 
 this.mmooc.powerFunctions = function() {
   var rootId = undefined;
-  var accountID = undefined;
 
   function _render(template, heading, data) {
     var html =
@@ -2977,238 +3693,11 @@ this.mmooc.powerFunctions = function() {
           mmooc.util.renderTemplateWithData('powerfunctions/tail', {});
       document.getElementById(rootId).innerHTML = html;
     }
-
-  function _readFile(file, callback) {
-    var reader = new FileReader();
-    reader.onload = function(event){
-      callback(event.target.result);
-    };
-    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
-    reader.readAsText(file);
-  }
-
-  function _success(row) {
-    return function () {
-      $("td.status", row).removeClass("waiting").addClass("ok").text("OK");
-    };
-  }
-
-  function _error(row) {
-    return function (jqXHR, textStatus, errorThrown ) {
-      $("td.status", row).removeClass("waiting").addClass("failed").
-        text("Failed: " + errorThrown + ": " + JSON.parse(jqXHR.responseText).errors[0].message);
-    };
-  }
-
-  function _setUpSubmitHandler(callback) {
-    $('input[type="submit"]').click(function() {
-      var file = $('input:file')[0].files.item(0);
-      _readFile(file, function(content) {
-        callback(content);
-      });
-      return false;
-    });
-  }
-
-  function _parseCSV(content) {
-    try {
-      return $.csv.toObjects(content);
-    }
-    catch (e) {
-      alert(e.message);
-      console.log(e);
-      throw e;
-    }
-  }
-
-  function CreateGroupsTask() {
-
-    function _renderView() {
-      mmooc.api.getGroupCategoriesForAccount(accountID, function(categories) {
-        _render("powerfunctions/group-category",
-                "Create account groups",
-                {categories: categories});
-        _setUpSubmitHandler(_processFile);
-      });
-    }
-
-    function _processFile(content) {
-      var groups = _parseCSV(content);
-      var params = {
-        account: accountID,
-        category: document.getElementsByName("category")[0].value
-      };
-      _render("powerfunctions/groups-process",
-              "Processing group creations",
-              {groups: groups});
-      for (var i = 0; i < groups.length; i++) {
-        _processItem(params, i, groups[i]);
-      }
-    }
-
-    function _processItem(params, i, group) {
-      var row = $("#mmpf-group-"+i);
-      params.name = group.name;
-      params.description = group.description;
-      mmooc.api.createGroup(params, _success(row), _error(row));
-    }
-
-    return {
-      run: function() {
-        _renderView();
-      }
-    };
-  }
-
-
-  function CreateCourseGroupsTask() {
-
-    function _renderView() {
-      console.log("Here");
-      mmooc.api.getCoursesForAccount(accountID, function(courses) {
-        _render("powerfunctions/course-groups",
-                "Create course groups",
-                {courses: courses});
-        $('#mmpf-course-select').change(function () {
-          var courseID = $('#mmpf-course-select option:selected').val();
-          mmooc.api.getGroupCategoriesForCourse(courseID, function(categories) {
-            $('.step-2').css('display', 'list-item');
-            var html = html + "<option value=''>Choose a group set</option>";
-            for (var i = 0; i < categories.length; i++) {
-              html = html + "<option value=" + categories[i].id + ">" + categories[i].name + "</option>";
-            }
-            $("select[name='category']").html(html);
-            _setUpSubmitHandler(_processFile);
-          });
-        });
-      });
-    }
-
-    function _processFile(content) {
-      var groups = _parseCSV(content);
-      var params = {
-        category: $("select[name='category'] option:selected").val()
-      };
-      _render("powerfunctions/groups-process",
-              "Processing group creations",
-              {groups: groups});
-      for (var i = 0; i < groups.length; i++) {
-        _processItem(params, i, groups[i]);
-      }
-    }
-
-    function _processItem(params, i, group) {
-      var row = $("#mmpf-group-"+i);
-      params.name = group.name;
-      params.description = group.description;
-      mmooc.api.createGroup(params, _success(row), _error(row));
-    }
-
-    return {
-      run: function() {
-        _renderView();
-      }
-    };
-  }
-
-
-  function ListGroupsTask() {
-    function _renderView() {
-      mmooc.api.getGroupsForAccount(accountID, function(groups) {
-        _render("powerfunctions/list-groups",
-                "List groups",
-                {groups: groups});
-      });
-    }
-
-    return {
-      run: function() {
-        _renderView();
-      }
-    };
-  }
-
-
-  function CreateNewLoginsTask() {
-
-    function _renderView() {
-        _render("powerfunctions/logins",
-                "Add new logins to students",
-                {});
-    }
-
-    function _processFile(content) {
-      var logins = _parseCSV(content);
-      _render("powerfunctions/logins-process",
-              "Processing new logins",
-              {logins: logins});
-      for (var i = 0; i < logins.length; i++) {
-        _processItem(i, logins[i]);
-      }
-    }
-
-    function _processItem(i, login) {
-      var uid = "sis_user_id:" + login.current_id;
-      var nid = login.new_id;
-      var row = $("#mmpf-logins-"+i);
-      var params = {
-        'user[id]': uid,
-        'login[unique_id]': nid,
-        'login[sis_user_id]': nid,
-        account_id: accountID
-      };
-      mmooc.api.createUserLogin(params, _success(row), _error(row));
-    }
-
-    return {
-      run: function() {
-        _renderView();
-        _setUpSubmitHandler(_processFile);
-      }
-    };
-  }
-
-
-  function AssignStudentsToGroupsTask() {
-
-    function _renderView() {
-      _render("powerfunctions/assign",
-              "Assign students to groups",
-              {});
-    }
-
-    function _processFile(content) {
-      var assigns = _parseCSV(content);
-      _render("powerfunctions/assign-process",
-              "Processing assigning student to groups",
-              {assigns: assigns});
-      for (var i = 0; i < assigns.length; i++) {
-        _processItem(i, assigns[i]);
-      }
-    }
-
-    function _processItem(i, assignment) {
-      var gid = assignment.group_id;
-      // According to the API documentation the SIS params should be
-      // encoded, but this fails. Was:
-      // encodeURIComponent(assignment.user_id);
-      var uid = "sis_user_id:" + assignment.user_id;
-      var row = $("#mmpf-assign-"+i);
-      mmooc.api.createGroupMembership(gid, uid, _success(row), _error(row));
-    }
-
-    return {
-      run: function() {
-        _renderView();
-        _setUpSubmitHandler(_processFile);
-      }
-    };
-  }
   
   function AssignPeerReviewsForGroup() {
 
     function _renderView() {
-      mmooc.api.getCoursesForAccount(accountID, function(courses) {
+      mmooc.api.getCoursesForUser(function(courses) {
         _render("powerfunctions/peer-review",
                 "Assign peer reviews by group",
                 {courses: courses});
@@ -3267,7 +3756,7 @@ this.mmooc.powerFunctions = function() {
 	    var groupID = $('#mmpf-group-select option:selected').val();
 	    var assignmentID = $('#mmpf-assignment-select option:selected').val();
 	    var html = "<ul>";
-	    var peerReivewsInGroup = [];
+	    var peerReveiwsInGroup = [];
 	    var submitted = [];
 	    var count = 0;
 	    var asyncsDone = 0;
@@ -3279,9 +3768,10 @@ this.mmooc.powerFunctions = function() {
 			    $(".peer-review-list").html("Laster besvarelser...");
 			    $("#progress").show();
 			    $("#bar").width('0%');
+			    // Get submissions for users in group and push to array if workflow_state is submitted or graded
 				for (var i = 0; i < members.length; i++) {
 					mmooc.api.getSingleSubmissionForUser(courseID, assignmentID, members[i].id, function(submission) {
-						if (submission.workflow_state == "submitted") {
+						if (submission.workflow_state == "submitted" || submission.workflow_state == "graded") {
 							submitted.push(submission);
 						}
 						asyncsDone++;
@@ -3292,16 +3782,19 @@ this.mmooc.powerFunctions = function() {
 						}
 					});
 				}
-				function _renderList() {	  	
+				function _renderList() {
+					// Traverse all peer reviews and group members	  	
 			    	for (var i = 0; i < peerReviews.length; i++) {
-				    	for (var j = 0; j < members.length; j++) {			    	
-					    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
-						    	if(peerReivewsInGroup[k] === peerReviews[i]) {
+				    	for (var j = 0; j < members.length; j++) {
+					    	// Check if object is already in array			    	
+					    	for (var k = 0; k < peerReveiwsInGroup.length; k++) {
+						    	if(peerReveiwsInGroup[k] === peerReviews[i]) {
 							    	inArray = true;
 						    	}
-						    }			    	
+						    }
+						    // Push object to array if assesor is member of group and object not already in array	    	
 				    		if (peerReviews.assessor_id == members.id && !inArray) {
-					    		peerReivewsInGroup[count] = peerReviews[i];
+					    		peerReveiwsInGroup[count] = peerReviews[i];
 					    		count++;
 				    		}
 				    		inArray = false;
@@ -3310,8 +3803,10 @@ this.mmooc.powerFunctions = function() {
 				    inArray = false;			    			    			    
 			    	for (var i = 0; i < members.length; i++) {
 				    	count = 0;
+				    	// List users and tag users without submissions
 				    	if(submitted) {
 					    	for (j = 0; j < submitted.length; j++) {
+						    	// Check if user has submission
 						    	if (submitted[j].user_id == members[i].id) {
 							    	html = html + "<li>" + members[i].name + "</li><ul>";
 							    	inArray = true;
@@ -3324,9 +3819,14 @@ this.mmooc.powerFunctions = function() {
 				    	}else {
 					    	html = html + "<li>" + members[i].name + "</li><ul>";
 				    	}		    	
-				    	for (var k = 0; k < peerReivewsInGroup.length; k++) {
-					    	if(members[i].id == peerReivewsInGroup[k].assessor_id) {
-						    	html = html + "<li>" + peerReivewsInGroup[k].user.display_name  + "</li>";
+				    	for (var k = 0; k < peerReveiwsInGroup.length; k++) {
+					    	if(members[i].id == peerReveiwsInGroup[k].assessor_id) {
+						    	// List user name and tag peer review as completed/not completed
+						    	if(peerReveiwsInGroup[k].workflow_state == "completed") {
+						    		html = html + "<li>" + peerReveiwsInGroup[k].user.display_name  + " <span style='color:green;'>Fullført</span></li>";
+						    	}else {
+							    	html = html + "<li>" + peerReveiwsInGroup[k].user.display_name  + " <span style='color:red;'>Ikke fullført</span></li>";
+						    	}
 						    	count++;
 					    	}
 				    	}
@@ -3341,6 +3841,7 @@ this.mmooc.powerFunctions = function() {
 				    $('.input-wrapper').show();
 					$('.btn-create-pr').click(function () {
 						var numOfReviews = $('.number-of-reviews').val();
+						// Create peer reviews for group after valitadion
 						if (!_isNormalInteger(numOfReviews) || numOfReviews < 1) {
 							alert("Antall gjennomganger må være et positivt heltall");
 						}else if (numOfReviews > (submitted.length - 1)) {
@@ -3365,6 +3866,7 @@ this.mmooc.powerFunctions = function() {
 		for (var j = 0; j < numOfReviews; j++) {
 			for (var i = 0; i < submitted.length; i++) {				
 				assesorIndex = (i + 1) + j;
+				// Check if index exceeds array length
 				if (assesorIndex >= submitted.length) {
 					assesorIndex = assesorIndex - submitted.length;	
 				}
@@ -3395,53 +3897,124 @@ this.mmooc.powerFunctions = function() {
       }
     };
   }
-
-  function AccountPicker() {
-    function _setAccountID() {
-      accountID = $('select[name="account"] option:selected').val();
-    }
-
-    return {
-      run: function(params) {
-        mmooc.api.getAccounts(function(accounts) {
-          _render("powerfunctions/account-picker",
-                  "Choose account",
-                  {accounts: accounts});
-          $('select[name="account"]').change(function() {
-            _setAccountID();
-            params.nextStep();
+  
+  function ListStudentProgress() {
+    var error = function(error) {
+        console.error("error calling api", error);
+    };
+    	
+    function _renderView() {    
+      mmooc.api.getCoursesForUser(function(courses) {
+        _render("powerfunctions/student-progress",
+                "List student progress by section",
+                {courses: courses});
+        $('#mmpf-course-select').change(function () {
+          var courseID = $('#mmpf-course-select option:selected').val();
+          var params = { per_page: 999 };
+          mmooc.api.getSectionsForCourse(courseID, params, function(sections) {
+            $('.step-2').css('display', 'list-item');
+            $('.step-3').css('display', 'none');
+            var html = html + "<option value=''>Choose a section</option>";
+            for (var i = 0; i < sections.length; i++) {
+              html = html + "<option value=" + i + ">" + sections[i].name + "</option>";
+            }
+            $("#mmpf-section-select").html(html);
+            $(".student-progress-table").html("");
           });
         });
+        $('#mmpf-section-select').change(function () {
+	      var courseID = $('#mmpf-course-select option:selected').val();
+          mmooc.api.getModulesForCourseId(function(modules) {
+            $('.step-3').css('display', 'list-item');
+            var html = html + "<option value=''>Choose a module</option>";
+            for (var i = 0; i < modules.length; i++) {
+              html = html + "<option value=" + modules[i].id + ">" + modules[i].name + "</option>";
+            }
+            $("#mmpf-module-select").html(html);
+            $(".student-progress-table").html("");
+          }, error, courseID);
+        });
+		$('#mmpf-module-select').change(function () {
+			_printStudentProgressForSection();
+			$(".student-progress-table").html("");
+		});
+
+      });
+    }
+    
+    function _printStudentProgressForSection() {
+	    $("#progress").hide();
+	    var courseID = $('#mmpf-course-select option:selected').val();
+	    var moduleID = $('#mmpf-module-select option:selected').val();
+	    var sectionIndex = $('#mmpf-section-select option:selected').val();
+	    var sectionParams = { per_page: 999, "include": ["students"] };
+	    var moduleParams = { per_page: 999 };
+	    var html = "<table><tr><th>Navn</th>";
+	    var asyncsDone = 0;
+	    mmooc.api.getItemsForModuleId(function(items) {
+		    for (var i = 0; i < items.length; i++) {
+			    html = html + "<th>" + items[i].title + "</th>";
+		    }
+		    html = html + "</tr>";
+		    mmooc.api.getSectionsForCourse(courseID, sectionParams, function(sections) {		
+			    if(sections[sectionIndex].students.length < 1) {
+				    $(".student-progress-table").html("Ingen studenter funnet i klasse " + sections[sectionIndex].name);
+			    }    
+			    for (var j = 0; j < sections[sectionIndex].students.length; j++) {				    
+				    moduleParams = { student_id: sections[sectionIndex].students[j].id, per_page: 999 };
+				    mmooc.api.getItemsForModuleId(function(itemsForStudent) {
+					    html = html + "<tr><td>" + sections[sectionIndex].students[asyncsDone].name + "</td>";
+					    if(itemsForStudent.length < 1) {
+						    html = html + "<td>Ingen krav</td>";
+					    }
+					    for (var k = 0; k < itemsForStudent.length; k++) {
+						    if("completion_requirement" in itemsForStudent[k]) {
+							    if(itemsForStudent[k].completion_requirement.completed) {
+							    	html = html + "<td class='ok' />";
+							    }else {
+								    html = html + "<td class='nok' />";
+							    }
+						    }else {
+							    html = html + "<td>Ingen krav</td>";
+						    }
+					    }
+					    asyncsDone++;
+					    var width = ((100 / sections[sectionIndex].students.length) * asyncsDone + "%");
+					    $("#bar").width(width);
+					    $("#progress").show();
+					    if(asyncsDone == sections[sectionIndex].students.length) {
+						    $("#progress").hide();
+						    $(".student-progress-table").html(html + "</table>");
+					    }
+				    }, error, courseID, moduleID, moduleParams);
+				    html = html + "</tr>";
+			    }
+			    
+		    });
+	    }, error, courseID, moduleID, moduleParams);
+    }
+  
+    return {
+      run: function() {
+        _renderView();
       }
     };
-  }
+  }  
 
   function Menu() {
     function _setUpClickHandlers() {
-      $("#mmooc-pf-list-group-btn").click(function() {
-        new ListGroupsTask().run();
-      });
-      $("#mmooc-pf-course-group-btn").click(function() {
-        new CreateCourseGroupsTask().run();
-      });
-      $("#mmooc-pf-group-btn").click(function() {
-        new CreateGroupsTask().run();
-      });
-      $("#mmooc-pf-assign-btn").click(function() {
-        new AssignStudentsToGroupsTask().run();
-      });
-      $("#mmooc-pf-logins-btn").click(function() {
-        new CreateNewLoginsTask().run();
-      });
       $("#mmooc-pf-peer-review-btn").click(function() {
         new AssignPeerReviewsForGroup().run();
+      });
+      $("#mmooc-pf-student-progress-btn").click(function() {
+        new ListStudentProgress().run();
       });
     }
 
     return {
       run: function() {
         try {
-          _render("powerfunctions/main", {});
+          _render("powerfunctions/mainteacher", "Choose function");
           _setUpClickHandlers();
         }
         catch (e) {
@@ -3455,12 +4028,11 @@ this.mmooc.powerFunctions = function() {
   return {
     show: function(parentId) {
       rootId = parentId;
-      new AccountPicker().run({nextStep: function () {
-        new Menu().run();
-      }});
+      new Menu().run();
     }
   };
 }();
+
 
 this.mmooc=this.mmooc||{};
 
@@ -3831,40 +4403,52 @@ this.mmooc.settings = {
 
 this.mmooc=this.mmooc||{};
 
-
-this.mmooc.i18n = {
-    'Assignment' : 'Oppgave',
-    'Discussion' : 'Diskusjon',
-    'Quiz' : 'Prøve',
-    'Page' : 'Innholdsside',
-    'ExternalUrl' : 'Ekstern lenke',
-    'ExternalTool' : 'Eksternt verktøy',
-    'File' : 'Fil',
-    'Announcement' : 'Kunngjøring',
-    'DiscussionTopic': 'Diskusjon',
-    'Conversation': 'Innboksmelding',
-    'Message': 'Oppgavevarsel',
-    'Submission': 'Innlevering',
-    'AssessmentRequest': 'Vurderingsforespørsel',
-    'Conference': 'Conference',
-    'Collaboration': 'Collaboration',
-    'LinkBack': 'Tilbake til forrige side',
-    'Badgesafe': 'Utmerkelser',
-    'PeerReview' : 'Hverandrevurdering',
-    'PeerReviewer' : 'Hverandrevurderer',
-    'Delivery' : 'Innlevering',
-    'DetailsAboutYourDelivery' : 'Detaljer om din innlevering',
-    'DetailsAboutDelivery' : 'Detaljer om innlevering',
-    'SubmissionIsNotAssessed' : 'Oppgaven er ikke vurdert',
-    'SubmissionIsAssessedByOne' : 'Vurderingen er klar',
-    'SubmissionIsAssessedByAll' : 'Alle vurderinger er klare',
-    'SubmissionAssessmentsAreReady' : 'vurderinger er klare',
-    'ThisIsGroup' : 'Dette er gruppe',
-    'WeHaveAQuestionToTeacherInTheDiscussion' : 'Vi har et spørsmål til veileder i diskusjonen',
-    'NoTeacherFeedbackLink' : 'No teacher_feedback link. Does the help menu have a link to send feedback to the teacher?',
-    'OutOf' : 'av',
-    'Months' : ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "Oktober", "november", "december"]
-};
+if (typeof this.mmooc.i18n === 'undefined') {
+	this.mmooc.i18n = {
+		'Course' : 'Kurs',
+		'CoursePlural' : 'Kurs',
+		'CourseProgressionTitle' : 'Din kursprogresjon:',
+		'GoToCourse' : 'Gå til kursside',
+		'GoToModule' : 'Gå til modul',
+		'BackToCoursePage' : 'Tilbake til kursforsiden',
+		'AddACourse' : 'Legg til et kurs',
+		'Module' : 'Modul',
+		'ModulePlural' : 'Moduler',
+		'CourseModules' : 'Kursmoduler',
+		'Studies' : 'Studier',
+		'Assignment' : 'Oppgave',
+		'Discussion' : 'Diskusjon',
+		'Quiz' : 'Prøve',
+		'Page' : 'Innholdsside',
+		'ExternalUrl' : 'Ekstern lenke',
+		'ExternalTool' : 'Eksternt verktøy',
+		'File' : 'Fil',
+		'Announcement' : 'Kunngjøring',
+		'DiscussionTopic': 'Diskusjon',
+		'Conversation': 'Innboksmelding',
+		'Message': 'Oppgavevarsel',
+		'Submission': 'Innlevering',
+		'AssessmentRequest': 'Vurderingsforespørsel',
+		'Conference': 'Conference',
+		'Collaboration': 'Collaboration',
+		'LinkBack': 'Tilbake til forrige side',
+		'Badgesafe': 'Utmerkelser',
+		'PeerReview' : 'Hverandrevurdering',
+		'PeerReviewer' : 'Hverandrevurderer',
+		'Delivery' : 'Innlevering',
+		'DetailsAboutYourDelivery' : 'Detaljer om din innlevering',
+		'DetailsAboutDelivery' : 'Detaljer om innlevering',
+		'SubmissionIsNotAssessed' : 'Oppgaven er ikke vurdert',
+		'SubmissionIsAssessedByOne' : 'Vurderingen er klar',
+		'SubmissionIsAssessedByAll' : 'Alle vurderinger er klare',
+		'SubmissionAssessmentsAreReady' : 'vurderinger er klare',
+		'ThisIsGroup' : 'Dette er gruppe',
+		'WeHaveAQuestionToTeacherInTheDiscussion' : 'Vi har et spørsmål til veileder i diskusjonen',
+		'NoTeacherFeedbackLink' : 'No teacher_feedback link. Does the help menu have a link to send feedback to the teacher?',
+		'OutOf' : 'av',
+		'Months' : ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "Oktober", "november", "december"]
+	};
+}
 
 jQuery(function($) {
 	
@@ -3906,7 +4490,7 @@ jQuery(function($) {
             $("#content").append(canvabadgesForCurrentCourse);
         } else {
             mmooc.coursePage.listModulesAndShowProgressBar();
-            mmooc.menu.showCourseMenu(courseId, 'Kursforside', null);
+            mmooc.menu.showCourseMenu(courseId, mmooc.i18n.Course + 'forside', null);
         }
     });
 
