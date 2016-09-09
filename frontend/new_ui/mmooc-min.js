@@ -1127,7 +1127,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"mmooc-pf-main\">\r\n	<h3>Teacher functions</h3>\r\n	<div class=\"mmooc-pf-list\">\r\n	  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\r\n	  <div id=\"mmooc-pf-student-progress-btn\" class=\"item\">Student progress</div>\r\n	</div>\r\n</div>\r\n";
+  return "<div class=\"mmooc-pf-main-teacher\">\r\n	<h3>Teacher functions</h3>\r\n	<div class=\"mmooc-pf-list\">\r\n	  <div id=\"mmooc-pf-peer-review-btn\" class=\"item\">Peer review</div>\r\n	  <div id=\"mmooc-pf-student-progress-btn\" class=\"item\">Student progress</div>\r\n	</div>\r\n</div>\r\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/peer-review"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1277,7 +1277,31 @@ this.mmooc.api = function() {
         },
 
         _get: function(options) {
-            this._sendRequest(this._ajax.get, options);
+            //this._sendRequest(this._ajax.get, options);
+            
+            /*  Fix for returning student_id in response. 
+            *   Needed for powerfunction _printStudentProgressForSection to list progress for correct student.
+            */
+            
+            var uri      = this._uriPrefix + options.uri;
+            var params   = options.params || {};
+            var callback = options.callback;
+ 
+            $.ajax({
+                url: uri,
+                type: 'GET',
+                data: params,
+                success: function(response) {
+                    if("student_id" in params) {
+                        response = response.map(function(el){el.student_id = params.student_id; return el});
+                    }
+                    callback(response);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Error during GET");
+                }
+            });           
+                
         },
 
         _post: function(options) {
@@ -3688,7 +3712,7 @@ this.mmooc.powerFunctions = function() {
 
   function _render(template, heading, data) {
     var html =
-          mmooc.util.renderTemplateWithData('powerfunctions/head', {heading: heading}) +
+          mmooc.util.renderTemplateWithData('powerfunctions/headteacher', {heading: heading}) +
           mmooc.util.renderTemplateWithData(template, data) +
           mmooc.util.renderTemplateWithData('powerfunctions/tail', {});
       document.getElementById(rootId).innerHTML = html;
@@ -3963,7 +3987,11 @@ this.mmooc.powerFunctions = function() {
 			    for (var j = 0; j < sections[sectionIndex].students.length; j++) {				    
 				    moduleParams = { student_id: sections[sectionIndex].students[j].id, per_page: 999 };
 				    mmooc.api.getItemsForModuleId(function(itemsForStudent) {
-					    html = html + "<tr><td>" + sections[sectionIndex].students[asyncsDone].name + "</td>";
+    				    for(var l = 0; l < sections[sectionIndex].students.length; l++) {
+        				    if (sections[sectionIndex].students[l].id == itemsForStudent[0].student_id) {
+            				    html = html + "<tr><td>" + sections[sectionIndex].students[l].name + "</td>";
+        				    }
+    				    }
 					    if(itemsForStudent.length < 1) {
 						    html = html + "<td>Ingen krav</td>";
 					    }
@@ -4452,7 +4480,7 @@ if (typeof this.mmooc.i18n === 'undefined') {
 
 jQuery(function($) {
 	
-    $('#main').show(); //To avoid displaying the old contents while the javascript is loading. '#main' is set to display:none in CSS.
+    $('.header-bar, .ic-Action-header').show(); //To avoid displaying the old contents while the javascript is loading. Selectors are set to display:none in CSS.
     
     mmooc.routes.addRouteForPath(/\/$/, function() {
         mmooc.menu.hideRightMenu();
@@ -4534,7 +4562,10 @@ jQuery(function($) {
     });
 
     mmooc.routes.addRouteForPath([/\/groups\/\d+\/discussion_topics\/\d+$/], function() {
-      mmooc.groups.moveSequenceLinks();
+        mmooc.groups.moveSequenceLinks();
+        if (!mmooc.util.isTeacherOrAdmin()) {
+            mmooc.menu.hideRightMenu();
+        }
     });
 
     mmooc.routes.addRouteForPath([/\/courses\/\d+\/discussion_topics\/\d+/, /\/courses\/\d+\/discussion_topics\/new/], function() {
