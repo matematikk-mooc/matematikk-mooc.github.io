@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <link rel="stylesheet" href="https://matematikk.mooc.no/custom/common.css">
+  <link rel="stylesheet" href="https://matematikk.mooc.no/custom/login.css">
+  <link rel="stylesheet" href="https://matematikk.mooc.no/custom/mmooc-min.css">
+  <title>MatematikkMOOC</title>
+
+  <script type="text/javascript">
+    if (document.referrer.indexOf("/register/") !== -1) {
+      window.location.href = "https://matematikk.mooc.no/courses";
+    }
+
+    if (window.location.href.indexOf("login_success=1") !== -1) {
+      window.location.href = "https://matematikk.mooc.no/courses";
+    }
+    else if (window.location.href.indexOf("mmpf") !== -1) {
+      window.location.href = "https://matematikk.mooc.no/courses/?mmpf";
+    }
+    else
+    { 
+    	var i = window.location.href.indexOf("become_user_id");
+    	if (i !== -1) {
+	    	var str = window.location.href.split('?')[1];
+      		window.location.href = "https://matematikk.mooc.no/courses/?" + str;
+      	}
+    }
+  </script>
+</head>
+<body class="modal no-headers">
+
+  <div id="application">
+    <div id="wrapper-container">
+      <div id="wrapper">
+        <div id="main" style="min-height: 550px;">
+          <div id="not_right_side">
+            <div id="content-wrapper">
+              <div id="content" role="main" class="container-fluid">
+                <div id="modal-box" class="login-box">
+                  <div id="modal-box-inner">
+                    <div class="clearfix">
+                      <h1 class="span9">MatematikkMOOC</h1>
+                    </div>
+                    <div class="clearfix">
+                      <p style="color: #fff; padding-left: 68px;">Skal du ta Matematikk 1 ved UiA eller Matematikk 2 ved UiT?</p>
+                      <p style="color: #fff; padding-left: 68px;">Logg inn med FEIDE id fra ditt studiested nedenfor.</p>
+                      <p style="color: #fff; padding-left: 68px;"><a href="http://www.uia.no/student/it-hjelp" target="_blank">Teknisk hjelp UiA</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://uit.no/om/orakelet/frag?p_document_id=428258"  target="_blank">Teknisk hjelp UiT</a></p>
+                    </div>
+                 <div class="clearfix">
+                      <a href="/login/saml" class="btn btn-primary" style="float: left; color: #fff !important; margin-left: 68px;">FEIDE</a>
+                      <a href="/login/canvas" class="btn btn-primary" style="float: left; color: #fff !important;">Egen bruker</a>
+                    </div>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer role="contentinfo" id="footer">
+        <a href="http://www.instructure.com" class="footer-logo ">
+          <span class="screenreader-only">
+            By Instructure
+          </span>
+        </a>
+        <span id="footer-links">
+            <a href="http://instructure.com">Open Source LMS</a>
+          <a target="_blank" href="http://eepurl.com/1LSkT">User Research</a>
+
+
+        </span>
+      </footer>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
