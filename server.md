@@ -10,7 +10,7 @@ First thing you need to do is to install Docker on your machine.
 
 ### On Mac OS X or Windows
 
-Install and launch [Docker Toolbox][docker-toolbox]. This will give you a
+Install and launch [Docker][docker]. This will give you a
 terminal window that allows you to type the required commands
 documented below. It will also install the [Kitematic][kitematic] GUI.
 
@@ -21,8 +21,13 @@ your distribution. Once installed, open up a terminal window.
 
 ## Install the utility package
 
-In a terminal window:
+In a terminal window, if you have [Git][git] installed:
 
+    git clone https://github.com/matematikk-mooc/mmooc.git
+    cd mmooc
+
+otherwise:
+    
     curl -L -O https://github.com/matematikk-mooc/mmooc/archive/master.zip
     unzip master.zip
     cd mmooc-master
@@ -69,6 +74,6 @@ but wipe the data containers as well:
 
 [docker-hub-org]: https://registry.hub.docker.com/repos/mmooc/
 [docker-install]: https://docs.docker.com/installation/#installation
-[docker-toolbox]: https://www.docker.com/products/docker-toolbox
 [docker]: http://docker.com
 [kitematic]: https://kitematic.com/
+[git]: https://git-scm.com/downloads
