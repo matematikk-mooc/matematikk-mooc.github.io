@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Personvernvilkår</title>
+</head>
+
+<body>
+<img src="http://matematikk-mooc.github.io/frontend/bitmaps/mmooc-logo@2x.png">
+<h1>Personvernvilkår</h1>
+MatematikkMOOC er opptatt av personvern. 
+Denne siden oppsummerer det viktigste om hvordan vi samler inn og bruker informasjon om besøkende på matematikk.mooc.no.
+For detaljerte vilkår, se <a href="https://github.com/matematikk-mooc/matematikk-mooc.github.io/raw/master/Databehandleravtale%20Feide-tjenester%20Senter%20for%20IKT%20i%20utdanningen%20MatematikkMOOC.docx" target="_blank">
+databehandleravtalen</a>. Vi anbefaler alle Feideorganisasjoner å inngå denne avtalen med oss.
+
+<h2>Ansvar</h2>
+MatematikkMOOC er ansvarlig for innhenting og bruk av personopplysninger som gjøres i forbindelse med drift og vedlikehold av matematikk.mooc.no. 
+BIBSYS er vår leverandør for teknisk drift og vedlikehold av nettstedet. 
+MatematikkMOOC har databehandleravtale med BIBSYS.
+
+<h2>Innhold</h2>
+MatematikkMOOC lagrer diskusjonsinnlegg, svar på prøver, innleveringer etc. 
+Formålet med dette er at brukeren skal kunne finne igjen disse tingene neste gang hen logger på. 
+Brukere som deltar på samme kurs vil kunne se hverandres diskusjonsinnlegg.
+
+<h2>Feide</h2>
+Matematikk.mooc.no bruker følgende informasjon fra Feide: 
+<ul>
+<li>eduPersonPrincipalName</li>
+<li>displayName</li>
+<li>mail</li>
+</ul>
+
+Se forøvrig <a href="https://www.feide.no/personvern-og-samtykke" target="_blank">Feide personvern og samtykke</a> for mer informasjon.
+
+<h2>Informasjonskapsler</h2>
+Matematikk.mooc.no benytter informasjonskapsler (cookies). Informasjonskapsler er små tekstfiler som lagres på maskinen din. De fleste nettlesere er stilt inn til å godta informasjonskapsler. 
+Du kan blokkere informasjonskapsler eller bli varslet når en informasjonskapsel lagres på datamaskinen din. Mer informasjon om dette finner du i hjelpefunksjonen i nettleseren din.
+
+</body></html>
