@@ -28,7 +28,7 @@ so if you run our design on their servers you should test that it works when Can
  *The Canvas DOM is not carved in stone.*
 
 ## February 2017 Canvas user interface
-In the [February 18 Canvas release][https://community.canvaslms.com/docs/DOC-8835-canvas-production-release-notes-2017-02-18], 
+In the [February 18 Canvas release](https://community.canvaslms.com/docs/DOC-8835-canvas-production-release-notes-2017-02-18), 
 Canvas changed they way they load Javascript files. This causes previous javascript version to fail loading because
 Handlebars is not defined. Handlebars used to be available because Canvas loaded it too. 
 We solved this by including a version of handlebars in our javascript file.
