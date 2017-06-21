@@ -27,6 +27,18 @@ so if you run our design on their servers you should test that it works when Can
  <img src="http://www.publicdomainpictures.net/pictures/180000/velka/hieroglyphs-14641949174f2.jpg " alt="The Canvas DOM is not carved in stone" style="width: 200px;"/>	    
  *The Canvas DOM is not carved in stone.*
 
+## Latest version of Canvas user interface
+
+To include the latest version of the design files, you can upload the following files
+
+- [https://matematikk-mooc.github.io/mmooclatest.css](https://matematikk-mooc.github.io/mmooclatest.css)
+- [https://matematikk-mooc.github.io/mmooclatest.js](https://matematikk-mooc.github.io/mmooclatest.js)
+
+They contain symbolic links to the two following files, which will be maintained to support the latest Canvas version at any time (hopefully):
+
+- [https://matematikk-mooc.github.io/frontend/mmooc-min.css](https://matematikk-mooc.github.io/frontend/mmooc-min.css)
+- [https://matematikk-mooc.github.io/frontend/mmooc-min.js](https://matematikk-mooc.github.io/frontend/mmooc-min.js)
+
 ## February 2017 Canvas user interface
 In the [February 18 Canvas release](https://community.canvaslms.com/docs/DOC-8835-canvas-production-release-notes-2017-02-18), 
 Canvas changed they way they load Javascript files. This causes previous javascript version to fail loading because
@@ -57,12 +69,6 @@ July 10th 2016 it will no longer be possible to use the old Canvas user interfac
 - Direct link to JS file: [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js)
 
 You must then upload these two files in the Canvas theme editor.
-
-## Old Canvas user interface
-If you are running a Canvas release from before July 10th 2016 and you are using the old version of the Canvas user interface, the files you need to include are
-
-- [https://matematikk-mooc.github.io/frontend/mmooc-min.css](https://matematikk-mooc.github.io/frontend/mmooc-min.css)
-- [https://matematikk-mooc.github.io/frontend/mmooc-min.js](https://matematikk-mooc.github.io/frontend/mmooc-min.js)
 
 ## Own logo and other colors
 If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to.  
