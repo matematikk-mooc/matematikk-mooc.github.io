@@ -5224,6 +5224,16 @@ this.mmooc.api = function() {
             return null;
         },
 
+        getSelfRegisterCourse: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/search/all_courses",
+                "params":   { "search": "SELFREGISTER" }
+            });
+        },        
+
+
         getAllCourses: function(callback, error) {
             this._get({
                 "callback": function(courses) {
@@ -6571,11 +6581,12 @@ this.mmooc.enroll = function() {
             }
             else
             {
+                this.hideEnrollInformationPolicy();
                 if(this.isSelfEnrollmentPage()) {
                     //When self enrolling, give the user the impression of registering on the platform, and not on the course
                     //we use to make self enrollment possible. See settings.js/selfRegisterCourseCode
                     this.getEnrollInformationElement().text("");
-                    $("#enroll_form > p:nth-child(2)").text("Vennligst fyll inn informasjonen nedenfor for å registrere deg " + mmooc.settings.platformName);
+                    $("#enroll_form > p:nth-child(2)").text("Vennligst fyll inn informasjonen nedenfor for å registrere deg på " + mmooc.settings.platformName);
                     this.selectRegisterUserCheckbox();
                     this.updatePrivacyPolicyLinks();
                     this.changeEnrollButton();            
@@ -6592,7 +6603,6 @@ this.mmooc.enroll = function() {
                         window.location.href = "/search/all_courses";
                     });
                 }
-                this.hideEnrollInformationPolicy();
             }
         },
         printAllCoursesContainer: function() {
@@ -7296,17 +7306,19 @@ this.mmooc.pages = function() {
         },
         
         replaceCreateAccountLink: function() {
-          if(mmooc.settings.displaySelfRegisterLink)
-          {
-              var url = "/enroll/" + mmooc.settings.selfRegisterCourseCode;
-              $("#register_link").attr("href", url);
-              $("#register_link div.ic-Login__banner-title").html(mmooc.i18n.CreateAccountTitle);
-            $("#register_link div.ic-Login__banner-subtitle").html(mmooc.i18n.CreateAccountSubtitle);
-          }
-          else
-          {
-              $("#register_link").hide();
-          }
+          mmooc.api.getSelfRegisterCourse(function(selfRegisterCourse) {
+              var createAccountTitle = "";
+              var createAccountSubtitle = "";
+              if(selfRegisterCourse[0])
+              {
+                  var url = "/enroll/" + selfRegisterCourse[0].course.self_enrollment_code;
+                  $("#register_link").attr("href", url);
+                  createAccountTitle = mmooc.i18n.CreateAccountTitle;
+                  createAccountSubtitle = mmooc.i18n.CreateAccountSubtitle;
+              }
+              $("#register_link div.ic-Login__banner-title").html(createAccountTitle);
+              $("#register_link div.ic-Login__banner-subtitle").html(createAccountSubtitle);
+          });
         },
 
         duplicateMarkedAsDoneButton: function() {
@@ -8502,10 +8514,10 @@ this.mmooc.util = function () {
         },
 
         filterCourse: function(course) {
-            return course.name != mmooc.settings.selfRegisterCourseName;
+            return course.name != "SELFREGISTER";
         },
         filterSearchAllCourse: function(course) {
-            return course.course.name != mmooc.settings.selfRegisterCourseName;
+            return course.course.name != "SELFREGISTER";
         },
         callWhenElementIsPresent: function(classId, callback) {
             var checkExist = setInterval(function() {
@@ -8666,10 +8678,7 @@ this.mmooc.settings = {
     'disablePeerReviewButton' : false,
     'removeGlobalGradesLink' : true,
     'removeGroupsLink' : true,
-    'displaySelfRegisterLink' : true,
-    'selfRegisterCourseCode' : "6DM3WF", //Default course code used if displaySelfRegisterLink is set to true.
     'privacyPolicyLink' : 'https://kurs-iktsenteret.github.io/privacypolicy.html',
-    'selfRegisterCourseName' : "Velkommen",
     'platformName' : 'kurs.iktsenteret.no'
 };
 
