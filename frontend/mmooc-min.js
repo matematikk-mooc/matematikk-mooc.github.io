@@ -5224,6 +5224,16 @@ this.mmooc.api = function() {
             return null;
         },
 
+        getSelfRegisterCourse: function(callback, error) {
+            this._get({
+                "callback": callback,
+                "error":    error,
+                "uri":      "/search/all_courses",
+                "params":   { "search": "SELFREGISTER" }
+            });
+        },        
+
+
         getAllCourses: function(callback, error) {
             this._get({
                 "callback": function(courses) {
@@ -6102,18 +6112,17 @@ this.mmooc.coursePage = function() {
         },
         
         //Until Canvas has corrected the translation of drop course to something else than "slipp emnet", we override the functionality.
-        replaceBadTranslations: function() {
+        overrideUnregisterDialog : function() {
             var selfUnenrollmentButton = $(".self_unenrollment_link");
             var selfUnenrollmentDialog = $("#self_unenrollment_dialog");
             if(selfUnenrollmentButton.length)
             {
                 selfUnenrollmentButton.text(selfUnenrollmentButton.text().replace("Slipp dette emnet", mmooc.i18n.DropCourse));
-                selfUnenrollmentButton.unbind("click"); //Prevent default presentation of the dialog with incorrect translation.
-                selfUnenrollmentButton.click(function(e) {
-                    selfUnenrollmentDialog.toggle();
-                    selfUnenrollmentDialog.find(".dialog_closer").click(function(e) {
-                        selfUnenrollmentDialog.hide();
-                    });
+//                selfUnenrollmentButton.off(); //Prevent default presentation of the dialog with incorrect translation.
+                selfUnenrollmentButton.on("click",function(e) {
+                	setTimeout(function() {
+                        $("#ui-id-1").html(mmooc.i18n.DropCourse); 
+                	}, 200);
                 });
             }
             if(selfUnenrollmentDialog.length)
@@ -6166,7 +6175,7 @@ this.mmooc.coursePage = function() {
             $("#deadline-" + upcoming).addClass("upcoming");
             var parent = $("body.home .deadlines-list");
             var row = $("#deadline-" + upcoming);
-            parent.scrollTop(parent.scrollTop() + (row.position().top - parent.position().top) - (parent.height()/2) + (row.height()/2));
+            parent.scrollTop(parent.scrollTop() + row.position().top  - (parent.height()/2) + (row.height()/2));
             $(".deadlines-scroll-up").click(function() {
                 var scroll = parent.scrollTop() - 50;
                 $(parent).animate({
@@ -6572,11 +6581,12 @@ this.mmooc.enroll = function() {
             }
             else
             {
+                this.hideEnrollInformationPolicy();
                 if(this.isSelfEnrollmentPage()) {
                     //When self enrolling, give the user the impression of registering on the platform, and not on the course
                     //we use to make self enrollment possible. See settings.js/selfRegisterCourseCode
                     this.getEnrollInformationElement().text("");
-                    $("#enroll_form > p:nth-child(2)").text("Vennligst fyll inn informasjonen nedenfor for å registrere deg " + mmooc.settings.platformName);
+                    $("#enroll_form > p:nth-child(2)").text("Vennligst fyll inn informasjonen nedenfor for å registrere deg på " + mmooc.settings.platformName);
                     this.selectRegisterUserCheckbox();
                     this.updatePrivacyPolicyLinks();
                     this.changeEnrollButton();            
@@ -6593,7 +6603,6 @@ this.mmooc.enroll = function() {
                         window.location.href = "/search/all_courses";
                     });
                 }
-                this.hideEnrollInformationPolicy();
             }
         },
         printAllCoursesContainer: function() {
@@ -7011,7 +7020,11 @@ this.mmooc.menu = function() {
                 this.showLeftMenu();
 
                 $("#section-tabs-header").show();
+                
+                //Canvas changed the aria-label as shown in the two lines below. Keep both lines for backward compatibility.
                 $("nav[aria-label='context']").show();
+                $("nav[aria-label='Emner-navigasjonsmeny']").show();
+                
                 $("#edit_discussions_settings").show();
                 $("#availability_options").show();
                 $("#group_category_options").show();
@@ -7297,17 +7310,19 @@ this.mmooc.pages = function() {
         },
         
         replaceCreateAccountLink: function() {
-          if(mmooc.settings.displaySelfRegisterLink)
-          {
-              var url = "/enroll/" + mmooc.settings.selfRegisterCourseCode;
-              $("#register_link").attr("href", url);
-              $("#register_link div.ic-Login__banner-title").html(mmooc.i18n.CreateAccountTitle);
-            $("#register_link div.ic-Login__banner-subtitle").html(mmooc.i18n.CreateAccountSubtitle);
-          }
-          else
-          {
-              $("#register_link").hide();
-          }
+          mmooc.api.getSelfRegisterCourse(function(selfRegisterCourse) {
+              var createAccountTitle = "";
+              var createAccountSubtitle = "";
+              if(selfRegisterCourse[0])
+              {
+                  var url = "/enroll/" + selfRegisterCourse[0].course.self_enrollment_code;
+                  $("#register_link").attr("href", url);
+                  createAccountTitle = mmooc.i18n.CreateAccountTitle;
+                  createAccountSubtitle = mmooc.i18n.CreateAccountSubtitle;
+              }
+              $("#register_link div.ic-Login__banner-title").html(createAccountTitle);
+              $("#register_link div.ic-Login__banner-subtitle").html(createAccountSubtitle);
+          });
         },
 
         duplicateMarkedAsDoneButton: function() {
@@ -8503,10 +8518,10 @@ this.mmooc.util = function () {
         },
 
         filterCourse: function(course) {
-            return course.name != mmooc.settings.selfRegisterCourseName;
+            return course.name != "SELFREGISTER";
         },
         filterSearchAllCourse: function(course) {
-            return course.course.name != mmooc.settings.selfRegisterCourseName;
+            return course.course.name != "SELFREGISTER";
         },
         callWhenElementIsPresent: function(classId, callback) {
             var checkExist = setInterval(function() {
@@ -8667,10 +8682,7 @@ this.mmooc.settings = {
     'disablePeerReviewButton' : false,
     'removeGlobalGradesLink' : true,
     'removeGroupsLink' : true,
-    'displaySelfRegisterLink' : true,
-    'selfRegisterCourseCode' : "6DM3WF", //Default course code used if displaySelfRegisterLink is set to true.
     'privacyPolicyLink' : 'https://kurs-iktsenteret.github.io/privacypolicy.html',
-    'selfRegisterCourseName' : "Velkommen",
     'platformName' : 'kurs.iktsenteret.no'
 };
 
@@ -8781,7 +8793,8 @@ jQuery(function($) {
             mmooc.coursePage.listModulesAndShowProgressBar();
             mmooc.announcements.printAnnouncementsUnreadCount();
             mmooc.coursePage.replaceUpcomingInSidebar();
-            mmooc.coursePage.replaceBadTranslations();
+            mmooc.coursePage.overrideUnregisterDialog();
+            
             mmooc.coursePage.printDeadlinesForCourse();
         }
     });
