@@ -39,40 +39,9 @@ They contain symbolic links to the two following files, which will be maintained
 - [https://matematikk-mooc.github.io/frontend/mmooc-min.css](https://matematikk-mooc.github.io/frontend/mmooc-min.css)
 - [https://matematikk-mooc.github.io/frontend/mmooc-min.js](https://matematikk-mooc.github.io/frontend/mmooc-min.js)
 
-## February 2017 Canvas user interface
-In the [February 18 Canvas release](https://community.canvaslms.com/docs/DOC-8835-canvas-production-release-notes-2017-02-18), 
-Canvas changed they way they load Javascript files. This causes previous javascript version to fail loading because
-Handlebars is not defined. Handlebars used to be available because Canvas loaded it too. 
-We solved this by including a version of handlebars in our javascript file.
-
-[https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/feb17](https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/feb17)
-
-
-- Direct link to CSS file       : [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.css](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/feb17/mmooc-min.css)
-- Direct link to JS file: [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.js](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/feb17/mmooc-min.js)
-
-
-## January 2017 Canvas user interface
-Somewhere between July 2016 and January 2017, Canvas did some minor changes in their html code. We have updated our design accordingly. 
-If you are using the latest version of Canvas, you should use the CSS and JS files found here:
-[https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/jan17](https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/jan17)
-
-
-- Direct link to CSS file       : [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.css](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.css)
-- Direct link to JS file: [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.js](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/jan17/mmooc-min.js)
-
-## July 10th 2016 Canvas user interface
-July 10th 2016 it will no longer be possible to use the old Canvas user interface. After that date, or if you have already enabled the new design, you need to download the javascript and css files found here: 
-[https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/new_ui](https://github.com/matematikk-mooc/matematikk-mooc.github.io/tree/master/frontend/new_ui)
-
-- Direct link to CSS file       : [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.css](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.css)
-- Direct link to JS file: [https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js](https://raw.githubusercontent.com/matematikk-mooc/matematikk-mooc.github.io/master/frontend/new_ui/mmooc-min.js)
-
-You must then upload these two files in the Canvas theme editor.
 
 ## Own logo and other colors
-If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to.  
-If you host your own Canvas installation, you could for example put your logo in the /public directory. 
+If you want to use your own logo (which you probably do), you will have to host the files another place on GitHUB or another server you have access to.  If you host your own Canvas installation, you could for example put your logo in the /public directory. 
 
 To make the CSS file look for your logo in the right place, edit it and search for all occurences of ".png" and "@2x.png". Update the location of the files.
 
