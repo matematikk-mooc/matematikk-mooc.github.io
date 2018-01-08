@@ -5310,9 +5310,10 @@ this.mmooc.api = function() {
             } else if (this._env.group) {
                 // Group pages does not contain course id in URL, but is available via JavaScript variable
                 return this._env.group.context_id;
-            } else if ($("#section-tabs-header-subtitle").size() > 0) {
+            } else if ($("#discussion_container").size() > 0) {
                 // Group subpages contains course id only in a link
-                var tmp = $("#section-tabs-header-subtitle").attr("href").split("/");
+                //#discussion_topic > div.entry-content > header > div > div.pull-left > span > a
+                var tmp = $("#discussion_topic div.entry-content header div div.pull-left span a").attr("href").split("/");
                 if (tmp.length == 3) {
                     return parseInt(tmp[2], 10);
                 }
@@ -7146,7 +7147,7 @@ this.mmooc.menu = function() {
                 
                 function _selectCourseAndPrefillMessageInDialogBox() {
                 
-                    var $teacherFeedbackBody = $("#teacher-feedback-body");
+                    var $teacherFeedbackBody = $("#help_tray textarea");
                     var courseId = mmooc.api.getCurrentCourseId();
 
                     mmooc.api.getCourse(courseId, function(course) {
@@ -7155,26 +7156,30 @@ this.mmooc.menu = function() {
                         var discussionAndGroupTitle = $(".discussion-title").text();
                         var discussionTitle = strLeft(discussionAndGroupTitle, " - ");
                         var newLine = "\n";
-                        $('#teacher-feedback-recipients option:contains("' + courseName + '")').prop('selected', true);
+                        //Canvas now uses React for their help dialog, so we need to set the selected value slightly different.
+                        var selectValue = $('#help_tray form fieldset label select option:contains("' + courseName + '")').prop('value');
+                        $('#help_tray form fieldset label select').prop('value', selectValue);
                         var teacherFeedbackBodyHtml = mmooc.i18n.ThisIsGroup + ' "' + group.name + '".' + newLine + newLine + mmooc.i18n.WeHaveAQuestionToTeacherInTheDiscussion + ' "' + discussionTitle + '":' + newLine + discussionUrl;
                         $teacherFeedbackBody.val(teacherFeedbackBodyHtml);
                     });
                 }
 
                 function _openTeacherFeedbackLink() {
-                    var $teacherFeedbackLink = $("#help-dialog a[href='#teacher_feedback']");
+                    var $teacherFeedbackLink = $("#help_tray a[href='#teacher_feedback']");
                     if (!$teacherFeedbackLink.length) {
                         console.log(mmooc.i18n.NoTeacherFeedbackLink);
                         return false;
                     }
-                    $teacherFeedbackLink.click();
-                    _selectCourseAndPrefillMessageInDialogBox();
+                    //Ref. https://stackoverflow.com/questions/7999806/jquery-how-to-trigger-click-event-on-href-element
+                    $teacherFeedbackLink[0].click();
+                    setTimeout(_selectCourseAndPrefillMessageInDialogBox, 600); //Need to wait for the get teacher help contents to be loaded
+                    
                 }
 
                 function _addClickEventOnGetHelpFromTeacherButton() {
                     $(document).on("click", "#mmooc-get-teachers-help", function(event) {
-                        $('.help_dialog_trigger').click();
-                        setTimeout(_openTeacherFeedbackLink, 600); //Need to wait for the dialog contents to be loaded
+                        $('#global_nav_help_link').click();
+                        setTimeout(_openTeacherFeedbackLink, 600); //Need to wait for the help dialog contents to be loaded
                     });
                 }
                 
@@ -8651,7 +8656,7 @@ this.mmooc.util = function () {
                     }
                 }
                 categoryCourses.sort(function(a,b){
-                    return a.name > b.name;
+                    return a.course_code > b.course_code;
                 });
                 var categoryObj = {
                     title: categorys[i],
@@ -8682,8 +8687,8 @@ this.mmooc.settings = {
     'disablePeerReviewButton' : false,
     'removeGlobalGradesLink' : true,
     'removeGroupsLink' : true,
-    'privacyPolicyLink' : 'https://kurs-iktsenteret.github.io/privacypolicy.html',
-    'platformName' : 'kurs.iktsenteret.no'
+    'privacyPolicyLink' : 'http://matematikk-mooc.github.io/privacypolicy.html',
+    'platformName' : 'matematikk.mooc.no'
 };
 
 this.mmooc=this.mmooc||{};
@@ -8953,13 +8958,13 @@ jQuery(function($) {
         window.location.href = "/courses";
     });
 
-    mmooc.routes.addRouteForPath(/enroll\/[0-9A-Z]+$/, function() {
+/*    mmooc.routes.addRouteForPath(/enroll\/[0-9A-Z]+$/, function() {
         if(document.location.search == "")
         {
             mmooc.enroll.changeEnrollPage();
         }
     });
-
+*/
     try {
         mmooc.menu.renderLeftHeaderMenu();
         mmooc.menu.showUserMenu();
