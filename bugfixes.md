@@ -1,11 +1,11 @@
-#January 8th 2018
+# January 8th 2018
 
 In the MatematikkMOOC design, we have moved the previous/next buttons on the course pages to the lower middle of the page. 
 At some point late 2017, Canvas changed something which caused the previous/next buttons to look like this with our design.
 
 <img src="images/previousnextbug.png" alt="Previous/Next bug"/>	    
 
-##The relevant HTML code before the change:
+## The relevant HTML code before the change:
 
 Previous button:
 
@@ -25,7 +25,7 @@ Next button:
       </a>
 ```
 
-##After the change
+## After the change
 
 Previous button:
 
