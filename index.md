@@ -27,6 +27,8 @@ so if you run our design on their servers you should test that it works when Can
  <img src="http://www.publicdomainpictures.net/pictures/180000/velka/hieroglyphs-14641949174f2.jpg " alt="The Canvas DOM is not carved in stone" style="width: 200px;"/>	    
  *The Canvas DOM is not carved in stone.*
 
+[This page](bugfixes.md) contains some examples of changes Instructure has done in their DOM.
+
 ## Latest version of Canvas user interface
 
 To include the latest version of the design files, you can upload the following files
