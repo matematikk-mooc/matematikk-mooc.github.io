@@ -2952,16 +2952,16 @@ var output=[];for(i in arrays){output.push(arrays[i]);}
 if(!config.callback){return output;}else{config.callback('',output);}},fromObjects2CSV:function(objects,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.experimental='experimental'in options?options.experimental:false;if(!config.experimental){throw new Error('not implemented');}
 var output=[];for(i in objects){output.push(arrays[i]);}
 if(!config.callback){return output;}else{config.callback('',output);}}};$.csvEntry2Array=$.csv.toArray;$.csv2Array=$.csv.toArrays;$.csv2Dictionary=$.csv.toObjects;})(jQuery);
-function mmoocLoadScript(mmoocScript)
-{
-    var mmoocScriptElement = document.createElement('script');
-    mmoocScriptElement.setAttribute('charset', 'UTF-8');
-    mmoocScriptElement.setAttribute('src', mmoocScript);
-    document.body.appendChild(mmoocScriptElement);
-}
-$(document).load($(function() {
-    mmoocLoadScript("https://www.nrk.no/serum/latest/js/video_embed.js");
-}));
+this.mmooc = this.mmooc || {};
+
+this.mmooc.nrk = function() {
+	return {
+		init : function ()
+		{
+		    mmooc.util.mmoocLoadScript("https://www.nrk.no/serum/latest/js/video_embed.js");
+		}
+	}
+}();
 // ==========================================================================================
 // This code was copied and adapted on January 27th 2015 from:
 // https://s3.amazonaws.com/SSL_Assets/bham/uob/uob7.js 
@@ -3633,6 +3633,250 @@ function getQueryVariable(variable) {
 	}
 
 	return(false);
+}
+
+this.mmooc=this.mmooc||{};
+
+//https://medium.com/@pointbmusic/youtube-api-checklist-c195e9abaff1
+this.mmooc.youtube = function() {
+	var hrefPrefix = "https://video.google.com/timedtext?name=bokm%C3%A5l&lang=no&v=";
+	var transcriptIdPrefix = "videoTranscript";
+	var transcriptArr = [];
+
+	function transcript(transcriptId)
+	{
+		this.transcriptId = transcriptId;
+		this.videoId = transcriptId.split(transcriptIdPrefix)[1];
+
+			//Array of captions in video
+		this.captionsLoaded = false;
+
+		//Timeout for next caption
+		this.captionTimeout = null;
+
+		//Keep track of which captions we are showing
+		this.currentCaptionIndex = 0;
+		this.nextCaptionIndex = 0;
+
+		this.player = new YT.Player(this.videoId, {
+		  videoId: this.videoId,
+		  events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		  }
+  	    });	
+		
+		function findCaptionIndexFromTimestamp(timeStamp)
+		{
+			console.log("timeStamp:" + timeStamp);
+			var start = 0;
+			var duration = 0;
+			for (var i = 0, il = captions.length; i < il; i++) {
+				start = Number(getStartTimeFromCaption(i));
+				duration = Number(getDurationFromCaption(i));
+	
+				//Return the first caption if the timeStamp is smaller than the first caption start time.
+				if(timeStamp < start)
+				{
+					break;
+				}
+	
+				//Check if the timestamp is in the interval of this caption.
+				if((timeStamp >= start) && (timeStamp < (start + duration)))
+				{
+					break;
+				}        
+			}
+			console.log("Found index:" + i + " Start:" + start + " Duration:" + duration);
+			return i;
+		}
+
+		function getTimeIdFromTimestampIndex(i)
+		{
+			var strTimestamp = "" + i;
+			return "t" + strTimestamp;
+		}
+
+		function clearCurrentHighlighting()
+		{
+			var timeStampId = getTimeIdFromTimestampIndex(currentCaptionIndex);
+			console.log("clearCurrentHighlighting " + timeStampId);
+			$("#"+timeStampId).css('background-color', '');
+		}
+
+		function highlightNextCaption()
+		{
+			console.log("highlightNextCaption");
+			var timestampId = getTimeIdFromTimestampIndex(nextCaptionIndex);
+			$("#"+timestampId).css('background-color', 'yellow');
+		}
+
+		function calculateTimeout(currentTime)
+		{
+			var startTime = Number(getStartTimeFromCaption(currentCaptionIndex));
+			var duration = Number(getDurationFromCaption(currentCaptionIndex));
+			var timeoutValue = startTime - currentTime + duration;
+			return timeoutValue;
+		}
+
+		function setCaptionTimeout(timeoutValue)
+		{
+			clearTimeout(captionTimeout);
+		
+			captionTimeout = setTimeout(function() {
+				highlightCaptionAndPrepareForNext();
+			}, timeoutValue*1000)
+		}
+
+		//This function highlights the next caption in the list and
+		//sets a timeout for the next one after that.
+		function highlightCaptionAndPrepareForNext(player)
+		{
+			console.log("highlightCaptionAndPrepareForNext");
+			clearCurrentHighlighting(player);
+			highlightNextCaption(player);
+			player.currentCaptionIndex = player.nextCaptionIndex;
+			player.nextCaptionIndex++;
+
+			currentTime = player.getCurrentTime();
+			var timeoutValue = calculateTimeout(player, currentTime);
+		
+			setCaptionTimeout(player, timeoutValue);
+		}
+
+
+		//Called if the user has dragged the slider to somewhere in the video.
+		function highlightCaptionFromTimestamp(timeStamp)
+		{
+			console.log("highlightCaptionFromTimestamp timeStamp:" + timeStamp);
+			clearCurrentHighlighting();
+			nextCaptionIndex = findCaptionIndexFromTimestamp(timeStamp);
+			highlightNextCaption();
+			currentCaptionIndex = nextCaptionIndex;
+
+			var timeoutValue = calculateTimeout(timeStamp);
+
+			setCaptionTimeout(timeoutValue);
+		}   
+
+		function getStartTimeFromCaption(i)
+		{
+			return captions[i].getAttribute('start');
+		}
+		function getDurationFromCaption(i) 
+		{
+			return captions[i].getAttribute('dur');
+		}
+
+		
+	}
+	transcript.prototype.transcriptLoaded = function(transcript) {
+		var start = 0;
+		this.captions = this.getElementsByTagName('text');
+		var srt_output = "<div id='btnSeek' data-seek='0'>0:00</div>";
+
+		for (var i = 0, il = this.captions.length; i < il; i++) {
+			start =+ this.getStartTimeFromCaption(i);
+
+			captionText = this.captions[i].textContent.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			var timestampId = this.getTimeIdFromTimestampIndex(i);
+			srt_output += "<span class='btnSeek' data-seek='" + start + "' id='" + timestampId + "'>" + captionText + "</span> ";
+		};
+
+		$("#videoTranscript" + this.videoId).append(srt_output);
+		this.captionsLoaded = true;
+	}
+	transcript.prototype.getTranscript = function()
+	{
+		var href = hrefPrefix + this.videoId;
+		var oTranscript = this;
+		$.ajax({
+			url: href,
+			type: 'GET',
+			data: {},
+			success: function(response) {
+				oTranscript.transcriptLoaded(response);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				console.log("Error during GET");
+			}
+		});           
+	}
+
+	
+	$(function() {
+		$(document).on('click', '.btnSeek', function() {
+			console.log("=============");
+			var seekToTime = $(this).data('seek');
+			console.log("Seekto: " + seekToTime);
+			var player = getPlayerFromTranscriptId($(this).parent().attr("id"));
+			player.seekTo(seekToTime, true);
+		});
+	});
+
+	return {
+		addTranscriptToYoutubeVideos : function()
+		{
+		
+			$(".mmocVideoTranscript" ).each(function( i ) {
+				var oTranscript = new transcript(this.id)
+				oTranscript.getTranscript();
+				transcriptArr.push(oTranscript);
+			});
+		},
+		playerPlaying : function(player)
+		{
+			if(!player.captionsLoaded)
+			{
+				return;
+			}	
+			
+		    currentTime = player.getCurrentTime();
+		    highlightCaptionFromTimestamp(player, currentTime);
+		},
+		playerNotPlaying : function (player)
+		{
+			if(!player.parent.captionsLoaded)
+			{
+				return;
+			}	
+			clearTimeout(player.parent.captionTimeout);
+		},
+		APIReady : function ()
+		{
+			this.addTranscriptToYoutubeVideos();
+		},
+		init : function ()
+		{
+			onYouTubePlayerAPIReady();		
+		}		
+	}
+}();
+
+
+//These functions must be global as YouTube API will call them.  
+function onYouTubePlayerAPIReady() {
+	console.log("onYouTubePlayerAPIReady.");
+	this.mmooc.youtube.APIReady();
+}
+
+// The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+	event.target.playVideo();
+}
+
+// The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+function onPlayerStateChange(event) {
+	console.log("onPlayerStateChange " + event.data);
+	if (event.data == YT.PlayerState.PLAYING) {
+		this.mmooc.youtube.playerPlaying(event.target);
+	}
+	else
+	{
+		this.mmooc.youtube.playerNotPlaying(event.target);
+	}
 }
 
 this["mmooc"] = this["mmooc"] || {};
@@ -8492,6 +8736,14 @@ this.mmooc = this.mmooc || {};
 
 this.mmooc.util = function () {
     return {
+		mmoocLoadScript : function (mmoocScript)
+		{
+			var mmoocScriptElement = document.createElement('script');
+			mmoocScriptElement.setAttribute('charset', 'UTF-8');
+			mmoocScriptElement.setAttribute('src', mmoocScript);
+			document.body.appendChild(mmoocScriptElement);
+		},
+
         renderTemplateWithData: function (template, data) {
             var html = "";
             try {
@@ -8974,6 +9226,13 @@ jQuery(function($) {
 
     try {
         mmooc.routes.performHandlerForUrl(document.location);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+		mmooc.youtube.init();
+		mmooc.nrk.init();
     } catch (e) {
         console.log(e);
     }
