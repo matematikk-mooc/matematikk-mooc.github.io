@@ -2962,6 +2962,8 @@ this.mmooc.nrk = function() {
 		}
 	}
 }();
+
+
 // ==========================================================================================
 // This code was copied and adapted on January 27th 2015 from:
 // https://s3.amazonaws.com/SSL_Assets/bham/uob/uob7.js 
@@ -3639,36 +3641,48 @@ this.mmooc=this.mmooc||{};
 
 //https://medium.com/@pointbmusic/youtube-api-checklist-c195e9abaff1
 this.mmooc.youtube = function() {
-	var hrefPrefix = "https://video.google.com/timedtext?name=bokm%C3%A5l&lang=no&v=";
+	var hrefPrefix = "https://video.google.com/timedtext?v=";
 	var transcriptIdPrefix = "videoTranscript";
 	var transcriptArr = [];
+	var initialized = false;
 
-	function transcript(transcriptId)
+	function transcript(transcriptId, language, name)
 	{
-		this.transcriptId = transcriptId;
-		this.videoId = transcriptId.split(transcriptIdPrefix)[1];
+		var transcriptId = transcriptId;
+		var videoId = transcriptId.split(transcriptIdPrefix)[1];
+
+		var href = hrefPrefix + videoId;
+		if(language != "")
+		{
+		   href = href + "&lang=" + language;
+		}
+		if(name != "")
+		{
+		  href = href + "&name=" + name;
+		}
 
 			//Array of captions in video
-		this.captionsLoaded = false;
+		var captionsLoaded = false;
 
 		//Timeout for next caption
-		this.captionTimeout = null;
+		var captionTimeout = null;
+		
+		var captions = null;
 
 		//Keep track of which captions we are showing
-		this.currentCaptionIndex = 0;
-		this.nextCaptionIndex = 0;
+		var currentCaptionIndex = 0;
+		var nextCaptionIndex = 0;
 
-		this.player = new YT.Player(this.videoId, {
-		  videoId: this.videoId,
+		this.player = new YT.Player(videoId, {
+		  videoId: videoId,
 		  events: {
 			'onReady': onPlayerReady,
 			'onStateChange': onPlayerStateChange
 		  }
   	    });	
 		
-		function findCaptionIndexFromTimestamp(timeStamp)
+		var findCaptionIndexFromTimestamp = function(timeStamp)
 		{
-			console.log("timeStamp:" + timeStamp);
 			var start = 0;
 			var duration = 0;
 			for (var i = 0, il = captions.length; i < il; i++) {
@@ -3687,31 +3701,23 @@ this.mmooc.youtube = function() {
 					break;
 				}        
 			}
-			console.log("Found index:" + i + " Start:" + start + " Duration:" + duration);
 			return i;
 		}
 
-		function getTimeIdFromTimestampIndex(i)
-		{
-			var strTimestamp = "" + i;
-			return "t" + strTimestamp;
-		}
 
-		function clearCurrentHighlighting()
+		var clearCurrentHighlighting = function()
 		{
 			var timeStampId = getTimeIdFromTimestampIndex(currentCaptionIndex);
-			console.log("clearCurrentHighlighting " + timeStampId);
 			$("#"+timeStampId).css('background-color', '');
 		}
 
-		function highlightNextCaption()
+		var highlightNextCaption = function ()
 		{
-			console.log("highlightNextCaption");
 			var timestampId = getTimeIdFromTimestampIndex(nextCaptionIndex);
 			$("#"+timestampId).css('background-color', 'yellow');
 		}
 
-		function calculateTimeout(currentTime)
+		var calculateTimeout = function (currentTime)
 		{
 			var startTime = Number(getStartTimeFromCaption(currentCaptionIndex));
 			var duration = Number(getDurationFromCaption(currentCaptionIndex));
@@ -3719,165 +3725,239 @@ this.mmooc.youtube = function() {
 			return timeoutValue;
 		}
 
-		function setCaptionTimeout(timeoutValue)
+		this.setCaptionTimeout = function (timeoutValue)
 		{
+			if(timeoutValue < 0)
+			{
+				return;
+			}
+			
 			clearTimeout(captionTimeout);
-		
+			
+			var transcript = this;
+			
 			captionTimeout = setTimeout(function() {
-				highlightCaptionAndPrepareForNext();
+				transcript.highlightCaptionAndPrepareForNext();
 			}, timeoutValue*1000)
 		}
 
-		//This function highlights the next caption in the list and
-		//sets a timeout for the next one after that.
-		function highlightCaptionAndPrepareForNext(player)
+		var getStartTimeFromCaption = function(i)
 		{
-			console.log("highlightCaptionAndPrepareForNext");
-			clearCurrentHighlighting(player);
-			highlightNextCaption(player);
-			player.currentCaptionIndex = player.nextCaptionIndex;
-			player.nextCaptionIndex++;
-
-			currentTime = player.getCurrentTime();
-			var timeoutValue = calculateTimeout(player, currentTime);
-		
-			setCaptionTimeout(player, timeoutValue);
-		}
-
-
-		//Called if the user has dragged the slider to somewhere in the video.
-		function highlightCaptionFromTimestamp(timeStamp)
-		{
-			console.log("highlightCaptionFromTimestamp timeStamp:" + timeStamp);
-			clearCurrentHighlighting();
-			nextCaptionIndex = findCaptionIndexFromTimestamp(timeStamp);
-			highlightNextCaption();
-			currentCaptionIndex = nextCaptionIndex;
-
-			var timeoutValue = calculateTimeout(timeStamp);
-
-			setCaptionTimeout(timeoutValue);
-		}   
-
-		function getStartTimeFromCaption(i)
-		{
+			if(i >= captions.length)
+			{
+				return -1;
+			}
 			return captions[i].getAttribute('start');
 		}
-		function getDurationFromCaption(i) 
+		var getDurationFromCaption = function(i) 
 		{
+			if(i >= captions.length)
+			{
+				return -1;
+			}
 			return captions[i].getAttribute('dur');
 		}
+		var getTimeIdFromTimestampIndex = function(i)
+		{
+			var strTimestamp = "" + i;
+			return "t" + strTimestamp;
+		}
 
+
+		//////////////////
+		//Public functions
+		/////////////////
+
+		//This function highlights the next caption in the list and
+		//sets a timeout for the next one after that.
+		//It must be public as it is called from a timer.
+		this.highlightCaptionAndPrepareForNext = function ()
+		{
+			clearCurrentHighlighting();
+			highlightNextCaption();
+			currentCaptionIndex = nextCaptionIndex;
+			nextCaptionIndex++;
+
+			var currentTime = this.player.getCurrentTime();
+			var timeoutValue = calculateTimeout(currentTime);
 		
-	}
-	transcript.prototype.transcriptLoaded = function(transcript) {
-		var start = 0;
-		this.captions = this.getElementsByTagName('text');
-		var srt_output = "<div id='btnSeek' data-seek='0'>0:00</div>";
-
-		for (var i = 0, il = this.captions.length; i < il; i++) {
-			start =+ this.getStartTimeFromCaption(i);
-
-			captionText = this.captions[i].textContent.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-			var timestampId = this.getTimeIdFromTimestampIndex(i);
-			srt_output += "<span class='btnSeek' data-seek='" + start + "' id='" + timestampId + "'>" + captionText + "</span> ";
-		};
-
-		$("#videoTranscript" + this.videoId).append(srt_output);
-		this.captionsLoaded = true;
-	}
-	transcript.prototype.getTranscript = function()
-	{
-		var href = hrefPrefix + this.videoId;
-		var oTranscript = this;
-		$.ajax({
-			url: href,
-			type: 'GET',
-			data: {},
-			success: function(response) {
-				oTranscript.transcriptLoaded(response);
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log("Error during GET");
+			if(nextCaptionIndex <= captions.length)			
+			{
+				this.setCaptionTimeout(timeoutValue);
 			}
-		});           
-	}
-
-	
-	$(function() {
-		$(document).on('click', '.btnSeek', function() {
-			console.log("=============");
-			var seekToTime = $(this).data('seek');
-			console.log("Seekto: " + seekToTime);
-			var player = getPlayerFromTranscriptId($(this).parent().attr("id"));
-			player.seekTo(seekToTime, true);
-		});
-	});
-
-	return {
-		addTranscriptToYoutubeVideos : function()
-		{
+		}
 		
-			$(".mmocVideoTranscript" ).each(function( i ) {
-				var oTranscript = new transcript(this.id)
-				oTranscript.getTranscript();
-				transcriptArr.push(oTranscript);
-			});
-		},
-		playerPlaying : function(player)
+		//Called if the user has dragged the slider to somewhere in the video.
+		this.highlightCaptionFromTimestamp = function(timeStamp)
 		{
-			if(!player.captionsLoaded)
+			clearCurrentHighlighting();
+			nextCaptionIndex = findCaptionIndexFromTimestamp(timeStamp);
+			currentCaptionIndex = nextCaptionIndex;
+
+			var startTime = Number(getStartTimeFromCaption(currentCaptionIndex));
+
+			var timeoutValue = -1;		
+			if(timeStamp < startTime)
+			{
+				timeoutValue = startTime - currentTime;
+			}
+			else
+			{
+				highlightNextCaption();
+				timeoutValue = calculateTimeout(currentTime);
+			}
+			this.setCaptionTimeout(timeoutValue);
+		}   
+
+		this.transcriptLoaded = function(transcript) {
+			var start = 0;
+			captions = transcript.getElementsByTagName('text');
+			var srt_output = "<div class='btnSeek' id='btnSeek' data-seek='0'>0:00</div>";
+
+			for (var i = 0, il = captions.length; i < il; i++) {
+				start =+ getStartTimeFromCaption(i);
+
+				captionText = captions[i].textContent.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+				var timestampId = getTimeIdFromTimestampIndex(i);
+				srt_output += "<span class='btnSeek' data-seek='" + start + "' id='" + timestampId + "'>" + captionText + "</span> ";
+			};
+
+			$("#videoTranscript" + videoId).append(srt_output);
+			captionsLoaded = true;
+		}
+		
+		this.getTranscriptId = function()
+		{
+			return transcriptId;
+		}
+		this.getVideoId = function()
+		{
+			return videoId;
+		}
+		
+		this.getTranscript = function()
+		{
+			var oTranscript = this;
+			$.ajax({
+				url: href,
+				type: 'GET',
+				data: {},
+				success: function(response) {
+					oTranscript.transcriptLoaded(response);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log("Error during GET");
+				}
+			});           
+		}
+		
+		this.playerPlaying = function()
+		{
+			if(!captionsLoaded)
 			{
 				return;
 			}	
 			
-		    currentTime = player.getCurrentTime();
-		    highlightCaptionFromTimestamp(player, currentTime);
-		},
-		playerNotPlaying : function (player)
+		    currentTime = this.player.getCurrentTime();
+		    this.highlightCaptionFromTimestamp(currentTime);
+		}
+		this.playerNotPlaying = function (transcript)
 		{
-			if(!player.parent.captionsLoaded)
+			if(!captionsLoaded)
 			{
 				return;
 			}	
-			clearTimeout(player.parent.captionTimeout);
+			clearTimeout(captionTimeout);
+		}
+	}
+
+	//Called when user clicks somewhere in the transcript.
+	$(function() {
+		$(document).on('click', '.btnSeek', function() {
+			var seekToTime = $(this).data('seek');
+			var transcript = mmooc.youtube.getTranscriptFromTranscriptId($(this).parent().attr("id"));
+			transcript.player.seekTo(seekToTime, true);
+			transcript.player.playVideo();
+		});
+	});
+
+	//These functions must be global as YouTube API will call them. 
+	var previousOnYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady; 
+	window.onYouTubePlayerAPIReady = function() {
+		if(previousOnYouTubePlayerAPIReady)
+		{
+			previousOnYouTubePlayerAPIReady();
+		}
+		mmooc.youtube.APIReady();
+	};
+
+	// The API will call this function when the video player is ready.
+	// It can be used to auto start the video f.ex.
+	window.onPlayerReady = function(event) {
+	}
+
+	// The API calls this function when the player's state changes.
+	//    The function indicates that when playing a video (state=1),
+	//    the player should play for six seconds and then stop.
+	window.onPlayerStateChange = function(event) {
+		console.log("onPlayerStateChange " + event.data);
+		var transcript = this.mmooc.youtube.getTranscriptFromVideoId(event.target.getIframe().id);
+		if (event.data == YT.PlayerState.PLAYING) {
+			transcript.playerPlaying();
+		}
+		else
+		{
+			transcript.playerNotPlaying();
+		}
+	}
+
+	return {
+		getTranscriptFromTranscriptId(transcriptId)
+		{
+			for (index = 0; index < transcriptArr.length; ++index) {
+				if(transcriptArr[index].getTranscriptId() == transcriptId)
+				{
+					return transcriptArr[index];
+				}
+			}
+			return null;
 		},
+	    getTranscriptFromVideoId(videoId)
+	    {
+			for (index = 0; index < transcriptArr.length; ++index) {
+				if(transcriptArr[index].getVideoId() == videoId)
+				{
+					return transcriptArr[index];
+				}
+			}
+			return null;
+	    },
+	    
 		APIReady : function ()
 		{
-			this.addTranscriptToYoutubeVideos();
+			if(!initialized)
+			{
+				$(".mmocVideoTranscript" ).each(function( i ) {
+					var language = $(this).data('language');
+					var name = $(this).data('name');
+					var oTranscript = new transcript(this.id, language, name);
+					oTranscript.getTranscript();
+					transcriptArr.push(oTranscript);
+				});
+				initialized = true;
+			}
 		},
 		init : function ()
 		{
-			onYouTubePlayerAPIReady();		
+			this.APIReady();
 		}		
 	}
+
 }();
+//Everything is ready, load the youtube iframe_api
+$.getScript("https://www.youtube.com/iframe_api");
 
 
-//These functions must be global as YouTube API will call them.  
-function onYouTubePlayerAPIReady() {
-	console.log("onYouTubePlayerAPIReady.");
-	this.mmooc.youtube.APIReady();
-}
-
-// The API will call this function when the video player is ready.
-function onPlayerReady(event) {
-	event.target.playVideo();
-}
-
-// The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-function onPlayerStateChange(event) {
-	console.log("onPlayerStateChange " + event.data);
-	if (event.data == YT.PlayerState.PLAYING) {
-		this.mmooc.youtube.playerPlaying(event.target);
-	}
-	else
-	{
-		this.mmooc.youtube.playerNotPlaying(event.target);
-	}
-}
 
 this["mmooc"] = this["mmooc"] || {};
 this["mmooc"]["templates"] = this["mmooc"]["templates"] || {};
@@ -4880,6 +4960,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += escapeExpression(stack1)
     + "\n    </span>\n</nav>";
   return buffer;
+  });
+
+this["mmooc"]["templates"]["observer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div id=\"fixed_bottom\">\n    <div id=\"masquerade_bar\" class=\"ic-alert-masquerade-student-view\">\n      <div class=\"ic-alert-masquerade-student-view-module ic-alert-masquerade-student-view-module--header\">\n        <div class=\"ic-image-text-combo\">\n          <i class=\"icon-student-view\"></i>\n          <div class=\"ic-image-text-combo__text\">Du er registrert i dette emnet som observatør</div>\n        </div>\n      </div>\n      <div class=\"button-explanation ic-alert-masquerade-student-view-module ic-alert-masquerade-student-view-module--description\">\n        Du vil ikke kunne levere inn oppgaver, bidra i diskusjoner eller se hva andre har gjort der.\n      </div>\n    </div>\n</div>";
   });
 
 this["mmooc"]["templates"]["powerfunctions/account-picker"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -6562,7 +6651,7 @@ this.mmooc.discussionTopics = function () {
         printGroupDiscussionUnreadCount: function(courseId, groupDiscussionTopics, totalUnread, context) {
             // if teacher or admin
             if (mmooc.util.isTeacherOrAdmin()) {
-                var params = { user_id: "self" };
+                var params = { user_id: "self", per_page: 999 };
                 var asyncsDone = 0;
                 var sectionNames = [];
                 // get enrollments and sections for current user
@@ -7595,6 +7684,12 @@ this.mmooc.pages = function() {
                 }
             }, 100);
         },
+        
+        showObserverInformationPane : function()
+        {
+			var paneHTML = mmooc.util.renderTemplateWithData("observer", {});
+			document.getElementById('wrapper').insertAdjacentHTML('afterend', paneHTML);
+		},
 
         // changeTranslations : function() {
         //     $("a.submit_assignment_link").text('Lever besvarelse');
@@ -8855,6 +8950,11 @@ this.mmooc.util = function () {
                 && (roles.indexOf('teacher') != -1
                     || roles.indexOf('admin') != -1);
         },
+        isObserver: function() {
+            var roles = mmooc.api.getRoles();
+            return roles != null
+                && (roles.indexOf('observer') != -1);
+        },
 
         setGlobalPeerReviewButtonState: function () {
             if(mmooc.settings.disablePeerReviewButton == true) {
@@ -9220,6 +9320,10 @@ jQuery(function($) {
     try {
         mmooc.menu.renderLeftHeaderMenu();
         mmooc.menu.showUserMenu();
+        if(mmooc.util.isObserver())
+        {
+        	mmooc.pages.showObserverInformationPane();
+        }
     } catch (e) {
         console.log(e);
     }
@@ -9231,7 +9335,6 @@ jQuery(function($) {
     }
 
     try {
-		mmooc.youtube.init();
 		mmooc.nrk.init();
     } catch (e) {
         console.log(e);
