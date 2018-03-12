@@ -4911,13 +4911,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["mmooc"]["templates"]["observer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["mmooc"]["templates"]["notifications"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div id=\"fixed_bottom\">\n    <div id=\"masquerade_bar\" class=\"ic-alert-masquerade-student-view\">\n      <div class=\"ic-alert-masquerade-student-view-module ic-alert-masquerade-student-view-module--header\">\n        <div class=\"ic-image-text-combo\">\n          <i class=\"icon-student-view\"></i>\n          <div class=\"ic-image-text-combo__text\">Du er registrert i dette emnet som observatør</div>\n        </div>\n      </div>\n      <div class=\"button-explanation ic-alert-masquerade-student-view-module ic-alert-masquerade-student-view-module--description\">\n        Du vil ikke kunne levere inn oppgaver, bidra i diskusjoner eller se hva andre har bidratt med.\n      </div>\n    </div>\n</div>";
+  return "<a href=\"/profile/communication\" class=\"edit_settings_link btn button-sidebar-wide\"><i class=\"icon-edit\"></i> Rediger varslingsinnstillinger</a>\n";
   });
 
 this["mmooc"]["templates"]["powerfunctions/account-picker"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -7634,12 +7634,6 @@ this.mmooc.pages = function() {
                 }
             }, 100);
         },
-        
-        showObserverInformationPane : function()
-        {
-			var paneHTML = mmooc.util.renderTemplateWithData("observer", {});
-			document.getElementById('wrapper').insertAdjacentHTML('afterend', paneHTML);
-		},
 
         // changeTranslations : function() {
         //     $("a.submit_assignment_link").text('Lever besvarelse');
@@ -8900,11 +8894,6 @@ this.mmooc.util = function () {
                 && (roles.indexOf('teacher') != -1
                     || roles.indexOf('admin') != -1);
         },
-        isObserver: function() {
-            var roles = mmooc.api.getRoles();
-            return roles != null
-                && (roles.indexOf('observer') != -1);
-        },
 
         setGlobalPeerReviewButtonState: function () {
             if(mmooc.settings.disablePeerReviewButton == true) {
@@ -9111,6 +9100,11 @@ jQuery(function($) {
         mmooc.enroll.printAllCourses();
     });
 
+    mmooc.routes.addRouteForPath(/\/profile\/settings$/, function() {
+		var notificationButtonHTML = mmooc.util.renderTemplateWithData("notifications", {});
+		document.getElementById('confirm_email_channel').insertAdjacentHTML('beforebegin', notificationButtonHTML);
+    });
+
     mmooc.routes.addRouteForPath(/\/courses\/\d+\/announcements$/, function() {
         var courseId = mmooc.api.getCurrentCourseId();
         mmooc.menu.showCourseMenu(courseId, 'Kunngjøringer', mmooc.util.getPageTitleBeforeColon());
@@ -9270,10 +9264,6 @@ jQuery(function($) {
     try {
         mmooc.menu.renderLeftHeaderMenu();
         mmooc.menu.showUserMenu();
-        if(mmooc.util.isObserver())
-        {
-        	mmooc.pages.showObserverInformationPane();
-        }
     } catch (e) {
         console.log(e);
     }
